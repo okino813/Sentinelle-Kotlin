@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_blue"
+    tools:context=".login_activity"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="-18dp">
+
+    <EditText
+        android:id="@+id/editPasswordRegister"
+        android:layout_width="309dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="288dp"
+        android:background="@drawable/rounde_edit_text"
+        android:ems="10"
+        android:hint="Mot de passe"
+        android:inputType="textPassword"
+        android:paddingStart="10sp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <EditText
+        android:id="@+id/editEmailRegister"
+        android:layout_width="309dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="176dp"
+        android:background="@drawable/rounde_edit_text"
+        android:ems="10"
+        android:hint="Adresse Mail"
+        android:inputType="text"
+        android:paddingStart="10sp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <EditText
+        android:id="@+id/editFirstNameRegister"
+        android:layout_width="309dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="64dp"
+        android:background="@drawable/rounde_edit_text"
+        android:ems="10"
+        android:hint="Prénom"
+        android:inputType="text"
+        android:paddingStart="10sp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="56dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/main_dark_logo" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/inter_medium"
+        android:text="Inscription"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <FrameLayout
+        android:layout_width="123dp"
+        android:layout_height="7dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="44dp"
+        android:background="@color/blue_sky"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4">
+
+    </FrameLayout>
+
+    <EditText
+        android:id="@+id/editFamilyNameRegister"
+        android:layout_width="309dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="120dp"
+        android:background="@drawable/rounde_edit_text"
+        android:ems="10"
+        android:hint="Nom"
+        android:inputType="text"
+        android:paddingStart="10sp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <EditText
+        android:id="@+id/editPhoneRegister"
+        android:layout_width="309dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="232dp"
+        android:background="@drawable/rounde_edit_text"
+        android:ems="10"
+        android:hint="Numéro de téléphone"
+        android:inputType="text"
+        android:paddingStart="10sp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <EditText
+        android:id="@+id/editConfirmPasswordRegister"
+        android:layout_width="309dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="344dp"
+        android:background="@drawable/rounde_edit_text"
+        android:ems="10"
+        android:hint="Confirmation du Mot de passe"
+        android:inputType="textPassword"
+        android:paddingStart="10sp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="136dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="460dp"
+        android:backgroundTint="@color/blue_sky"
+        android:fontFamily="@font/roboto_light"
+        android:text="Se connecter"
+        android:textAlignment="center"
+        android:textColor="@color/dark_blue"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:cornerRadius="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <CheckBox
+        android:id="@+id/CheckBoxRegister"
+        android:layout_width="309dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="396dp"
+        android:text="J'accepte les conditions générales d'utilisations"
+        android:textColor="@color/white"
+        android:textColorLink="@color/blue_sky"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <TextView
+        android:id="@+id/errorRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="432dp"
+        android:textColor="#FB0303"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
