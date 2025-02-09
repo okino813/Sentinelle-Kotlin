@@ -48,14 +48,22 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var  sharedPreferences: SharedPreferences
 
+    // Initialisation paresseuse du LocationManager, l'objet sera créé uniquement lorsque nécessaire
     private val locationManager by lazy {
-        LocationManager(applicationContext)
+        // Utilisation du contexte de l'application pour éviter les fuites de mémoire liées à un contexte d'activité
+        LocationManager(this)
     }
 
+    // Définition des permissions nécessaires pour accéder à la localisation et afficher des notifications
     private val permissions = arrayOf(
+        // Permission pour accéder à la localisation approximative
         Manifest.permission.ACCESS_COARSE_LOCATION,
+
+        // Permission pour accéder à la localisation précise
         Manifest.permission.ACCESS_FINE_LOCATION,
-        Manifest.permission.POST_NOTIFICATIONS,
+
+        // Permission pour poster des notifications
+        Manifest.permission.POST_NOTIFICATIONS
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,6 +84,7 @@ class MainActivity : AppCompatActivity() {
         val tokenPreference = sharedPreferences.getString("token", "")
         var email = emailPreference.toString()
         var token = tokenPreference.toString()
+
 
         /* val sharedPreferences = getSharedPreferences("app_state", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
@@ -120,8 +129,8 @@ class MainActivity : AppCompatActivity() {
                                 editor.putString("token", NewToken)
                                 editor.putBoolean("is_authentificated", true)
                                 editor.apply()
-                                // Rediriger vers activity_register
-                                val intent = Intent(this, activity_register::class.java)
+                                // Rediriger vers activity_home
+                                val intent = Intent(this, activity_home::class.java)
                                 startActivity(intent)
                             } else {
                                 // Si la réponse est "null", le token est invalide
@@ -132,6 +141,7 @@ class MainActivity : AppCompatActivity() {
                                 editor.putBoolean("is_authentificated", false)
                                 editor.apply()
                                 Toast.makeText(applicationContext, "Déconnexion...", Toast.LENGTH_SHORT).show()
+
 
                                 // Redirection vers tuto_one_activity
                                 val intent = Intent(this, TutoOneActivity::class.java)

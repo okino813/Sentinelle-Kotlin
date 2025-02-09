@@ -56,6 +56,12 @@ class activity_home : AppCompatActivity() {
     private lateinit var wakeLock: PowerManager.WakeLock
     lateinit var  sharedPreferences: SharedPreferences
 
+    private lateinit var locationManager: LocationManager
+
+
+
+    private var isTracking = false // Variable pour suivre si le service est en cours de suivi ou non
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -68,10 +74,10 @@ class activity_home : AppCompatActivity() {
             insets
         }
 
-        // Activation du WakeLock pour éviter que l'application ne soit mise en veille
-        val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
-        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "MyApp::LocationWakelock")
-        wakeLock.acquire(10 * 60 * 1000L)
+        locationManager = LocationManager(this)
+
+
+
 
         // Demande à l'utilisateur de désactiver les optimisations de batterie
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -117,7 +123,28 @@ class activity_home : AppCompatActivity() {
             } else {
                 startTimer()
             }
+            isTracking = !isTracking // Change l'état du suivi
         }
+    }
+
+    // Fonction pour démarrer le suivi de localisation
+    private fun startLocationTracking() {
+        // Crée un intent pour démarrer le service avec l'action START
+        val intent = Intent(this, LocationTrackerService::class.java)
+        intent.action = LocationTrackerService.Action.START.name
+
+        // Démarre le service en arrière-plan
+        startService(intent)
+    }
+
+    // Fonction pour arrêter le suivi de localisation
+    private fun stopLocationTracking() {
+        // Crée un intent pour arrêter le service avec l'action STOP
+        val intent = Intent(this, LocationTrackerService::class.java)
+        intent.action = LocationTrackerService.Action.STOP.name
+
+        // Arrête le service en arrière-plan
+        stopService(intent)
     }
 
     // Démarage du timer
@@ -169,6 +196,8 @@ class activity_home : AppCompatActivity() {
                             editor.putBoolean("is_authentificated", true)
                             editor.apply()
                             // C'est Good
+                            // On démare la localisation
+                            startLocationTracking()
 
                         } else {
                             // Si la réponse est "null", le token est invalide
@@ -216,8 +245,11 @@ class activity_home : AppCompatActivity() {
 
                     // Si 10 secondes sont passer, alors on récupère la localisation
                     if (remainingSeconds % 10 == 0) {
-                        getLocation()
+                        locationManager.getLocation { latitude, longitude ->
+                            Log.d("activity_home", "Localisation récupérée : $latitude, $longitude")
+                        }
                     }
+
                 }
 
                 override fun onFinish() {
@@ -357,6 +389,9 @@ class activity_home : AppCompatActivity() {
                             npMinutes.value = 0
                             npSeconds.value = 0
 
+                            // On stop la localisation
+                            stopLocationTracking()
+
 
                         } else {
                             // Si la réponse est "null", le token est invalide
@@ -379,87 +414,6 @@ class activity_home : AppCompatActivity() {
         }.start()
     }
 
-    // Récupère la localisation en continu même en arrière-plan
-    private fun getLocation() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-            ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_BACKGROUND_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
-            return
-        }
-        val locationRequest = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 10000)
-            .setMinUpdateIntervalMillis(10000) // Mise à jour toutes les 10 secondes
-            .build()
-
-        val locationCallback = object : LocationCallback() {
-            override fun onLocationResult(locationResult: LocationResult) {
-                for (location in locationResult.locations) {
-                    sendLocationToServer(location)
-                }
-            }
-        }
-        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null)
-    }
-
-    private fun sendLocationToServer(location: Location) {
-        val latitude = location.latitude
-        val longitude = location.longitude
-        Log.d("Location", "Latitude: $latitude, Longitude: $longitude")
-
-        sharedPreferences = this.getSharedPreferences("app_state", Context.MODE_PRIVATE)
-        val email = sharedPreferences.getString("email", "") ?: ""
-        val token = sharedPreferences.getString("token", "") ?: ""
-
-        val url = "https://boutique-casse-tete.com/sentinelle/index.php"
-        val client = OkHttpClient()
-        val formBody = FormBody.Builder()
-            .add("email", email)
-            .add("token", token)
-            .add("latitude", latitude.toString())
-            .add("longitude", longitude.toString())
-            .add("task", "send_GPS")
-            .build()
-
-        val request = Request.Builder()
-            .url(url)
-            .post(formBody)
-            .build()
-
-        Thread {
-            try {
-                val response = client.newCall(request).execute()
-                val responseData: String = response.body?.string().toString()
-                runOnUiThread {
-                    if (response.isSuccessful && responseData != "null") {
-                        //val sharedPreferences = getSharedPreferences("app_state", MODE_PRIVATE)
-                        //val editor = sharedPreferences.edit()
-                        //editor.putString("token", responseData.trim())
-                        //editor.putBoolean("is_authentificated", true)
-                        //editor.apply()
-                        Log.d("LocationGo", "Latitude: $latitude, Longitude: $longitude");
-                    } else {
-                        logoutUser()
-                    }
-                }
-            } catch (e: Exception) {
-                runOnUiThread {
-                    Log.e("LoginError", "Erreur: ${e.message}", e)
-                    Toast.makeText(applicationContext, "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }.start()
-    }
-
-    // Gère les permissions de localisation
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                getLocation()
-            } else {
-                Toast.makeText(this, "Permission de localisation refusée", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
 
 
     // Remise à zero des NumberPickers
@@ -482,7 +436,7 @@ class activity_home : AppCompatActivity() {
 
 
     // Déconnexion de l'utilisateur
-    private fun logoutUser() {
+    fun logoutUser() {
         val sharedPreferences = getSharedPreferences("app_state", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putString("email", "")
