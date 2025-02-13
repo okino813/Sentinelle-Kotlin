@@ -15,6 +15,10 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
+    <!-- Permission pour enregistrer l'audio -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <permission
         android:name="com.example.sentinelle.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
         android:protectionLevel="signature" />
@@ -33,24 +37,21 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:testOnly="true"
         android:theme="@style/Theme.Sentinelle" >
-
-        <!-- Déclaration de l'activité testativity -->
-        <activity
-            android:name="com.example.sentinelle.testativity"
-            android:exported="false" />
 
         <!-- Autres activités -->
         <activity
             android:name="com.example.sentinelle.activity_home"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.example.sentinelle.activity_register"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.example.sentinelle.login_activity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.example.sentinelle.home_choice_activity"
             android:exported="false"

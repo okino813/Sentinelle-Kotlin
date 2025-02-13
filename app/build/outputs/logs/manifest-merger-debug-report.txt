@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:2:1-83:12
-INJECTED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:2:1-83:12
-INJECTED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:2:1-83:12
-INJECTED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:2:1-83:12
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:2:1-84:12
+INJECTED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:2:1-84:12
+INJECTED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:2:1-84:12
+INJECTED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:2:1-84:12
 MERGED from [com.google.android.material:material:1.12.0] /home/axel/.gradle/caches/8.10.2/transforms/77bfe939c341db109de16140a5434002/transformed/material-1.12.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.2.0] /home/axel/.gradle/caches/8.10.2/transforms/288009b949fba48b9dd601e8de9a4d1c/transformed/constraintlayout-2.2.0/AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.appcompat:appcompat-resources:1.7.0] /home/axel/.gradle/caches/8.10.2/transforms/543da880c44464c1f2d089192a1c84d9/transformed/appcompat-resources-1.7.0/AndroidManifest.xml:2:1-7:12
@@ -111,9 +111,17 @@ uses-permission#android.permission.POST_NOTIFICATIONS
 ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:13:5-76
 	android:name
 		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:13:22-74
+uses-permission#android.permission.RECORD_AUDIO
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:16:5-70
+	android:name
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:16:22-68
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:17:5-80
+	android:name
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:17:22-78
 application
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:15:5-82:19
-INJECTED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:15:5-82:19
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:19:5-83:19
+INJECTED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:19:5-83:19
 MERGED from [com.google.android.material:material:1.12.0] /home/axel/.gradle/caches/8.10.2/transforms/77bfe939c341db109de16140a5434002/transformed/material-1.12.0/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.12.0] /home/axel/.gradle/caches/8.10.2/transforms/77bfe939c341db109de16140a5434002/transformed/material-1.12.0/AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.2.0] /home/axel/.gradle/caches/8.10.2/transforms/288009b949fba48b9dd601e8de9a4d1c/transformed/constraintlayout-2.2.0/AndroidManifest.xml:7:5-20
@@ -147,119 +155,119 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/axel/
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/fdec5c64296b86121beae904ba5ee4c7/transformed/core-1.15.0/AndroidManifest.xml:28:18-86
 	android:supportsRtl
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:23:9-35
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:27:9-35
 	android:label
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:21:9-41
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:25:9-41
 	android:fullBackupContent
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:19:9-54
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:23:9-54
 	android:roundIcon
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:22:9-54
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:26:9-54
 	tools:targetApi
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:25:9-29
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:29:9-29
 	android:icon
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:20:9-50
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:24:9-50
 	android:allowBackup
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:17:9-35
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:21:9-35
 	android:theme
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:24:9-48
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:28:9-48
 	android:dataExtractionRules
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:18:9-65
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:22:9-65
 	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:16:9-28
-activity#com.example.sentinelle.testativity
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:28:9-30:40
-	android:exported
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:30:13-37
-	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:29:13-62
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:20:9-28
 activity#com.example.sentinelle.activity_home
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:34:9-36:40
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:32:9-35:51
+	android:screenOrientation
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:35:13-49
 	android:exported
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:36:13-37
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:34:13-37
 	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:35:13-42
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:33:13-42
 activity#com.example.sentinelle.activity_register
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:37:9-39:40
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:36:9-39:51
+	android:screenOrientation
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:39:13-49
 	android:exported
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:39:13-37
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:38:13-37
 	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:38:13-46
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:37:13-46
 activity#com.example.sentinelle.login_activity
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:40:9-42:40
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:40:9-43:51
+	android:screenOrientation
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:43:13-49
 	android:exported
 		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:42:13-37
 	android:name
 		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:41:13-43
 activity#com.example.sentinelle.home_choice_activity
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:43:9-46:52
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:44:9-47:52
 	android:screenOrientation
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:46:13-49
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:47:13-49
 	android:exported
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:45:13-37
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:46:13-37
 	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:44:13-49
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:45:13-49
 activity#com.example.sentinelle.tuto_four_activity
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:47:9-50:52
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:48:9-51:52
 	android:screenOrientation
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:50:13-49
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:51:13-49
 	android:exported
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:49:13-37
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:50:13-37
 	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:48:13-47
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:49:13-47
 activity#com.example.sentinelle.tuto_tree_activity
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:51:9-54:52
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:52:9-55:52
 	android:screenOrientation
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:54:13-49
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:55:13-49
 	android:exported
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:53:13-37
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:54:13-37
 	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:52:13-47
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:53:13-47
 activity#com.example.sentinelle.tuto_two_activity
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:55:9-58:52
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:56:9-59:52
 	android:screenOrientation
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:58:13-49
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:59:13-49
 	android:exported
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:57:13-37
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:58:13-37
 	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:56:13-46
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:57:13-46
 activity#com.example.sentinelle.TutoOneActivity
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:59:9-62:52
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:60:9-63:52
 	android:screenOrientation
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:62:13-49
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:63:13-49
 	android:exported
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:61:13-37
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:62:13-37
 	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:60:13-44
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:61:13-44
 activity#com.example.sentinelle.MainActivity
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:65:9-73:20
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:66:9-74:20
 	android:screenOrientation
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:68:13-49
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:69:13-49
 	android:exported
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:67:13-36
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:68:13-36
 	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:66:13-41
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:67:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:69:13-72:29
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:70:13-73:29
 action#android.intent.action.MAIN
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:70:17-69
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:71:17-69
 	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:70:25-66
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:71:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:71:17-77
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:72:17-77
 	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:71:27-74
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:72:27-74
 meta-data#preloaded_fonts
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:75:9-77:57
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:76:9-78:57
 	android:resource
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:77:13-54
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:78:13-54
 	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:76:13-43
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:77:13-43
 service#com.example.sentinelle.LocationTrackerService
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:79:9-81:56
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:80:9-82:56
 	android:foregroundServiceType
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:81:13-53
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:82:13-53
 	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:80:13-51
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:81:13-51
 uses-sdk
 INJECTED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml

@@ -15,11 +15,13 @@ import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.location.Location
+import android.media.MediaRecorder
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.IBinder
 import android.os.PowerManager
+import android.provider.MediaStore.Audio.Media
 import android.provider.Settings
 import android.util.Log
 import android.view.View

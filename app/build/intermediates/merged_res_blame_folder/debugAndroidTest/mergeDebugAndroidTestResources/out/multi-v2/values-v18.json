@@ -4,7 +4,7 @@
             "outputFile": "com.example.sentinelle.test.app-mergeDebugAndroidTestResources-33:/values-v18/values-v18.xml",
             "map": [
                 {
-                    "source": "/home/axel/.gradle/caches/8.10.2/transforms/82587e10e4bf57c9e26c2cd7ab2880de/transformed/core-1.6.1/res/values-v18/values.xml",
+                    "source": "/home/axel/.gradle/caches/8.10.2/transforms/0679bca553b1606016d1e8f98259c102/transformed/core-1.6.1/res/values-v18/values.xml",
                     "from": {
                         "startLines": "4,12",
                         "startColumns": "0,0",
