@@ -3,18 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools">
     <!-- Permissions nécessaires -->
     <uses-permission android:name="android.permission.INTERNET" />
-
-
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
-
-    <!-- Permission pour enregistrer l'audio -->
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> <!-- Permission pour enregistrer l'audio -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".App"
@@ -27,20 +22,43 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Sentinelle"
         tools:targetApi="31">
+        <activity
+            android:name=".detailSafeJourney_activity"
+            android:exported="false" />
+        <activity
+            android:name=".liste_safe_journey_activity"
+            android:exported="false" />
+        <!--
+             TODO: Before you run your application, you need a Google Maps API key.
 
-        <!-- Autres activités -->
+             To get one, follow the directions here:
+
+                https://developers.google.com/maps/documentation/android-sdk/get-api-key
+
+             Once you have your API key (it starts with "AIza"), define a new property in your
+             project's local.properties file (e.g. MAPS_API_KEY=Aiza...), and replace the
+             "YOUR_API_KEY" string in this file with "${MAPS_API_KEY}".
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="YOUR_API_KEY" />
+
+        <activity
+            android:name=".MapsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_maps" /> <!-- Autres activités -->
         <activity
             android:name=".activity_home"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity_register"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".login_activity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".home_choice_activity"
             android:exported="false"
@@ -60,15 +78,14 @@
         <activity
             android:name=".TutoOneActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
-
-        <!-- Déclaration de l'activité MainActivity -->
+            android:screenOrientation="portrait" /> <!-- Déclaration de l'activité MainActivity -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -81,4 +98,5 @@
             android:name=".LocationTrackerService"
             android:foregroundServiceType="location" />
     </application>
+
 </manifest>

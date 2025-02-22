@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.sentinelle.app-mergeDebugResources-59:/values-hdpi-v4/values-hdpi-v4.xml",
+            "outputFile": "com.example.sentinelle.app-mergeDebugResources-60:/values-hdpi-v4/values-hdpi-v4.xml",
             "map": [
                 {
-                    "source": "/home/axel/.gradle/caches/8.10.2/transforms/3f56d7b875afad54579b5a2ddad42cc9/transformed/appcompat-1.7.0/res/values-hdpi-v4/values-hdpi-v4.xml",
+                    "source": "/home/axel/.gradle/caches/8.10.2/transforms/d7d8e0482e3eed4a85ccceb38cd6d963/transformed/appcompat-1.7.0/res/values-hdpi-v4/values-hdpi-v4.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

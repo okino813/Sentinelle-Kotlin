@@ -1,82 +1,84 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:2:1-84:12
-INJECTED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:2:1-84:12
-INJECTED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:2:1-84:12
-INJECTED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:2:1-84:12
-MERGED from [com.google.android.material:material:1.12.0] /home/axel/.gradle/caches/8.10.2/transforms/77bfe939c341db109de16140a5434002/transformed/material-1.12.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.constraintlayout:constraintlayout:2.2.0] /home/axel/.gradle/caches/8.10.2/transforms/288009b949fba48b9dd601e8de9a4d1c/transformed/constraintlayout-2.2.0/AndroidManifest.xml:2:1-9:12
-MERGED from [androidx.appcompat:appcompat-resources:1.7.0] /home/axel/.gradle/caches/8.10.2/transforms/543da880c44464c1f2d089192a1c84d9/transformed/appcompat-resources-1.7.0/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.appcompat:appcompat:1.7.0] /home/axel/.gradle/caches/8.10.2/transforms/3f56d7b875afad54579b5a2ddad42cc9/transformed/appcompat-1.7.0/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.material3:material3-android:1.2.0] /home/axel/.gradle/caches/8.10.2/transforms/3dcef8c9033cb3116194c6ee62b345e2/transformed/material3-release/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.compose.material:material-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/56189318203afbcb9baf7276c5e606b3/transformed/material-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.material:material-icons-core-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/5adffc4bf45f88f1e3981bf398a10687/transformed/material-icons-core-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.material:material-ripple-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/0203986e8b0eb9e66088a643c81c02d9/transformed/material-ripple-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.foundation:foundation-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/b3013071503cce3a730ac0be57782e78/transformed/foundation-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.animation:animation-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/0609e2b66bbf0715da8b1df534e3280c/transformed/animation-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.foundation:foundation-layout-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/aa17da6081635857bdc3d3cc4bf66638/transformed/foundation-layout-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.animation:animation-core-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/dec69b303f77ac8432ebc72b88691f38/transformed/animation-core-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.ui:ui-tooling-data-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/0ab41147ce717b43da25f03ce1f2abe0/transformed/ui-tooling-data-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.ui:ui-unit-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/0b49fe546959a954fb1810273f1c8371/transformed/ui-unit-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.ui:ui-geometry-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/9d564ced824a486abb555d5b6a03cdef/transformed/ui-geometry-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.ui:ui-util-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/e799d1f497c2454a614e0e6c4de26d8e/transformed/ui-util-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.ui:ui-text-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/2deb3369a347e7e01b5a673f46c8bc5f/transformed/ui-text-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/d90e6ffd1db98776375fa6857672e7aa/transformed/ui-tooling-preview-release/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.compose.ui:ui-graphics-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/3306784edf9e7ecfd871674618990a72/transformed/ui-graphics-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.ui:ui-tooling-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/ed04644a7bdc90ec884e0bd2caaef237/transformed/ui-tooling-release/AndroidManifest.xml:17:1-28:12
-MERGED from [androidx.activity:activity-ktx:1.9.3] /home/axel/.gradle/caches/8.10.2/transforms/9dc2f56185c6fe765abac9d903e06681/transformed/activity-ktx-1.9.3/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.activity:activity-compose:1.9.3] /home/axel/.gradle/caches/8.10.2/transforms/a3c39b6dce174e3d8e9f49d6f3ccf8fb/transformed/activity-compose-1.9.3/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.ui:ui-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/c60cc7651d8dfd4444996cb28878c512/transformed/ui-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.ui:ui-test-manifest:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/21a099dee71eb8e12ab46a24e19d6b6d/transformed/ui-test-manifest-1.6.1/AndroidManifest.xml:17:1-28:12
-MERGED from [androidx.viewpager2:viewpager2:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/6f01feab99fb3368c7c34123367b851a/transformed/viewpager2-1.0.0/AndroidManifest.xml:17:1-24:12
-MERGED from [com.google.android.gms:play-services-location:21.3.0] /home/axel/.gradle/caches/8.10.2/transforms/4a6b02e9a85682a8046580fd72a24f62/transformed/play-services-location-21.3.0/AndroidManifest.xml:2:1-8:12
-MERGED from [com.google.android.gms:play-services-base:18.5.0] /home/axel/.gradle/caches/8.10.2/transforms/9ff38aa06b8390172e09e7d525a0824f/transformed/play-services-base-18.5.0/AndroidManifest.xml:2:1-7:12
-MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /home/axel/.gradle/caches/8.10.2/transforms/7eb17519bd8ef1ac8ad6a684c4277cae/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:2:1-5:12
-MERGED from [com.google.android.gms:play-services-basement:18.4.0] /home/axel/.gradle/caches/8.10.2/transforms/97ac0f43a3677e7f93efd4c52a4ba140/transformed/play-services-basement-18.4.0/AndroidManifest.xml:2:1-9:12
-MERGED from [androidx.fragment:fragment:1.5.4] /home/axel/.gradle/caches/8.10.2/transforms/703af835743541dfa80f304dd4079302/transformed/fragment-1.5.4/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.activity:activity:1.9.3] /home/axel/.gradle/caches/8.10.2/transforms/155c36bd3eb08d464c2cc993885d1ff1/transformed/activity-1.9.3/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /home/axel/.gradle/caches/8.10.2/transforms/b5b9729c0e516c63036aed83009d05cb/transformed/emoji2-views-helper-1.3.0/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.10.2/transforms/3f691094df3a2388dd890e0401714886/transformed/emoji2-1.3.0/AndroidManifest.xml:17:1-35:12
-MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /home/axel/.gradle/caches/8.10.2/transforms/4aabf16fda6b8d9caf9e601c9e64e5b3/transformed/drawerlayout-1.1.1/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /home/axel/.gradle/caches/8.10.2/transforms/ed5ebd782a64b6b1af0a0f5762c55cf7/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.transition:transition:1.5.0] /home/axel/.gradle/caches/8.10.2/transforms/12d70de85c3fca1dae46a5584ea0bd80/transformed/transition-1.5.0/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/4da7452072cfc5fade6fe8589966be5a/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/axel/.gradle/caches/8.10.2/transforms/a9d3a68f56caf21dcbeb452f01a71ba1/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/axel/.gradle/caches/8.10.2/transforms/dbecc988ecb228966749cbc8c62027a9/transformed/vectordrawable-1.1.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/041e22380696fcd90c40d61518c56a10/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.loader:loader:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/51cddc98daf4fddf4e2e7a529b3ee1b3/transformed/loader-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.viewpager:viewpager:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/799aacc2f3f1ba080c2d8dc59a667004/transformed/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.recyclerview:recyclerview:1.1.0] /home/axel/.gradle/caches/8.10.2/transforms/6a7c143c52eccc8ad3b0218e9666dab6/transformed/recyclerview-1.1.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.customview:customview:1.1.0] /home/axel/.gradle/caches/8.10.2/transforms/40b7662e81f61b5b39568cffa3d7ae68/transformed/customview-1.1.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.autofill:autofill:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/92739b8c75bb67c67174a0ab6f238df0/transformed/autofill-1.0.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/fdec5c64296b86121beae904ba5ee4c7/transformed/core-1.15.0/AndroidManifest.xml:17:1-30:12
-MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /home/axel/.gradle/caches/8.10.2/transforms/1c56763e444c6a08f2764856cd909e70/transformed/savedstate-ktx-1.2.1/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.savedstate:savedstate:1.2.1] /home/axel/.gradle/caches/8.10.2/transforms/d195e0c6be8bddd259a398c102f4d46f/transformed/savedstate-1.2.1/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/507f7bc2a7f1ed97dc578751c90e0487/transformed/lifecycle-livedata-core-ktx-2.7.0/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/c85cc56f96e670a7ef4720a477716e0c/transformed/lifecycle-viewmodel-ktx-2.7.0/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/ce643f7c604e1ab1472f845b6f330613/transformed/lifecycle-livedata-2.7.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/54fb634a3408e9d416624893ea25da6e/transformed/lifecycle-livedata-core-2.7.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/7d47a7b1a7f35dbb8f8262a322071e26/transformed/lifecycle-process-2.7.0/AndroidManifest.xml:17:1-35:12
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/a23eb8f79a755955c55a8d2246d7545b/transformed/lifecycle-viewmodel-2.7.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/e7b89cdc31ec0f28c0a0a3342b1f7a53/transformed/lifecycle-runtime-2.7.0/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/7d47cf62ef54452e8b961123dbd7be58/transformed/lifecycle-runtime-ktx-2.7.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/837ca9facd7284810c146e4d0ca444aa/transformed/lifecycle-viewmodel-savedstate-2.7.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/87c606e1fdfac423c751ba5405dada79/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:17:1-23:12
-MERGED from [androidx.core:core-ktx:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/b41f4beb8981c8e43234caa4ea292bba/transformed/core-ktx-1.15.0/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/fea4883a73bb0411f423e0f2826033f9/transformed/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.cardview:cardview:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/ddb9e10bf4b010326e8c29d1e71213b3/transformed/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/f9a167dd1e895a2cd46e732594694a20/transformed/profileinstaller-1.4.0/AndroidManifest.xml:17:1-55:12
-MERGED from [androidx.startup:startup-runtime:1.1.1] /home/axel/.gradle/caches/8.10.2/transforms/b607ccf84e74dab336a5ded57b106da6/transformed/startup-runtime-1.1.1/AndroidManifest.xml:17:1-33:12
-MERGED from [androidx.tracing:tracing:1.2.0] /home/axel/.gradle/caches/8.10.2/transforms/fa65076715ccd95ce108959767e302a2/transformed/tracing-1.2.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.interpolator:interpolator:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/5968cc0b09729ea83d6aaded903cb11b/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/axel/.gradle/caches/8.10.2/transforms/5de9571312ced1e11b9fb3737b347f8b/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
-MERGED from [androidx.arch.core:core-runtime:2.2.0] /home/axel/.gradle/caches/8.10.2/transforms/9873bd6c4f7a7360a312eae0b7a27385/transformed/core-runtime-2.2.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.compose.runtime:runtime-saveable-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/28efdb7c9ff72283dfe5891d17674126/transformed/runtime-saveable-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.runtime:runtime-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/0c6d2a5c9c58d3c2f63b6d5658ec0280/transformed/runtime-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.documentfile:documentfile:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/7b974a65f88c2eec46fa19b5bce9aa83/transformed/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/06bfc0b616fcdf241b0d4199c0894f28/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.print:print:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/438082c11429fbd4e85fb6adf492bd16/transformed/print-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.annotation:annotation-experimental:1.4.1] /home/axel/.gradle/caches/8.10.2/transforms/ba2e109bee8e779921b744f3312129a1/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:2:1-7:12
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:2:1-102:12
+INJECTED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:2:1-102:12
+INJECTED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:2:1-102:12
+INJECTED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:2:1-102:12
+MERGED from [androidx.databinding:viewbinding:8.8.0] /home/axel/.gradle/caches/8.10.2/transforms/ade9a3bed7c935aa5c47e154c3afd5f7/transformed/viewbinding-8.8.0/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.material:material:1.12.0] /home/axel/.gradle/caches/8.10.2/transforms/8b420df6fe00a15626b6d5e2bf3a4e3f/transformed/material-1.12.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.constraintlayout:constraintlayout:2.2.0] /home/axel/.gradle/caches/8.10.2/transforms/156682726774c9f301752c458906af31/transformed/constraintlayout-2.2.0/AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.appcompat:appcompat-resources:1.7.0] /home/axel/.gradle/caches/8.10.2/transforms/d0813150272fffe84161662c33a98c6f/transformed/appcompat-resources-1.7.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.appcompat:appcompat:1.7.0] /home/axel/.gradle/caches/8.10.2/transforms/d7d8e0482e3eed4a85ccceb38cd6d963/transformed/appcompat-1.7.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material3:material3-android:1.2.0] /home/axel/.gradle/caches/8.10.2/transforms/725bd2f8029f00d66d9eaa6f4b10c404/transformed/material3-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.compose.material:material-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/f634985f41e6f8ebbf802ea8a7b6b2a9/transformed/material-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material:material-icons-core-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/7b53af049721866b6e960882de8e2b3a/transformed/material-icons-core-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material:material-ripple-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/9e079a3c45ca9d2bba26eabcf4f121d4/transformed/material-ripple-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.foundation:foundation-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/06b5148fe51a5e36861e2edb965cee1a/transformed/foundation-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.animation:animation-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/301dae4344b5ba3e87b05c1b02299dd6/transformed/animation-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/cc1ee1293589a8f5ddfe8b4c3bcdfea7/transformed/foundation-layout-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.animation:animation-core-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/bc01166a9d30e66a85795a080af03583/transformed/animation-core-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/1ee34a2ece7b3e9cbf713141b3afc928/transformed/ui-tooling-data-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-unit-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/c9d9673c5a8a1125b36eedbe72ee04ac/transformed/ui-unit-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-geometry-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/bd499b050bd62f5998432575d1d9650c/transformed/ui-geometry-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-util-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/308df8f3963dfa131047a087d8fe18a0/transformed/ui-util-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-text-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/c17bc9a1f873964380e7267ea9ce891f/transformed/ui-text-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/9cda2f6946799a6d989b83ec49d84743/transformed/ui-tooling-preview-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.compose.ui:ui-graphics-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/2d8ef74852643f97d01691a17c7c81f9/transformed/ui-graphics-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-tooling-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/b95770eaeaa4056a9e5c5e2b30017f46/transformed/ui-tooling-release/AndroidManifest.xml:17:1-28:12
+MERGED from [androidx.activity:activity-ktx:1.9.3] /home/axel/.gradle/caches/8.10.2/transforms/45f539a796fee0b27c2129f6ca78725f/transformed/activity-ktx-1.9.3/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.activity:activity-compose:1.9.3] /home/axel/.gradle/caches/8.10.2/transforms/6854986c8691fe916c4511d62c91ff97/transformed/activity-compose-1.9.3/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/e2339302b4cf04d05dcc2c549362b82a/transformed/ui-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-test-manifest:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/6677b10b5b4f4fc1c6e201d2d7fd820f/transformed/ui-test-manifest-1.6.1/AndroidManifest.xml:17:1-28:12
+MERGED from [com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.10.2/transforms/f4893eaaf42606b89ffe14b6ada097e7/transformed/play-services-maps-19.0.0/AndroidManifest.xml:17:1-44:12
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/8f8d734a983c613f6698f3f783ec969e/transformed/viewpager2-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-location:21.3.0] /home/axel/.gradle/caches/8.10.2/transforms/27f9b59dd1845615240df1190355eed3/transformed/play-services-location-21.3.0/AndroidManifest.xml:2:1-8:12
+MERGED from [com.google.android.gms:play-services-base:18.5.0] /home/axel/.gradle/caches/8.10.2/transforms/5541d6af5c442b2479fcb1ea93f61812/transformed/play-services-base-18.5.0/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /home/axel/.gradle/caches/8.10.2/transforms/1df55b42c4504f2e2a3a40d2de420792/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:2:1-5:12
+MERGED from [com.google.android.gms:play-services-basement:18.4.0] /home/axel/.gradle/caches/8.10.2/transforms/ae26d1bff1433bad5c62c7e1ee2f48ee/transformed/play-services-basement-18.4.0/AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.fragment:fragment:1.5.4] /home/axel/.gradle/caches/8.10.2/transforms/16e5240b4c2e76da15e92bbcb5055c18/transformed/fragment-1.5.4/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.activity:activity:1.9.3] /home/axel/.gradle/caches/8.10.2/transforms/7f6079d7b34d9b510dbda863cc938f37/transformed/activity-1.9.3/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /home/axel/.gradle/caches/8.10.2/transforms/dcb59ed34523172e00400dc11481f955/transformed/emoji2-views-helper-1.3.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.10.2/transforms/09799f573115b968f1655f29b68afced/transformed/emoji2-1.3.0/AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /home/axel/.gradle/caches/8.10.2/transforms/f228c2fcdddd77cb0e73b6328b31fd4f/transformed/drawerlayout-1.1.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /home/axel/.gradle/caches/8.10.2/transforms/4159cc45fef69f143f735989ce07745c/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.transition:transition:1.5.0] /home/axel/.gradle/caches/8.10.2/transforms/235c397fe9bc5549c73a8d4fa6749489/transformed/transition-1.5.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/2063f3b98f11a9d449cb7fe711bb3ced/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/axel/.gradle/caches/8.10.2/transforms/3cf6aba95bbee8ce502f5c00ec590453/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/axel/.gradle/caches/8.10.2/transforms/c7b199144e50dbbec522e0b1b96094ab/transformed/vectordrawable-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/50e331b847280b5047359572bd7e9917/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/33a5fbf724e3de1ac9b10d7ba589103d/transformed/loader-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/2556e29ac670a2e49f3b9d2cf79e23cb/transformed/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /home/axel/.gradle/caches/8.10.2/transforms/cf45626d1ab57fa08eee2a6f7458b5fa/transformed/recyclerview-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.customview:customview:1.1.0] /home/axel/.gradle/caches/8.10.2/transforms/99401cd0e1662a0ba1734a8b5719563f/transformed/customview-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.autofill:autofill:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/c1b9c427fbce70390a4cc6a21105f976/transformed/autofill-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/c9d80fd86ba3e25b3dc9674ef88cbab2/transformed/core-1.15.0/AndroidManifest.xml:17:1-30:12
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /home/axel/.gradle/caches/8.10.2/transforms/4a693222ed10a190f02e74fbb0856944/transformed/savedstate-ktx-1.2.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.savedstate:savedstate:1.2.1] /home/axel/.gradle/caches/8.10.2/transforms/7abad4c7163fc5d8f3511d8f35fcbc41/transformed/savedstate-1.2.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/240b5ad9526e51441f85ac2c8fed32b2/transformed/lifecycle-livedata-core-ktx-2.7.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/50f662936f8e3e622a2f7bf58356146c/transformed/lifecycle-viewmodel-ktx-2.7.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/71bdbc790f4397e7106ee7b839aa30ac/transformed/lifecycle-livedata-2.7.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/af139646598dc173d775245e5e358bfd/transformed/lifecycle-livedata-core-2.7.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/0b85e9ab4ff7b778e3a809deee1c28ad/transformed/lifecycle-process-2.7.0/AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/a603340e8b535a5b9ce45e8a2747c932/transformed/lifecycle-viewmodel-2.7.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/41baaae8f515d0d8bee38491aba4f37a/transformed/lifecycle-runtime-2.7.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/f527614dd135215923ba703bd8ccaac0/transformed/lifecycle-runtime-ktx-2.7.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/4bc1c16eeecbb1592f700c3d2b6f54ee/transformed/lifecycle-viewmodel-savedstate-2.7.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/2b25a041bdad140dab450d9a8effc704/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:17:1-23:12
+MERGED from [androidx.core:core-ktx:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/3f058efbe57461e24ffaa320c27282c8/transformed/core-ktx-1.15.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/52943fbfa7d27ea8f7e25379ba7e9c4e/transformed/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.cardview:cardview:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/ed39eab3772ce5370b6b2ff4f18df462/transformed/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/e58d6ba122c578d057cbb8dac3d9b37a/transformed/profileinstaller-1.4.0/AndroidManifest.xml:17:1-55:12
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/axel/.gradle/caches/8.10.2/transforms/be83f322921699975fab65384ec6677d/transformed/startup-runtime-1.1.1/AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.tracing:tracing:1.2.0] /home/axel/.gradle/caches/8.10.2/transforms/8165e73982cdcba9dc588887a92fbc48/transformed/tracing-1.2.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/bcb61fe35ba7f35265f8e4c825d6f089/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/axel/.gradle/caches/8.10.2/transforms/20b56f103ec25a04b034ec261797cfc1/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /home/axel/.gradle/caches/8.10.2/transforms/8463d64e325bdc0374e82025724432e4/transformed/core-runtime-2.2.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/3f529933bb5ad6566fb037c8cb7ab23c/transformed/runtime-saveable-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.runtime:runtime-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/088946b3b75634dd9ca996ee9cbc5e24/transformed/runtime-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/1f747efe2f1d6b1d847206eda58676a0/transformed/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/d01367511275b00ef201190257e6bac5/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/4a5ec74e9ed0f0bb0b36905a6adad9e2/transformed/print-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /home/axel/.gradle/caches/8.10.2/transforms/5bddd2beecdfa72c067e5f6dd7b02df3/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:2:1-7:12
 	package
 		INJECTED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml
 	android:versionName
@@ -89,452 +91,508 @@ MERGED from [androidx.annotation:annotation-experimental:1.4.1] /home/axel/.grad
 		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:2:11-69
 uses-permission#android.permission.INTERNET
 ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:5:5-67
+MERGED from [com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.10.2/transforms/f4893eaaf42606b89ffe14b6ada097e7/transformed/play-services-maps-19.0.0/AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.10.2/transforms/f4893eaaf42606b89ffe14b6ada097e7/transformed/play-services-maps-19.0.0/AndroidManifest.xml:24:5-67
 	android:name
 		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:5:22-64
 uses-permission#android.permission.ACCESS_COARSE_LOCATION
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:8:5-81
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:6:5-81
 	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:8:22-78
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:6:22-78
 uses-permission#android.permission.ACCESS_FINE_LOCATION
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:9:5-79
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:7:5-79
 	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:9:22-76
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:7:22-76
 uses-permission#android.permission.FOREGROUND_SERVICE
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:11:5-77
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:8:5-77
 	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:11:22-74
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:8:22-74
 uses-permission#android.permission.FOREGROUND_SERVICE_LOCATION
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:12:5-86
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:9:5-86
 	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:12:22-83
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:9:22-83
 uses-permission#android.permission.POST_NOTIFICATIONS
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:13:5-76
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:10:5-77
 	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:13:22-74
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:10:22-74
 uses-permission#android.permission.RECORD_AUDIO
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:16:5-70
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:11:5-71
 	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:16:22-68
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:11:22-68
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:17:5-80
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:12:5-81
 	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:17:22-78
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:12:22-78
 application
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:19:5-83:19
-INJECTED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:19:5-83:19
-MERGED from [com.google.android.material:material:1.12.0] /home/axel/.gradle/caches/8.10.2/transforms/77bfe939c341db109de16140a5434002/transformed/material-1.12.0/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.material:material:1.12.0] /home/axel/.gradle/caches/8.10.2/transforms/77bfe939c341db109de16140a5434002/transformed/material-1.12.0/AndroidManifest.xml:22:5-20
-MERGED from [androidx.constraintlayout:constraintlayout:2.2.0] /home/axel/.gradle/caches/8.10.2/transforms/288009b949fba48b9dd601e8de9a4d1c/transformed/constraintlayout-2.2.0/AndroidManifest.xml:7:5-20
-MERGED from [androidx.constraintlayout:constraintlayout:2.2.0] /home/axel/.gradle/caches/8.10.2/transforms/288009b949fba48b9dd601e8de9a4d1c/transformed/constraintlayout-2.2.0/AndroidManifest.xml:7:5-20
-MERGED from [androidx.compose.ui:ui-tooling-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/ed04644a7bdc90ec884e0bd2caaef237/transformed/ui-tooling-release/AndroidManifest.xml:22:5-26:19
-MERGED from [androidx.compose.ui:ui-tooling-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/ed04644a7bdc90ec884e0bd2caaef237/transformed/ui-tooling-release/AndroidManifest.xml:22:5-26:19
-MERGED from [androidx.compose.ui:ui-test-manifest:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/21a099dee71eb8e12ab46a24e19d6b6d/transformed/ui-test-manifest-1.6.1/AndroidManifest.xml:22:5-26:19
-MERGED from [androidx.compose.ui:ui-test-manifest:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/21a099dee71eb8e12ab46a24e19d6b6d/transformed/ui-test-manifest-1.6.1/AndroidManifest.xml:22:5-26:19
-MERGED from [com.google.android.gms:play-services-location:21.3.0] /home/axel/.gradle/caches/8.10.2/transforms/4a6b02e9a85682a8046580fd72a24f62/transformed/play-services-location-21.3.0/AndroidManifest.xml:6:5-20
-MERGED from [com.google.android.gms:play-services-location:21.3.0] /home/axel/.gradle/caches/8.10.2/transforms/4a6b02e9a85682a8046580fd72a24f62/transformed/play-services-location-21.3.0/AndroidManifest.xml:6:5-20
-MERGED from [com.google.android.gms:play-services-base:18.5.0] /home/axel/.gradle/caches/8.10.2/transforms/9ff38aa06b8390172e09e7d525a0824f/transformed/play-services-base-18.5.0/AndroidManifest.xml:4:5-6:19
-MERGED from [com.google.android.gms:play-services-base:18.5.0] /home/axel/.gradle/caches/8.10.2/transforms/9ff38aa06b8390172e09e7d525a0824f/transformed/play-services-base-18.5.0/AndroidManifest.xml:4:5-6:19
-MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /home/axel/.gradle/caches/8.10.2/transforms/7eb17519bd8ef1ac8ad6a684c4277cae/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:4:5-20
-MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /home/axel/.gradle/caches/8.10.2/transforms/7eb17519bd8ef1ac8ad6a684c4277cae/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:4:5-20
-MERGED from [com.google.android.gms:play-services-basement:18.4.0] /home/axel/.gradle/caches/8.10.2/transforms/97ac0f43a3677e7f93efd4c52a4ba140/transformed/play-services-basement-18.4.0/AndroidManifest.xml:5:5-7:19
-MERGED from [com.google.android.gms:play-services-basement:18.4.0] /home/axel/.gradle/caches/8.10.2/transforms/97ac0f43a3677e7f93efd4c52a4ba140/transformed/play-services-basement-18.4.0/AndroidManifest.xml:5:5-7:19
-MERGED from [androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.10.2/transforms/3f691094df3a2388dd890e0401714886/transformed/emoji2-1.3.0/AndroidManifest.xml:23:5-33:19
-MERGED from [androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.10.2/transforms/3f691094df3a2388dd890e0401714886/transformed/emoji2-1.3.0/AndroidManifest.xml:23:5-33:19
-MERGED from [androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/fdec5c64296b86121beae904ba5ee4c7/transformed/core-1.15.0/AndroidManifest.xml:28:5-89
-MERGED from [androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/fdec5c64296b86121beae904ba5ee4c7/transformed/core-1.15.0/AndroidManifest.xml:28:5-89
-MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/7d47a7b1a7f35dbb8f8262a322071e26/transformed/lifecycle-process-2.7.0/AndroidManifest.xml:23:5-33:19
-MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/7d47a7b1a7f35dbb8f8262a322071e26/transformed/lifecycle-process-2.7.0/AndroidManifest.xml:23:5-33:19
-MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/f9a167dd1e895a2cd46e732594694a20/transformed/profileinstaller-1.4.0/AndroidManifest.xml:23:5-53:19
-MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/f9a167dd1e895a2cd46e732594694a20/transformed/profileinstaller-1.4.0/AndroidManifest.xml:23:5-53:19
-MERGED from [androidx.startup:startup-runtime:1.1.1] /home/axel/.gradle/caches/8.10.2/transforms/b607ccf84e74dab336a5ded57b106da6/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
-MERGED from [androidx.startup:startup-runtime:1.1.1] /home/axel/.gradle/caches/8.10.2/transforms/b607ccf84e74dab336a5ded57b106da6/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/axel/.gradle/caches/8.10.2/transforms/5de9571312ced1e11b9fb3737b347f8b/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/axel/.gradle/caches/8.10.2/transforms/5de9571312ced1e11b9fb3737b347f8b/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:14:5-100:19
+INJECTED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:14:5-100:19
+MERGED from [com.google.android.material:material:1.12.0] /home/axel/.gradle/caches/8.10.2/transforms/8b420df6fe00a15626b6d5e2bf3a4e3f/transformed/material-1.12.0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.material:material:1.12.0] /home/axel/.gradle/caches/8.10.2/transforms/8b420df6fe00a15626b6d5e2bf3a4e3f/transformed/material-1.12.0/AndroidManifest.xml:22:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.2.0] /home/axel/.gradle/caches/8.10.2/transforms/156682726774c9f301752c458906af31/transformed/constraintlayout-2.2.0/AndroidManifest.xml:7:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.2.0] /home/axel/.gradle/caches/8.10.2/transforms/156682726774c9f301752c458906af31/transformed/constraintlayout-2.2.0/AndroidManifest.xml:7:5-20
+MERGED from [androidx.compose.ui:ui-tooling-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/b95770eaeaa4056a9e5c5e2b30017f46/transformed/ui-tooling-release/AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.compose.ui:ui-tooling-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/b95770eaeaa4056a9e5c5e2b30017f46/transformed/ui-tooling-release/AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.compose.ui:ui-test-manifest:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/6677b10b5b4f4fc1c6e201d2d7fd820f/transformed/ui-test-manifest-1.6.1/AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.compose.ui:ui-test-manifest:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/6677b10b5b4f4fc1c6e201d2d7fd820f/transformed/ui-test-manifest-1.6.1/AndroidManifest.xml:22:5-26:19
+MERGED from [com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.10.2/transforms/f4893eaaf42606b89ffe14b6ada097e7/transformed/play-services-maps-19.0.0/AndroidManifest.xml:36:5-42:19
+MERGED from [com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.10.2/transforms/f4893eaaf42606b89ffe14b6ada097e7/transformed/play-services-maps-19.0.0/AndroidManifest.xml:36:5-42:19
+MERGED from [com.google.android.gms:play-services-location:21.3.0] /home/axel/.gradle/caches/8.10.2/transforms/27f9b59dd1845615240df1190355eed3/transformed/play-services-location-21.3.0/AndroidManifest.xml:6:5-20
+MERGED from [com.google.android.gms:play-services-location:21.3.0] /home/axel/.gradle/caches/8.10.2/transforms/27f9b59dd1845615240df1190355eed3/transformed/play-services-location-21.3.0/AndroidManifest.xml:6:5-20
+MERGED from [com.google.android.gms:play-services-base:18.5.0] /home/axel/.gradle/caches/8.10.2/transforms/5541d6af5c442b2479fcb1ea93f61812/transformed/play-services-base-18.5.0/AndroidManifest.xml:4:5-6:19
+MERGED from [com.google.android.gms:play-services-base:18.5.0] /home/axel/.gradle/caches/8.10.2/transforms/5541d6af5c442b2479fcb1ea93f61812/transformed/play-services-base-18.5.0/AndroidManifest.xml:4:5-6:19
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /home/axel/.gradle/caches/8.10.2/transforms/1df55b42c4504f2e2a3a40d2de420792/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:4:5-20
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /home/axel/.gradle/caches/8.10.2/transforms/1df55b42c4504f2e2a3a40d2de420792/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:4:5-20
+MERGED from [com.google.android.gms:play-services-basement:18.4.0] /home/axel/.gradle/caches/8.10.2/transforms/ae26d1bff1433bad5c62c7e1ee2f48ee/transformed/play-services-basement-18.4.0/AndroidManifest.xml:5:5-7:19
+MERGED from [com.google.android.gms:play-services-basement:18.4.0] /home/axel/.gradle/caches/8.10.2/transforms/ae26d1bff1433bad5c62c7e1ee2f48ee/transformed/play-services-basement-18.4.0/AndroidManifest.xml:5:5-7:19
+MERGED from [androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.10.2/transforms/09799f573115b968f1655f29b68afced/transformed/emoji2-1.3.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.10.2/transforms/09799f573115b968f1655f29b68afced/transformed/emoji2-1.3.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/c9d80fd86ba3e25b3dc9674ef88cbab2/transformed/core-1.15.0/AndroidManifest.xml:28:5-89
+MERGED from [androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/c9d80fd86ba3e25b3dc9674ef88cbab2/transformed/core-1.15.0/AndroidManifest.xml:28:5-89
+MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/0b85e9ab4ff7b778e3a809deee1c28ad/transformed/lifecycle-process-2.7.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/0b85e9ab4ff7b778e3a809deee1c28ad/transformed/lifecycle-process-2.7.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/e58d6ba122c578d057cbb8dac3d9b37a/transformed/profileinstaller-1.4.0/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/e58d6ba122c578d057cbb8dac3d9b37a/transformed/profileinstaller-1.4.0/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/axel/.gradle/caches/8.10.2/transforms/be83f322921699975fab65384ec6677d/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/axel/.gradle/caches/8.10.2/transforms/be83f322921699975fab65384ec6677d/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/axel/.gradle/caches/8.10.2/transforms/20b56f103ec25a04b034ec261797cfc1/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/axel/.gradle/caches/8.10.2/transforms/20b56f103ec25a04b034ec261797cfc1/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
 	android:extractNativeLibs
 		INJECTED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml
 	android:appComponentFactory
-		ADDED from [androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/fdec5c64296b86121beae904ba5ee4c7/transformed/core-1.15.0/AndroidManifest.xml:28:18-86
+		ADDED from [androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/c9d80fd86ba3e25b3dc9674ef88cbab2/transformed/core-1.15.0/AndroidManifest.xml:28:18-86
 	android:supportsRtl
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:27:9-35
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:22:9-35
 	android:label
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:25:9-41
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:20:9-41
 	android:fullBackupContent
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:23:9-54
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:18:9-54
 	android:roundIcon
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:26:9-54
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:21:9-54
 	tools:targetApi
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:29:9-29
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:24:9-29
 	android:icon
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:24:9-50
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:19:9-50
 	android:allowBackup
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:21:9-35
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:16:9-35
 	android:theme
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:28:9-48
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:23:9-48
 	android:dataExtractionRules
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:22:9-65
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:17:9-65
 	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:20:9-28
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:15:9-28
+activity#com.example.sentinelle.detailSafeJourney_activity
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:25:9-27:40
+	android:exported
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:27:13-37
+	android:name
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:26:13-55
+activity#com.example.sentinelle.liste_safe_journey_activity
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:28:9-30:40
+	android:exported
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:30:13-37
+	android:name
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:29:13-56
+meta-data#com.google.android.geo.API_KEY
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:42:9-44:44
+	android:value
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:44:13-41
+	android:name
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:43:13-58
+activity#com.example.sentinelle.MapsActivity
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:46:9-49:59
+	android:label
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:49:13-56
+	android:exported
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:48:13-37
+	android:name
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:47:13-41
 activity#com.example.sentinelle.activity_home
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:32:9-35:51
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:50:9-53:52
 	android:screenOrientation
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:35:13-49
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:53:13-49
 	android:exported
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:34:13-37
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:52:13-37
 	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:33:13-42
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:51:13-42
 activity#com.example.sentinelle.activity_register
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:36:9-39:51
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:54:9-57:52
 	android:screenOrientation
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:39:13-49
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:57:13-49
 	android:exported
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:38:13-37
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:56:13-37
 	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:37:13-46
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:55:13-46
 activity#com.example.sentinelle.login_activity
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:40:9-43:51
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:58:9-61:52
 	android:screenOrientation
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:43:13-49
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:61:13-49
 	android:exported
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:42:13-37
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:60:13-37
 	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:41:13-43
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:59:13-43
 activity#com.example.sentinelle.home_choice_activity
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:44:9-47:52
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:62:9-65:52
 	android:screenOrientation
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:47:13-49
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:65:13-49
 	android:exported
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:46:13-37
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:64:13-37
 	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:45:13-49
-activity#com.example.sentinelle.tuto_four_activity
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:48:9-51:52
-	android:screenOrientation
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:51:13-49
-	android:exported
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:50:13-37
-	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:49:13-47
-activity#com.example.sentinelle.tuto_tree_activity
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:52:9-55:52
-	android:screenOrientation
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:55:13-49
-	android:exported
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:54:13-37
-	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:53:13-47
-activity#com.example.sentinelle.tuto_two_activity
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:56:9-59:52
-	android:screenOrientation
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:59:13-49
-	android:exported
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:58:13-37
-	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:57:13-46
-activity#com.example.sentinelle.TutoOneActivity
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:60:9-63:52
-	android:screenOrientation
 		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:63:13-49
-	android:exported
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:62:13-37
-	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:61:13-44
-activity#com.example.sentinelle.MainActivity
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:66:9-74:20
+activity#com.example.sentinelle.tuto_four_activity
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:66:9-69:52
 	android:screenOrientation
 		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:69:13-49
 	android:exported
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:68:13-36
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:68:13-37
 	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:67:13-41
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:67:13-47
+activity#com.example.sentinelle.tuto_tree_activity
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:70:9-73:52
+	android:screenOrientation
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:73:13-49
+	android:exported
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:72:13-37
+	android:name
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:71:13-47
+activity#com.example.sentinelle.tuto_two_activity
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:74:9-77:52
+	android:screenOrientation
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:77:13-49
+	android:exported
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:76:13-37
+	android:name
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:75:13-46
+activity#com.example.sentinelle.TutoOneActivity
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:78:9-81:52
+	android:screenOrientation
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:81:13-49
+	android:exported
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:80:13-37
+	android:name
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:79:13-44
+activity#com.example.sentinelle.MainActivity
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:82:9-91:20
+	android:screenOrientation
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:85:13-49
+	android:exported
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:84:13-36
+	android:name
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:83:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:70:13-73:29
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:86:13-90:29
 action#android.intent.action.MAIN
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:71:17-69
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:87:17-69
 	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:71:25-66
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:87:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:72:17-77
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:89:17-77
 	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:72:27-74
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:89:27-74
 meta-data#preloaded_fonts
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:76:9-78:57
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:93:9-95:57
 	android:resource
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:78:13-54
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:95:13-54
 	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:77:13-43
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:94:13-43
 service#com.example.sentinelle.LocationTrackerService
-ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:80:9-82:56
+ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:97:9-99:56
 	android:foregroundServiceType
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:82:13-53
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:99:13-53
 	android:name
-		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:81:13-51
+		ADDED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml:98:13-51
 uses-sdk
 INJECTED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml
 INJECTED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml
-MERGED from [com.google.android.material:material:1.12.0] /home/axel/.gradle/caches/8.10.2/transforms/77bfe939c341db109de16140a5434002/transformed/material-1.12.0/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.material:material:1.12.0] /home/axel/.gradle/caches/8.10.2/transforms/77bfe939c341db109de16140a5434002/transformed/material-1.12.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.constraintlayout:constraintlayout:2.2.0] /home/axel/.gradle/caches/8.10.2/transforms/288009b949fba48b9dd601e8de9a4d1c/transformed/constraintlayout-2.2.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.constraintlayout:constraintlayout:2.2.0] /home/axel/.gradle/caches/8.10.2/transforms/288009b949fba48b9dd601e8de9a4d1c/transformed/constraintlayout-2.2.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.appcompat:appcompat-resources:1.7.0] /home/axel/.gradle/caches/8.10.2/transforms/543da880c44464c1f2d089192a1c84d9/transformed/appcompat-resources-1.7.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.appcompat:appcompat-resources:1.7.0] /home/axel/.gradle/caches/8.10.2/transforms/543da880c44464c1f2d089192a1c84d9/transformed/appcompat-resources-1.7.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.appcompat:appcompat:1.7.0] /home/axel/.gradle/caches/8.10.2/transforms/3f56d7b875afad54579b5a2ddad42cc9/transformed/appcompat-1.7.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.appcompat:appcompat:1.7.0] /home/axel/.gradle/caches/8.10.2/transforms/3f56d7b875afad54579b5a2ddad42cc9/transformed/appcompat-1.7.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.material3:material3-android:1.2.0] /home/axel/.gradle/caches/8.10.2/transforms/3dcef8c9033cb3116194c6ee62b345e2/transformed/material3-release/AndroidManifest.xml:20:5-44
-MERGED from [androidx.compose.material3:material3-android:1.2.0] /home/axel/.gradle/caches/8.10.2/transforms/3dcef8c9033cb3116194c6ee62b345e2/transformed/material3-release/AndroidManifest.xml:20:5-44
-MERGED from [androidx.compose.material:material-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/56189318203afbcb9baf7276c5e606b3/transformed/material-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.material:material-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/56189318203afbcb9baf7276c5e606b3/transformed/material-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.material:material-icons-core-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/5adffc4bf45f88f1e3981bf398a10687/transformed/material-icons-core-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.material:material-icons-core-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/5adffc4bf45f88f1e3981bf398a10687/transformed/material-icons-core-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.material:material-ripple-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/0203986e8b0eb9e66088a643c81c02d9/transformed/material-ripple-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.material:material-ripple-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/0203986e8b0eb9e66088a643c81c02d9/transformed/material-ripple-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.foundation:foundation-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/b3013071503cce3a730ac0be57782e78/transformed/foundation-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.foundation:foundation-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/b3013071503cce3a730ac0be57782e78/transformed/foundation-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.animation:animation-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/0609e2b66bbf0715da8b1df534e3280c/transformed/animation-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.animation:animation-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/0609e2b66bbf0715da8b1df534e3280c/transformed/animation-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.foundation:foundation-layout-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/aa17da6081635857bdc3d3cc4bf66638/transformed/foundation-layout-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.foundation:foundation-layout-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/aa17da6081635857bdc3d3cc4bf66638/transformed/foundation-layout-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.animation:animation-core-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/dec69b303f77ac8432ebc72b88691f38/transformed/animation-core-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.animation:animation-core-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/dec69b303f77ac8432ebc72b88691f38/transformed/animation-core-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.ui:ui-tooling-data-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/0ab41147ce717b43da25f03ce1f2abe0/transformed/ui-tooling-data-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.ui:ui-tooling-data-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/0ab41147ce717b43da25f03ce1f2abe0/transformed/ui-tooling-data-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.ui:ui-unit-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/0b49fe546959a954fb1810273f1c8371/transformed/ui-unit-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.ui:ui-unit-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/0b49fe546959a954fb1810273f1c8371/transformed/ui-unit-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.ui:ui-geometry-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/9d564ced824a486abb555d5b6a03cdef/transformed/ui-geometry-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.ui:ui-geometry-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/9d564ced824a486abb555d5b6a03cdef/transformed/ui-geometry-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.ui:ui-util-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/e799d1f497c2454a614e0e6c4de26d8e/transformed/ui-util-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.ui:ui-util-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/e799d1f497c2454a614e0e6c4de26d8e/transformed/ui-util-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.ui:ui-text-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/2deb3369a347e7e01b5a673f46c8bc5f/transformed/ui-text-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.ui:ui-text-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/2deb3369a347e7e01b5a673f46c8bc5f/transformed/ui-text-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/d90e6ffd1db98776375fa6857672e7aa/transformed/ui-tooling-preview-release/AndroidManifest.xml:20:5-44
-MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/d90e6ffd1db98776375fa6857672e7aa/transformed/ui-tooling-preview-release/AndroidManifest.xml:20:5-44
-MERGED from [androidx.compose.ui:ui-graphics-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/3306784edf9e7ecfd871674618990a72/transformed/ui-graphics-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.ui:ui-graphics-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/3306784edf9e7ecfd871674618990a72/transformed/ui-graphics-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.ui:ui-tooling-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/ed04644a7bdc90ec884e0bd2caaef237/transformed/ui-tooling-release/AndroidManifest.xml:20:5-44
-MERGED from [androidx.compose.ui:ui-tooling-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/ed04644a7bdc90ec884e0bd2caaef237/transformed/ui-tooling-release/AndroidManifest.xml:20:5-44
-MERGED from [androidx.activity:activity-ktx:1.9.3] /home/axel/.gradle/caches/8.10.2/transforms/9dc2f56185c6fe765abac9d903e06681/transformed/activity-ktx-1.9.3/AndroidManifest.xml:5:5-44
-MERGED from [androidx.activity:activity-ktx:1.9.3] /home/axel/.gradle/caches/8.10.2/transforms/9dc2f56185c6fe765abac9d903e06681/transformed/activity-ktx-1.9.3/AndroidManifest.xml:5:5-44
-MERGED from [androidx.activity:activity-compose:1.9.3] /home/axel/.gradle/caches/8.10.2/transforms/a3c39b6dce174e3d8e9f49d6f3ccf8fb/transformed/activity-compose-1.9.3/AndroidManifest.xml:5:5-44
-MERGED from [androidx.activity:activity-compose:1.9.3] /home/axel/.gradle/caches/8.10.2/transforms/a3c39b6dce174e3d8e9f49d6f3ccf8fb/transformed/activity-compose-1.9.3/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.ui:ui-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/c60cc7651d8dfd4444996cb28878c512/transformed/ui-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.ui:ui-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/c60cc7651d8dfd4444996cb28878c512/transformed/ui-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.ui:ui-test-manifest:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/21a099dee71eb8e12ab46a24e19d6b6d/transformed/ui-test-manifest-1.6.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.compose.ui:ui-test-manifest:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/21a099dee71eb8e12ab46a24e19d6b6d/transformed/ui-test-manifest-1.6.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.viewpager2:viewpager2:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/6f01feab99fb3368c7c34123367b851a/transformed/viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.viewpager2:viewpager2:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/6f01feab99fb3368c7c34123367b851a/transformed/viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [com.google.android.gms:play-services-location:21.3.0] /home/axel/.gradle/caches/8.10.2/transforms/4a6b02e9a85682a8046580fd72a24f62/transformed/play-services-location-21.3.0/AndroidManifest.xml:4:5-44
-MERGED from [com.google.android.gms:play-services-location:21.3.0] /home/axel/.gradle/caches/8.10.2/transforms/4a6b02e9a85682a8046580fd72a24f62/transformed/play-services-location-21.3.0/AndroidManifest.xml:4:5-44
-MERGED from [com.google.android.gms:play-services-base:18.5.0] /home/axel/.gradle/caches/8.10.2/transforms/9ff38aa06b8390172e09e7d525a0824f/transformed/play-services-base-18.5.0/AndroidManifest.xml:3:5-44
-MERGED from [com.google.android.gms:play-services-base:18.5.0] /home/axel/.gradle/caches/8.10.2/transforms/9ff38aa06b8390172e09e7d525a0824f/transformed/play-services-base-18.5.0/AndroidManifest.xml:3:5-44
-MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /home/axel/.gradle/caches/8.10.2/transforms/7eb17519bd8ef1ac8ad6a684c4277cae/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:3:5-44
-MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /home/axel/.gradle/caches/8.10.2/transforms/7eb17519bd8ef1ac8ad6a684c4277cae/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:3:5-44
-MERGED from [com.google.android.gms:play-services-basement:18.4.0] /home/axel/.gradle/caches/8.10.2/transforms/97ac0f43a3677e7f93efd4c52a4ba140/transformed/play-services-basement-18.4.0/AndroidManifest.xml:3:5-44
-MERGED from [com.google.android.gms:play-services-basement:18.4.0] /home/axel/.gradle/caches/8.10.2/transforms/97ac0f43a3677e7f93efd4c52a4ba140/transformed/play-services-basement-18.4.0/AndroidManifest.xml:3:5-44
-MERGED from [androidx.fragment:fragment:1.5.4] /home/axel/.gradle/caches/8.10.2/transforms/703af835743541dfa80f304dd4079302/transformed/fragment-1.5.4/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.fragment:fragment:1.5.4] /home/axel/.gradle/caches/8.10.2/transforms/703af835743541dfa80f304dd4079302/transformed/fragment-1.5.4/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.activity:activity:1.9.3] /home/axel/.gradle/caches/8.10.2/transforms/155c36bd3eb08d464c2cc993885d1ff1/transformed/activity-1.9.3/AndroidManifest.xml:20:5-44
-MERGED from [androidx.activity:activity:1.9.3] /home/axel/.gradle/caches/8.10.2/transforms/155c36bd3eb08d464c2cc993885d1ff1/transformed/activity-1.9.3/AndroidManifest.xml:20:5-44
-MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /home/axel/.gradle/caches/8.10.2/transforms/b5b9729c0e516c63036aed83009d05cb/transformed/emoji2-views-helper-1.3.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /home/axel/.gradle/caches/8.10.2/transforms/b5b9729c0e516c63036aed83009d05cb/transformed/emoji2-views-helper-1.3.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.10.2/transforms/3f691094df3a2388dd890e0401714886/transformed/emoji2-1.3.0/AndroidManifest.xml:21:5-44
-MERGED from [androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.10.2/transforms/3f691094df3a2388dd890e0401714886/transformed/emoji2-1.3.0/AndroidManifest.xml:21:5-44
-MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /home/axel/.gradle/caches/8.10.2/transforms/4aabf16fda6b8d9caf9e601c9e64e5b3/transformed/drawerlayout-1.1.1/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /home/axel/.gradle/caches/8.10.2/transforms/4aabf16fda6b8d9caf9e601c9e64e5b3/transformed/drawerlayout-1.1.1/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /home/axel/.gradle/caches/8.10.2/transforms/ed5ebd782a64b6b1af0a0f5762c55cf7/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /home/axel/.gradle/caches/8.10.2/transforms/ed5ebd782a64b6b1af0a0f5762c55cf7/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.transition:transition:1.5.0] /home/axel/.gradle/caches/8.10.2/transforms/12d70de85c3fca1dae46a5584ea0bd80/transformed/transition-1.5.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.transition:transition:1.5.0] /home/axel/.gradle/caches/8.10.2/transforms/12d70de85c3fca1dae46a5584ea0bd80/transformed/transition-1.5.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/4da7452072cfc5fade6fe8589966be5a/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/4da7452072cfc5fade6fe8589966be5a/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/axel/.gradle/caches/8.10.2/transforms/a9d3a68f56caf21dcbeb452f01a71ba1/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/axel/.gradle/caches/8.10.2/transforms/a9d3a68f56caf21dcbeb452f01a71ba1/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/axel/.gradle/caches/8.10.2/transforms/dbecc988ecb228966749cbc8c62027a9/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/axel/.gradle/caches/8.10.2/transforms/dbecc988ecb228966749cbc8c62027a9/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/041e22380696fcd90c40d61518c56a10/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/041e22380696fcd90c40d61518c56a10/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.loader:loader:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/51cddc98daf4fddf4e2e7a529b3ee1b3/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.loader:loader:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/51cddc98daf4fddf4e2e7a529b3ee1b3/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.viewpager:viewpager:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/799aacc2f3f1ba080c2d8dc59a667004/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.viewpager:viewpager:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/799aacc2f3f1ba080c2d8dc59a667004/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.recyclerview:recyclerview:1.1.0] /home/axel/.gradle/caches/8.10.2/transforms/6a7c143c52eccc8ad3b0218e9666dab6/transformed/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.recyclerview:recyclerview:1.1.0] /home/axel/.gradle/caches/8.10.2/transforms/6a7c143c52eccc8ad3b0218e9666dab6/transformed/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.customview:customview:1.1.0] /home/axel/.gradle/caches/8.10.2/transforms/40b7662e81f61b5b39568cffa3d7ae68/transformed/customview-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.customview:customview:1.1.0] /home/axel/.gradle/caches/8.10.2/transforms/40b7662e81f61b5b39568cffa3d7ae68/transformed/customview-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.autofill:autofill:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/92739b8c75bb67c67174a0ab6f238df0/transformed/autofill-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.autofill:autofill:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/92739b8c75bb67c67174a0ab6f238df0/transformed/autofill-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/fdec5c64296b86121beae904ba5ee4c7/transformed/core-1.15.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/fdec5c64296b86121beae904ba5ee4c7/transformed/core-1.15.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /home/axel/.gradle/caches/8.10.2/transforms/1c56763e444c6a08f2764856cd909e70/transformed/savedstate-ktx-1.2.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /home/axel/.gradle/caches/8.10.2/transforms/1c56763e444c6a08f2764856cd909e70/transformed/savedstate-ktx-1.2.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.savedstate:savedstate:1.2.1] /home/axel/.gradle/caches/8.10.2/transforms/d195e0c6be8bddd259a398c102f4d46f/transformed/savedstate-1.2.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.savedstate:savedstate:1.2.1] /home/axel/.gradle/caches/8.10.2/transforms/d195e0c6be8bddd259a398c102f4d46f/transformed/savedstate-1.2.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/507f7bc2a7f1ed97dc578751c90e0487/transformed/lifecycle-livedata-core-ktx-2.7.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/507f7bc2a7f1ed97dc578751c90e0487/transformed/lifecycle-livedata-core-ktx-2.7.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/c85cc56f96e670a7ef4720a477716e0c/transformed/lifecycle-viewmodel-ktx-2.7.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/c85cc56f96e670a7ef4720a477716e0c/transformed/lifecycle-viewmodel-ktx-2.7.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/ce643f7c604e1ab1472f845b6f330613/transformed/lifecycle-livedata-2.7.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/ce643f7c604e1ab1472f845b6f330613/transformed/lifecycle-livedata-2.7.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/54fb634a3408e9d416624893ea25da6e/transformed/lifecycle-livedata-core-2.7.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/54fb634a3408e9d416624893ea25da6e/transformed/lifecycle-livedata-core-2.7.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/7d47a7b1a7f35dbb8f8262a322071e26/transformed/lifecycle-process-2.7.0/AndroidManifest.xml:21:5-44
-MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/7d47a7b1a7f35dbb8f8262a322071e26/transformed/lifecycle-process-2.7.0/AndroidManifest.xml:21:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/a23eb8f79a755955c55a8d2246d7545b/transformed/lifecycle-viewmodel-2.7.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/a23eb8f79a755955c55a8d2246d7545b/transformed/lifecycle-viewmodel-2.7.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/e7b89cdc31ec0f28c0a0a3342b1f7a53/transformed/lifecycle-runtime-2.7.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/e7b89cdc31ec0f28c0a0a3342b1f7a53/transformed/lifecycle-runtime-2.7.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/7d47cf62ef54452e8b961123dbd7be58/transformed/lifecycle-runtime-ktx-2.7.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/7d47cf62ef54452e8b961123dbd7be58/transformed/lifecycle-runtime-ktx-2.7.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/837ca9facd7284810c146e4d0ca444aa/transformed/lifecycle-viewmodel-savedstate-2.7.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/837ca9facd7284810c146e4d0ca444aa/transformed/lifecycle-viewmodel-savedstate-2.7.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/87c606e1fdfac423c751ba5405dada79/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
-MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/87c606e1fdfac423c751ba5405dada79/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
-MERGED from [androidx.core:core-ktx:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/b41f4beb8981c8e43234caa4ea292bba/transformed/core-ktx-1.15.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.core:core-ktx:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/b41f4beb8981c8e43234caa4ea292bba/transformed/core-ktx-1.15.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/fea4883a73bb0411f423e0f2826033f9/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/fea4883a73bb0411f423e0f2826033f9/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.cardview:cardview:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/ddb9e10bf4b010326e8c29d1e71213b3/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.cardview:cardview:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/ddb9e10bf4b010326e8c29d1e71213b3/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/f9a167dd1e895a2cd46e732594694a20/transformed/profileinstaller-1.4.0/AndroidManifest.xml:21:5-44
-MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/f9a167dd1e895a2cd46e732594694a20/transformed/profileinstaller-1.4.0/AndroidManifest.xml:21:5-44
-MERGED from [androidx.startup:startup-runtime:1.1.1] /home/axel/.gradle/caches/8.10.2/transforms/b607ccf84e74dab336a5ded57b106da6/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
-MERGED from [androidx.startup:startup-runtime:1.1.1] /home/axel/.gradle/caches/8.10.2/transforms/b607ccf84e74dab336a5ded57b106da6/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
-MERGED from [androidx.tracing:tracing:1.2.0] /home/axel/.gradle/caches/8.10.2/transforms/fa65076715ccd95ce108959767e302a2/transformed/tracing-1.2.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.tracing:tracing:1.2.0] /home/axel/.gradle/caches/8.10.2/transforms/fa65076715ccd95ce108959767e302a2/transformed/tracing-1.2.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.interpolator:interpolator:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/5968cc0b09729ea83d6aaded903cb11b/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.interpolator:interpolator:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/5968cc0b09729ea83d6aaded903cb11b/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/axel/.gradle/caches/8.10.2/transforms/5de9571312ced1e11b9fb3737b347f8b/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/axel/.gradle/caches/8.10.2/transforms/5de9571312ced1e11b9fb3737b347f8b/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.arch.core:core-runtime:2.2.0] /home/axel/.gradle/caches/8.10.2/transforms/9873bd6c4f7a7360a312eae0b7a27385/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.arch.core:core-runtime:2.2.0] /home/axel/.gradle/caches/8.10.2/transforms/9873bd6c4f7a7360a312eae0b7a27385/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.compose.runtime:runtime-saveable-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/28efdb7c9ff72283dfe5891d17674126/transformed/runtime-saveable-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.runtime:runtime-saveable-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/28efdb7c9ff72283dfe5891d17674126/transformed/runtime-saveable-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.runtime:runtime-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/0c6d2a5c9c58d3c2f63b6d5658ec0280/transformed/runtime-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.runtime:runtime-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/0c6d2a5c9c58d3c2f63b6d5658ec0280/transformed/runtime-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.documentfile:documentfile:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/7b974a65f88c2eec46fa19b5bce9aa83/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.documentfile:documentfile:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/7b974a65f88c2eec46fa19b5bce9aa83/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/06bfc0b616fcdf241b0d4199c0894f28/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/06bfc0b616fcdf241b0d4199c0894f28/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.print:print:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/438082c11429fbd4e85fb6adf492bd16/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.print:print:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/438082c11429fbd4e85fb6adf492bd16/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.annotation:annotation-experimental:1.4.1] /home/axel/.gradle/caches/8.10.2/transforms/ba2e109bee8e779921b744f3312129a1/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:5:5-44
-MERGED from [androidx.annotation:annotation-experimental:1.4.1] /home/axel/.gradle/caches/8.10.2/transforms/ba2e109bee8e779921b744f3312129a1/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.databinding:viewbinding:8.8.0] /home/axel/.gradle/caches/8.10.2/transforms/ade9a3bed7c935aa5c47e154c3afd5f7/transformed/viewbinding-8.8.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.databinding:viewbinding:8.8.0] /home/axel/.gradle/caches/8.10.2/transforms/ade9a3bed7c935aa5c47e154c3afd5f7/transformed/viewbinding-8.8.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.material:material:1.12.0] /home/axel/.gradle/caches/8.10.2/transforms/8b420df6fe00a15626b6d5e2bf3a4e3f/transformed/material-1.12.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.12.0] /home/axel/.gradle/caches/8.10.2/transforms/8b420df6fe00a15626b6d5e2bf3a4e3f/transformed/material-1.12.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.constraintlayout:constraintlayout:2.2.0] /home/axel/.gradle/caches/8.10.2/transforms/156682726774c9f301752c458906af31/transformed/constraintlayout-2.2.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.constraintlayout:constraintlayout:2.2.0] /home/axel/.gradle/caches/8.10.2/transforms/156682726774c9f301752c458906af31/transformed/constraintlayout-2.2.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.appcompat:appcompat-resources:1.7.0] /home/axel/.gradle/caches/8.10.2/transforms/d0813150272fffe84161662c33a98c6f/transformed/appcompat-resources-1.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.appcompat:appcompat-resources:1.7.0] /home/axel/.gradle/caches/8.10.2/transforms/d0813150272fffe84161662c33a98c6f/transformed/appcompat-resources-1.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.appcompat:appcompat:1.7.0] /home/axel/.gradle/caches/8.10.2/transforms/d7d8e0482e3eed4a85ccceb38cd6d963/transformed/appcompat-1.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.appcompat:appcompat:1.7.0] /home/axel/.gradle/caches/8.10.2/transforms/d7d8e0482e3eed4a85ccceb38cd6d963/transformed/appcompat-1.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material3:material3-android:1.2.0] /home/axel/.gradle/caches/8.10.2/transforms/725bd2f8029f00d66d9eaa6f4b10c404/transformed/material3-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.material3:material3-android:1.2.0] /home/axel/.gradle/caches/8.10.2/transforms/725bd2f8029f00d66d9eaa6f4b10c404/transformed/material3-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.material:material-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/f634985f41e6f8ebbf802ea8a7b6b2a9/transformed/material-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/f634985f41e6f8ebbf802ea8a7b6b2a9/transformed/material-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-core-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/7b53af049721866b6e960882de8e2b3a/transformed/material-icons-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-core-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/7b53af049721866b6e960882de8e2b3a/transformed/material-icons-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-ripple-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/9e079a3c45ca9d2bba26eabcf4f121d4/transformed/material-ripple-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-ripple-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/9e079a3c45ca9d2bba26eabcf4f121d4/transformed/material-ripple-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/06b5148fe51a5e36861e2edb965cee1a/transformed/foundation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/06b5148fe51a5e36861e2edb965cee1a/transformed/foundation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/301dae4344b5ba3e87b05c1b02299dd6/transformed/animation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/301dae4344b5ba3e87b05c1b02299dd6/transformed/animation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/cc1ee1293589a8f5ddfe8b4c3bcdfea7/transformed/foundation-layout-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/cc1ee1293589a8f5ddfe8b4c3bcdfea7/transformed/foundation-layout-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-core-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/bc01166a9d30e66a85795a080af03583/transformed/animation-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-core-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/bc01166a9d30e66a85795a080af03583/transformed/animation-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/1ee34a2ece7b3e9cbf713141b3afc928/transformed/ui-tooling-data-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/1ee34a2ece7b3e9cbf713141b3afc928/transformed/ui-tooling-data-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-unit-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/c9d9673c5a8a1125b36eedbe72ee04ac/transformed/ui-unit-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-unit-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/c9d9673c5a8a1125b36eedbe72ee04ac/transformed/ui-unit-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-geometry-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/bd499b050bd62f5998432575d1d9650c/transformed/ui-geometry-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-geometry-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/bd499b050bd62f5998432575d1d9650c/transformed/ui-geometry-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-util-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/308df8f3963dfa131047a087d8fe18a0/transformed/ui-util-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-util-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/308df8f3963dfa131047a087d8fe18a0/transformed/ui-util-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-text-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/c17bc9a1f873964380e7267ea9ce891f/transformed/ui-text-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-text-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/c17bc9a1f873964380e7267ea9ce891f/transformed/ui-text-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/9cda2f6946799a6d989b83ec49d84743/transformed/ui-tooling-preview-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/9cda2f6946799a6d989b83ec49d84743/transformed/ui-tooling-preview-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-graphics-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/2d8ef74852643f97d01691a17c7c81f9/transformed/ui-graphics-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-graphics-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/2d8ef74852643f97d01691a17c7c81f9/transformed/ui-graphics-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/b95770eaeaa4056a9e5c5e2b30017f46/transformed/ui-tooling-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-tooling-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/b95770eaeaa4056a9e5c5e2b30017f46/transformed/ui-tooling-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity-ktx:1.9.3] /home/axel/.gradle/caches/8.10.2/transforms/45f539a796fee0b27c2129f6ca78725f/transformed/activity-ktx-1.9.3/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-ktx:1.9.3] /home/axel/.gradle/caches/8.10.2/transforms/45f539a796fee0b27c2129f6ca78725f/transformed/activity-ktx-1.9.3/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-compose:1.9.3] /home/axel/.gradle/caches/8.10.2/transforms/6854986c8691fe916c4511d62c91ff97/transformed/activity-compose-1.9.3/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-compose:1.9.3] /home/axel/.gradle/caches/8.10.2/transforms/6854986c8691fe916c4511d62c91ff97/transformed/activity-compose-1.9.3/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/e2339302b4cf04d05dcc2c549362b82a/transformed/ui-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/e2339302b4cf04d05dcc2c549362b82a/transformed/ui-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-test-manifest:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/6677b10b5b4f4fc1c6e201d2d7fd820f/transformed/ui-test-manifest-1.6.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-test-manifest:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/6677b10b5b4f4fc1c6e201d2d7fd820f/transformed/ui-test-manifest-1.6.1/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.10.2/transforms/f4893eaaf42606b89ffe14b6ada097e7/transformed/play-services-maps-19.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.10.2/transforms/f4893eaaf42606b89ffe14b6ada097e7/transformed/play-services-maps-19.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/8f8d734a983c613f6698f3f783ec969e/transformed/viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/8f8d734a983c613f6698f3f783ec969e/transformed/viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.gms:play-services-location:21.3.0] /home/axel/.gradle/caches/8.10.2/transforms/27f9b59dd1845615240df1190355eed3/transformed/play-services-location-21.3.0/AndroidManifest.xml:4:5-44
+MERGED from [com.google.android.gms:play-services-location:21.3.0] /home/axel/.gradle/caches/8.10.2/transforms/27f9b59dd1845615240df1190355eed3/transformed/play-services-location-21.3.0/AndroidManifest.xml:4:5-44
+MERGED from [com.google.android.gms:play-services-base:18.5.0] /home/axel/.gradle/caches/8.10.2/transforms/5541d6af5c442b2479fcb1ea93f61812/transformed/play-services-base-18.5.0/AndroidManifest.xml:3:5-44
+MERGED from [com.google.android.gms:play-services-base:18.5.0] /home/axel/.gradle/caches/8.10.2/transforms/5541d6af5c442b2479fcb1ea93f61812/transformed/play-services-base-18.5.0/AndroidManifest.xml:3:5-44
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /home/axel/.gradle/caches/8.10.2/transforms/1df55b42c4504f2e2a3a40d2de420792/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:3:5-44
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /home/axel/.gradle/caches/8.10.2/transforms/1df55b42c4504f2e2a3a40d2de420792/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:3:5-44
+MERGED from [com.google.android.gms:play-services-basement:18.4.0] /home/axel/.gradle/caches/8.10.2/transforms/ae26d1bff1433bad5c62c7e1ee2f48ee/transformed/play-services-basement-18.4.0/AndroidManifest.xml:3:5-44
+MERGED from [com.google.android.gms:play-services-basement:18.4.0] /home/axel/.gradle/caches/8.10.2/transforms/ae26d1bff1433bad5c62c7e1ee2f48ee/transformed/play-services-basement-18.4.0/AndroidManifest.xml:3:5-44
+MERGED from [androidx.fragment:fragment:1.5.4] /home/axel/.gradle/caches/8.10.2/transforms/16e5240b4c2e76da15e92bbcb5055c18/transformed/fragment-1.5.4/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.5.4] /home/axel/.gradle/caches/8.10.2/transforms/16e5240b4c2e76da15e92bbcb5055c18/transformed/fragment-1.5.4/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.9.3] /home/axel/.gradle/caches/8.10.2/transforms/7f6079d7b34d9b510dbda863cc938f37/transformed/activity-1.9.3/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.9.3] /home/axel/.gradle/caches/8.10.2/transforms/7f6079d7b34d9b510dbda863cc938f37/transformed/activity-1.9.3/AndroidManifest.xml:20:5-44
+MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /home/axel/.gradle/caches/8.10.2/transforms/dcb59ed34523172e00400dc11481f955/transformed/emoji2-views-helper-1.3.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /home/axel/.gradle/caches/8.10.2/transforms/dcb59ed34523172e00400dc11481f955/transformed/emoji2-views-helper-1.3.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.10.2/transforms/09799f573115b968f1655f29b68afced/transformed/emoji2-1.3.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.10.2/transforms/09799f573115b968f1655f29b68afced/transformed/emoji2-1.3.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /home/axel/.gradle/caches/8.10.2/transforms/f228c2fcdddd77cb0e73b6328b31fd4f/transformed/drawerlayout-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /home/axel/.gradle/caches/8.10.2/transforms/f228c2fcdddd77cb0e73b6328b31fd4f/transformed/drawerlayout-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /home/axel/.gradle/caches/8.10.2/transforms/4159cc45fef69f143f735989ce07745c/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /home/axel/.gradle/caches/8.10.2/transforms/4159cc45fef69f143f735989ce07745c/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.5.0] /home/axel/.gradle/caches/8.10.2/transforms/235c397fe9bc5549c73a8d4fa6749489/transformed/transition-1.5.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.transition:transition:1.5.0] /home/axel/.gradle/caches/8.10.2/transforms/235c397fe9bc5549c73a8d4fa6749489/transformed/transition-1.5.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/2063f3b98f11a9d449cb7fe711bb3ced/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/2063f3b98f11a9d449cb7fe711bb3ced/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/axel/.gradle/caches/8.10.2/transforms/3cf6aba95bbee8ce502f5c00ec590453/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/axel/.gradle/caches/8.10.2/transforms/3cf6aba95bbee8ce502f5c00ec590453/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/axel/.gradle/caches/8.10.2/transforms/c7b199144e50dbbec522e0b1b96094ab/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/axel/.gradle/caches/8.10.2/transforms/c7b199144e50dbbec522e0b1b96094ab/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/50e331b847280b5047359572bd7e9917/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/50e331b847280b5047359572bd7e9917/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/33a5fbf724e3de1ac9b10d7ba589103d/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/33a5fbf724e3de1ac9b10d7ba589103d/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/2556e29ac670a2e49f3b9d2cf79e23cb/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/2556e29ac670a2e49f3b9d2cf79e23cb/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /home/axel/.gradle/caches/8.10.2/transforms/cf45626d1ab57fa08eee2a6f7458b5fa/transformed/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /home/axel/.gradle/caches/8.10.2/transforms/cf45626d1ab57fa08eee2a6f7458b5fa/transformed/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.1.0] /home/axel/.gradle/caches/8.10.2/transforms/99401cd0e1662a0ba1734a8b5719563f/transformed/customview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.1.0] /home/axel/.gradle/caches/8.10.2/transforms/99401cd0e1662a0ba1734a8b5719563f/transformed/customview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.autofill:autofill:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/c1b9c427fbce70390a4cc6a21105f976/transformed/autofill-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.autofill:autofill:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/c1b9c427fbce70390a4cc6a21105f976/transformed/autofill-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/c9d80fd86ba3e25b3dc9674ef88cbab2/transformed/core-1.15.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/c9d80fd86ba3e25b3dc9674ef88cbab2/transformed/core-1.15.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /home/axel/.gradle/caches/8.10.2/transforms/4a693222ed10a190f02e74fbb0856944/transformed/savedstate-ktx-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /home/axel/.gradle/caches/8.10.2/transforms/4a693222ed10a190f02e74fbb0856944/transformed/savedstate-ktx-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] /home/axel/.gradle/caches/8.10.2/transforms/7abad4c7163fc5d8f3511d8f35fcbc41/transformed/savedstate-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] /home/axel/.gradle/caches/8.10.2/transforms/7abad4c7163fc5d8f3511d8f35fcbc41/transformed/savedstate-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/240b5ad9526e51441f85ac2c8fed32b2/transformed/lifecycle-livedata-core-ktx-2.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/240b5ad9526e51441f85ac2c8fed32b2/transformed/lifecycle-livedata-core-ktx-2.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/50f662936f8e3e622a2f7bf58356146c/transformed/lifecycle-viewmodel-ktx-2.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/50f662936f8e3e622a2f7bf58356146c/transformed/lifecycle-viewmodel-ktx-2.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/71bdbc790f4397e7106ee7b839aa30ac/transformed/lifecycle-livedata-2.7.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/71bdbc790f4397e7106ee7b839aa30ac/transformed/lifecycle-livedata-2.7.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/af139646598dc173d775245e5e358bfd/transformed/lifecycle-livedata-core-2.7.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/af139646598dc173d775245e5e358bfd/transformed/lifecycle-livedata-core-2.7.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/0b85e9ab4ff7b778e3a809deee1c28ad/transformed/lifecycle-process-2.7.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/0b85e9ab4ff7b778e3a809deee1c28ad/transformed/lifecycle-process-2.7.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/a603340e8b535a5b9ce45e8a2747c932/transformed/lifecycle-viewmodel-2.7.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/a603340e8b535a5b9ce45e8a2747c932/transformed/lifecycle-viewmodel-2.7.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/41baaae8f515d0d8bee38491aba4f37a/transformed/lifecycle-runtime-2.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/41baaae8f515d0d8bee38491aba4f37a/transformed/lifecycle-runtime-2.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/f527614dd135215923ba703bd8ccaac0/transformed/lifecycle-runtime-ktx-2.7.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/f527614dd135215923ba703bd8ccaac0/transformed/lifecycle-runtime-ktx-2.7.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/4bc1c16eeecbb1592f700c3d2b6f54ee/transformed/lifecycle-viewmodel-savedstate-2.7.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/4bc1c16eeecbb1592f700c3d2b6f54ee/transformed/lifecycle-viewmodel-savedstate-2.7.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/2b25a041bdad140dab450d9a8effc704/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/2b25a041bdad140dab450d9a8effc704/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.core:core-ktx:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/3f058efbe57461e24ffaa320c27282c8/transformed/core-ktx-1.15.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-ktx:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/3f058efbe57461e24ffaa320c27282c8/transformed/core-ktx-1.15.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/52943fbfa7d27ea8f7e25379ba7e9c4e/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/52943fbfa7d27ea8f7e25379ba7e9c4e/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/ed39eab3772ce5370b6b2ff4f18df462/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/ed39eab3772ce5370b6b2ff4f18df462/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/e58d6ba122c578d057cbb8dac3d9b37a/transformed/profileinstaller-1.4.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/e58d6ba122c578d057cbb8dac3d9b37a/transformed/profileinstaller-1.4.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/axel/.gradle/caches/8.10.2/transforms/be83f322921699975fab65384ec6677d/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/axel/.gradle/caches/8.10.2/transforms/be83f322921699975fab65384ec6677d/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.tracing:tracing:1.2.0] /home/axel/.gradle/caches/8.10.2/transforms/8165e73982cdcba9dc588887a92fbc48/transformed/tracing-1.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.tracing:tracing:1.2.0] /home/axel/.gradle/caches/8.10.2/transforms/8165e73982cdcba9dc588887a92fbc48/transformed/tracing-1.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/bcb61fe35ba7f35265f8e4c825d6f089/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/bcb61fe35ba7f35265f8e4c825d6f089/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/axel/.gradle/caches/8.10.2/transforms/20b56f103ec25a04b034ec261797cfc1/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/axel/.gradle/caches/8.10.2/transforms/20b56f103ec25a04b034ec261797cfc1/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /home/axel/.gradle/caches/8.10.2/transforms/8463d64e325bdc0374e82025724432e4/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /home/axel/.gradle/caches/8.10.2/transforms/8463d64e325bdc0374e82025724432e4/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/3f529933bb5ad6566fb037c8cb7ab23c/transformed/runtime-saveable-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/3f529933bb5ad6566fb037c8cb7ab23c/transformed/runtime-saveable-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/088946b3b75634dd9ca996ee9cbc5e24/transformed/runtime-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/088946b3b75634dd9ca996ee9cbc5e24/transformed/runtime-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/1f747efe2f1d6b1d847206eda58676a0/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/1f747efe2f1d6b1d847206eda58676a0/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/d01367511275b00ef201190257e6bac5/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/d01367511275b00ef201190257e6bac5/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/4a5ec74e9ed0f0bb0b36905a6adad9e2/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /home/axel/.gradle/caches/8.10.2/transforms/4a5ec74e9ed0f0bb0b36905a6adad9e2/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /home/axel/.gradle/caches/8.10.2/transforms/5bddd2beecdfa72c067e5f6dd7b02df3/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /home/axel/.gradle/caches/8.10.2/transforms/5bddd2beecdfa72c067e5f6dd7b02df3/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:5:5-44
 	android:targetSdkVersion
 		INJECTED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml
 	android:minSdkVersion
 		INJECTED from /home/axel/Documents/Sentinelle/sentinelle/app/src/main/AndroidManifest.xml
 activity#androidx.compose.ui.tooling.PreviewActivity
-ADDED from [androidx.compose.ui:ui-tooling-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/ed04644a7bdc90ec884e0bd2caaef237/transformed/ui-tooling-release/AndroidManifest.xml:23:9-25:39
+ADDED from [androidx.compose.ui:ui-tooling-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/b95770eaeaa4056a9e5c5e2b30017f46/transformed/ui-tooling-release/AndroidManifest.xml:23:9-25:39
 	android:exported
-		ADDED from [androidx.compose.ui:ui-tooling-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/ed04644a7bdc90ec884e0bd2caaef237/transformed/ui-tooling-release/AndroidManifest.xml:25:13-36
+		ADDED from [androidx.compose.ui:ui-tooling-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/b95770eaeaa4056a9e5c5e2b30017f46/transformed/ui-tooling-release/AndroidManifest.xml:25:13-36
 	android:name
-		ADDED from [androidx.compose.ui:ui-tooling-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/ed04644a7bdc90ec884e0bd2caaef237/transformed/ui-tooling-release/AndroidManifest.xml:24:13-71
+		ADDED from [androidx.compose.ui:ui-tooling-android:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/b95770eaeaa4056a9e5c5e2b30017f46/transformed/ui-tooling-release/AndroidManifest.xml:24:13-71
 activity#androidx.activity.ComponentActivity
-ADDED from [androidx.compose.ui:ui-test-manifest:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/21a099dee71eb8e12ab46a24e19d6b6d/transformed/ui-test-manifest-1.6.1/AndroidManifest.xml:23:9-25:39
+ADDED from [androidx.compose.ui:ui-test-manifest:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/6677b10b5b4f4fc1c6e201d2d7fd820f/transformed/ui-test-manifest-1.6.1/AndroidManifest.xml:23:9-25:39
 	android:exported
-		ADDED from [androidx.compose.ui:ui-test-manifest:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/21a099dee71eb8e12ab46a24e19d6b6d/transformed/ui-test-manifest-1.6.1/AndroidManifest.xml:25:13-36
+		ADDED from [androidx.compose.ui:ui-test-manifest:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/6677b10b5b4f4fc1c6e201d2d7fd820f/transformed/ui-test-manifest-1.6.1/AndroidManifest.xml:25:13-36
 	android:name
-		ADDED from [androidx.compose.ui:ui-test-manifest:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/21a099dee71eb8e12ab46a24e19d6b6d/transformed/ui-test-manifest-1.6.1/AndroidManifest.xml:24:13-63
+		ADDED from [androidx.compose.ui:ui-test-manifest:1.6.1] /home/axel/.gradle/caches/8.10.2/transforms/6677b10b5b4f4fc1c6e201d2d7fd820f/transformed/ui-test-manifest-1.6.1/AndroidManifest.xml:24:13-63
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from [com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.10.2/transforms/f4893eaaf42606b89ffe14b6ada097e7/transformed/play-services-maps-19.0.0/AndroidManifest.xml:23:5-79
+	android:name
+		ADDED from [com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.10.2/transforms/f4893eaaf42606b89ffe14b6ada097e7/transformed/play-services-maps-19.0.0/AndroidManifest.xml:23:22-76
+uses-feature#0x00020000
+ADDED from [com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.10.2/transforms/f4893eaaf42606b89ffe14b6ada097e7/transformed/play-services-maps-19.0.0/AndroidManifest.xml:26:5-28:35
+	android:glEsVersion
+		ADDED from [com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.10.2/transforms/f4893eaaf42606b89ffe14b6ada097e7/transformed/play-services-maps-19.0.0/AndroidManifest.xml:27:9-41
+	android:required
+		ADDED from [com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.10.2/transforms/f4893eaaf42606b89ffe14b6ada097e7/transformed/play-services-maps-19.0.0/AndroidManifest.xml:28:9-32
+queries
+ADDED from [com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.10.2/transforms/f4893eaaf42606b89ffe14b6ada097e7/transformed/play-services-maps-19.0.0/AndroidManifest.xml:30:5-34:15
+package#com.google.android.apps.maps
+ADDED from [com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.10.2/transforms/f4893eaaf42606b89ffe14b6ada097e7/transformed/play-services-maps-19.0.0/AndroidManifest.xml:33:9-64
+	android:name
+		ADDED from [com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.10.2/transforms/f4893eaaf42606b89ffe14b6ada097e7/transformed/play-services-maps-19.0.0/AndroidManifest.xml:33:18-61
+uses-library#org.apache.http.legacy
+ADDED from [com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.10.2/transforms/f4893eaaf42606b89ffe14b6ada097e7/transformed/play-services-maps-19.0.0/AndroidManifest.xml:39:9-41:40
+	android:required
+		ADDED from [com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.10.2/transforms/f4893eaaf42606b89ffe14b6ada097e7/transformed/play-services-maps-19.0.0/AndroidManifest.xml:41:13-37
+	android:name
+		ADDED from [com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.10.2/transforms/f4893eaaf42606b89ffe14b6ada097e7/transformed/play-services-maps-19.0.0/AndroidManifest.xml:40:13-50
 activity#com.google.android.gms.common.api.GoogleApiActivity
-ADDED from [com.google.android.gms:play-services-base:18.5.0] /home/axel/.gradle/caches/8.10.2/transforms/9ff38aa06b8390172e09e7d525a0824f/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:9-173
+ADDED from [com.google.android.gms:play-services-base:18.5.0] /home/axel/.gradle/caches/8.10.2/transforms/5541d6af5c442b2479fcb1ea93f61812/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:9-173
 	android:exported
-		ADDED from [com.google.android.gms:play-services-base:18.5.0] /home/axel/.gradle/caches/8.10.2/transforms/9ff38aa06b8390172e09e7d525a0824f/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:146-170
+		ADDED from [com.google.android.gms:play-services-base:18.5.0] /home/axel/.gradle/caches/8.10.2/transforms/5541d6af5c442b2479fcb1ea93f61812/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:146-170
 	android:theme
-		ADDED from [com.google.android.gms:play-services-base:18.5.0] /home/axel/.gradle/caches/8.10.2/transforms/9ff38aa06b8390172e09e7d525a0824f/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:86-145
+		ADDED from [com.google.android.gms:play-services-base:18.5.0] /home/axel/.gradle/caches/8.10.2/transforms/5541d6af5c442b2479fcb1ea93f61812/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:86-145
 	android:name
-		ADDED from [com.google.android.gms:play-services-base:18.5.0] /home/axel/.gradle/caches/8.10.2/transforms/9ff38aa06b8390172e09e7d525a0824f/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:19-85
+		ADDED from [com.google.android.gms:play-services-base:18.5.0] /home/axel/.gradle/caches/8.10.2/transforms/5541d6af5c442b2479fcb1ea93f61812/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:19-85
 meta-data#com.google.android.gms.version
-ADDED from [com.google.android.gms:play-services-basement:18.4.0] /home/axel/.gradle/caches/8.10.2/transforms/97ac0f43a3677e7f93efd4c52a4ba140/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:9-122
+ADDED from [com.google.android.gms:play-services-basement:18.4.0] /home/axel/.gradle/caches/8.10.2/transforms/ae26d1bff1433bad5c62c7e1ee2f48ee/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:9-122
 	android:value
-		ADDED from [com.google.android.gms:play-services-basement:18.4.0] /home/axel/.gradle/caches/8.10.2/transforms/97ac0f43a3677e7f93efd4c52a4ba140/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:66-119
+		ADDED from [com.google.android.gms:play-services-basement:18.4.0] /home/axel/.gradle/caches/8.10.2/transforms/ae26d1bff1433bad5c62c7e1ee2f48ee/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:66-119
 	android:name
-		ADDED from [com.google.android.gms:play-services-basement:18.4.0] /home/axel/.gradle/caches/8.10.2/transforms/97ac0f43a3677e7f93efd4c52a4ba140/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:20-65
+		ADDED from [com.google.android.gms:play-services-basement:18.4.0] /home/axel/.gradle/caches/8.10.2/transforms/ae26d1bff1433bad5c62c7e1ee2f48ee/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:20-65
 provider#androidx.startup.InitializationProvider
-ADDED from [androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.10.2/transforms/3f691094df3a2388dd890e0401714886/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
-MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/7d47a7b1a7f35dbb8f8262a322071e26/transformed/lifecycle-process-2.7.0/AndroidManifest.xml:24:9-32:20
-MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/7d47a7b1a7f35dbb8f8262a322071e26/transformed/lifecycle-process-2.7.0/AndroidManifest.xml:24:9-32:20
-MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/f9a167dd1e895a2cd46e732594694a20/transformed/profileinstaller-1.4.0/AndroidManifest.xml:24:9-32:20
-MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/f9a167dd1e895a2cd46e732594694a20/transformed/profileinstaller-1.4.0/AndroidManifest.xml:24:9-32:20
-MERGED from [androidx.startup:startup-runtime:1.1.1] /home/axel/.gradle/caches/8.10.2/transforms/b607ccf84e74dab336a5ded57b106da6/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
-MERGED from [androidx.startup:startup-runtime:1.1.1] /home/axel/.gradle/caches/8.10.2/transforms/b607ccf84e74dab336a5ded57b106da6/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+ADDED from [androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.10.2/transforms/09799f573115b968f1655f29b68afced/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/0b85e9ab4ff7b778e3a809deee1c28ad/transformed/lifecycle-process-2.7.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/0b85e9ab4ff7b778e3a809deee1c28ad/transformed/lifecycle-process-2.7.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/e58d6ba122c578d057cbb8dac3d9b37a/transformed/profileinstaller-1.4.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/e58d6ba122c578d057cbb8dac3d9b37a/transformed/profileinstaller-1.4.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/axel/.gradle/caches/8.10.2/transforms/be83f322921699975fab65384ec6677d/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/axel/.gradle/caches/8.10.2/transforms/be83f322921699975fab65384ec6677d/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
 	tools:node
-		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.10.2/transforms/3f691094df3a2388dd890e0401714886/transformed/emoji2-1.3.0/AndroidManifest.xml:28:13-31
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.10.2/transforms/09799f573115b968f1655f29b68afced/transformed/emoji2-1.3.0/AndroidManifest.xml:28:13-31
 	android:authorities
-		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.10.2/transforms/3f691094df3a2388dd890e0401714886/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.10.2/transforms/09799f573115b968f1655f29b68afced/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68
 	android:exported
-		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.10.2/transforms/3f691094df3a2388dd890e0401714886/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.10.2/transforms/09799f573115b968f1655f29b68afced/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37
 	android:name
-		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.10.2/transforms/3f691094df3a2388dd890e0401714886/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.10.2/transforms/09799f573115b968f1655f29b68afced/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67
 meta-data#androidx.emoji2.text.EmojiCompatInitializer
-ADDED from [androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.10.2/transforms/3f691094df3a2388dd890e0401714886/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
+ADDED from [androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.10.2/transforms/09799f573115b968f1655f29b68afced/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
 	android:value
-		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.10.2/transforms/3f691094df3a2388dd890e0401714886/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.10.2/transforms/09799f573115b968f1655f29b68afced/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
 	android:name
-		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.10.2/transforms/3f691094df3a2388dd890e0401714886/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.10.2/transforms/09799f573115b968f1655f29b68afced/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
 permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
-ADDED from [androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/fdec5c64296b86121beae904ba5ee4c7/transformed/core-1.15.0/AndroidManifest.xml:22:5-24:47
+ADDED from [androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/c9d80fd86ba3e25b3dc9674ef88cbab2/transformed/core-1.15.0/AndroidManifest.xml:22:5-24:47
 	android:protectionLevel
-		ADDED from [androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/fdec5c64296b86121beae904ba5ee4c7/transformed/core-1.15.0/AndroidManifest.xml:24:9-44
+		ADDED from [androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/c9d80fd86ba3e25b3dc9674ef88cbab2/transformed/core-1.15.0/AndroidManifest.xml:24:9-44
 	android:name
-		ADDED from [androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/fdec5c64296b86121beae904ba5ee4c7/transformed/core-1.15.0/AndroidManifest.xml:23:9-81
+		ADDED from [androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/c9d80fd86ba3e25b3dc9674ef88cbab2/transformed/core-1.15.0/AndroidManifest.xml:23:9-81
 permission#com.example.sentinelle.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
-ADDED from [androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/fdec5c64296b86121beae904ba5ee4c7/transformed/core-1.15.0/AndroidManifest.xml:22:5-24:47
+ADDED from [androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/c9d80fd86ba3e25b3dc9674ef88cbab2/transformed/core-1.15.0/AndroidManifest.xml:22:5-24:47
 	android:protectionLevel
-		ADDED from [androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/fdec5c64296b86121beae904ba5ee4c7/transformed/core-1.15.0/AndroidManifest.xml:24:9-44
+		ADDED from [androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/c9d80fd86ba3e25b3dc9674ef88cbab2/transformed/core-1.15.0/AndroidManifest.xml:24:9-44
 	android:name
-		ADDED from [androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/fdec5c64296b86121beae904ba5ee4c7/transformed/core-1.15.0/AndroidManifest.xml:23:9-81
+		ADDED from [androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/c9d80fd86ba3e25b3dc9674ef88cbab2/transformed/core-1.15.0/AndroidManifest.xml:23:9-81
 uses-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
-ADDED from [androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/fdec5c64296b86121beae904ba5ee4c7/transformed/core-1.15.0/AndroidManifest.xml:26:5-97
+ADDED from [androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/c9d80fd86ba3e25b3dc9674ef88cbab2/transformed/core-1.15.0/AndroidManifest.xml:26:5-97
 	android:name
-		ADDED from [androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/fdec5c64296b86121beae904ba5ee4c7/transformed/core-1.15.0/AndroidManifest.xml:26:22-94
+		ADDED from [androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/c9d80fd86ba3e25b3dc9674ef88cbab2/transformed/core-1.15.0/AndroidManifest.xml:26:22-94
 uses-permission#com.example.sentinelle.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
-ADDED from [androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/fdec5c64296b86121beae904ba5ee4c7/transformed/core-1.15.0/AndroidManifest.xml:26:5-97
+ADDED from [androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/c9d80fd86ba3e25b3dc9674ef88cbab2/transformed/core-1.15.0/AndroidManifest.xml:26:5-97
 	android:name
-		ADDED from [androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/fdec5c64296b86121beae904ba5ee4c7/transformed/core-1.15.0/AndroidManifest.xml:26:22-94
+		ADDED from [androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.10.2/transforms/c9d80fd86ba3e25b3dc9674ef88cbab2/transformed/core-1.15.0/AndroidManifest.xml:26:22-94
 meta-data#androidx.lifecycle.ProcessLifecycleInitializer
-ADDED from [androidx.lifecycle:lifecycle-process:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/7d47a7b1a7f35dbb8f8262a322071e26/transformed/lifecycle-process-2.7.0/AndroidManifest.xml:29:13-31:52
+ADDED from [androidx.lifecycle:lifecycle-process:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/0b85e9ab4ff7b778e3a809deee1c28ad/transformed/lifecycle-process-2.7.0/AndroidManifest.xml:29:13-31:52
 	android:value
-		ADDED from [androidx.lifecycle:lifecycle-process:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/7d47a7b1a7f35dbb8f8262a322071e26/transformed/lifecycle-process-2.7.0/AndroidManifest.xml:31:17-49
+		ADDED from [androidx.lifecycle:lifecycle-process:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/0b85e9ab4ff7b778e3a809deee1c28ad/transformed/lifecycle-process-2.7.0/AndroidManifest.xml:31:17-49
 	android:name
-		ADDED from [androidx.lifecycle:lifecycle-process:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/7d47a7b1a7f35dbb8f8262a322071e26/transformed/lifecycle-process-2.7.0/AndroidManifest.xml:30:17-78
+		ADDED from [androidx.lifecycle:lifecycle-process:2.7.0] /home/axel/.gradle/caches/8.10.2/transforms/0b85e9ab4ff7b778e3a809deee1c28ad/transformed/lifecycle-process-2.7.0/AndroidManifest.xml:30:17-78
 meta-data#androidx.profileinstaller.ProfileInstallerInitializer
-ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/f9a167dd1e895a2cd46e732594694a20/transformed/profileinstaller-1.4.0/AndroidManifest.xml:29:13-31:52
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/e58d6ba122c578d057cbb8dac3d9b37a/transformed/profileinstaller-1.4.0/AndroidManifest.xml:29:13-31:52
 	android:value
-		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/f9a167dd1e895a2cd46e732594694a20/transformed/profileinstaller-1.4.0/AndroidManifest.xml:31:17-49
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/e58d6ba122c578d057cbb8dac3d9b37a/transformed/profileinstaller-1.4.0/AndroidManifest.xml:31:17-49
 	android:name
-		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/f9a167dd1e895a2cd46e732594694a20/transformed/profileinstaller-1.4.0/AndroidManifest.xml:30:17-85
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/e58d6ba122c578d057cbb8dac3d9b37a/transformed/profileinstaller-1.4.0/AndroidManifest.xml:30:17-85
 receiver#androidx.profileinstaller.ProfileInstallReceiver
-ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/f9a167dd1e895a2cd46e732594694a20/transformed/profileinstaller-1.4.0/AndroidManifest.xml:34:9-52:20
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/e58d6ba122c578d057cbb8dac3d9b37a/transformed/profileinstaller-1.4.0/AndroidManifest.xml:34:9-52:20
 	android:enabled
-		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/f9a167dd1e895a2cd46e732594694a20/transformed/profileinstaller-1.4.0/AndroidManifest.xml:37:13-35
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/e58d6ba122c578d057cbb8dac3d9b37a/transformed/profileinstaller-1.4.0/AndroidManifest.xml:37:13-35
 	android:exported
-		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/f9a167dd1e895a2cd46e732594694a20/transformed/profileinstaller-1.4.0/AndroidManifest.xml:38:13-36
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/e58d6ba122c578d057cbb8dac3d9b37a/transformed/profileinstaller-1.4.0/AndroidManifest.xml:38:13-36
 	android:permission
-		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/f9a167dd1e895a2cd46e732594694a20/transformed/profileinstaller-1.4.0/AndroidManifest.xml:39:13-57
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/e58d6ba122c578d057cbb8dac3d9b37a/transformed/profileinstaller-1.4.0/AndroidManifest.xml:39:13-57
 	android:directBootAware
-		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/f9a167dd1e895a2cd46e732594694a20/transformed/profileinstaller-1.4.0/AndroidManifest.xml:36:13-44
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/e58d6ba122c578d057cbb8dac3d9b37a/transformed/profileinstaller-1.4.0/AndroidManifest.xml:36:13-44
 	android:name
-		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/f9a167dd1e895a2cd46e732594694a20/transformed/profileinstaller-1.4.0/AndroidManifest.xml:35:13-76
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/e58d6ba122c578d057cbb8dac3d9b37a/transformed/profileinstaller-1.4.0/AndroidManifest.xml:35:13-76
 intent-filter#action:name:androidx.profileinstaller.action.INSTALL_PROFILE
-ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/f9a167dd1e895a2cd46e732594694a20/transformed/profileinstaller-1.4.0/AndroidManifest.xml:40:13-42:29
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/e58d6ba122c578d057cbb8dac3d9b37a/transformed/profileinstaller-1.4.0/AndroidManifest.xml:40:13-42:29
 action#androidx.profileinstaller.action.INSTALL_PROFILE
-ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/f9a167dd1e895a2cd46e732594694a20/transformed/profileinstaller-1.4.0/AndroidManifest.xml:41:17-91
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/e58d6ba122c578d057cbb8dac3d9b37a/transformed/profileinstaller-1.4.0/AndroidManifest.xml:41:17-91
 	android:name
-		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/f9a167dd1e895a2cd46e732594694a20/transformed/profileinstaller-1.4.0/AndroidManifest.xml:41:25-88
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/e58d6ba122c578d057cbb8dac3d9b37a/transformed/profileinstaller-1.4.0/AndroidManifest.xml:41:25-88
 intent-filter#action:name:androidx.profileinstaller.action.SKIP_FILE
-ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/f9a167dd1e895a2cd46e732594694a20/transformed/profileinstaller-1.4.0/AndroidManifest.xml:43:13-45:29
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/e58d6ba122c578d057cbb8dac3d9b37a/transformed/profileinstaller-1.4.0/AndroidManifest.xml:43:13-45:29
 action#androidx.profileinstaller.action.SKIP_FILE
-ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/f9a167dd1e895a2cd46e732594694a20/transformed/profileinstaller-1.4.0/AndroidManifest.xml:44:17-85
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/e58d6ba122c578d057cbb8dac3d9b37a/transformed/profileinstaller-1.4.0/AndroidManifest.xml:44:17-85
 	android:name
-		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/f9a167dd1e895a2cd46e732594694a20/transformed/profileinstaller-1.4.0/AndroidManifest.xml:44:25-82
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/e58d6ba122c578d057cbb8dac3d9b37a/transformed/profileinstaller-1.4.0/AndroidManifest.xml:44:25-82
 intent-filter#action:name:androidx.profileinstaller.action.SAVE_PROFILE
-ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/f9a167dd1e895a2cd46e732594694a20/transformed/profileinstaller-1.4.0/AndroidManifest.xml:46:13-48:29
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/e58d6ba122c578d057cbb8dac3d9b37a/transformed/profileinstaller-1.4.0/AndroidManifest.xml:46:13-48:29
 action#androidx.profileinstaller.action.SAVE_PROFILE
-ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/f9a167dd1e895a2cd46e732594694a20/transformed/profileinstaller-1.4.0/AndroidManifest.xml:47:17-88
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/e58d6ba122c578d057cbb8dac3d9b37a/transformed/profileinstaller-1.4.0/AndroidManifest.xml:47:17-88
 	android:name
-		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/f9a167dd1e895a2cd46e732594694a20/transformed/profileinstaller-1.4.0/AndroidManifest.xml:47:25-85
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/e58d6ba122c578d057cbb8dac3d9b37a/transformed/profileinstaller-1.4.0/AndroidManifest.xml:47:25-85
 intent-filter#action:name:androidx.profileinstaller.action.BENCHMARK_OPERATION
-ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/f9a167dd1e895a2cd46e732594694a20/transformed/profileinstaller-1.4.0/AndroidManifest.xml:49:13-51:29
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/e58d6ba122c578d057cbb8dac3d9b37a/transformed/profileinstaller-1.4.0/AndroidManifest.xml:49:13-51:29
 action#androidx.profileinstaller.action.BENCHMARK_OPERATION
-ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/f9a167dd1e895a2cd46e732594694a20/transformed/profileinstaller-1.4.0/AndroidManifest.xml:50:17-95
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/e58d6ba122c578d057cbb8dac3d9b37a/transformed/profileinstaller-1.4.0/AndroidManifest.xml:50:17-95
 	android:name
-		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/f9a167dd1e895a2cd46e732594694a20/transformed/profileinstaller-1.4.0/AndroidManifest.xml:50:25-92
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.10.2/transforms/e58d6ba122c578d057cbb8dac3d9b37a/transformed/profileinstaller-1.4.0/AndroidManifest.xml:50:25-92

@@ -13,11 +13,22 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-
-    <!-- Permission pour enregistrer l'audio -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> <!-- Permission pour enregistrer l'audio -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- Include required permissions for Google Maps API to run. -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <queries>
+
+        <!-- Needs to be explicitly declared on Android R+ -->
+        <package android:name="com.google.android.apps.maps" />
+    </queries>
 
     <permission
         android:name="com.example.sentinelle.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
@@ -37,9 +48,33 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:testOnly="true"
         android:theme="@style/Theme.Sentinelle" >
+        <activity
+            android:name="com.example.sentinelle.detailSafeJourney_activity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.sentinelle.liste_safe_journey_activity"
+            android:exported="false" />
+        <!--
+             TODO: Before you run your application, you need a Google Maps API key.
 
-        <!-- Autres activités -->
+             To get one, follow the directions here:
+
+                https://developers.google.com/maps/documentation/android-sdk/get-api-key
+
+             Once you have your API key (it starts with "AIza"), define a new property in your
+             project's local.properties file (e.g. MAPS_API_KEY=Aiza...), and replace the
+             "YOUR_API_KEY" string in this file with "${MAPS_API_KEY}".
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="YOUR_API_KEY" />
+
+        <activity
+            android:name="com.example.sentinelle.MapsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_maps" /> <!-- Autres activités -->
         <activity
             android:name="com.example.sentinelle.activity_home"
             android:exported="false"
@@ -71,9 +106,7 @@
         <activity
             android:name="com.example.sentinelle.TutoOneActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
-
-        <!-- Déclaration de l'activité MainActivity -->
+            android:screenOrientation="portrait" /> <!-- Déclaration de l'activité MainActivity -->
         <activity
             android:name="com.example.sentinelle.MainActivity"
             android:exported="true"
@@ -98,7 +131,11 @@
             android:exported="true" />
         <activity
             android:name="androidx.activity.ComponentActivity"
-            android:exported="true" />
+            android:exported="true" /> <!-- Needs to be explicitly declared on P+ -->
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
         <activity
             android:name="com.google.android.gms.common.api.GoogleApiActivity"
             android:exported="false"

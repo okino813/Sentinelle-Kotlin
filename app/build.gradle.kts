@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
 }
 
 android {
@@ -35,6 +36,7 @@ android {
     }
     buildFeatures {
         compose = true
+        viewBinding = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.13"
@@ -55,7 +57,8 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation("com.squareup.okhttp3:okhttp:4.9.1") // Ajoute OkHttp ici
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
-    implementation(libs.play.services.location) // Ajoute logging-interceptor (facultatif)
+    implementation(libs.play.services.location)
+    implementation(libs.play.services.maps) // Ajoute logging-interceptor (facultatif)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

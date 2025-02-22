@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.sentinelle.app-mergeDebugResources-59:/values-v23/values-v23.xml",
+            "outputFile": "com.example.sentinelle.app-mergeDebugResources-60:/values-v23/values-v23.xml",
             "map": [
                 {
-                    "source": "/home/axel/.gradle/caches/8.10.2/transforms/3f56d7b875afad54579b5a2ddad42cc9/transformed/appcompat-1.7.0/res/values-v23/values-v23.xml",
+                    "source": "/home/axel/.gradle/caches/8.10.2/transforms/d7d8e0482e3eed4a85ccceb38cd6d963/transformed/appcompat-1.7.0/res/values-v23/values-v23.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,20,34,35,36,39,43,44,45,46",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -15,7 +15,7 @@
                     }
                 },
                 {
-                    "source": "/home/axel/.gradle/caches/8.10.2/transforms/77bfe939c341db109de16140a5434002/transformed/material-1.12.0/res/values-v23/values-v23.xml",
+                    "source": "/home/axel/.gradle/caches/8.10.2/transforms/8b420df6fe00a15626b6d5e2bf3a4e3f/transformed/material-1.12.0/res/values-v23/values-v23.xml",
                     "from": {
                         "startLines": "2,5,9,13,16,19,22,25,28,32",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",
@@ -34,7 +34,7 @@
                     }
                 },
                 {
-                    "source": "/home/axel/.gradle/caches/8.10.2/transforms/ddb9e10bf4b010326e8c29d1e71213b3/transformed/cardview-1.0.0/res/values-v23/values-v23.xml",
+                    "source": "/home/axel/.gradle/caches/8.10.2/transforms/ed39eab3772ce5370b6b2ff4f18df462/transformed/cardview-1.0.0/res/values-v23/values-v23.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

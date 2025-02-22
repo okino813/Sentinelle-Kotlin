@@ -26,7 +26,9 @@ import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.NumberPicker
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -75,6 +77,16 @@ class activity_home : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+
+        // On récupère le btn de l'onglet des safe journey
+        val btn_ongletSafeJourney = findViewById<ImageView>(R.id.btnOngletJourney)
+
+        btn_ongletSafeJourney.setOnClickListener(View.OnClickListener { view: View? ->
+            Intent(this, liste_safe_journey_activity::class.java).also {
+                startActivity(it)
+            }
+        })
 
         locationManager = LocationManager(this)
 

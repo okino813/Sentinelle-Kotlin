@@ -128,12 +128,12 @@
         android:text="Minutes"
         android:textColor="@color/blue_sky"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/textView13"
+        app:layout_constraintEnd_toStartOf="@+id/textView131"
         app:layout_constraintStart_toEndOf="@+id/textView12"
         app:layout_constraintTop_toBottomOf="@+id/np_minutes" />
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/textView131"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -144,4 +144,142 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/np_seconds" />
+
+    <Button
+        android:id="@+id/btn_alerter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="456dp"
+        android:width="170dp"
+        android:height="170dp"
+        android:backgroundTint="#A72525"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="ALERTER"
+        android:textColor="@color/white"
+        android:textColorLink="@color/white"
+        android:textSize="64px"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="408dp"
+        android:fontFamily="@font/inter_medium"
+        android:text="Vous êtes en danger ?"
+        android:textColor="@color/blue"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="640dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Appuyez sur ce bouton pour prévenir votre proche"
+        android:textColor="@color/white"
+        android:textSize="32px"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="338dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="668dp"
+        android:fontFamily="@font/montserrat_semibold"
+        android:text="Attention : Si vous cliquer sur le bouton “Alerter”, votre contact aura accès à votre localisation ainsi que l’accès à votre micro"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="22px"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/homeBtnMenu"
+        android:layout_width="100px"
+        android:layout_height="100px"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/home"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/journeyBtnMenu"
+        android:layout_width="100px"
+        android:layout_height="100px"
+        android:layout_marginStart="130dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/map"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/contactBtnMenu"
+        android:layout_width="100px"
+        android:layout_height="100px"
+        android:layout_marginEnd="130dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/message"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/settingBtnMenu"
+        android:layout_width="100px"
+        android:layout_height="100px"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/settings"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top" />
+
+    <ImageView
+        android:id="@+id/btnOngletJourney"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/rectangle" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
