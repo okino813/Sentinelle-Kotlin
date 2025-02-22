@@ -3199,8 +3199,10 @@ int drawable rounde_edit_text 0x7f080109
 int drawable rounded_button_app 0x7f08010a
 int drawable settings 0x7f08010b
 int drawable test_level_drawable 0x7f08010c
+int drawable tick 0x7f08010f
 int drawable tooltip_frame_dark 0x7f08010d
 int drawable tooltip_frame_light 0x7f08010e
+int drawable warning 0x7f080110
 int font inter_medium 0x7f090000
 int font montserrat_bold 0x7f090001
 int font montserrat_semibold 0x7f090002
@@ -3397,6 +3399,7 @@ int id dragRight 0x7f0a00bc
 int id dragStart 0x7f0a00bd
 int id dragUp 0x7f0a00be
 int id dropdown_menu 0x7f0a00bf
+int id duree_journey 0x7f0a024a
 int id easeIn 0x7f0a00c0
 int id easeInOut 0x7f0a00c1
 int id easeOut 0x7f0a00c2
@@ -3494,7 +3497,6 @@ int id left 0x7f0a011d
 int id leftToRight 0x7f0a011e
 int id legacy 0x7f0a011f
 int id light 0x7f0a0120
-int id likeButton 0x7f0a0121
 int id line1 0x7f0a0122
 int id line3 0x7f0a0123
 int id linear 0x7f0a0124
@@ -3658,7 +3660,6 @@ int id select_dialog_listview 0x7f0a01c1
 int id selected 0x7f0a01c2
 int id selection_type 0x7f0a01c3
 int id settingBtnMenu 0x7f0a01c4
-int id shareButton 0x7f0a01c5
 int id sharedValueSet 0x7f0a01c6
 int id sharedValueUnset 0x7f0a01c7
 int id shortcut 0x7f0a01c8

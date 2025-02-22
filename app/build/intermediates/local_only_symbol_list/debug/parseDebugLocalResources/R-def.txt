@@ -31,6 +31,8 @@ drawable rectangle
 drawable rounde_edit_text
 drawable rounded_button_app
 drawable settings
+drawable tick
+drawable warning
 font inter_medium
 font montserrat_bold
 font montserrat_semibold
@@ -52,6 +54,7 @@ id btn_inscription
 id btn_start
 id contactBtnMenu
 id description
+id duree_journey
 id editConfirmPasswordRegister
 id editEmailLogin
 id editEmailRegister
@@ -71,7 +74,6 @@ id itemDelete
 id itemShow
 id item_post
 id journeyBtnMenu
-id likeButton
 id main
 id map
 id np_hours
@@ -79,7 +81,6 @@ id np_minutes
 id np_seconds
 id paragrapheTuto1
 id settingBtnMenu
-id shareButton
 id textView
 id textView10
 id textView11

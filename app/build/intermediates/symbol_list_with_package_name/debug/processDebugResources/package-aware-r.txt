@@ -3200,8 +3200,10 @@ drawable rounde_edit_text
 drawable rounded_button_app
 drawable settings
 drawable test_level_drawable
+drawable tick
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
+drawable warning
 font inter_medium
 font montserrat_bold
 font montserrat_semibold
@@ -3398,6 +3400,7 @@ id dragRight
 id dragStart
 id dragUp
 id dropdown_menu
+id duree_journey
 id easeIn
 id easeInOut
 id easeOut
@@ -3495,7 +3498,6 @@ id left
 id leftToRight
 id legacy
 id light
-id likeButton
 id line1
 id line3
 id linear
@@ -3659,7 +3661,6 @@ id select_dialog_listview
 id selected
 id selection_type
 id settingBtnMenu
-id shareButton
 id sharedValueSet
 id sharedValueUnset
 id shortcut

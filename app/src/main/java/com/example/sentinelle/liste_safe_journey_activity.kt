@@ -29,12 +29,12 @@ class liste_safe_journey_activity : AppCompatActivity() {
         // Data de la liste
         listView = findViewById(R.id.ListViewSafeJourney)
         listItems = arrayListOf(
-            Journey("Lundi 11 Janvier", "Trajet sécurisé de test",R.drawable.main_dark_logo),
-            Journey("Lundi 12 Janvier", "Trajet sécurisé de test",R.drawable.main_dark_logo),
-            Journey("Lundi 12 Janvier", "Trajet sécurisé de test",R.drawable.main_dark_logo),
-            Journey("Lundi 13 Janvier", "Trajet sécurisé de test",R.drawable.main_dark_logo),
-            Journey("Lundi 14 Janvier", "Trajet sécurisé de test",R.drawable.main_dark_logo),
-            Journey("Lundi 15 Janvier", "Trajet sécurisé de test",R.drawable.main_dark_logo),
+            Journey("14 Décembre 2024", "16h13-17h43",R.drawable.tick),
+            Journey("14 Décembre 2024", "16h13-17h43",R.drawable.warning),
+            Journey("14 Décembre 2024", "16h13-17h43",R.drawable.tick),
+            Journey("14 Décembre 2024", "16h13-17h43",R.drawable.tick),
+            Journey("14 Décembre 2024", "16h13-17h43",R.drawable.tick),
+            Journey("14 Décembre 2024", "16h13-17h43",R.drawable.warning),
             )
 
         adapter = JourneyAdapter(this, R.layout.item_journey, listItems)
