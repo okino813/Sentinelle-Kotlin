@@ -3195,6 +3195,7 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+drawable pending
 drawable rectangle
 drawable rounde_edit_text
 drawable rounded_button_app
@@ -3729,6 +3730,8 @@ id textView13
 id textView131
 id textView14
 id textView15
+id textView16
+id textView17
 id textView2
 id textView3
 id textView4

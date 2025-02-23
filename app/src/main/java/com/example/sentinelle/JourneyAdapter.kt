@@ -32,6 +32,10 @@ class JourneyAdapter (
             val tvImage = itemView.findViewById<ImageView>(R.id.avatar)
             tvImage.setImageResource(post.image)
 
+            val tvTemps = itemView.findViewById<TextView>(R.id.duree_journey)
+            tvTemps.text = post.temps
+
+
             BtnShowPopup.setOnClickListener{
                 val popupMenu = PopupMenu(mContext, it)
                 popupMenu.menuInflater.inflate(R.menu.list_pop_up_menu, popupMenu.menu)

@@ -3194,6 +3194,7 @@ int drawable notification_template_icon_bg 0x7f080104
 int drawable notification_template_icon_low_bg 0x7f080105
 int drawable notification_tile_bg 0x7f080106
 int drawable notify_panel_notification_icon_bg 0x7f080107
+int drawable pending 0x7f080111
 int drawable rectangle 0x7f080108
 int drawable rounde_edit_text 0x7f080109
 int drawable rounded_button_app 0x7f08010a
@@ -3728,6 +3729,8 @@ int id textView13 0x7f0a0206
 int id textView131 0x7f0a0207
 int id textView14 0x7f0a0208
 int id textView15 0x7f0a0209
+int id textView16 0x7f0a024b
+int id textView17 0x7f0a024c
 int id textView2 0x7f0a020a
 int id textView3 0x7f0a020b
 int id textView4 0x7f0a020c

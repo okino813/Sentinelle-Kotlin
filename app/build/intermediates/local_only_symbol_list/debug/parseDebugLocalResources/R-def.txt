@@ -27,6 +27,7 @@ drawable main_dark_logo
 drawable main_icon_dark
 drawable map
 drawable message
+drawable pending
 drawable rectangle
 drawable rounde_edit_text
 drawable rounded_button_app
@@ -89,6 +90,8 @@ id textView13
 id textView131
 id textView14
 id textView15
+id textView16
+id textView17
 id textView2
 id textView3
 id textView4

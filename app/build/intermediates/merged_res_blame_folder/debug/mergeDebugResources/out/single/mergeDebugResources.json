@@ -188,6 +188,10 @@
         "source": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-main-64:/layout/activity_main.xml"
     },
     {
+        "merged": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-debug-62:/drawable_pending.png.flat",
+        "source": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-main-64:/drawable/pending.png"
+    },
+    {
         "merged": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-debug-62:/layout_activity_maps.xml.flat",
         "source": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-main-64:/layout/activity_maps.xml"
     },
