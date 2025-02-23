@@ -325,12 +325,20 @@ class activity_home : AppCompatActivity() {
                     var emailBis = emailPreferenceBis.toString()
                     var tokenBis = tokenPreferenceBis.toString()
 
+                    // Obtenir l'heure actuelle en millisecondes
+                    val currentTimeMillisBis = System.currentTimeMillis()
+
+                    // Formater les heures
+                    val dateFormatBis = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+                    val heureActuelleBis = dateFormat.format(Date(currentTimeMillis))
+
                     val urlBis = "https://boutique-casse-tete.com/sentinelle/index.php"
                     val clientBis = OkHttpClient()
                     val formBodyBis = FormBody.Builder()
                         .add("email", emailBis)
                         .add("token", tokenBis)
                         .add("task", "expire_minuteur")
+                        .add("heure_actuelle", heureActuelleBis)
                         .build()
                     val requestBis = Request.Builder()
                         .url(urlBis)
