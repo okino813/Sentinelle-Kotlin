@@ -20,11 +20,14 @@ import com.example.sentinelle.activity_home
 import okhttp3.FormBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 /**
  * @author Ahmed Guedmioui
  */
-@SuppressLint("MissingPermission") // Suppression de l'alerte de permission manquante
+//@SuppressLint("MissingPermission") // Suppression de l'alerte de permission manquante
 public class LocationManager(
     private val context: Context // Le contexte de l'application, utilisé pour obtenir des services système
 ) {
@@ -56,10 +59,18 @@ public class LocationManager(
         }
     }
 
+
     private fun sendLocationToServer(latitude: String, longitude: String) {
         val sharedPreferences = context.getSharedPreferences("app_state", Context.MODE_PRIVATE)
         val email = sharedPreferences.getString("email", "") ?: ""
         val token = sharedPreferences.getString("token", "") ?: ""
+
+        // Obtenir l'heure actuelle en millisecondes
+        val currentTimeMillis = System.currentTimeMillis()
+
+        // Formater les heures
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        val heureActuelle = dateFormat.format(Date(currentTimeMillis))
 
         val url = "https://boutique-casse-tete.com/sentinelle/index.php"
         val client = OkHttpClient()
@@ -69,6 +80,7 @@ public class LocationManager(
             .add("latitude", latitude)
             .add("longitude", longitude)
             .add("task", "send_GPS")
+            .add("heure_actuelle", heureActuelle)
             .build()
 
         val request = Request.Builder()

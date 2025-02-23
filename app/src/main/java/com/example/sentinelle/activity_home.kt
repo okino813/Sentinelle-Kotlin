@@ -43,6 +43,9 @@ import okhttp3.FormBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.lang.reflect.Field
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 import kotlin.system.exitProcess
 
 
@@ -144,11 +147,20 @@ class activity_home : AppCompatActivity() {
     // Fonction pour démarrer le suivi de localisation
     private fun startLocationTracking() {
         // Crée un intent pour démarrer le service avec l'action START
-        val intent = Intent(this, LocationTrackerService::class.java)
-        intent.action = LocationTrackerService.Action.START.name
-
-        // Démarre le service en arrière-plan
-        startService(intent)
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // Les permissions ne sont pas accordées, demandez-les
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION),
+                LOCATION_PERMISSION_REQUEST_CODE
+            )
+        } else {
+            val intent = Intent(this, LocationTrackerService::class.java)
+            intent.action = LocationTrackerService.Action.START.name
+            // Démarre le service en arrière-plan
+            startService(intent)
+        }
     }
 
     // Fonction pour arrêter le suivi de localisation
@@ -172,80 +184,112 @@ class activity_home : AppCompatActivity() {
         var email = emailPreference.toString()
         var token = tokenPreference.toString()
 
-        // On crée le safejourney
-        val url = "https://boutique-casse-tete.com/sentinelle/index.php"
-
-        val client = OkHttpClient()
-
-        val formBody = FormBody.Builder()
-            .add("email", email)
-            .add("token", token)
-            .add("task", "launch_minuteur")
-            .build()
-
-        val request = Request.Builder()
-            .url(url)
-            .post(formBody)
-            .build()
-
-        Thread {
-            try {
-                val response = client.newCall(request).execute()
-                val responseData: String = response.body?.string().toString() // Récupérer la réponse sous forme de String
-
-                // Vérifier si la réponse est valide
-                if (response.isSuccessful) {
-                    // Ici, on compare simplement si la réponse est "null" ou non
-                    runOnUiThread {
-                        Log.e("LeToken", "Voici la ${responseData.toString()}")
-                        val NewToken = responseData.substring(1)
-                        if (NewToken.toString() != "null") {
-                            // Si la réponse est différente de "null", succès
-
-                            // On ajoute les identifiants (email et token) dans les SharedPreferences
-                            val sharedPreferences = getSharedPreferences("app_state", MODE_PRIVATE)
-                            val editor = sharedPreferences.edit()
-                            editor.putString("email", email)
-                            editor.putString("token", NewToken)
-                            editor.putBoolean("is_authentificated", true)
-                            editor.apply()
-                            // C'est Good
-                            // On démare la localisation
-                            startLocationTracking()
-
-                        } else {
-                            // Si la réponse est "null", le token est invalide
-                            logoutUser()
-                        }
-                    }
-                } else {
-                    // Si la réponse HTTP n'est pas réussie
-                    runOnUiThread {
-                        Toast.makeText(applicationContext, "Erreur lors de la connexion de l'utilisateur", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this, TutoOneActivity::class.java))
-                    }
-                }
-            } catch (e: Exception) {
-                runOnUiThread {
-                    Log.e("LoginError", "Erreur: ${e.message}", e)
-                    Toast.makeText(applicationContext, "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }.start()
-
 
         val hours = npHours.value
         val minutes = npMinutes.value
         val seconds = npSeconds.value
         totalTimeInMillis = ((hours * 3600) + (minutes * 60) + seconds) * 1000L
 
+
+
         if (totalTimeInMillis > 0) {
             timer?.cancel()
             isTimerRunning = true
             btnStart.text = "Arrêter"
 
+            // On crée le safejourney
+            val url = "https://boutique-casse-tete.com/sentinelle/index.php"
+
+            val client = OkHttpClient()
+
+            // Calculer le temps total en millisecondes
+            val totalMillis : Long = (npHours.value * 3600L + npMinutes.value * 60L + npSeconds.value) * 1000L
+
+
+            // Obtenir l'heure actuelle en millisecondes
+            val currentTimeMillis = System.currentTimeMillis()
+
+            // Calculer l'heure de fin théorique
+            val heureFinTheoriqueMillis = currentTimeMillis + totalMillis
+
+            // Formater les heures
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+            val heureActuelle = dateFormat.format(Date(currentTimeMillis))
+            val heureFinTheorique = dateFormat.format(Date(heureFinTheoriqueMillis))
+
+
+
+            // Ajouter les champs au FormBody
+            val formBody = FormBody.Builder()
+                .add("email", email)
+                .add("token", token)
+                .add("task", "launch_minuteur")
+                .add("heure_fin_theorique", heureFinTheorique)
+                .add("heure_actuelle", heureActuelle)
+                .build()
+
+
+
+            val request = Request.Builder()
+                .url(url)
+                .post(formBody)
+                .build()
+
+            Thread {
+
+                try {
+
+                    val response = client.newCall(request).execute()
+                    val responseData: String = response.body?.string().toString() // Récupérer la réponse sous forme de String
+
+                    // Vérifier si la réponse est valide
+                    if (response.isSuccessful) {
+                        // Ici, on compare simplement si la réponse est "null" ou non
+                        runOnUiThread {
+                            Log.e("LeToken", "Voici la ${responseData.toString()}")
+                            val NewToken = responseData.substring(1)
+                            if (NewToken.toString() != "null") {
+                                // Si la réponse est différente de "null", succès
+
+                                // On ajoute les identifiants (email et token) dans les SharedPreferences
+                                val sharedPreferences = getSharedPreferences("app_state", MODE_PRIVATE)
+                                val editor = sharedPreferences.edit()
+                                editor.putString("email", email)
+                                editor.putString("token", NewToken)
+                                editor.putBoolean("is_authentificated", true)
+                                editor.apply()
+                                // C'est Good
+                                // On démare la localisation
+                                startLocationTracking()
+
+
+
+                            } else {
+                                // Si la réponse est "null", le token est invalide
+                                logoutUser()
+                            }
+                        }
+                    } else {
+                        // Si la réponse HTTP n'est pas réussie
+                        runOnUiThread {
+                            Toast.makeText(applicationContext, "Erreur lors de la connexion de l'utilisateur", Toast.LENGTH_SHORT).show()
+                            startActivity(Intent(this, TutoOneActivity::class.java))
+                        }
+                    }
+                } catch (e: Exception) {
+                    runOnUiThread {
+                        Log.e("LoginError", "Erreur: ${e.message}", e)
+                        Toast.makeText(applicationContext, "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }.start()
+
+
+
             timer = object : CountDownTimer(totalTimeInMillis, 1000) {
+
                 override fun onTick(millisUntilFinished: Long) {
+
                     val remainingSeconds = (millisUntilFinished / 1000).toInt()
                     val remainingHours = remainingSeconds / 3600
                     val remainingMinutes = (remainingSeconds % 3600) / 60
@@ -257,10 +301,14 @@ class activity_home : AppCompatActivity() {
                         npSeconds.value = remainingSecs
                     }
 
+
+
                     // Si 10 secondes sont passer, alors on récupère la localisation
                     if (remainingSeconds % 10 == 0) {
+
+
                         locationManager.getLocation { latitude, longitude ->
-                            Log.d("activity_home", "Localisation récupérée : $latitude, $longitude")
+                            Log.d("activity_homeSA", "Localisation récupérée : $latitude, $longitude")
                         }
                     }
 
