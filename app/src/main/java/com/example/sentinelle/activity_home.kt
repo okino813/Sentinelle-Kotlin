@@ -248,6 +248,8 @@ class activity_home : AppCompatActivity() {
                         runOnUiThread {
                             Log.e("LeToken", "Voici la ${responseData.toString()}")
                             val NewToken = responseData.substring(1)
+
+                            Log.d("LATOKEN", "${NewToken}")
                             if (NewToken.toString() != "null") {
                                 // Si la réponse est différente de "null", succès
 
@@ -409,10 +411,18 @@ class activity_home : AppCompatActivity() {
 
         val client = OkHttpClient()
 
+
+        // Obtenir l'heure actuelle en millisecondes
+        val currentTimeMillis = System.currentTimeMillis()
+        // Formater les heures
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        val heureActuelle = dateFormat.format(Date(currentTimeMillis))
+
         val formBody = FormBody.Builder()
             .add("email", email)
             .add("token", token)
             .add("task", "close_minuteur")
+            .add("heure_actuelle", heureActuelle)
             .build()
 
         val request = Request.Builder()
@@ -429,9 +439,10 @@ class activity_home : AppCompatActivity() {
                 if (response.isSuccessful) {
                     // Ici, on compare simplement si la réponse est "null" ou non
                     runOnUiThread {
-                        Log.e("LeToken", "Voici la ${responseData.toString()}")
                         val NewToken = responseData.substring(1)
-                        if (NewToken.toString() != "null") {
+                        Log.e("LaToken", "Voici la ${NewToken}")
+
+                        if (NewToken != "null") {
                             // Si la réponse est différente de "null", succès
 
                             // On ajoute les identifiants (email et token) dans les SharedPreferences

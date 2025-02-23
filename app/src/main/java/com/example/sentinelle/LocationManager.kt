@@ -154,7 +154,6 @@ public class LocationManager(
                     val currentTime = location.time
                     if (currentTime > lastLocationTime) {
                         lastLocationTime = currentTime
-                        Log.d("LocationManagerCACA", "Nouvelle localisation : Latitude = ${location.latitude}, Longitude = ${location.longitude}")
                         val latitude = location.latitude
                         val longitude = location.longitude
 
