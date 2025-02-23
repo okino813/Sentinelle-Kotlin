@@ -4,6 +4,10 @@
         "source": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-main-64:/layout/item_journey.xml"
     },
     {
+        "merged": "com.example.sentinelle.app-debug-62:/layout_activity_liste_safe_journey.xml.flat",
+        "source": "com.example.sentinelle.app-main-64:/layout/activity_liste_safe_journey.xml"
+    },
+    {
         "merged": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-debug-62:/mipmap-hdpi_ic_launcher.webp.flat",
         "source": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-main-64:/mipmap-hdpi/ic_launcher.webp"
     },
@@ -12,12 +16,12 @@
         "source": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-main-64:/drawable/settings.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-debug-62:/drawable_main_icon_dark.jpg.flat",
-        "source": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-main-64:/drawable/main_icon_dark.jpg"
-    },
-    {
         "merged": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-debug-62:/mipmap-xxhdpi_ic_launcher.webp.flat",
         "source": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-main-64:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-debug-62:/drawable_main_icon_dark.jpg.flat",
+        "source": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-main-64:/drawable/main_icon_dark.jpg"
     },
     {
         "merged": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-debug-62:/drawable_ic_launcher_background.xml.flat",
@@ -26,6 +30,10 @@
     {
         "merged": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-debug-62:/layout_activity_register.xml.flat",
         "source": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-main-64:/layout/activity_register.xml"
+    },
+    {
+        "merged": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-debug-62:/drawable_tick.png.flat",
+        "source": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-main-64:/drawable/tick.png"
     },
     {
         "merged": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-debug-62:/font_roboto_light.xml.flat",
@@ -80,6 +88,10 @@
         "source": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-main-64:/mipmap-xhdpi/ic_launcher.webp"
     },
     {
+        "merged": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-debug-62:/drawable_warning.png.flat",
+        "source": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-main-64:/drawable/warning.png"
+    },
+    {
         "merged": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-debug-62:/xml_data_extraction_rules.xml.flat",
         "source": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-main-64:/xml/data_extraction_rules.xml"
     },
@@ -110,10 +122,6 @@
     {
         "merged": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-debug-62:/xml_backup_rules.xml.flat",
         "source": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-main-64:/xml/backup_rules.xml"
-    },
-    {
-        "merged": "com.example.sentinelle.app-debug-62:/drawable_tick.png.flat",
-        "source": "com.example.sentinelle.app-main-64:/drawable/tick.png"
     },
     {
         "merged": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-debug-62:/drawable_fleche_tuto_1.jpg.flat",
@@ -152,10 +160,6 @@
         "source": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-main-64:/drawable/logo_record_tuto3.png"
     },
     {
-        "merged": "com.example.sentinelle.app-debug-62:/layout_item_journey.xml.flat",
-        "source": "com.example.sentinelle.app-main-64:/layout/item_journey.xml"
-    },
-    {
         "merged": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-debug-62:/mipmap-mdpi_ic_launcher.webp.flat",
         "source": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-main-64:/mipmap-mdpi/ic_launcher.webp"
     },
@@ -182,10 +186,6 @@
     {
         "merged": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-debug-62:/layout_activity_main.xml.flat",
         "source": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-main-64:/layout/activity_main.xml"
-    },
-    {
-        "merged": "com.example.sentinelle.app-debug-62:/drawable_warning.png.flat",
-        "source": "com.example.sentinelle.app-main-64:/drawable/warning.png"
     },
     {
         "merged": "/home/axel/.gradle/daemon/8.10.2/com.example.sentinelle.app-debug-62:/layout_activity_maps.xml.flat",
