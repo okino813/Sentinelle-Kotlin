@@ -59,11 +59,8 @@ id duree_journey
 id editConfirmPasswordRegister
 id editEmailLogin
 id editEmailRegister
-id editFamilyNameRegister
-id editFirstNameRegister
 id editPasswordLogin
 id editPasswordRegister
-id editPhoneRegister
 id errorLogin
 id errorRegister
 id homeBtnMenu
@@ -129,3 +126,4 @@ style NumberPickerStyle
 style Theme.Sentinelle
 xml backup_rules
 xml data_extraction_rules
+xml network_security_config

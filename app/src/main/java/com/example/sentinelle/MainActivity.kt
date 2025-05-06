@@ -1,7 +1,7 @@
 package com.example.sentinelle
 
+
 import android.Manifest
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -17,54 +17,8 @@ import androidx.core.view.WindowInsetsCompat
 import okhttp3.FormBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import kotlin.text.substring
-
-
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.core.app.ActivityCompat
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
-
-    lateinit var  sharedPreferences: SharedPreferences
-
-    // Initialisation paresseuse du LocationManager, l'objet sera créé uniquement lorsque nécessaire
-    private val locationManager by lazy {
-        // Utilisation du contexte de l'application pour éviter les fuites de mémoire liées à un contexte d'activité
-        LocationManager(this)
-    }
-
-    // Définition des permissions nécessaires pour accéder à la localisation et afficher des notifications
-    private val permissions = arrayOf(
-        // Permission pour accéder à la localisation approximative
-        Manifest.permission.ACCESS_COARSE_LOCATION,
-
-        // Permission pour accéder à la localisation précise
-        Manifest.permission.ACCESS_FINE_LOCATION,
-
-        // Permission pour poster des notifications
-        Manifest.permission.POST_NOTIFICATIONS
-    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,6 +30,30 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // **** A NÉTOYER *****
+
+
+
 
         // On récupère la varriable isConnected dans le SharedPreferences pour checker si l'utilisateur est déjà connecté
         sharedPreferences = this.getSharedPreferences("app_state", MODE_PRIVATE)
@@ -144,7 +122,8 @@ class MainActivity : AppCompatActivity() {
 
 
                                 // Redirection vers tuto_one_activity
-                                val intent = Intent(this, TutoOneActivity::class.java)
+//                                val intent = Intent(this, TutoOneActivity::class.java)
+                                val intent = Intent(this, home_choice_activity::class.java)
                                 startActivity(intent)
                             }
                         }
@@ -153,7 +132,8 @@ class MainActivity : AppCompatActivity() {
                         runOnUiThread {
                             // Redirection vers tuto_one_activity
                             Toast.makeText(applicationContext, "Erreur lors de la connexion de l'utilisateur", Toast.LENGTH_SHORT).show()
-                            val intent = Intent(this, TutoOneActivity::class.java)
+                            val intent = Intent(this, home_choice_activity::class.java)
+//                            val intent = Intent(this, TutoOneActivity::class.java)
                             startActivity(intent)
 
                         }
@@ -169,7 +149,8 @@ class MainActivity : AppCompatActivity() {
             // Si l'utilisateur n'est pas authentifié, redirection après 1 seconde
             // Redirection vers tuto_one_activity
             Handler(Looper.getMainLooper()).postDelayed({
-                val intent = Intent(this, TutoOneActivity::class.java)
+                val intent = Intent(this, home_choice_activity::class.java)
+//                val intent = Intent(this, TutoOneActivity::class.java)
                 startActivity(intent)
 
             }, 1000)
@@ -178,5 +159,26 @@ class MainActivity : AppCompatActivity() {
 
 
         // Toast.makeText(this,"Lancement avec Succès", Toast.LENGTH_SHORT).show()
+    }
+
+
+    // Définition des permissions nécessaires pour accéder à la localisation et afficher des notifications
+    private val permissions = arrayOf(
+        // Permission pour accéder à la localisation approximative
+        Manifest.permission.ACCESS_COARSE_LOCATION,
+
+        // Permission pour accéder à la localisation précise
+        Manifest.permission.ACCESS_FINE_LOCATION,
+
+        // Permission pour poster des notifications
+        Manifest.permission.POST_NOTIFICATIONS
+    )
+
+    lateinit var  sharedPreferences: SharedPreferences
+
+    // Initialisation paresseuse du LocationManager, l'objet sera créé uniquement lorsque nécessaire
+    private val locationManager by lazy {
+        // Utilisation du contexte de l'application pour éviter les fuites de mémoire liées à un contexte d'activité
+        LocationManager(this)
     }
 }

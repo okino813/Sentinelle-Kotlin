@@ -3410,11 +3410,8 @@ id edge
 id editConfirmPasswordRegister
 id editEmailLogin
 id editEmailRegister
-id editFamilyNameRegister
-id editFirstNameRegister
 id editPasswordLogin
 id editPasswordRegister
-id editPhoneRegister
 id edit_query
 id edit_text_id
 id elastic
@@ -5563,3 +5560,4 @@ styleable ViewTransition android_id SharedValue SharedValueId clearsTag duration
 styleable include constraintSet
 xml backup_rules
 xml data_extraction_rules
+xml network_security_config

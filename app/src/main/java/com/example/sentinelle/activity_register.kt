@@ -1,8 +1,6 @@
 package com.example.sentinelle
 
-import android.content.Intent
 import android.os.Bundle
-import android.provider.ContactsContract.CommonDataKinds.Email
 import android.util.Log
 import android.util.Patterns
 import android.view.View
@@ -15,11 +13,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.sentinelle.api.api_service
 import okhttp3.FormBody
-
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import org.json.JSONArray
 import org.json.JSONObject
 
 class activity_register : AppCompatActivity() {
@@ -37,22 +34,18 @@ class activity_register : AppCompatActivity() {
         // On récupère le btn d'inscription
         val btn_registerClick = findViewById<Button>(R.id.btnRegister)
 
+        val api = api_service(this)
+
         btn_registerClick.setOnClickListener(View.OnClickListener { view: View? ->
             // On récupère tout les champs de la page register
-            val editFisrtName = findViewById<EditText>(R.id.editFirstNameRegister)
-            val editFamilyName = findViewById<EditText>(R.id.editFamilyNameRegister)
             val editEmail = findViewById<EditText>(R.id.editEmailRegister)
-            val editPhone = findViewById<EditText>(R.id.editPhoneRegister)
             val editPassword = findViewById<EditText>(R.id.editPasswordRegister)
             val editPasswordConfirm = findViewById<EditText>(R.id.editConfirmPasswordRegister)
             val editCheckBox = findViewById<CheckBox>(R.id.CheckBoxRegister)
             val tvError = findViewById<TextView>(R.id.errorRegister)
 
             // On récupère les valeurs en Sting des champs remplissable
-            val FirstName = editFisrtName.text.toString()
-            val FamilyName = editFamilyName.text.toString()
             val Email = editEmail.text.toString()
-            val Phone = editPhone.text.toString()
             val Password = editPassword.text.toString()
             val PasswordConfirm = editPasswordConfirm.text.toString()
             val isChecked:Boolean = editCheckBox.isChecked()
@@ -60,29 +53,22 @@ class activity_register : AppCompatActivity() {
 
 
                 // On vérifie les informations renseigner
-                if(FirstName.isEmpty() || FamilyName.isEmpty() || Email.isEmpty() || Password.isEmpty() || PasswordConfirm.isEmpty()){
+                if(Email.isEmpty() || Password.isEmpty() || PasswordConfirm.isEmpty()){
                     tvError.text = "Veuillez renseigner tous les champs"
                     tvError.visibility = View.VISIBLE
                 }
                 else {
                     // On continue les vérifications
 
-                    // On vérifie le nom
-                    if (FirstName.length > 2) {
-                        // On vérifie prénom
-                        if (FamilyName.length > 2) {
                             // On vérifie l'email
                             if (Patterns.EMAIL_ADDRESS.matcher(Email).matches()) {
-                                // On vérifie le numéro de téléphone
-                                val regex = "^\\+?\\d{10}\$"
-                                if (Phone.matches(regex.toRegex())) {
                                     // On vérifie le mot de passe
                                     if (Password == PasswordConfirm) {
                                         // Si les conditions générales sont accepté par l'utilisateur
                                         if (isChecked) {
                                             // Les vérifications sont correcte !
                                             // On crée l'utilisateur
-                                            createUser(FirstName, FamilyName, Email, Phone, Password, PasswordConfirm)
+                                            api.register(Email, Password)
                                         } else {
                                             tvError.text = "Veuillez accepter les CGU"
                                             tvError.visibility = View.VISIBLE
@@ -92,24 +78,15 @@ class activity_register : AppCompatActivity() {
                                         editPassword.error = "Mots de passe invalides"
                                         editPasswordConfirm.error = "Mots de passe invalides"
                                     }
-                                } else {
-                                    editPhone.error = "Numéro invalide"
-                                }
                             } else {
                                 editEmail.error = "Adresse mail invalide"
                             }
-                        } else {
-                            editFamilyName.error = "Nom invalide"
-                        }
-                    } else {
-                        editFisrtName.error = "Prénom invalide"
-                    }
                 }
 
         })
     }
 
-    private fun createUser(firstName: String, familyName: String, email: String, phone: String, password: String, passwordConfirm: String) {
+    private fun createUser(email: String, password: String, passwordConfirm: String) {
         // URL de ton fichier PHP qui renvoie les données
         val url = "https://boutique-casse-tete.com/sentinelle/createUser.php" // Remplace avec ton URL
 
@@ -118,10 +95,7 @@ class activity_register : AppCompatActivity() {
 
         // Créer le corps de la requête avec les données à envoyer en POST
         val formBody = FormBody.Builder()
-            .add("firstname", firstName)
-            .add("lastname", familyName)
             .add("email", email)
-            .add("phone", phone)
             .add("password", password)
             .add("passwordConfirm", passwordConfirm)
             .build()

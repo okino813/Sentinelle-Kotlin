@@ -2,10 +2,10 @@ package com.example.sentinelle
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.Button
-import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
@@ -13,11 +13,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.sentinelle.api.api_service
 import okhttp3.FormBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
-import android.util.Log
 
 class login_activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +29,8 @@ class login_activity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val api = api_service(this)
 
         // Récupération du bouton de connexion
         val btn_loginClick = findViewById<Button>(R.id.btnLogin)
@@ -54,7 +56,7 @@ class login_activity : AppCompatActivity() {
                 // On continue les vérifications
                 if (Patterns.EMAIL_ADDRESS.matcher(EmailLogin).matches()) {
                     // On lance le processus de connexion
-                    login(EmailLogin, PasswordLogin)
+                    api.login(EmailLogin, PasswordLogin)
                 }
                 else {
                     editLoginEmail.error = "Numéro invalide"
@@ -64,6 +66,7 @@ class login_activity : AppCompatActivity() {
 
         })
     }
+
 
     private fun login(email: String, password: String) {
         // Ici on envoi tout les champs renseigner par l'utilisateur au serveur

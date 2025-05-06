@@ -6,39 +6,29 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import kotlin.system.exitProcess
 import android.Manifest
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Color
-import android.location.Location
-import android.media.MediaRecorder
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.os.IBinder
 import android.os.PowerManager
-import android.provider.MediaStore.Audio.Media
 import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.NumberPicker
-import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
-import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.google.android.gms.location.*
+import com.example.sentinelle.page.tuto.TutoOneActivity
 import okhttp3.FormBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -46,7 +36,6 @@ import java.lang.reflect.Field
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import kotlin.system.exitProcess
 
 
 class activity_home : AppCompatActivity() {

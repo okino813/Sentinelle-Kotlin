@@ -80,5 +80,6 @@ dependencies {
     // Fin d'implentation en erreur
 
     implementation(libs.play.services.location)
-
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 }

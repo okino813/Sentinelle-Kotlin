@@ -1,4 +1,4 @@
-package com.example.sentinelle
+package com.example.sentinelle.page.tuto
 
 import android.Manifest
 import android.content.Intent
@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.sentinelle.R
 
 class tuto_two_activity : AppCompatActivity() {
 

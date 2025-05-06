@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "286545274111",
+    "project_id": "sentinelle-kotlin",
+    "storage_bucket": "sentinelle-kotlin.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:286545274111:android:61151a1b2aee5ea640d8ca",
+        "android_client_info": {
+          "package_name": "com.exemple.sentinelle"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwvt4mnrPjLEhub3_kMi_KCyEEaszILV4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
