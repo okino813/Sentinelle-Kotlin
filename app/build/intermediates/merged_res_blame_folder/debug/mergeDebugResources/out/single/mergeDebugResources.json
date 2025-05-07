@@ -236,10 +236,6 @@
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/drawable/main_icon_dark.jpg"
     },
     {
-        "merged": "com.example.sentinelle.app-debug-62:/layout_activity_register.xml.flat",
-        "source": "com.example.sentinelle.app-main-64:/layout/activity_register.xml"
-    },
-    {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/drawable_warning.png.flat",
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/drawable/warning.png"
     },

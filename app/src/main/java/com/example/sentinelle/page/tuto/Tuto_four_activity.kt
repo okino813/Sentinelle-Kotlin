@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.sentinelle.R
-import com.example.sentinelle.home_choice_activity
+import com.example.sentinelle.login_activity
 
 class tuto_four_activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +26,7 @@ class tuto_four_activity : AppCompatActivity() {
         val btn_fleche_tuto4 = findViewById<ImageView>(R.id.btn_fleche_tuto4)
 
         btn_fleche_tuto4.setOnClickListener(View.OnClickListener { view: View? ->
-            Intent(this, home_choice_activity::class.java).also {
+            Intent(this, login_activity::class.java).also {
                 startActivity(it)
             }
         })

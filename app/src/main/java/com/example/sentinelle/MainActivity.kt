@@ -5,18 +5,11 @@ import android.Manifest
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import okhttp3.FormBody
-import okhttp3.OkHttpClient
-import okhttp3.Request
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,135 +24,25 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // **** A NÉTOYER *****
-
-
-
-
         // On récupère la varriable isConnected dans le SharedPreferences pour checker si l'utilisateur est déjà connecté
-        sharedPreferences = this.getSharedPreferences("app_state", MODE_PRIVATE)
+        sharedPreferences = this.getSharedPreferences("auth_prefs", MODE_PRIVATE)
         val isAuthentificated = sharedPreferences.getBoolean("is_authentificated", false)
-        val emailPreference = sharedPreferences.getString("email", "")
-        val tokenPreference = sharedPreferences.getString("token", "")
-        var email = emailPreference.toString()
-        var token = tokenPreference.toString()
-
-
-        /* val sharedPreferences = getSharedPreferences("app_state", MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putBoolean("is_authentificated", false)
-        editor.apply() */
 
         // Si la varriable is_authentificated est à True, alors on redirige vers la page principale
         if (isAuthentificated) {
-            val url = "https://boutique-casse-tete.com/sentinelle/index.php"
-
-            val client = OkHttpClient()
-
-            val formBody = FormBody.Builder()
-                .add("email", email)
-                .add("token", token)
-                .add("task", "launch_connexion")
-                .build()
-
-            val request = Request.Builder()
-                .url(url)
-                .post(formBody)
-                .build()
-
-            Thread {
-                try {
-                    val response = client.newCall(request).execute()
-                    val responseData: String = response.body?.string().toString() // Récupérer la réponse sous forme de String
-
-                    // Vérifier si la réponse est valide
-                    if (response.isSuccessful) {
-                        // Ici, on compare simplement si la réponse est "null" ou non
-                        runOnUiThread {
-                            Log.e("LeToken", "Voici la ${responseData.toString()}")
-                            val NewToken = responseData.substring(1)
-                            if (NewToken.toString() != "null") {
-                                // Si la réponse est différente de "null", succès
-
-                                // On ajoute les identifiants (email et token) dans les SharedPreferences
-                                val sharedPreferences = getSharedPreferences("app_state", MODE_PRIVATE)
-                                val editor = sharedPreferences.edit()
-                                editor.putString("email", email)
-                                editor.putString("token", NewToken)
-                                editor.putBoolean("is_authentificated", true)
-                                editor.apply()
-                                // Rediriger vers activity_home
-                                val intent = Intent(this, activity_home::class.java)
-                                startActivity(intent)
-                            } else {
-                                // Si la réponse est "null", le token est invalide
-                                val sharedPreferences = getSharedPreferences("app_state", MODE_PRIVATE)
-                                val editor = sharedPreferences.edit()
-                                editor.putString("email", email)
-                                editor.putString("token", "null")
-                                editor.putBoolean("is_authentificated", false)
-                                editor.apply()
-                                Toast.makeText(applicationContext, "Déconnexion...", Toast.LENGTH_SHORT).show()
-
-
-                                // Redirection vers tuto_one_activity
-//                                val intent = Intent(this, TutoOneActivity::class.java)
-                                val intent = Intent(this, home_choice_activity::class.java)
-                                startActivity(intent)
-                            }
-                        }
-                    } else {
-                        // Si la réponse HTTP n'est pas réussie
-                        runOnUiThread {
-                            // Redirection vers tuto_one_activity
-                            Toast.makeText(applicationContext, "Erreur lors de la connexion de l'utilisateur", Toast.LENGTH_SHORT).show()
-                            val intent = Intent(this, home_choice_activity::class.java)
-//                            val intent = Intent(this, TutoOneActivity::class.java)
-                            startActivity(intent)
-
-                        }
-                    }
-                } catch (e: Exception) {
-                    runOnUiThread {
-                        Log.e("LoginError", "Erreur: ${e.message}", e)
-                        Toast.makeText(applicationContext, "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }.start()
+            // Rediriger vers activity_home
+            val intent = Intent(this, activity_home::class.java)
+            startActivity(intent)
+            finish()
         } else {
-            // Si l'utilisateur n'est pas authentifié, redirection après 1 seconde
-            // Redirection vers tuto_one_activity
-            Handler(Looper.getMainLooper()).postDelayed({
-                val intent = Intent(this, home_choice_activity::class.java)
-//                val intent = Intent(this, TutoOneActivity::class.java)
-                startActivity(intent)
+            // Si la réponse est "null", le token est invalide
+            val intent = Intent(this, login_activity::class.java)
+            startActivity(intent)
+            finish()
 
-            }, 1000)
         }
-
-
-
-        // Toast.makeText(this,"Lancement avec Succès", Toast.LENGTH_SHORT).show()
     }
+}
 
 
     // Définition des permissions nécessaires pour accéder à la localisation et afficher des notifications
@@ -177,8 +60,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var  sharedPreferences: SharedPreferences
 
     // Initialisation paresseuse du LocationManager, l'objet sera créé uniquement lorsque nécessaire
-    private val locationManager by lazy {
-        // Utilisation du contexte de l'application pour éviter les fuites de mémoire liées à un contexte d'activité
-        LocationManager(this)
-    }
-}
+//    private val locationManager by lazy {
+//        // Utilisation du contexte de l'application pour éviter les fuites de mémoire liées à un contexte d'activité
+//        LocationManager(this)
+//    }
+//}

@@ -10,12 +10,12 @@
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="-18dp">
 
-    <EditText
-        android:id="@+id/editPasswordRegister"
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/editPassword"
         android:layout_width="309dp"
         android:layout_height="45dp"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="148dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/rounde_edit_text"
         android:ems="10"
         android:hint="Mot de passe"
@@ -25,10 +25,10 @@
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/editEmail" />
 
-    <EditText
-        android:id="@+id/editEmailRegister"
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/editEmail"
         android:layout_width="309dp"
         android:layout_height="45dp"
         android:layout_marginStart="56dp"
@@ -57,7 +57,7 @@
         app:srcCompat="@drawable/main_dark_logo" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/h2Connexion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="52dp"
@@ -80,12 +80,12 @@
 
     </FrameLayout>
 
-    <EditText
-        android:id="@+id/editConfirmPasswordRegister"
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/editConfirmPassword"
         android:layout_width="309dp"
         android:layout_height="45dp"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="212dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/rounde_edit_text"
         android:ems="10"
         android:hint="Confirmation du Mot de passe"
@@ -95,14 +95,14 @@
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/editPassword" />
 
     <Button
-        android:id="@+id/btnRegister"
+        android:id="@+id/btnConnexion"
         android:layout_width="136dp"
         android:layout_height="40dp"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="324dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="@color/blue_sky"
         android:fontFamily="@font/roboto_light"
         android:text="Se connecter"
@@ -112,30 +112,31 @@
         android:textStyle="bold"
         app:cornerRadius="5dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/CheckBoxRegister" />
 
     <CheckBox
         android:id="@+id/CheckBoxRegister"
         android:layout_width="309dp"
         android:layout_height="29dp"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="272dp"
+        android:layout_marginTop="12dp"
         android:text="J'accepte les conditions générales d'utilisations"
         android:textColor="@color/white"
         android:textColorLink="@color/blue_sky"
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/editConfirmPassword" />
+
 
     <TextView
-        android:id="@+id/errorRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="432dp"
-        android:textColor="#FB0303"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        android:id="@+id/btnChangeSingupMode"
+        android:layout_width="140dp"
+        android:layout_height="15dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="28dp"
+        android:text="Je n'ai pas de compte"
+        android:textColor="#FEFDFD"
+        app:layout_constraintStart_toEndOf="@+id/btnConnexion"
+        app:layout_constraintTop_toBottomOf="@+id/CheckBoxRegister" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,8 @@ package com.example.sentinelle.api
 import TokenManager
 import android.content.Context
 import android.util.Log
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.MediaType.Companion.toMediaType
@@ -17,9 +19,10 @@ class api_service(val context: Context) {
 
     private val tokenManager = TokenManager(context)
 
-    private val token = tokenManager.getToken()
 
-    fun login(email: String, password: String) {
+    private val token_access = tokenManager.getToken(0)
+
+    suspend fun login(email: String, password: String): Boolean {
         val client = OkHttpClient()
         val json = JSONObject().apply {
             put("email", email)
@@ -31,25 +34,27 @@ class api_service(val context: Context) {
             .post(body)
             .build()
 
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                Log.e("Login", "Erreur : ${e.message}")
-            }
-
-            override fun onResponse(call: Call, response: Response) {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = client.newCall(request).execute()
                 if (response.isSuccessful) {
                     val responseData = response.body?.string()
-                    val token = JSONObject(responseData).getString("access")
-                    // Sauvegarder le token dans SharedPreferences
-                    tokenManager.saveToken(token)
-                    Log.d("API", "Connexion réussie. Token : $token")
+                    val token_access = JSONObject(responseData).getString("access")
+                    val token_refresh = JSONObject(responseData).getString("refresh")
+                    // Sauvegarder les tokens dans SharedPreferences
+                    tokenManager.saveToken(token_access, token_refresh)
+                    Log.d("API", "Connexion réussie. Token : $token_access")
+                    true
                 } else {
                     Log.e("API", "Échec de connexion : ${response.code}")
+                    false
                 }
+            } catch (e: IOException) {
+                Log.e("API", "Erreur : ${e.message}")
+                false
             }
-        })
+        }
     }
-
 
     fun register(email: String, password: String) {
         val client = OkHttpClient()
@@ -71,16 +76,55 @@ class api_service(val context: Context) {
             override fun onResponse(call: Call, response: Response) {
                 if (response.isSuccessful) {
                     val responseData = response.body?.string()
-                    val token = JSONObject(responseData).getString("access")
+                    val token_access = JSONObject(responseData).getString("access")
+                    val token_refresh = JSONObject(responseData).getString("refresh")
                     // Sauvegarder le token dans SharedPreferences
-                    tokenManager.saveToken(token)
-                    Log.d("API", "Inscription réussie. Token : $token")
+                    tokenManager.saveToken(token_access, token_refresh)
+                    Log.d("API", "Inscription réussie. Token : $token_access")
                 } else {
                     Log.e("API", "Échec de l'inscription : ${response.code}")
                 }
             }
         })
     }
+//
+//    fun testToken() {
+//        // Créer le client HTTP
+//        Log.d("API", "Cn : $token_access")
+//
+//        val client = OkHttpClient()
+//
+//        // Construire la requête avec le token dans l'en-tête Authorization
+//        val request = Request.Builder()
+//            .url("http://192.168.1.9:8000/api/test/")
+//            .addHeader("Authorization", "Bearer $token_access")  // Ajouter le token
+//            .build()
+//
+//        // Exécuter la requête
+//        client.newCall(request).enqueue(object : Callback {
+////            override fun onFailure(call: Call, e: IOException) {
+////                // Si la requête échoue (par exemple, pas de connexion Internet)
+////                callback(false)
+////            }
+//
+//            override fun onResponse(call: Call, response: Response) {
+//                // Vérifie le code de réponse HTTP
+//                if (response.code == 200) {
+//                    // Token valide
+//                    print("Token valide")
+//
+//                } else if (response.code == 401) {
+//                    // Token invalide ou expiré
+//                    print("Token invalide")
+//
+//                } else {
+//                    // Autres erreurs HTTP
+//                    print("Erreur")
+//
+//                }
+//            }
+//        })
+//    }
 
     companion object
 
