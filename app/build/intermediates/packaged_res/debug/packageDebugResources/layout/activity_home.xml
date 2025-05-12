@@ -96,15 +96,14 @@
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="44dp"
         android:fontFamily="@font/inter_medium"
         android:text="Minuteur"
         android:textColor="@color/blue"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteY="43dp" />
 
     <TextView
         android:id="@+id/textView12"
@@ -207,79 +206,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/homeBtnMenu"
-        android:layout_width="100px"
-        android:layout_height="100px"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/home"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/journeyBtnMenu"
-        android:layout_width="100px"
-        android:layout_height="100px"
-        android:layout_marginStart="130dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/map"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/contactBtnMenu"
-        android:layout_width="100px"
-        android:layout_height="100px"
-        android:layout_marginEnd="130dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/message"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <ImageView
-        android:id="@+id/settingBtnMenu"
-        android:layout_width="100px"
-        android:layout_height="100px"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/settings"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="top" />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="top" />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="top" />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="top" />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="top" />
-
-    <ImageView
-        android:id="@+id/btnOngletJourney"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/rectangle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

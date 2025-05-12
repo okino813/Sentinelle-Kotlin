@@ -1,27 +1,21 @@
 package com.example.sentinelle
 
 
-import androidx.activity.enableEdgeToEdge
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
-import kotlin.system.exitProcess
 import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.PowerManager
 import android.provider.Settings
 import android.util.Log
-import android.view.View
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.NumberPicker
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
@@ -29,13 +23,15 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.sentinelle.page.tuto.TutoOneActivity
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import okhttp3.FormBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import java.lang.reflect.Field
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import kotlin.system.exitProcess
 
 
 class activity_home : AppCompatActivity() {
@@ -71,15 +67,6 @@ class activity_home : AppCompatActivity() {
         }
 
 
-        // On récupère le btn de l'onglet des safe journey
-        val btn_ongletSafeJourney = findViewById<ImageView>(R.id.btnOngletJourney)
-
-        btn_ongletSafeJourney.setOnClickListener(View.OnClickListener { view: View? ->
-            Intent(this, liste_safe_journey_activity::class.java).also {
-                startActivity(it)
-            }
-        })
-
         locationManager = LocationManager(this)
 
 
@@ -110,10 +97,10 @@ class activity_home : AppCompatActivity() {
         npMinutes.maxValue = 59
         npSeconds.minValue = 0
         npSeconds.maxValue = 59
-
-        setNumberPickerTextColor(npHours, Color.GREEN)
-        setNumberPickerTextColor(npMinutes, Color.GREEN)
-        setNumberPickerTextColor(npSeconds, Color.GREEN)
+//
+//        setNumberPickerTextColor(npHours, Color.GREEN)
+//        setNumberPickerTextColor(npMinutes, Color.GREEN)
+//        setNumberPickerTextColor(npSeconds, Color.GREEN)
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION)
             == PackageManager.PERMISSION_GRANTED) {
@@ -486,23 +473,23 @@ class activity_home : AppCompatActivity() {
 
 
 
-    // Remise à zero des NumberPickers
-    private fun setNumberPickerTextColor(numberPicker: NumberPicker, color: Int) {
-        try {
-            val selectorWheelPaintField: Field = numberPicker.javaClass.getDeclaredField("mSelectorWheelPaint")
-            selectorWheelPaintField.isAccessible = true
-            (selectorWheelPaintField.get(numberPicker) as android.graphics.Paint).color = color
-            for (i in 0 until numberPicker.childCount) {
-                val child: View = numberPicker.getChildAt(i)
-                if (child is android.widget.EditText) {
-                    child.setTextColor(color)
-                }
-            }
-            numberPicker.invalidate()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
+//    // Remise à zero des NumberPickers
+//    private fun setNumberPickerTextColor(numberPicker: NumberPicker, color: Int) {
+//        try {
+//            val selectorWheelPaintField: Field = numberPicker.javaClass.getDeclaredField("mSelectorWheelPaint")
+//            selectorWheelPaintField.isAccessible = true
+//            (selectorWheelPaintField.get(numberPicker) as android.graphics.Paint).color = color
+//            for (i in 0 until numberPicker.childCount) {
+//                val child: View = numberPicker.getChildAt(i)
+//                if (child is android.widget.EditText) {
+//                    child.setTextColor(color)
+//                }
+//            }
+//            numberPicker.invalidate()
+//        } catch (e: Exception) {
+//            e.printStackTrace()
+//        }
+//    }
 
 
     // Déconnexion de l'utilisateur

@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         // Si la varriable is_authentificated est à True, alors on redirige vers la page principale
         if (isAuthentificated) {
             // Rediriger vers activity_home
-            val intent = Intent(this, activity_home::class.java)
+            val intent = Intent(this, login_activity::class.java)
             startActivity(intent)
             finish()
         } else {

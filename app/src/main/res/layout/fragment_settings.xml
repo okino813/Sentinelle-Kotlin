@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_blue"
+    tools:context=".SettingsFragment"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="-18dp">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/editLastName"
+        android:layout_width="309dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/rounde_edit_text"
+        android:ems="10"
+        android:hint="Nom"
+        android:inputType="text"
+        android:paddingStart="10sp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editFistName" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/editFistName"
+        android:layout_width="309dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="56dp"
+        android:background="@drawable/rounde_edit_text"
+        android:ems="10"
+        android:hint="Prénom"
+        android:inputType="text"
+        android:paddingStart="10sp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="75dp" />
+
+    <TextView
+        android:id="@+id/h2Connexion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:fontFamily="@font/inter_medium"
+        android:text="Information personel"
+        android:textColor="@color/blue_sky"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="26dp" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/editPhone"
+        android:layout_width="309dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/rounde_edit_text"
+        android:ems="10"
+        android:hint="Numéro de téléphone"
+        android:inputType="text"
+        android:paddingStart="10sp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editLastName" />
+
+    <Button
+        android:id="@+id/btnValidateSettingAccount"
+        android:layout_width="136dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/blue_sky"
+        android:fontFamily="@font/roboto_light"
+        android:text="Se connecter"
+        android:textAlignment="center"
+        android:textColor="@color/dark_blue"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:cornerRadius="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editPhone" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -53,6 +53,12 @@
         android:theme="@style/Theme.Sentinelle"
         android:usesCleartextTraffic="true" >
         <activity
+            android:name="com.example.sentinelle.MainActivity2"
+            android:exported="false" />
+        <activity
+            android:name="com.example.sentinelle.MainActivity_page"
+            android:exported="false" />
+        <activity
             android:name="com.example.sentinelle.detailSafeJourney_activity"
             android:exported="false" />
         <activity

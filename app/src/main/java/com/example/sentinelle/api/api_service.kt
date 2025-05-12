@@ -18,8 +18,6 @@ import java.io.IOException
 class api_service(val context: Context) {
 
     private val tokenManager = TokenManager(context)
-
-
     private val token_access = tokenManager.getToken(0)
 
     suspend fun login(email: String, password: String): Boolean {
@@ -30,7 +28,7 @@ class api_service(val context: Context) {
         }
         val body = json.toString().toRequestBody("application/json".toMediaType())
         val request = Request.Builder()
-            .url("http://192.168.1.9:8000/api/login/") // si tu utilises l'émulateur Android
+            .url("${AppValues.base_url}/api/login/") // si tu utilises l'émulateur Android
             .post(body)
             .build()
 
@@ -64,7 +62,7 @@ class api_service(val context: Context) {
         }
         val body = json.toString().toRequestBody("application/json".toMediaType())
         val request = Request.Builder()
-            .url("http://192.168.1.9:8000/api/register/") // si tu utilises l'émulateur Android
+            .url("${AppValues.base_url}/api/register/") // si tu utilises l'émulateur Android
             .post(body)
             .build()
 
@@ -96,7 +94,7 @@ class api_service(val context: Context) {
 //
 //        // Construire la requête avec le token dans l'en-tête Authorization
 //        val request = Request.Builder()
-//            .url("http://192.168.1.9:8000/api/test/")
+//            .url("${AppValues.base_url}/api/test/")
 //            .addHeader("Authorization", "Bearer $token_access")  // Ajouter le token
 //            .build()
 //
