@@ -1,22 +1,21 @@
 package com.example.sentinelle
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,22 +25,211 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.sentinelle.api.AppColors
+import com.example.sentinelle.api.Bouton
+import com.example.sentinelle.api.Input
+import com.example.sentinelle.api.Logo
+import com.example.sentinelle.api.Titre
 
-class AppColors{
-    var SentiBlack = Color(0xff16252B)
-    var SentiGreen = Color(0xff399d61)
-    var SentiDarkBlue = Color(0x33289DD2)
-    var SentiBlue = Color(0xff0097B2)
-    var SentiCyan = Color(0xff289DD2)
+@Composable
+fun FormulaireConnexion() {
+    var motDePasse by remember { mutableStateOf("") }
+    var motDePasseConfirm by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var inscriptionMode by remember { mutableStateOf(true) }
+
+    // États pour les erreurs
+    var emailError by remember { mutableStateOf<String?>(null) }
+    var motDePasseError by remember { mutableStateOf<String?>(null) }
+    var ConfrimmotDePasseError by remember { mutableStateOf<String?>(null) }
+
+    var checked by remember { mutableStateOf(false) }
+
+    val context = LocalContext.current
+
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = AppColors().SentiBlack
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(20.dp)
+        ) {
+            // Ici qu'on va mettre le contenu de la page
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(20.dp)
+            ) {
+                Logo()
+
+                if (inscriptionMode) {
+                    Titre("Inscription")
+                } else {
+                    Titre("Connexion")
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Input("Email", value = email, onValueChange = { email = it }, false, emailError)
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Input(
+                    "Mot de passe",
+                    value = motDePasse,
+                    onValueChange = { motDePasse = it },
+                    true,
+                    errorMessage = motDePasseError
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                if (inscriptionMode) {
+                    Input(
+                        "Confirmation du mot de passe",
+                        value = motDePasseConfirm,
+                        onValueChange = { motDePasseConfirm = it },
+                        true,
+                        errorMessage = ConfrimmotDePasseError
+                    )
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+
+                if (inscriptionMode) {
+                    // Check box et test pour accepter les CGU
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Checkbox(
+                            checked = checked,
+                            onCheckedChange = { checked = it },
+                            colors = androidx.compose.material3.CheckboxDefaults.colors(
+                                checkedColor = AppColors().SentiGreen,
+                                uncheckedColor = AppColors().SentiCyan,
+                                checkmarkColor = AppColors().SentiBlack
+                            )
+                        )
+                        Spacer(modifier = Modifier.padding(8.dp))
+
+                        Text(
+                            text = "J'accepte les Conditions Générales d'utilisations",
+                            color = Color.White
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                }
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = androidx.compose.foundation.layout.Arrangement.SpaceAround
+                )
+                {
+                    if (inscriptionMode) {
+                        Bouton("S'inscrire'", OnClick = {
+                            // Reset des erreurs
+                            emailError = null
+                            motDePasseError = null
+                            ConfrimmotDePasseError = null
+
+                            // Validation
+                            var isValid = true
+                            if (!email.contains("@")) {
+                                emailError = "Email invalide"
+                                isValid = false
+                            }
+                            if (motDePasse.length < 6) {
+                                motDePasseError = "Au moins 6 caractères"
+                                isValid = false
+                            }
+
+                            if (motDePasseConfirm != motDePasse) {
+                                ConfrimmotDePasseError = "Les mots de passe ne correspondent pas"
+                                isValid = false
+                            }
+
+                            if (!checked) {
+                                Toast.makeText(
+                                    context,
+                                    "Vous devez accepter les CGU",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                isValid = false
+                            }
+
+                            if (isValid) {
+                                val action = "Inscription"
+                                Toast.makeText(context, "$action réussie !", Toast.LENGTH_SHORT)
+                                    .show()
+                            }
+                        })
+                    } else {
+                        Bouton("Se connecter", OnClick = {
+                            // Reset des erreurs
+                            emailError = null
+                            motDePasseError = null
+
+                            // Validation
+                            var isValid = true
+                            if (!email.contains("@")) {
+                                emailError = "Email invalide"
+                                isValid = false
+                            }
+                            if (motDePasse.length < 6) {
+                                motDePasseError = "Au moins 6 caractères"
+                                isValid = false
+                            }
+
+                            if (isValid) {
+                                val action = "Connexion"
+                                Toast.makeText(context, "$action réussie !", Toast.LENGTH_SHORT)
+                                    .show()
+                            }
+                        })
+                    }
+
+                    if (inscriptionMode) {
+                        Text(
+                            text = "Se connecter",
+                            // ALign center
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = Color.White,
+                            modifier = Modifier
+                                .padding(16.dp)
+                                .clickable {
+                                    inscriptionMode = !inscriptionMode
+                                }
+                        )
+                    } else {
+                        Text(
+                            text = "Crée un compte",
+                            // ALign center
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = Color.White,
+                            modifier = Modifier
+                                .padding(16.dp)
+                                .clickable {
+                                    inscriptionMode = !inscriptionMode
+                                }
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Preview
+@Composable
+fun PreviewPages(){
+    FormulaireConnexion()
 }
 
 class login_activity : ComponentActivity() {
@@ -51,11 +239,6 @@ class login_activity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-//            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-//            insets
-//        }
         setContent {
             MaterialTheme {
                 PreviewPages()
@@ -63,145 +246,6 @@ class login_activity : ComponentActivity() {
         }
 
 
-    }
-}
-
-
-// Les composable sont en dehors de la class
-@Composable
-fun Pages(){
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = AppColors().SentiBlack
-    ){
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(20.dp)
-        ) {
-           // Ici qu'on va mettre le contenu de la page
-            Column(modifier = Modifier
-                .fillMaxSize()
-                .padding(20.dp)){
-                Logo()
-                Titre()
-                FormulaireConnexion()
-
-            }
-
-        }
-    }
-
-}
-
-@Composable
-fun Input(
-    label: String,
-    value: String,
-    onValueChange: (String) -> Unit,
-    isPassword: Boolean = false
-) {
-    OutlinedTextField(
-        modifier = Modifier.fillMaxWidth(),
-        value = value,
-        onValueChange = onValueChange,
-        placeholder = { Text(label, color = Color.Black) },
-        singleLine = true,
-        shape = RoundedCornerShape(50.dp),
-        colors = OutlinedTextFieldDefaults.colors(
-            focusedBorderColor = AppColors().SentiCyan,
-            unfocusedBorderColor = AppColors().SentiGreen,
-            cursorColor = AppColors().SentiBlack,
-            focusedTextColor = AppColors().SentiBlack,
-            unfocusedTextColor = AppColors().SentiBlack,
-            unfocusedContainerColor = AppColors().SentiGreen,
-            focusedContainerColor = AppColors().SentiGreen,
-        ),
-        visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None,
-
-    )
-}
-
-@Composable
-fun FormulaireConnexion() {
-    var motDePasse by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-
-    Spacer(modifier = Modifier.height(16.dp))
-
-    Input(
-        "Email",
-        value = email,
-        onValueChange = {email = it},
-        false
-    )
-
-    Spacer(modifier = Modifier.height(8.dp))
-
-    Input(
-        "Mot de passe",
-        value = motDePasse,
-        onValueChange = {motDePasse = it},
-        true
-    )
-
-    Spacer(modifier = Modifier.height(16.dp))
-
-    Button(
-        onClick = {
-            // Ici tu fais la vérification ou l'appel à Firebase/Django
-            println("Email: $email - Mot de passe: $motDePasse")
-        }
-    ) {
-        Text("Se connecter")
-    }
-}
-
-
-@Composable
-fun Logo(){
-    Column(
-        modifier = Modifier
-            .fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    )
-    {
-        Image(
-            painter = painterResource(R.drawable.main_icon_dark),
-            contentDescription = "Logo Sentinelle",
-        )
-    }
-
-}
-
-
-@Composable
-fun Titre(){
-    Text(
-        text= "Connexion",
-        color = Color.White,
-        style = MaterialTheme.typography.headlineMedium.copy(
-            textDecoration = TextDecoration.None
-        ),
-        modifier = Modifier.drawBehind{
-            val strokeWidth = 5.dp.toPx()
-            val y = size.height - strokeWidth / 3
-            drawLine(
-                color= AppColors().SentiCyan,
-                start = Offset(0f, y),
-                end = Offset(size.width, y),
-                strokeWidth = strokeWidth
-            )
-        }
-    )
-}
-
-
-@Preview
-@Composable
-fun PreviewPages(){
-    Pages()
-}
 
 
 
@@ -329,3 +373,7 @@ fun PreviewPages(){
 //        }
 //    }
 //}
+
+    }
+}
+
