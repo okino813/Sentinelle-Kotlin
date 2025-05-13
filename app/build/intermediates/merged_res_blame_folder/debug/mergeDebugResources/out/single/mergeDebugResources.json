@@ -1,274 +1,258 @@
 [
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/drawable_logo_carte_tuto2.png.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/drawable/logo_carte_tuto2.png"
+        "merged": "com.example.sentinelle.app-debug-68:/drawable_logo_minuteur.png.flat",
+        "source": "com.example.sentinelle.app-main-70:/drawable/logo_minuteur.png"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/drawable_settings.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/drawable/settings.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/font_montserrat_bold.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/font/montserrat_bold.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/drawable_main_dark_logo.png.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/drawable/main_dark_logo.png"
+        "merged": "com.example.sentinelle.app-debug-68:/drawable_ic_more.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/drawable/ic_more.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/font_inter_medium.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/font/inter_medium.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/drawable_rectangle.png.flat",
+        "source": "com.example.sentinelle.app-main-70:/drawable/rectangle.png"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/layout_activity_tuto_tree.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/layout/activity_tuto_tree.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/drawable_main_dark_logo.png.flat",
+        "source": "com.example.sentinelle.app-main-70:/drawable/main_dark_logo.png"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/drawable_logo_minuteur.png.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/drawable/logo_minuteur.png"
+        "merged": "com.example.sentinelle.app-debug-68:/drawable_pending.png.flat",
+        "source": "com.example.sentinelle.app-main-70:/drawable/pending.png"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/layout_activity_home_choice.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/layout/activity_home_choice.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/layout_fragment_settings.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/layout/fragment_settings.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/xml_backup_rules.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/xml/backup_rules.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/layout_activity_maps.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/layout/activity_maps.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/drawable_ic_launcher_background.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/drawable/ic_launcher_background.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/layout_activity_main.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/layout/activity_main.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/drawable_fleche_tuto4.jpg.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/drawable/fleche_tuto4.jpg"
+        "merged": "com.example.sentinelle.app-debug-68:/drawable_logo_proche_tuto_4.jpg.flat",
+        "source": "com.example.sentinelle.app-main-70:/drawable/logo_proche_tuto_4.jpg"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/drawable_message.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/drawable/message.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.sentinelle.app-main-70:/mipmap-xhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/drawable_map.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/drawable/map.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/drawable_map.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/drawable/map.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/layout_activity_tuto_four.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/layout/activity_tuto_four.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/mipmap-hdpi_icon_dark_test.png.flat",
+        "source": "com.example.sentinelle.app-main-70:/mipmap-hdpi/icon_dark_test.png"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/mipmap-mdpi_ic_launcher_round.webp.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/mipmap-mdpi/ic_launcher_round.webp"
+        "merged": "com.example.sentinelle.app-debug-68:/drawable_tick.png.flat",
+        "source": "com.example.sentinelle.app-main-70:/drawable/tick.png"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/mipmap-xhdpi_ic_launcher.webp.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/mipmap-xhdpi/ic_launcher.webp"
+        "merged": "com.example.sentinelle.app-debug-68:/layout_activity_home.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/layout/activity_home.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/font_roboto_light.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/font/roboto_light.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.sentinelle.app-main-70:/mipmap-mdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/menu_bottom_nav_menu.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/menu/bottom_nav_menu.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/drawable_fleche_tuto2.jpg.flat",
+        "source": "com.example.sentinelle.app-main-70:/drawable/fleche_tuto2.jpg"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/layout_activity_liste_safe_journey.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/layout/activity_liste_safe_journey.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/mipmap-hdpi_icon_app_dark.png.flat",
+        "source": "com.example.sentinelle.app-main-70:/mipmap-hdpi/icon_app_dark.png"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/mipmap-hdpi_icon_app.png.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/mipmap-hdpi/icon_app.png"
+        "merged": "com.example.sentinelle.app-debug-68:/xml_network_security_config.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/xml/network_security_config.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/drawable_pending.png.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/drawable/pending.png"
+        "merged": "com.example.sentinelle.app-debug-68:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.example.sentinelle.app-main-70:/mipmap-hdpi/ic_launcher.webp"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/drawable_fleche_tuto_1.jpg.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/drawable/fleche_tuto_1.jpg"
+        "merged": "com.example.sentinelle.app-debug-68:/drawable_fleche_tuto_1.jpg.flat",
+        "source": "com.example.sentinelle.app-main-70:/drawable/fleche_tuto_1.jpg"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/layout_activity_login.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/layout/activity_login.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.sentinelle.app-main-70:/mipmap-xxhdpi/ic_launcher.webp"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/drawable_fleche_tuto3.jpg.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/drawable/fleche_tuto3.jpg"
+        "merged": "com.example.sentinelle.app-debug-68:/xml_data_extraction_rules.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/xml/data_extraction_rules.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/mipmap-hdpi_ic_launcher.webp.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/mipmap-hdpi/ic_launcher.webp"
+        "merged": "com.example.sentinelle.app-debug-68:/drawable_message.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/drawable/message.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/mipmap-xxhdpi_ic_launcher.webp.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/mipmap-xxhdpi/ic_launcher.webp"
+        "merged": "com.example.sentinelle.app-debug-68:/drawable_warning.png.flat",
+        "source": "com.example.sentinelle.app-main-70:/drawable/warning.png"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/mipmap-hdpi_icon_app_dark.png.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/mipmap-hdpi/icon_app_dark.png"
+        "merged": "com.example.sentinelle.app-debug-68:/font_roboto_light.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/font/roboto_light.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/xml_data_extraction_rules.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/xml/data_extraction_rules.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/layout_activity_tuto_one.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/layout/activity_tuto_one.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/mipmap-anydpi-v26/ic_launcher.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/drawable_main_icon_dark.jpg.flat",
+        "source": "com.example.sentinelle.app-main-70:/drawable/main_icon_dark.jpg"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/layout_fragment_settings.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/layout/fragment_settings.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/layout_fragment_message.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/layout/fragment_message.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/mipmap-hdpi_icon_dark_test.png.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/mipmap-hdpi/icon_dark_test.png"
+        "merged": "com.example.sentinelle.app-debug-68:/layout_activity_tuto_four.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/layout/activity_tuto_four.xml"
     },
     {
-        "merged": "com.example.sentinelle.app-debug-62:/layout_fragment_settings.xml.flat",
-        "source": "com.example.sentinelle.app-main-64:/layout/fragment_settings.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/mipmap-anydpi-v26/ic_launcher_round.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/mipmap-xxxhdpi_ic_launcher.webp.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/mipmap-xxxhdpi/ic_launcher.webp"
+        "merged": "com.example.sentinelle.app-debug-68:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/drawable/ic_launcher_background.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/xml_network_security_config.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/xml/network_security_config.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/layout_activity_tuto_tree.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/layout/activity_tuto_tree.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/layout_item_journey.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/layout/item_journey.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.example.sentinelle.app-main-70:/mipmap-mdpi/ic_launcher.webp"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/drawable_tick.png.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/drawable/tick.png"
+        "merged": "com.example.sentinelle.app-debug-68:/mipmap-hdpi_icon_main_app_dark.png.flat",
+        "source": "com.example.sentinelle.app-main-70:/mipmap-hdpi/icon_main_app_dark.png"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/layout_activity_main.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/layout/activity_main.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/drawable_logo_record_tuto3.png.flat",
+        "source": "com.example.sentinelle.app-main-70:/drawable/logo_record_tuto3.png"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/layout_activity_tuto_one.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/layout/activity_tuto_one.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/drawable_rounded_button_app.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/drawable/rounded_button_app.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/mipmap-hdpi_icon_main_app_dark.png.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/mipmap-hdpi/icon_main_app_dark.png"
+        "merged": "com.example.sentinelle.app-debug-68:/menu_list_pop_up_menu.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/menu/list_pop_up_menu.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/layout_activity_detail_safe_journey.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/layout/activity_detail_safe_journey.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.sentinelle.app-main-70:/mipmap-xxhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/layout_fragment_map.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/layout/fragment_map.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/layout_fragment_map.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/layout/fragment_map.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/layout_fragment_message.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/layout/fragment_message.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/font_montserrat_semibold.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/font/montserrat_semibold.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/mipmap-hdpi_ic_launcher_round.webp.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/mipmap-hdpi/ic_launcher_round.webp"
+        "merged": "com.example.sentinelle.app-debug-68:/drawable_fleche_tuto3.jpg.flat",
+        "source": "com.example.sentinelle.app-main-70:/drawable/fleche_tuto3.jpg"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/layout_activity_maps.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/layout/activity_maps.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.example.sentinelle.app-main-70:/mipmap-xhdpi/ic_launcher.webp"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/mipmap-mdpi/ic_launcher.webp"
+        "merged": "com.example.sentinelle.app-debug-68:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/drawable/ic_launcher_foreground.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/drawable_fleche_tuto2.jpg.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/drawable/fleche_tuto2.jpg"
+        "merged": "com.example.sentinelle.app-debug-68:/font_inter_medium.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/font/inter_medium.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/font_montserrat_semibold.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/font/montserrat_semibold.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/drawable_settings.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/drawable/settings.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/mipmap-xxxhdpi/ic_launcher_round.webp"
+        "merged": "com.example.sentinelle.app-debug-68:/layout_activity_liste_safe_journey.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/layout/activity_liste_safe_journey.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/layout_activity_main_page.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/layout/activity_main_page.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.sentinelle.app-main-70:/mipmap-hdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/drawable_rectangle.png.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/drawable/rectangle.png"
+        "merged": "com.example.sentinelle.app-debug-68:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.sentinelle.app-main-70:/mipmap-xxxhdpi/ic_launcher.webp"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/drawable_logo_proche_tuto_4.jpg.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/drawable/logo_proche_tuto_4.jpg"
+        "merged": "com.example.sentinelle.app-debug-68:/layout_activity_detail_safe_journey.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/layout/activity_detail_safe_journey.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/layout_activity_home.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/layout/activity_home.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/xml_backup_rules.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/xml/backup_rules.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/drawable_logo_record_tuto3.png.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/drawable/logo_record_tuto3.png"
+        "merged": "com.example.sentinelle.app-debug-68:/layout_activity_tuto_two.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/layout/activity_tuto_two.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/drawable_rounde_edit_text.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/drawable/rounde_edit_text.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/drawable_fleche_tuto4.jpg.flat",
+        "source": "com.example.sentinelle.app-main-70:/drawable/fleche_tuto4.jpg"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/mipmap-anydpi-v26/ic_launcher_round.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/drawable_rounde_edit_text.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/drawable/rounde_edit_text.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/drawable_ic_more.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/drawable/ic_more.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/mipmap-anydpi-v26/ic_launcher.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/mipmap-xxhdpi/ic_launcher_round.webp"
+        "merged": "com.example.sentinelle.app-debug-68:/menu_bottom_nav_menu.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/menu/bottom_nav_menu.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/layout_fragment_home.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/layout/fragment_home.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/layout_fragment_home.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/layout/fragment_home.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/font_montserrat_bold.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/font/montserrat_bold.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.sentinelle.app-main-70:/mipmap-xxxhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/mipmap-xhdpi_ic_launcher_round.webp.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/mipmap-xhdpi/ic_launcher_round.webp"
+        "merged": "com.example.sentinelle.app-debug-68:/drawable_home.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/drawable/home.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/drawable_ic_launcher_foreground.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/drawable/ic_launcher_foreground.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/drawable_fleche_tuto1.jpg.flat",
+        "source": "com.example.sentinelle.app-main-70:/drawable/fleche_tuto1.jpg"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/drawable_fleche_tuto1.jpg.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/drawable/fleche_tuto1.jpg"
+        "merged": "com.example.sentinelle.app-debug-68:/layout_item_journey.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/layout/item_journey.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/drawable_home.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/drawable/home.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/layout_activity_main_page.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/layout/activity_main_page.xml"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/layout_activity_tuto_two.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/layout/activity_tuto_two.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/mipmap-hdpi_icon_app.png.flat",
+        "source": "com.example.sentinelle.app-main-70:/mipmap-hdpi/icon_app.png"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/drawable_rounded_button_app.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/drawable/rounded_button_app.xml"
-    },
-    {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/menu_list_pop_up_menu.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/menu/list_pop_up_menu.xml"
-    },
-    {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/drawable_main_icon_dark.jpg.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/drawable/main_icon_dark.jpg"
-    },
-    {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/drawable_warning.png.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/drawable/warning.png"
-    },
-    {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-62:/layout_activity_register.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-64:/layout/activity_register.xml"
+        "merged": "com.example.sentinelle.app-debug-68:/drawable_logo_carte_tuto2.png.flat",
+        "source": "com.example.sentinelle.app-main-70:/drawable/logo_carte_tuto2.png"
     }
 ]

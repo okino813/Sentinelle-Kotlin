@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.sentinelle.app-mergeDebugResources-60:/values-gu/values-gu.xml",
+            "outputFile": "com.example.sentinelle.app-mergeDebugResources-66:/values-gu/values-gu.xml",
             "map": [
                 {
                     "source": "/home/axel/.gradle/caches/8.11.1/transforms/c0e59b0448a9fd1249123bd273bb9695/transformed/play-services-base-18.5.0/res/values-gu/values.xml",

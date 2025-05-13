@@ -56,7 +56,7 @@
             android:exported="false"
             android:label="@string/title_activity_maps" /> <!-- Autres activités -->
         <activity
-            android:name=".activity_home"
+            android:name=".page.activity_home"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

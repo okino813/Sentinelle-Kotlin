@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.sentinelle.app-mergeDebugResources-60:/values-kk/values-kk.xml",
+            "outputFile": "com.example.sentinelle.app-mergeDebugResources-66:/values-kk/values-kk.xml",
             "map": [
                 {
                     "source": "/home/axel/.gradle/caches/8.11.1/transforms/3d94954f9075924963502cdc97cd4c0f/transformed/foundation-release/res/values-kk/values-kk.xml",

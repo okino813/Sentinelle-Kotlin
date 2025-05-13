@@ -1,28 +1,36 @@
-package com.example.sentinelle
-
+package com.example.sentinelle.page
 
 import android.Manifest
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.PowerManager
-import android.provider.Settings
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.NumberPicker
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.sentinelle.page.tuto.TutoOneActivity
+import androidx.fragment.app.Fragment
+import com.example.sentinelle.LocationManager
+import com.example.sentinelle.LocationTrackerService
+import com.example.sentinelle.R
+import com.example.sentinelle.api.AppColors
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import okhttp3.FormBody
@@ -33,8 +41,30 @@ import java.util.Date
 import java.util.Locale
 import kotlin.system.exitProcess
 
+/**
+ * A simple [androidx.fragment.app.Fragment] subclass.
+ * Use the [HomeFragment.newInstance] factory method to
+ * create an instance of this fragment.
+ */
 
-class activity_home : AppCompatActivity() {
+@Composable
+fun HomeScreen() {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(AppColors().SentiBlack),
+        contentAlignment = Alignment.Center
+    )
+    {
+        Text(
+            "Bienvenue sur l'accueil",
+            color = Color.White,
+            )
+    }
+}
+
+class HomeFragment : Fragment() {
+
     private val LOCATION_PERMISSION_REQUEST_CODE = 1
     private lateinit var npHours: NumberPicker
     private lateinit var npMinutes: NumberPicker
@@ -50,46 +80,53 @@ class activity_home : AppCompatActivity() {
 
     private lateinit var locationManager: LocationManager
 
-
-
     private var isTracking = false // Variable pour suivre si le service est en cours de suivi ou non
+
+    // TODO: Rename and change types of parameters
+    private var param1: String? = null
+    private var param2: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        setContentView(R.layout.activity_home)
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+    }
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_home, container, false)
+    }
+    companion object {
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @param param1 Parameter 1.
+         * @param param2 Parameter 2.
+         * @return A new instance of fragment HomeFragment.
+         */
+        // TODO: Rename and change types and number of parameters
+        @JvmStatic
+        fun newInstance(param1: String, param2: String) =
+            HomeFragment().apply {
 
-        locationManager = LocationManager(this)
-
-
-
-
-        // Demande à l'utilisateur de désactiver les optimisations de batterie
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val packageName = packageName
-            val pm = getSystemService(Context.POWER_SERVICE) as PowerManager
-            if (!pm.isIgnoringBatteryOptimizations(packageName)) {
-                val intent = Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS)
-                intent.data = android.net.Uri.parse("package:$packageName")
-                startActivity(intent)
             }
-        }
+    }
 
-        npHours = findViewById(R.id.np_hours)
-        npMinutes = findViewById(R.id.np_minutes)
-        npSeconds = findViewById(R.id.np_seconds)
-        btnStart = findViewById(R.id.btn_start)
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        // Initialisation des composants graphique et des varriables
 
+        locationManager = LocationManager(requireContext())
+
+        npHours = view.findViewById(R.id.np_hours)
+        npMinutes = view.findViewById(R.id.np_minutes)
+        npSeconds = view.findViewById(R.id.np_seconds)
+        btnStart = view.findViewById(R.id.btn_start)
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
 
         npHours.minValue = 0
         npHours.maxValue = 23
@@ -97,63 +134,154 @@ class activity_home : AppCompatActivity() {
         npMinutes.maxValue = 59
         npSeconds.minValue = 0
         npSeconds.maxValue = 59
-//
-//        setNumberPickerTextColor(npHours, Color.GREEN)
-//        setNumberPickerTextColor(npMinutes, Color.GREEN)
-//        setNumberPickerTextColor(npSeconds, Color.GREEN)
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+
+
+
+
+        // On check les autorisations
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_BACKGROUND_LOCATION)
             == PackageManager.PERMISSION_GRANTED) {
-            // Permission en arrière-plan accordée
+            // Permission accordée
         } else {
-            // Demander la permission
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_BACKGROUND_LOCATION), REQUEST_CODE_BACKGROUND_LOCATION)
+            requestPermissions(arrayOf(Manifest.permission.ACCESS_BACKGROUND_LOCATION), REQUEST_CODE_BACKGROUND_LOCATION)
         }
 
+
+
+        // Si le bouton starts est presser
         btnStart.setOnClickListener {
             if (isTimerRunning) {
                 stopTimer()
             } else {
                 startTimer()
             }
-            isTracking = !isTracking // Change l'état du suivi
+            isTracking = !isTracking
         }
     }
 
     // Fonction pour démarrer le suivi de localisation
     private fun startLocationTracking() {
         // Crée un intent pour démarrer le service avec l'action START
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // Les permissions ne sont pas accordées, demandez-les
             ActivityCompat.requestPermissions(
-                this,
+                requireContext() as Activity,
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION),
                 LOCATION_PERMISSION_REQUEST_CODE
             )
         } else {
-            val intent = Intent(this, LocationTrackerService::class.java)
+            val intent = Intent(requireContext(), LocationTrackerService::class.java)
             intent.action = LocationTrackerService.Action.START.name
             // Démarre le service en arrière-plan
-            startService(intent)
+            requireContext().startService(intent)
         }
     }
 
     // Fonction pour arrêter le suivi de localisation
     private fun stopLocationTracking() {
         // Crée un intent pour arrêter le service avec l'action STOP
-        val intent = Intent(this, LocationTrackerService::class.java)
+        val intent = Intent(requireContext(), LocationTrackerService::class.java)
         intent.action = LocationTrackerService.Action.STOP.name
 
         // Arrête le service en arrière-plan
-        stopService(intent)
+        requireContext().stopService(intent)
+    }
+
+    // Arrêt du timer
+    private fun stopTimer() {
+
+
+        // On change le status de la safe journey
+
+        // On récupère la varriable isConnected dans le SharedPreferences pour checker si l'utilisateur est déjà connecté
+        sharedPreferences = requireContext().getSharedPreferences("app_state", Context.MODE_PRIVATE)
+        val isAuthentificated = sharedPreferences.getBoolean("is_authentificated", false)
+        val emailPreference = sharedPreferences.getString("email", "")
+        val tokenPreference = sharedPreferences.getString("token", "")
+        var email = emailPreference.toString()
+        var token = tokenPreference.toString()
+
+        // On crée le safejourney
+        val url = "https://boutique-casse-tete.com/sentinelle/index.php"
+
+        val client = OkHttpClient()
+
+
+        // Obtenir l'heure actuelle en millisecondes
+        val currentTimeMillis = System.currentTimeMillis()
+        // Formater les heures
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        val heureActuelle = dateFormat.format(Date(currentTimeMillis))
+
+        val formBody = FormBody.Builder()
+            .add("email", email)
+            .add("token", token)
+            .add("task", "close_minuteur")
+            .add("heure_actuelle", heureActuelle)
+            .build()
+
+        val request = Request.Builder()
+            .url(url)
+            .post(formBody)
+            .build()
+
+        Thread {
+            try {
+                val response = client.newCall(request).execute()
+                val responseData: String = response.body?.string().toString() // Récupérer la réponse sous forme de String
+
+                // Vérifier si la réponse est valide
+                if (response.isSuccessful) {
+                    // Ici, on compare simplement si la réponse est "null" ou non
+                    requireActivity().runOnUiThread {
+                        val NewToken = responseData.substring(1)
+                        Log.e("LaToken", "Voici la ${NewToken}")
+
+                        if (NewToken != "null") {
+                            // Si la réponse est différente de "null", succès
+
+                            // On ajoute les identifiants (email et token) dans les SharedPreferences
+                            val sharedPreferences = requireContext().getSharedPreferences("app_state",
+                                Context.MODE_PRIVATE
+                            )
+                            val editor = sharedPreferences.edit()
+                            editor.putString("email", email)
+                            editor.putString("token", NewToken)
+                            editor.putBoolean("is_authentificated", true)
+                            editor.apply()
+
+                            timer?.cancel()
+                            isTimerRunning = false
+                            btnStart.text = "Démarrer"
+
+                            // Réinitialisation des NumberPickers à 0
+                            npHours.value = 0
+                            npMinutes.value = 0
+                            npSeconds.value = 0
+
+                            // On stop la localisation
+                            stopLocationTracking()
+
+
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                requireActivity().runOnUiThread {
+                    Log.e("LoginError", "Erreur: ${e.message}", e)
+                    Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }.start()
     }
 
     // Démarage du timer
     private fun startTimer() {
 
         // On récupère la varriable isConnected dans le SharedPreferences pour checker si l'utilisateur est déjà connecté
-        sharedPreferences = this.getSharedPreferences("app_state", Context.MODE_PRIVATE)
+        sharedPreferences = requireContext().getSharedPreferences("auth_prefs", Context.MODE_PRIVATE)
         val isAuthentificated = sharedPreferences.getBoolean("is_authentificated", false)
         val emailPreference = sharedPreferences.getString("email", "")
         val tokenPreference = sharedPreferences.getString("token", "")
@@ -221,7 +349,7 @@ class activity_home : AppCompatActivity() {
                     // Vérifier si la réponse est valide
                     if (response.isSuccessful) {
                         // Ici, on compare simplement si la réponse est "null" ou non
-                        runOnUiThread {
+                        requireActivity().runOnUiThread {
                             Log.e("LeToken", "Voici la ${responseData.toString()}")
                             val NewToken = responseData.substring(1)
 
@@ -230,7 +358,9 @@ class activity_home : AppCompatActivity() {
                                 // Si la réponse est différente de "null", succès
 
                                 // On ajoute les identifiants (email et token) dans les SharedPreferences
-                                val sharedPreferences = getSharedPreferences("app_state", MODE_PRIVATE)
+                                val sharedPreferences = requireContext().getSharedPreferences("app_state",
+                                    Context.MODE_PRIVATE
+                                )
                                 val editor = sharedPreferences.edit()
                                 editor.putString("email", email)
                                 editor.putString("token", NewToken)
@@ -239,25 +369,14 @@ class activity_home : AppCompatActivity() {
                                 // C'est Good
                                 // On démare la localisation
                                 startLocationTracking()
-
-
-
-                            } else {
-                                // Si la réponse est "null", le token est invalide
-                                logoutUser()
                             }
                         }
-                    } else {
-                        // Si la réponse HTTP n'est pas réussie
-                        runOnUiThread {
-                            Toast.makeText(applicationContext, "Erreur lors de la connexion de l'utilisateur", Toast.LENGTH_SHORT).show()
-                            startActivity(Intent(this, TutoOneActivity::class.java))
-                        }
+
                     }
                 } catch (e: Exception) {
-                    runOnUiThread {
+                    requireActivity().runOnUiThread {
                         Log.e("LoginError", "Erreur: ${e.message}", e)
-                        Toast.makeText(applicationContext, "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
                     }
                 }
             }.start()
@@ -273,7 +392,7 @@ class activity_home : AppCompatActivity() {
                     val remainingMinutes = (remainingSeconds % 3600) / 60
                     val remainingSecs = remainingSeconds % 60
 
-                    runOnUiThread {
+                    requireActivity().runOnUiThread {
                         npHours.value = remainingHours
                         npMinutes.value = remainingMinutes
                         npSeconds.value = remainingSecs
@@ -294,7 +413,7 @@ class activity_home : AppCompatActivity() {
 
                 override fun onFinish() {
                     // On change le status de la safe journey
-                    sharedPreferences = this@activity_home.getSharedPreferences("app_state", Context.MODE_PRIVATE)
+                    sharedPreferences = requireContext().getSharedPreferences("app_state", Context.MODE_PRIVATE)
                     val isAuthentificatedBis = sharedPreferences.getBoolean("is_authentificated", false)
                     val emailPreferenceBis = sharedPreferences.getString("email", "")
                     val tokenPreferenceBis = sharedPreferences.getString("token", "")
@@ -327,14 +446,16 @@ class activity_home : AppCompatActivity() {
                             // Vérifier si la réponse est valide
                             if (response.isSuccessful) {
                                 // Ici, on compare simplement si la réponse est "null" ou non
-                                runOnUiThread {
+                                requireActivity().runOnUiThread {
                                     Log.e("LeToken", "Voici la ${responseData.toString()}")
                                     val NewToken = responseData.substring(1)
                                     if (NewToken.toString() != "null") {
                                         // Si la réponse est différente de "null", succès
 
                                         // On ajoute les identifiants (email et token) dans les SharedPreferences
-                                        val sharedPreferences = getSharedPreferences("app_state", MODE_PRIVATE)
+                                        val sharedPreferences = requireContext().getSharedPreferences("app_state",
+                                            Context.MODE_PRIVATE
+                                        )
                                         val editor = sharedPreferences.edit()
                                         editor.putString("email", email)
                                         editor.putString("token", NewToken)
@@ -348,159 +469,39 @@ class activity_home : AppCompatActivity() {
                                         npMinutes.value = 0
                                         npSeconds.value = 0
 
-                                        Toast.makeText(applicationContext, "Alerte délcancher !", Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(requireContext(), "Alerte délcancher !", Toast.LENGTH_SHORT).show()
 
-                                    } else {
-                                        // Si la réponse est "null", le token est invalide
-                                        logoutUser()
                                     }
-                                }
-                            } else {
-                                // Si la réponse HTTP n'est pas réussie
-                                runOnUiThread {
-                                    Toast.makeText(applicationContext, "Erreur lors de la connexion de l'utilisateur", Toast.LENGTH_SHORT).show()
-                                    startActivity(Intent(this@activity_home, TutoOneActivity::class.java))
                                 }
                             }
                         } catch (e: Exception) {
-                            runOnUiThread {
+                            requireActivity().runOnUiThread {
                                 Log.e("LoginError", "Erreur: ${e.message}", e)
-                                Toast.makeText(applicationContext, "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
                             }
                         }
                     }.start()
                 }
             }.start()
         } else {
-            Toast.makeText(this, "Veuillez régler une durée valide !", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Veuillez régler une durée valide !", Toast.LENGTH_SHORT).show()
         }
     }
-
-    // Arrêt du timer
-    private fun stopTimer() {
-
-
-        // On change le status de la safe journey
-
-        // On récupère la varriable isConnected dans le SharedPreferences pour checker si l'utilisateur est déjà connecté
-        sharedPreferences = this.getSharedPreferences("app_state", Context.MODE_PRIVATE)
-        val isAuthentificated = sharedPreferences.getBoolean("is_authentificated", false)
-        val emailPreference = sharedPreferences.getString("email", "")
-        val tokenPreference = sharedPreferences.getString("token", "")
-        var email = emailPreference.toString()
-        var token = tokenPreference.toString()
-
-        // On crée le safejourney
-        val url = "https://boutique-casse-tete.com/sentinelle/index.php"
-
-        val client = OkHttpClient()
-
-
-        // Obtenir l'heure actuelle en millisecondes
-        val currentTimeMillis = System.currentTimeMillis()
-        // Formater les heures
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-        val heureActuelle = dateFormat.format(Date(currentTimeMillis))
-
-        val formBody = FormBody.Builder()
-            .add("email", email)
-            .add("token", token)
-            .add("task", "close_minuteur")
-            .add("heure_actuelle", heureActuelle)
-            .build()
-
-        val request = Request.Builder()
-            .url(url)
-            .post(formBody)
-            .build()
-
-        Thread {
-            try {
-                val response = client.newCall(request).execute()
-                val responseData: String = response.body?.string().toString() // Récupérer la réponse sous forme de String
-
-                // Vérifier si la réponse est valide
-                if (response.isSuccessful) {
-                    // Ici, on compare simplement si la réponse est "null" ou non
-                    runOnUiThread {
-                        val NewToken = responseData.substring(1)
-                        Log.e("LaToken", "Voici la ${NewToken}")
-
-                        if (NewToken != "null") {
-                            // Si la réponse est différente de "null", succès
-
-                            // On ajoute les identifiants (email et token) dans les SharedPreferences
-                            val sharedPreferences = getSharedPreferences("app_state", MODE_PRIVATE)
-                            val editor = sharedPreferences.edit()
-                            editor.putString("email", email)
-                            editor.putString("token", NewToken)
-                            editor.putBoolean("is_authentificated", true)
-                            editor.apply()
-
-                            timer?.cancel()
-                            isTimerRunning = false
-                            btnStart.text = "Démarrer"
-
-                            // Réinitialisation des NumberPickers à 0
-                            npHours.value = 0
-                            npMinutes.value = 0
-                            npSeconds.value = 0
-
-                            // On stop la localisation
-                            stopLocationTracking()
-
-
-                        } else {
-                            // Si la réponse est "null", le token est invalide
-                            logoutUser()
-                        }
-                    }
-                } else {
-                    // Si la réponse HTTP n'est pas réussie
-                    runOnUiThread {
-                        Toast.makeText(applicationContext, "Erreur lors de la connexion de l'utilisateur", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this, TutoOneActivity::class.java))
-                    }
-                }
-            } catch (e: Exception) {
-                runOnUiThread {
-                    Log.e("LoginError", "Erreur: ${e.message}", e)
-                    Toast.makeText(applicationContext, "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }.start()
-    }
-
-
-
-//    // Remise à zero des NumberPickers
-//    private fun setNumberPickerTextColor(numberPicker: NumberPicker, color: Int) {
-//        try {
-//            val selectorWheelPaintField: Field = numberPicker.javaClass.getDeclaredField("mSelectorWheelPaint")
-//            selectorWheelPaintField.isAccessible = true
-//            (selectorWheelPaintField.get(numberPicker) as android.graphics.Paint).color = color
-//            for (i in 0 until numberPicker.childCount) {
-//                val child: View = numberPicker.getChildAt(i)
-//                if (child is android.widget.EditText) {
-//                    child.setTextColor(color)
-//                }
-//            }
-//            numberPicker.invalidate()
-//        } catch (e: Exception) {
-//            e.printStackTrace()
-//        }
-//    }
 
 
     // Déconnexion de l'utilisateur
     fun logoutUser() {
-        val sharedPreferences = getSharedPreferences("app_state", MODE_PRIVATE)
+        val sharedPreferences = requireContext().getSharedPreferences("app_state",
+            Context.MODE_PRIVATE
+        )
         val editor = sharedPreferences.edit()
         editor.putString("email", "")
         editor.putString("token", "null")
         editor.putBoolean("is_authentificated", false)
         editor.apply()
-        Toast.makeText(applicationContext, "Déconnexion...", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), "Déconnexion...", Toast.LENGTH_SHORT).show()
         exitProcess(0)
     }
+
+
 }

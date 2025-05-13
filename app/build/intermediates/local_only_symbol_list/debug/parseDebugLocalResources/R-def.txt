@@ -39,12 +39,9 @@ font montserrat_bold
 font montserrat_semibold
 font roboto_light
 id BtnShowPopUp
-id CheckBoxRegister
 id ListViewSafeJourney
 id avatar
 id bottom_navigation
-id btnChangeSingupMode
-id btnConnexion
 id btnOngletJourney
 id btnValidateSettingAccount
 id btn_alerter
@@ -56,11 +53,8 @@ id btn_start
 id contactBtnMenu
 id description
 id duree_journey
-id editConfirmPassword
-id editEmail
 id editFistName
 id editLastName
-id editPassword
 id editPhone
 id fragment_container
 id h2Connexion
@@ -68,7 +62,6 @@ id home
 id homeBtnMenu
 id imageView
 id imageView2
-id imageView4
 id itemDelete
 id itemShow
 id item_post
@@ -101,7 +94,6 @@ layout activity_liste_safe_journey
 layout activity_main
 layout activity_main_page
 layout activity_maps
-layout activity_register
 layout activity_tuto_four
 layout activity_tuto_one
 layout activity_tuto_tree

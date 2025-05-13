@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.launch
-import com.example.sentinelle.activity_home
+import com.example.sentinelle.page.activity_home
 import okhttp3.FormBody
 import okhttp3.OkHttpClient
 import okhttp3.Request

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_blue"
-    tools:context=".SettingsFragment"
+    tools:context=".page.SettingsFragment"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="-18dp">
 

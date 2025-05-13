@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.sentinelle.app-mergeDebugResources-60:/values-zh-rCN/values-zh-rCN.xml",
+            "outputFile": "com.example.sentinelle.app-mergeDebugResources-66:/values-zh-rCN/values-zh-rCN.xml",
             "map": [
                 {
                     "source": "/home/axel/.gradle/caches/8.11.1/transforms/ad06b6a542ec89461c0140483329094d/transformed/ui-release/res/values-zh-rCN/values-zh-rCN.xml",
