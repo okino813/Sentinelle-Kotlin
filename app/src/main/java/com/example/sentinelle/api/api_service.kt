@@ -3,8 +3,6 @@ package com.example.sentinelle.api
 import TokenManager
 import android.content.Context
 import android.util.Log
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.MediaType.Companion.toMediaType
@@ -20,7 +18,7 @@ class api_service(val context: Context) {
     private val tokenManager = TokenManager(context)
     private val token_access = tokenManager.getToken(0)
 
-    suspend fun login(email: String, password: String): Boolean {
+    fun login(email: String, password: String, callback: (Boolean) -> Unit) {
         val client = OkHttpClient()
         val json = JSONObject().apply {
             put("email", email)
@@ -28,30 +26,31 @@ class api_service(val context: Context) {
         }
         val body = json.toString().toRequestBody("application/json".toMediaType())
         val request = Request.Builder()
-            .url("${AppValues.base_url}/api/login/") // si tu utilises l'émulateur Android
+            .url("${AppValues.base_url}/api/login/")
             .post(body)
             .build()
 
-        return withContext(Dispatchers.IO) {
-            try {
-                val response = client.newCall(request).execute()
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                Log.e("Login", "Erreur : ${e.message}")
+                callback(false)
+            }
+
+            override fun onResponse(call: Call, response: Response) {
                 if (response.isSuccessful) {
                     val responseData = response.body?.string()
-                    val token_access = JSONObject(responseData).getString("access")
-                    val token_refresh = JSONObject(responseData).getString("refresh")
-                    // Sauvegarder les tokens dans SharedPreferences
+                    val json = JSONObject(responseData)
+                    val token_access = json.getString("access")
+                    val token_refresh = json.getString("refresh")
                     tokenManager.saveToken(token_access, token_refresh)
                     Log.d("API", "Connexion réussie. Token : $token_access")
-                    true
+                    callback(true)
                 } else {
                     Log.e("API", "Échec de connexion : ${response.code}")
-                    false
+                    callback(false)
                 }
-            } catch (e: IOException) {
-                Log.e("API", "Erreur : ${e.message}")
-                false
             }
-        }
+        })
     }
 
     fun register(email: String, password: String) {

@@ -1,5 +1,7 @@
 package com.example.sentinelle
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -19,6 +21,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -34,13 +37,14 @@ import com.example.sentinelle.api.Bouton
 import com.example.sentinelle.api.Input
 import com.example.sentinelle.api.Logo
 import com.example.sentinelle.api.Titre
+import com.example.sentinelle.api.api_service
 
 @Composable
 fun FormulaireConnexion() {
     var motDePasse by remember { mutableStateOf("") }
     var motDePasseConfirm by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
-    var inscriptionMode by remember { mutableStateOf(true) }
+    var inscriptionMode by remember { mutableStateOf(false) }
 
     // États pour les erreurs
     var emailError by remember { mutableStateOf<String?>(null) }
@@ -48,6 +52,9 @@ fun FormulaireConnexion() {
     var ConfrimmotDePasseError by remember { mutableStateOf<String?>(null) }
 
     var checked by remember { mutableStateOf(false) }
+
+    var loginSuccess by remember { mutableStateOf(false) }
+    var loginTried by remember { mutableStateOf(false) }
 
     val context = LocalContext.current
 
@@ -80,24 +87,12 @@ fun FormulaireConnexion() {
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                Input(
-                    "Mot de passe",
-                    value = motDePasse,
-                    onValueChange = { motDePasse = it },
-                    true,
-                    errorMessage = motDePasseError
-                )
+                Input("Mot de passe",value = motDePasse, onValueChange = { motDePasse = it }, true, errorMessage = motDePasseError)
 
                 Spacer(modifier = Modifier.height(8.dp))
 
                 if (inscriptionMode) {
-                    Input(
-                        "Confirmation du mot de passe",
-                        value = motDePasseConfirm,
-                        onValueChange = { motDePasseConfirm = it },
-                        true,
-                        errorMessage = ConfrimmotDePasseError
-                    )
+                    Input("Confirmation du mot de passe", value = motDePasseConfirm, onValueChange = { motDePasseConfirm = it }, true, errorMessage = ConfrimmotDePasseError)
                 }
                 Spacer(modifier = Modifier.height(8.dp))
 
@@ -165,12 +160,14 @@ fun FormulaireConnexion() {
                             }
 
                             if (isValid) {
-                                val action = "Inscription"
-                                Toast.makeText(context, "$action réussie !", Toast.LENGTH_SHORT)
-                                    .show()
+                                val api = api_service(context)
+                                api.register(email, motDePasse)
+                                var intent = Intent(context, MainActivity_page::class.java)
+                                context.startActivity(intent)
                             }
                         })
-                    } else {
+                    }
+                    else {
                         Bouton("Se connecter", OnClick = {
                             // Reset des erreurs
                             emailError = null
@@ -188,11 +185,30 @@ fun FormulaireConnexion() {
                             }
 
                             if (isValid) {
-                                val action = "Connexion"
-                                Toast.makeText(context, "$action réussie !", Toast.LENGTH_SHORT)
-                                    .show()
+                                val api = api_service(context)
+                                api.login(email, motDePasse) { success ->
+                                    loginSuccess = success
+                                    loginTried = true
+                                }
+                                // Si login échoué → affiche un message ou autre
+                                if (!loginSuccess && loginTried) {
+                                    emailError = "Email ou mot de passse incorect"
+                                    motDePasseError = "Email ou mot de passse incorect"
+                                }
                             }
                         })
+                        // Si login réussi → redirection
+                        if (loginSuccess && loginTried) {
+                            LaunchedEffect(Unit) {
+                                val intent = Intent(context, MainActivity_page::class.java)
+                                context.startActivity(intent)
+
+                                // On "termine" l'activité courante pour empêcher le retour
+                                if (context is Activity) {
+                                    context.finish()
+                                }
+                            }
+                        }
                     }
 
                     if (inscriptionMode) {
@@ -207,7 +223,8 @@ fun FormulaireConnexion() {
                                     inscriptionMode = !inscriptionMode
                                 }
                         )
-                    } else {
+                    }
+                    else {
                         Text(
                             text = "Crée un compte",
                             // ALign center
@@ -244,136 +261,6 @@ class login_activity : ComponentActivity() {
                 PreviewPages()
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
-//        val api = api_service(this)
-//
-//        // Récupération du bouton
-//        val btn_loginClick = findViewById<Button>(R.id.btnConnexion)
-//        val btn_change_mode = findViewById<TextView>(R.id.btnChangeSingupMode)
-//        val h2Page = findViewById<TextView>(R.id.h2Connexion)
-//
-//        // Récupération des champs
-//        val editEmail = findViewById<TextInputEditText>(R.id.editEmail)
-//        val editPassword = findViewById<TextInputEditText>(R.id.editPassword)
-//        val editPasswordConfirm = findViewById<TextInputEditText>(R.id.editConfirmPassword)
-//
-//        val checkboxCGU = findViewById<CheckBox>(R.id.CheckBoxRegister)
-//
-//        // Valeur par defaut
-//        editPasswordConfirm.visibility = View.GONE
-//        checkboxCGU.visibility = View.GONE
-//        h2Page.text = "Connexion"
-//
-//
-//        btn_change_mode.setOnClickListener{
-//            isSignupMode = !isSignupMode
-//            if(isSignupMode){
-//                btn_change_mode.text = "Se connecter"
-//                btn_loginClick.text = "S'inscrire"
-//                h2Page.text = "Inscription"
-//                editPasswordConfirm.visibility = View.VISIBLE
-//                checkboxCGU.visibility = View.VISIBLE
-//            }else{
-//                btn_change_mode.text = "S'inscrire"
-//                h2Page.text = "Connexion"
-//                btn_loginClick.text = "Se connecter"
-//                editPasswordConfirm.visibility = View.GONE
-//                checkboxCGU.visibility = View.GONE
-//            }
-//        }
-//
-//        btn_loginClick.setOnClickListener {
-//            val Email = editEmail.text.toString()
-//            val Password = editPassword.text.toString()
-//            val PasswordConfirm = editPasswordConfirm.text.toString()
-//            val isChecked:Boolean = checkboxCGU.isChecked()
-//
-//            if(isSignupMode){
-//                // Inscription
-//                // On vérifie les informations renseigner
-//                if(Email.isEmpty()){
-//                    editEmail.error = "Veuillez renseigner votre adresse mail"
-//                }
-//                else if(Password.isEmpty()){
-//                    editPassword.error = "Veuillez renseigner votre mot de passe"
-//                }
-//                else if(PasswordConfirm.isEmpty()){
-//                    editPasswordConfirm.error = "Veuillez confirmer votre mot de passe"
-//                }
-//                else {
-//                    // On vérifie l'email
-//                    if (Patterns.EMAIL_ADDRESS.matcher(Email).matches()) {
-//                        // On vérifie le mot de passe
-//                        if (Password == PasswordConfirm) {
-//                            // Si les conditions générales sont accepté par l'utilisateur
-//                            if (isChecked) {
-//                                // Les vérifications sont correcte !
-//                                api.register(Email, Password)
-//                                var intent = Intent(this@login_activity, MainActivity_page::class.java)
-//                                startActivity(intent)
-//                                finish()
-//                            } else {
-//                                Toast.makeText(this, "Vous devez accepter les CGU", Toast.LENGTH_SHORT).show()
-//                            }
-//                        }
-//                        else {
-//                            editPassword.error = "Mots de passe invalides"
-//                            editPasswordConfirm.error = "Mots de passe invalides"
-//                        }
-//                    }
-//                    else {
-//                        editEmail.error = "Adresse mail invalide"
-//                    }
-//                }
-//            }
-//            else{
-//                // Scred Connexion
-//                // On vérifie les informations renseigner
-//                if(Email.isEmpty()){
-//                    editEmail.error = "Veuillez renseigner tous les champs"
-//                }
-//                else if(Password.isEmpty()){
-//                    editPassword.error = "Veuillez renseigner tous les champs"
-//                }
-//                else {
-//                    // On continue les vérifications
-//                    if (Patterns.EMAIL_ADDRESS.matcher(Email).matches()) {
-//                        // On lance le processus de connexion
-//                        lifecycleScope.launch {
-//                            val result = api.login(Email, Password)
-//                            if(result){
-//                                var intent = Intent(this@login_activity, activity_home::class.java)
-//                                startActivity(intent)
-//                                finish()
-//                            }
-//                        }
-////                    api.testToken()
-//                    }
-//                    else {
-//                        editEmail.error = "Numéro invalide"
-//                    }
-//
-//                }
-//            }
-//        }
-//    }
-//}
-
     }
 }
 
