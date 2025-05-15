@@ -1,33 +1,110 @@
 package com.example.sentinelle.page.tuto
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.ImageView
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.sentinelle.R
+import com.example.sentinelle.api.AppColors
+import com.example.sentinelle.api.AppValues.Montserrat
 
-class TutoOneActivity : AppCompatActivity() {
+class TutoOneActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_tuto_one)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+        setContent {
+            Tuto1()
         }
-
-        // On récupère le btn flêche 1
-        val btn_fleche_tuto1 = findViewById<ImageView>(R.id.btn_fleche_tuto1)
-
-        btn_fleche_tuto1.setOnClickListener(View.OnClickListener { view: View? ->
-            Intent(this, tuto_two_activity::class.java).also {
-                startActivity(it)
-            }
-        })
     }
 }
+
+
+@Composable
+fun Tuto1(){
+    val context = LocalContext.current
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = AppColors().SentiBlack
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(20.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            // Ici qu'on va mettre le contenu de la page
+            Column() {
+                Image(
+                    painter = painterResource(id = R.drawable.logo_minuteur),
+                    contentDescription = "Logo Minuteur",
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                )
+                Spacer(modifier = Modifier.padding(10.dp))
+
+                Text(
+                    "Un minuteur pas comme les autres ...",
+                    color = Color.White,
+                    modifier = Modifier.align(Alignment.CenterHorizontally),
+                    textAlign = TextAlign.Center,
+                    fontFamily = Montserrat,
+                    fontWeight = FontWeight.Bold,
+                    fontStyle = FontStyle.Italic,
+                    fontSize = 16.sp
+                )
+
+                Spacer(modifier = Modifier.padding(10.dp))
+
+                Text(
+                    "Lorsque vous sortez de chez vous, vous programmer un minuteur jusqu'à votre retour !",
+                    color = Color.White,
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                        .fillMaxWidth(),
+                    textAlign = TextAlign.Center,
+                    fontFamily = Montserrat,
+                    fontWeight = FontWeight.SemiBold,
+                    fontStyle = FontStyle.Normal,
+                    fontSize = 14.sp
+                )
+
+                Spacer(modifier = Modifier.padding(20.dp))
+
+                Image(
+                    painter = painterResource(id = R.drawable.fleche_tuto1),
+                    contentDescription = "Logo suivant",
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                        .clickable{
+                            val intent = Intent(context, TutoTwoActivity::class.java)
+                            context.startActivity(intent)
+                            (context as? Activity)?.finish()
+                        }
+                )
+
+            }
+        }
+    }
+}
+

@@ -1,34 +1,110 @@
 package com.example.sentinelle.page.tuto
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.ImageView
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.sentinelle.R
+import com.example.sentinelle.api.AppColors
+import com.example.sentinelle.api.AppValues.Montserrat
 import com.example.sentinelle.login_activity
 
-class tuto_four_activity : AppCompatActivity() {
+class TutoFourActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_tuto_four)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+        setContent {
+            Tuto4()
         }
+    }
+}
 
-        // On récupère le btn flêche 3
-        val btn_fleche_tuto4 = findViewById<ImageView>(R.id.btn_fleche_tuto4)
 
-        btn_fleche_tuto4.setOnClickListener(View.OnClickListener { view: View? ->
-            Intent(this, login_activity::class.java).also {
-                startActivity(it)
+@Composable
+fun Tuto4(){
+    val context = LocalContext.current
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = AppColors().SentiCyan
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(20.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            // Ici qu'on va mettre le contenu de la page
+            Column() {
+                Image(
+                    painter = painterResource(id = R.drawable.logo_proche_tuto_4),
+                    contentDescription = "Logo Proche",
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                )
+                Spacer(modifier = Modifier.padding(10.dp))
+
+                Text(
+                    "Prévenir vos proches",
+                    color = Color.White,
+                    modifier = Modifier.align(Alignment.CenterHorizontally),
+                    textAlign = TextAlign.Center,
+                    fontFamily = Montserrat,
+                    fontWeight = FontWeight.Bold,
+                    fontStyle = FontStyle.Italic,
+                    fontSize = 16.sp
+                )
+
+                Spacer(modifier = Modifier.padding(10.dp))
+
+                Text(
+                    "Ajoutez des contacts pour que Sentinelle puisse les prévenir en cas de danger",
+                    color = Color.White,
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                        .fillMaxWidth(),
+                    textAlign = TextAlign.Center,
+                    fontFamily = Montserrat,
+                    fontWeight = FontWeight.SemiBold,
+                    fontStyle = FontStyle.Normal,
+                    fontSize = 14.sp
+                )
+
+                Spacer(modifier = Modifier.padding(20.dp))
+
+                Image(
+                    painter = painterResource(id = R.drawable.fleche_tuto4),
+                    contentDescription = "Logo suivant",
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                        .clickable{
+                            val intent = Intent(context, login_activity::class.java)
+                            context.startActivity(intent)
+                            (context as? Activity)?.finish()
+                        }
+                )
+
             }
-        })
+        }
     }
 }

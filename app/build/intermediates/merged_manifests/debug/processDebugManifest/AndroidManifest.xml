@@ -53,9 +53,6 @@
         android:theme="@style/Theme.Sentinelle"
         android:usesCleartextTraffic="true" >
         <activity
-            android:name="com.example.sentinelle.MainActivity2"
-            android:exported="false" />
-        <activity
             android:name="com.example.sentinelle.MainActivity_page"
             android:exported="false" />
         <activity
@@ -80,15 +77,7 @@
             android:value="YOUR_API_KEY" />
 
         <activity
-            android:name="com.example.sentinelle.MapsActivity"
-            android:exported="false"
-            android:label="@string/title_activity_maps" /> <!-- Autres activités -->
-        <activity
             android:name="com.example.sentinelle.page.activity_home"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.sentinelle.activity_register"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
@@ -96,19 +85,15 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.sentinelle.home_choice_activity"
+            android:name="com.example.sentinelle.page.tuto.TutoFourActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.sentinelle.page.tuto.tuto_four_activity"
+            android:name="com.example.sentinelle.page.tuto.TutoThreeActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.sentinelle.page.tuto.tuto_tree_activity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.sentinelle.page.tuto.tuto_two_activity"
+            android:name="com.example.sentinelle.page.tuto.TutoTwoActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

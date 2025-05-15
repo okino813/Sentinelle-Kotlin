@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.sentinelle.page.tuto.TutoOneActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,12 +32,12 @@ class MainActivity : AppCompatActivity() {
         // Si la varriable is_authentificated est à True, alors on redirige vers la page principale
         if (isAuthentificated) {
             // Rediriger vers MainActivity_page
-            val intent = Intent(this, MainActivity_page::class.java)
+            val intent = Intent(this, MainActivity_page()::class.java)
             startActivity(intent)
             finish()
         } else {
             // Si la réponse est "null", le token est invalide
-            val intent = Intent(this, login_activity::class.java)
+            val intent = Intent(this, TutoOneActivity()::class.java)
             startActivity(intent)
             finish()
 

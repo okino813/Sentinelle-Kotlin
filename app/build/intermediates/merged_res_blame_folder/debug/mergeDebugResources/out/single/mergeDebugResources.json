@@ -4,12 +4,24 @@
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/drawable/ic_more.xml"
     },
     {
+        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/font_montserrat_italic.ttf.flat",
+        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/font/montserrat_italic.ttf"
+    },
+    {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/drawable_logo_minuteur.png.flat",
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/drawable/logo_minuteur.png"
     },
     {
+        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/font_montserrat_light.ttf.flat",
+        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/font/montserrat_light.ttf"
+    },
+    {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/font_montserrat_black_italic.ttf.flat",
+        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/font/montserrat_black_italic.ttf"
     },
     {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/layout_fragment_message.xml.flat",
@@ -36,6 +48,10 @@
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/xml/data_extraction_rules.xml"
     },
     {
+        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/font_montserrat_semi_bold_italic.ttf.flat",
+        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/font/montserrat_semi_bold_italic.ttf"
+    },
+    {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/menu_bottom_nav_menu.xml.flat",
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/menu/bottom_nav_menu.xml"
     },
@@ -46,6 +62,10 @@
     {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/layout_item_journey.xml.flat",
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/layout/item_journey.xml"
+    },
+    {
+        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/font_montserrat_medium_italic.ttf.flat",
+        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/font/montserrat_medium_italic.ttf"
     },
     {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/drawable_rounded_button_app.xml.flat",
@@ -64,12 +84,20 @@
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/layout/activity_tuto_two.xml"
     },
     {
+        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/font_montserrat_extrabold_italic.ttf.flat",
+        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/font/montserrat_extrabold_italic.ttf"
+    },
+    {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/mipmap-anydpi-v26_ic_launcher.xml.flat",
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/mipmap-anydpi-v26/ic_launcher.xml"
     },
     {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/mipmap-xxhdpi_ic_launcher.webp.flat",
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/font_montserrat_thin_italic.ttf.flat",
+        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/font/montserrat_thin_italic.ttf"
     },
     {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/layout_fragment_settings.xml.flat",
@@ -82,10 +110,6 @@
     {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/drawable_message.xml.flat",
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/drawable/message.xml"
-    },
-    {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/font_montserrat_bold.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/font/montserrat_bold.xml"
     },
     {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/drawable_map.xml.flat",
@@ -112,6 +136,10 @@
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/layout/activity_tuto_tree.xml"
     },
     {
+        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/font_montserrat_light_italic.ttf.flat",
+        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/font/montserrat_light_italic.ttf"
+    },
+    {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/layout_activity_detail_safe_journey.xml.flat",
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/layout/activity_detail_safe_journey.xml"
     },
@@ -128,12 +156,24 @@
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/drawable/logo_proche_tuto_4.jpg"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/layout_activity_maps.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/layout/activity_maps.xml"
+        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/font_montserrat_bold_italic.ttf.flat",
+        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/font/montserrat_bold_italic.ttf"
+    },
+    {
+        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/font_montserrat_thin.ttf.flat",
+        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/font/montserrat_thin.ttf"
     },
     {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/mipmap-hdpi_ic_launcher_round.webp.flat",
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/font_montserrat_extra_light_italic.ttf.flat",
+        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/font/montserrat_extra_light_italic.ttf"
+    },
+    {
+        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/font_montserrat_regular.ttf.flat",
+        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/font/montserrat_regular.ttf"
     },
     {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/layout_activity_liste_safe_journey.xml.flat",
@@ -148,8 +188,16 @@
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/mipmap-hdpi/icon_main_app_dark.png"
     },
     {
+        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/font_montserrat_black.ttf.flat",
+        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/font/montserrat_black.ttf"
+    },
+    {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/layout_activity_tuto_four.xml.flat",
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/layout/activity_tuto_four.xml"
+    },
+    {
+        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/font_montserrat_extrabold.ttf.flat",
+        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/font/montserrat_extrabold.ttf"
     },
     {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/drawable_main_icon_dark.jpg.flat",
@@ -170,6 +218,10 @@
     {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/font_roboto_light.xml.flat",
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/font/roboto_light.xml"
+    },
+    {
+        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/font_montserrat_medium.ttf.flat",
+        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/font/montserrat_medium.ttf"
     },
     {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/font_inter_medium.xml.flat",
@@ -200,16 +252,8 @@
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/drawable/fleche_tuto1.jpg"
     },
     {
-        "merged": "com.example.sentinelle.app-debug-68:/layout_number_picker.xml.flat",
-        "source": "com.example.sentinelle.app-main-70:/layout/number_picker.xml"
-    },
-    {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/mipmap-mdpi_ic_launcher.webp.flat",
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/mipmap-mdpi/ic_launcher.webp"
-    },
-    {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/font_montserrat_semibold.xml.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/font/montserrat_semibold.xml"
     },
     {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/drawable_ic_launcher_background.xml.flat",
@@ -222,6 +266,10 @@
     {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/drawable_settings.xml.flat",
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/drawable/settings.xml"
+    },
+    {
+        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/font_montserrat_semi_bold.ttf.flat",
+        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/font/montserrat_semi_bold.ttf"
     },
     {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/mipmap-mdpi_ic_launcher_round.webp.flat",
@@ -240,6 +288,10 @@
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/layout/fragment_home.xml"
     },
     {
+        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/font_montserrat_extra_light.ttf.flat",
+        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/font/montserrat_extra_light.ttf"
+    },
+    {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/layout_activity_main.xml.flat",
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/layout/activity_main.xml"
     },
@@ -250,6 +302,10 @@
     {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/layout_number_picker.xml.flat",
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/layout/number_picker.xml"
+    },
+    {
+        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/font_montserrat_bold.ttf.flat",
+        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/font/montserrat_bold.ttf"
     },
     {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/menu_list_pop_up_menu.xml.flat",

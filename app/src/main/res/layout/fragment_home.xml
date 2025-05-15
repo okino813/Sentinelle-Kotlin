@@ -210,7 +210,6 @@
             android:layout_width="338dp"
             android:layout_height="24dp"
             android:layout_marginTop="668dp"
-            android:fontFamily="@font/montserrat_semibold"
             android:text="Attention : Si vous cliquer sur le bouton “Alerter”, votre contact aura accès à votre localisation ainsi que l’accès à votre micro"
             android:textAlignment="center"
             android:textColor="@color/white"
