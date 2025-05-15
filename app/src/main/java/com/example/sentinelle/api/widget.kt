@@ -27,16 +27,22 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.example.sentinelle.R
+import com.example.sentinelle.api.AppValues.Montserrat
 
 class AppColors{
     var SentiBlack = Color(0xff16252B)
@@ -109,7 +115,7 @@ fun Input(
 }
 
 @Composable
-fun Bouton(test: String, OnClick: () -> Unit){
+fun Bouton(text: String, OnClick: () -> Unit){
     Button(
         onClick = OnClick,
         colors = ButtonDefaults.buttonColors(
@@ -118,7 +124,28 @@ fun Bouton(test: String, OnClick: () -> Unit){
         ),
         shape = RoundedCornerShape(8.dp)
     ) {
-        Text(test)
+        Text(text)
+    }
+}
+
+@Composable
+fun BoutonStartStop(text: String, OnClick: () -> Unit){
+    Button(
+        onClick = OnClick,
+        colors = ButtonDefaults.buttonColors(
+            containerColor = AppColors().SentiGreen,       // Couleur de fond du bouton
+            contentColor = AppColors().SentiBlack         // Couleur du texte
+        ),
+        shape = RoundedCornerShape(8.dp)
+    ) {
+        Text(
+            text,
+            textAlign = TextAlign.Center,
+            fontFamily = Montserrat,
+            fontWeight = FontWeight.Bold,
+            fontStyle = FontStyle.Normal,
+            fontSize = 16.sp
+            )
     }
 }
 
@@ -151,39 +178,39 @@ fun CustomNumberPicker(
 )
 {
     AndroidView(
-        modifier = Modifier.wrapContentSize(),
-                factory = { context ->
-                    val view = LayoutInflater.from(context).inflate(
-                        R.layout.number_picker, null
-                    )
+        modifier = Modifier.wrapContentSize().clipToBounds(),
+            factory = { context ->
+                val view = LayoutInflater.from(context).inflate(
+                    R.layout.number_picker, null
+                )
 
-                    val numberPicker = view.findViewById<NumberPicker>(R.id.numberPicker)
+                val numberPicker = view.findViewById<NumberPicker>(R.id.numberPicker)
 
-                    numberPicker.layoutParams = LinearLayout.LayoutParams(
-                        ViewGroup.LayoutParams.WRAP_CONTENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT
-                    )
+                numberPicker.layoutParams = LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                )
 
-                    numberPicker.minValue = list.first()
-                    numberPicker.maxValue = list.last()
-                    numberPicker.value = selectedValue
+                numberPicker.minValue = list.first()
+                numberPicker.maxValue = list.last()
+                numberPicker.value = selectedValue
 
 //                    numberPicker.textSize = 48f
 
-                    numberPicker.setOnValueChangedListener { numberPicker, old, new ->
-                        onValueChange(numberPicker.value)
-                    }
-
-                    numberPicker.dividerPadding = 16
-
-                    numberPicker
-                },
-
-                update = { view ->
-                    view.minValue = list.first()
-                    view.maxValue = list.last()
-                    view.value = selectedValue
+                numberPicker.setOnValueChangedListener { numberPicker, old, new ->
+                    onValueChange(numberPicker.value)
                 }
+
+                numberPicker.dividerPadding = 16
+
+                numberPicker
+            },
+
+            update = { view ->
+                view.minValue = list.first()
+                view.maxValue = list.last()
+                view.value = selectedValue
+            }
 
     )
 

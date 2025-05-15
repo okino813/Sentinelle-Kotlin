@@ -19,16 +19,31 @@ import android.widget.NumberPicker
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -36,6 +51,8 @@ import com.example.sentinelle.LocationManager
 import com.example.sentinelle.LocationTrackerService
 import com.example.sentinelle.R
 import com.example.sentinelle.api.AppColors
+import com.example.sentinelle.api.Bouton
+import com.example.sentinelle.api.BoutonStartStop
 import com.example.sentinelle.api.CustomNumberPicker
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -56,31 +73,122 @@ import kotlin.system.exitProcess
 @RequiresApi(Build.VERSION_CODES.Q)
 @Composable
 fun HomeScreen() {
-    var state by remember {
-        mutableStateOf(1)
-    }
+    val heures = remember { mutableStateOf(0) }
+    val minutes = remember { mutableStateOf(0) }
+    val secondes = remember { mutableStateOf(0) }
+
+    val values = (0..59).toList()
+    val heuresValues = (0..23).toList()
+
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(AppColors().SentiBlack),
-//        contentAlignment = Alignment.Center
-    )
-    {
-        Text(
-            "Bienvenue sur l'accueil",
-            color = Color.White,
+            .background(AppColors().SentiBlack)
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text("Minuteur", fontSize = 20.sp, color = AppColors().SentiBlue, fontWeight = FontWeight.Bold)
+
+        Spacer(Modifier.height(16.dp))
+
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            CustomNumberPicker(
+                selectedValue = heures.value,
+                list = heuresValues,
+                onValueChange = { heures.value = it }
             )
 
-        CustomNumberPicker(
-            selectedValue = state,
-            list = listOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11,12,13,14,15,16,17,18,19,20,21,22,23),
-            onValueChange = {
-                state = it
-    }
-    )
+            Text(":", fontSize = 50.sp, color = AppColors().SentiCyan, fontWeight = FontWeight.Bold)
 
-        Text("Voici le state : $state")
+            CustomNumberPicker(
+                selectedValue = minutes.value,
+                list = values,
+                onValueChange = { minutes.value = it }
+            )
+
+            Text(":", fontSize = 50.sp, color = AppColors().SentiCyan, fontWeight = FontWeight.Bold)
+
+            CustomNumberPicker(
+                selectedValue = secondes.value,
+                list = values,
+                onValueChange = { secondes.value = it }
+            )
+        }
+
+        Spacer(Modifier.height(8.dp))
+
+        Row(
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Heures", color = AppColors().SentiCyan)
+            Text("Minutes", color = AppColors().SentiCyan)
+            Text("Secondes", color = AppColors().SentiCyan)
+        }
+
+        Spacer(Modifier.height(24.dp))
+
+        BoutonStartStop(
+            "Départ",
+             { /* Démarrer le minuteur */ },
+        )
+
+        Spacer(Modifier.height(32.dp))
+
+        Text(
+            "Vous êtes en danger ?",
+            color = AppColors().SentiBlue,
+            fontWeight = FontWeight.Bold,
+            fontSize = 20.sp,
+            modifier = Modifier.align(Alignment.Start)
+        )
+
+        Spacer(Modifier.height(16.dp))
+
+//        Button(
+//            onClick = { /* Lancer alerte */ },
+//            modifier = Modifier
+//                .size(170.dp),
+//            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFFA72525)),
+//            shape = CircleShape
+//        ) {
+//            Text("ALERTER", fontSize = 32.sp, color = Color.White, fontWeight = FontWeight.Bold)
+//        }
+
+        Spacer(Modifier.height(24.dp))
+
+        Text(
+            "Appuyez sur ce bouton pour prévenir votre proche",
+            fontStyle = FontStyle.Italic,
+            color = Color.White,
+            fontSize = 20.sp,
+            textAlign = TextAlign.Center
+        )
+
+        Spacer(Modifier.height(8.dp))
+
+        Text(
+            "Attention : Si vous cliquez sur le bouton “Alerter”, votre contact aura accès à votre localisation ainsi que l’accès à votre micro",
+            color = Color.White,
+            fontSize = 14.sp,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(horizontal = 16.dp)
+        )
     }
+}
+
+@Composable
+fun RoundedCornerShape(x0: Dp) {
+    TODO("Not yet implemented")
+}
+
+@Preview
+@Composable
+fun HomeScreenPreview() {
+    HomeScreen()
 }
 
 class HomeFragment : Fragment() {

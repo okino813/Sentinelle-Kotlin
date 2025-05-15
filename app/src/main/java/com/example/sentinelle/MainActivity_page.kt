@@ -1,9 +1,11 @@
 package com.example.sentinelle
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -27,12 +29,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.sentinelle.api.AppColors
-import com.example.sentinelle.page.HomeScreen
+import com.example.sentinelle.page.HomeScreenPreview
 import com.example.sentinelle.page.MapScreen
 import com.example.sentinelle.page.MessageScreen
 import com.example.sentinelle.page.SettingsScreen
 
 class MainActivity_page : ComponentActivity() {
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -49,12 +52,14 @@ data class BottomNavItem(
     val label: String
 )
 
+@RequiresApi(Build.VERSION_CODES.Q)
 @Preview
 @Composable
 fun Apps() {
     BottomMenu()
 }
 
+@RequiresApi(Build.VERSION_CODES.Q)
 @Composable
 fun BottomMenu(){
     val navController = rememberNavController()
@@ -69,7 +74,7 @@ fun BottomMenu(){
             startDestination = "home",
             modifier = Modifier.padding(innerPadding)
         ) {
-            composable("home") { HomeScreen() }
+            composable("home") { HomeScreenPreview() }
             composable("map") { MapScreen() }
             composable("message") { MessageScreen() }
             composable("settings") { SettingsScreen() }
