@@ -72,6 +72,7 @@ id message_contact
 id np_hours
 id np_minutes
 id np_seconds
+id numberPicker
 id paragrapheTuto1
 id settingBtnMenu
 id settings
@@ -103,6 +104,7 @@ layout fragment_map
 layout fragment_message
 layout fragment_settings
 layout item_journey
+layout number_picker
 menu bottom_nav_menu
 menu list_pop_up_menu
 mipmap ic_launcher

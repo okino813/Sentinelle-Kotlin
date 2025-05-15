@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.PowerManager
@@ -16,12 +17,16 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.NumberPicker
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.core.app.ActivityCompat
@@ -31,6 +36,7 @@ import com.example.sentinelle.LocationManager
 import com.example.sentinelle.LocationTrackerService
 import com.example.sentinelle.R
 import com.example.sentinelle.api.AppColors
+import com.example.sentinelle.api.CustomNumberPicker
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import okhttp3.FormBody
@@ -47,19 +53,33 @@ import kotlin.system.exitProcess
  * create an instance of this fragment.
  */
 
+@RequiresApi(Build.VERSION_CODES.Q)
 @Composable
 fun HomeScreen() {
-    Box(
+    var state by remember {
+        mutableStateOf(1)
+    }
+    Column(
         modifier = Modifier
             .fillMaxSize()
             .background(AppColors().SentiBlack),
-        contentAlignment = Alignment.Center
+//        contentAlignment = Alignment.Center
     )
     {
         Text(
             "Bienvenue sur l'accueil",
             color = Color.White,
             )
+
+        CustomNumberPicker(
+            selectedValue = state,
+            list = listOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11,12,13,14,15,16,17,18,19,20,21,22,23),
+            onValueChange = {
+                state = it
+    }
+    )
+
+        Text("Voici le state : $state")
     }
 }
 
@@ -88,7 +108,6 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

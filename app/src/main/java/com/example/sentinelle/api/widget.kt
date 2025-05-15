@@ -1,9 +1,17 @@
 package com.example.sentinelle.api
 
+import android.annotation.SuppressLint
+import android.os.Build
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.NumberPicker
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -27,6 +35,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.viewinterop.AndroidView
 import com.example.sentinelle.R
 
 class AppColors{
@@ -129,5 +138,53 @@ fun Logo(){
             contentDescription = "Logo Sentinelle",
         )
     }
+
+}
+
+@RequiresApi(Build.VERSION_CODES.Q)
+@SuppressLint("MissingInflatedId")
+@Composable
+fun CustomNumberPicker(
+    selectedValue: Int,
+    list: List<Int>,
+    onValueChange: (Int) -> Unit
+)
+{
+    AndroidView(
+        modifier = Modifier.wrapContentSize(),
+                factory = { context ->
+                    val view = LayoutInflater.from(context).inflate(
+                        R.layout.number_picker, null
+                    )
+
+                    val numberPicker = view.findViewById<NumberPicker>(R.id.numberPicker)
+
+                    numberPicker.layoutParams = LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT
+                    )
+
+                    numberPicker.minValue = list.first()
+                    numberPicker.maxValue = list.last()
+                    numberPicker.value = selectedValue
+
+//                    numberPicker.textSize = 48f
+
+                    numberPicker.setOnValueChangedListener { numberPicker, old, new ->
+                        onValueChange(numberPicker.value)
+                    }
+
+                    numberPicker.dividerPadding = 16
+
+                    numberPicker
+                },
+
+                update = { view ->
+                    view.minValue = list.first()
+                    view.maxValue = list.last()
+                    view.value = selectedValue
+                }
+
+    )
 
 }

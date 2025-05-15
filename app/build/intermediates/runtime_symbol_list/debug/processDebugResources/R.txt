@@ -3600,6 +3600,7 @@ int id notification_main_column_container 0x7f0a016e
 int id np_hours 0x7f0a016f
 int id np_minutes 0x7f0a0170
 int id np_seconds 0x7f0a0171
+int id numberPicker 0x7f0a023d
 int id off 0x7f0a0172
 int id on 0x7f0a0173
 int id onInterceptTouchReturnSwipe 0x7f0a0174
@@ -4008,6 +4009,7 @@ int layout notification_template_custom_big 0x7f0d0072
 int layout notification_template_icon_group 0x7f0d0073
 int layout notification_template_part_chronometer 0x7f0d0074
 int layout notification_template_part_time 0x7f0d0075
+int layout number_picker 0x7f0d007a
 int layout select_dialog_item_material 0x7f0d0076
 int layout select_dialog_multichoice_material 0x7f0d0077
 int layout select_dialog_singlechoice_material 0x7f0d0078

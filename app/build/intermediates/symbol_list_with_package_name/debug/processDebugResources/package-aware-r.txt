@@ -3601,6 +3601,7 @@ id notification_main_column_container
 id np_hours
 id np_minutes
 id np_seconds
+id numberPicker
 id off
 id on
 id onInterceptTouchReturnSwipe
@@ -4009,6 +4010,7 @@ layout notification_template_custom_big
 layout notification_template_icon_group
 layout notification_template_part_chronometer
 layout notification_template_part_time
+layout number_picker
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
