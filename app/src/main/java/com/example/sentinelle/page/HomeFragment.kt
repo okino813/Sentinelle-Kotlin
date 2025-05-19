@@ -27,7 +27,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -51,7 +52,6 @@ import com.example.sentinelle.LocationManager
 import com.example.sentinelle.LocationTrackerService
 import com.example.sentinelle.R
 import com.example.sentinelle.api.AppColors
-import com.example.sentinelle.api.Bouton
 import com.example.sentinelle.api.BoutonStartStop
 import com.example.sentinelle.api.CustomNumberPicker
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -87,12 +87,18 @@ fun HomeScreen() {
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("Minuteur", fontSize = 20.sp, color = AppColors().SentiBlue, fontWeight = FontWeight.Bold)
-
+        Text(
+            "Minuteur",
+            color = AppColors().SentiBlue,
+            fontWeight = FontWeight.Bold,
+            fontSize = 20.sp,
+            modifier = Modifier.align(Alignment.Start)
+        )
         Spacer(Modifier.height(16.dp))
 
         Row(
             verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             CustomNumberPicker(
@@ -121,12 +127,14 @@ fun HomeScreen() {
         Spacer(Modifier.height(8.dp))
 
         Row(
-            horizontalArrangement = Arrangement.SpaceEvenly,
+            horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxWidth()
+                .padding(start = 10.dp, end = 10.dp)
+
         ) {
-            Text("Heures", color = AppColors().SentiCyan)
-            Text("Minutes", color = AppColors().SentiCyan)
-            Text("Secondes", color = AppColors().SentiCyan)
+                Text("Heures", color = AppColors().SentiCyan)
+                Text("Minutes", color = AppColors().SentiCyan)
+                Text("Secondes", color = AppColors().SentiCyan)
         }
 
         Spacer(Modifier.height(24.dp))
@@ -146,17 +154,19 @@ fun HomeScreen() {
             modifier = Modifier.align(Alignment.Start)
         )
 
-        Spacer(Modifier.height(16.dp))
+        Spacer(Modifier.height(26.dp))
 
-//        Button(
-//            onClick = { /* Lancer alerte */ },
-//            modifier = Modifier
-//                .size(170.dp),
-//            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFFA72525)),
-//            shape = CircleShape
-//        ) {
-//            Text("ALERTER", fontSize = 32.sp, color = Color.White, fontWeight = FontWeight.Bold)
-//        }
+        Button(
+            onClick = { /* Lancer alerte */ },
+            modifier = Modifier
+                .size(150.dp),
+            shape = CircleShape,
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFFA72525) // ou une autre couleur
+            )
+        ) {
+            Text("ALERTER", fontSize = 20.sp, color = Color.White, fontWeight = FontWeight.Bold)
+        }
 
         Spacer(Modifier.height(24.dp))
 
@@ -185,6 +195,7 @@ fun RoundedCornerShape(x0: Dp) {
     TODO("Not yet implemented")
 }
 
+@RequiresApi(Build.VERSION_CODES.Q)
 @Preview
 @Composable
 fun HomeScreenPreview() {

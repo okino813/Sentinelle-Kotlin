@@ -122,9 +122,15 @@ fun Bouton(text: String, OnClick: () -> Unit){
             containerColor = AppColors().SentiBlue,       // Couleur de fond du bouton
             contentColor = AppColors().SentiBlack         // Couleur du texte
         ),
-        shape = RoundedCornerShape(8.dp)
+        shape = RoundedCornerShape(8.dp),
+
     ) {
-        Text(text)
+        Text(
+            text,
+            fontFamily = Montserrat,
+            fontWeight = FontWeight.Bold,
+            fontStyle = FontStyle.Normal,
+        )
     }
 }
 

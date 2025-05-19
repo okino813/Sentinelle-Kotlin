@@ -128,7 +128,7 @@ fun FormulaireConnexion() {
                 )
                 {
                     if (inscriptionMode) {
-                        Bouton("S'inscrire'", OnClick = {
+                        Bouton("S'inscrire", OnClick = {
                             // Reset des erreurs
                             emailError = null
                             motDePasseError = null
@@ -161,9 +161,14 @@ fun FormulaireConnexion() {
 
                             if (isValid) {
                                 val api = api_service(context)
-                                api.register(email, motDePasse)
-                                var intent = Intent(context, MainActivity_page::class.java)
-                                context.startActivity(intent)
+                                api.register(context, email, motDePasse) { success ->
+                                    if (success) {
+                                        val intent = Intent(context, MainActivity_page::class.java)
+                                        context.startActivity(intent)
+                                    } else {
+                                        // gérer l'erreur
+                                    }
+                                }
                             }
                         })
                     }

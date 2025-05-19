@@ -29,20 +29,23 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.sentinelle.api.AppColors
+import com.example.sentinelle.api.api_service
 import com.example.sentinelle.page.HomeScreenPreview
 import com.example.sentinelle.page.MapScreen
 import com.example.sentinelle.page.MessageScreen
-import com.example.sentinelle.page.SettingsScreen
+import com.example.sentinelle.page.SettingsScreenPreview
 
 class MainActivity_page : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-
         setContent {
             Apps()
         }
+
+        val apiService = api_service(this)
+        apiService.getInfo(this)
 
     }
 }
@@ -77,7 +80,7 @@ fun BottomMenu(){
             composable("home") { HomeScreenPreview() }
             composable("map") { MapScreen() }
             composable("message") { MessageScreen() }
-            composable("settings") { SettingsScreen() }
+            composable("settings") { SettingsScreenPreview() }
         }
     }
 }
