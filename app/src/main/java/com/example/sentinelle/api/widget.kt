@@ -8,8 +8,14 @@ import android.widget.LinearLayout
 import android.widget.NumberPicker
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -42,6 +48,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.compose.ui.window.Dialog
 import com.example.sentinelle.R
 import com.example.sentinelle.api.AppValues.Montserrat
 
@@ -222,4 +229,73 @@ fun CustomNumberPicker(
 
     )
 
+}
+
+
+@Composable
+fun PopupAlert(
+    message: String,
+    isSuccess: Boolean,
+    onDismiss: () -> Unit
+) {
+
+    Dialog(onDismissRequest = onDismiss) {
+        var color = Color.Transparent
+        if(isSuccess)
+        {
+            color = AppColors().SentiGreen
+        }
+        else{
+            color = Color.Red
+        }
+        Box(
+            modifier = Modifier
+                .padding(16.dp)
+                .background(
+                    color = AppColors().SentiBlack, // Utilise ta couleur personnalisée
+                    shape = RoundedCornerShape(12.dp)
+                )
+                .border(
+                    width = 2.dp,
+                    color = color, // Utilise ta couleur personnalisée
+                    shape = RoundedCornerShape(12.dp)
+                )
+                .padding(16.dp)
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Spacer(modifier = Modifier.height(10.dp))
+
+                Text(
+                    text = "Attention !",
+                    color = AppColors().SentiGreen,
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.Bold,
+                    fontStyle = FontStyle.Italic,
+                    fontFamily = Montserrat,
+                )
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                Text(
+                    text = message,
+                    color = Color.White,
+                    fontSize = 16.sp,
+                    textAlign = TextAlign.Center,
+                )
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+                Button(
+                    onClick = onDismiss,
+                    colors = ButtonDefaults.buttonColors(containerColor = AppColors().SentiGreen)
+                ) {
+                    Text("Compris")
+                }
+            }
+        }
+    }
 }

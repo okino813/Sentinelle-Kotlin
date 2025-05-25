@@ -166,32 +166,74 @@ class api_service(val context: Context) {
 
         ApiClient.getClient(context).newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
+                callback(false)
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                if (response.isSuccessful) {
+                    val bodys = response.body?.string()
+                    try {
+                        val jsonObject = JSONObject(bodys)
+                        val status = jsonObject.getBoolean("status")
+                        if (status) {
+                            callback(true)
+                        } else {
+                            callback(false)
+                        }
+                    } catch (e: JSONException) {
+                        callback(false)
+                    }
+                } else if (response.code == 401) {
+                    callback(false)
+                    // Rediriger vers login ?
+
+                } else {
+                    callback(false)
+                }
+            }
+        })
+    }
+
+    fun saveNewPassword(context: Context,password: String, newPassword: String, callback: (Boolean) -> Unit) {
+        val json = JSONObject().apply {
+            put("password", password)
+            put("newPassword", newPassword)
+        }
+
+        val body = json.toString().toRequestBody("application/json".toMediaType())
+
+        val request = Request.Builder()
+            .url("${AppValues.base_url}/api/updatePassword/")
+            .post(body)
+            .build()
+
+        ApiClient.getClient(context).newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
                 Log.e("APICACA", "Erreur : ${e.message}")
             }
 
             override fun onResponse(call: Call, response: Response) {
                 if (response.isSuccessful) {
                     val bodys = response.body?.string()
-                    Log.d("APICACA", "Réponse : $bodys")
                     try {
                         val jsonObject = JSONObject(bodys)
                         val status = jsonObject.getBoolean("status")
                         if (status) {
-                            Log.d("APICACA", "Mise à jour réussie")
                             callback(true)
                         } else {
-                            Log.d("APICACA", "Mise à jour échouée")
                             callback(false)
                         }
                     } catch (e: JSONException) {
-                        Log.e("APICACA", "Erreur parsing JSON : ${e.message}")
+                        callback(false)
+
                     }
-                    // Parse JSON ici
                 } else if (response.code == 401) {
-                    Log.w("APICACA", "Token invalide ou expiré")
+                    callback(false)
                     // Rediriger vers login ?
+                }else if (response.code == 400) {
+                    callback(false)
                 } else {
-                    Log.e("APICACA", "Erreur inconnue : ${response.code}")
+                    callback(false)
                 }
             }
         })

@@ -9,9 +9,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Snackbar
-import androidx.compose.material3.SnackbarData
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,7 +20,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -34,8 +30,8 @@ import com.example.sentinelle.api.AppColors
 import com.example.sentinelle.api.AppValues
 import com.example.sentinelle.api.Bouton
 import com.example.sentinelle.api.Input
+import com.example.sentinelle.api.PopupAlert
 import com.example.sentinelle.api.api_service
-import kotlinx.coroutines.launch
 
 /**
  * A simple [androidx.fragment.app.Fragment] subclass.
@@ -55,6 +51,19 @@ fun SettingsScreen() {
 
     var phone by remember { mutableStateOf("") }
     var phoneError by remember { mutableStateOf<String?>(null) }
+
+    var password by remember { mutableStateOf("") }
+    var passwordError by remember { mutableStateOf<String?>(null) }
+
+    var NewPassword by remember { mutableStateOf("") }
+    var NewPasswordError by remember { mutableStateOf<String?>(null) }
+
+    var ConfirmNewPassword by remember { mutableStateOf("") }
+    var ConfirmNewPasswordError by remember { mutableStateOf<String?>(null) }
+
+    var showDialog by remember { mutableStateOf(false) }
+    var isSuccess by remember { mutableStateOf<Boolean>(false) }
+    var messageDialogue by remember { mutableStateOf("") }
 
     LaunchedEffect(Unit) {
         firstname = AppValues.firstname.toString()
@@ -94,24 +103,21 @@ fun SettingsScreen() {
             firstnameError = null
             lastnameError = null
             phoneError = null
-            var valide = false;
+            var valide = true;
 
-            if(firstname.length >= 1){
-                if(lastname.length >= 1){
-                    val phoneRegex = Regex("^0[1-9][0-9]{8}\$")
-                    if (phone.matches(phoneRegex)) {
-                        valide = true
-                    } else {
-                        phoneError = "Numéro de téléphone invalide"
-                        valide = false
-                    }
-                }
-                else {
-                    lastnameError = "Nom de famille invalide"
-                    valide = false
-                }
-            }else {
-                lastnameError = "Prénom invalide"
+            if(firstname.length < 1) {
+                firstnameError = "Prénom invalide"
+                valide = false
+            }
+
+            if(lastname.length < 1) {
+                lastnameError = "Nom de famille invalide"
+                valide = false
+            }
+
+            val phoneRegex = Regex("^0[1-9][0-9]{8}\$")
+            if (!phone.matches(phoneRegex)) {
+                phoneError = "Numéro de téléphone invalide"
                 valide = false
             }
 
@@ -121,29 +127,88 @@ fun SettingsScreen() {
                         AppValues.firstname = firstname
                         AppValues.lastname = lastname
                         AppValues.phone = phone
-                        coroutineScope.launch {
-                            snackbarHostState.showSnackbar("Infos mises à jour avec succès")
-                        }
+                        showDialog = true // Affiche le dialogue
+                        isSuccess = true
+                        messageDialogue ="Infos mises à jour avec succès"
+
                         Log.d("UI", "Infos mises à jour avec succès")
                     } else {
-                        coroutineScope.launch {
-                            snackbarHostState.showSnackbar("Erreur lors de la mise à jour des infos")
-                        }
+                        isSuccess = false
+                        showDialog = true // Affiche le dialogue
+                        messageDialogue ="Erreur lors de la mise à jour des infos"
                         Log.d("UI", "Erreur lors de la mise à jour des infos")
                     }
 
                 }
             }
-            else{
-                coroutineScope.launch {
-                    snackbarHostState.showSnackbar("Les données saisies sont invalides")
-                }
-            }
         })
 
 
+        Spacer(Modifier.height(16.dp))
+
+        Text(
+            "Sécurité",
+            color = AppColors().SentiBlue,
+            fontWeight = FontWeight.Bold,
+            fontSize = 20.sp,
+            modifier = Modifier.align(Alignment.Start)
+        )
+        Spacer(Modifier.height(16.dp))
+
+        Input("Mot de passe actuel", value = password, onValueChange = { password = it }, true, passwordError)
+        Spacer(modifier = Modifier.height(8.dp))
+        Input("Nouveau mot de passe", value = NewPassword, onValueChange = { NewPassword = it }, true, NewPasswordError)
+        Spacer(modifier = Modifier.height(8.dp))
+        Input("Confirmation du mot de passe", value = ConfirmNewPassword, onValueChange = { ConfirmNewPassword = it }, true, ConfirmNewPasswordError)
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Bouton("Enregistrer", OnClick = {
+            // Reset des erreurs
+            passwordError = null
+            NewPasswordError = null
+            ConfirmNewPasswordError = null
+            var valide = true;
+
+            if(password.length < 1) {
+                passwordError = "Merci de saisir votre mot de passe actuel"
+                valide = false
+            }
+
+            if(NewPassword.length >= 1) {
+                if (NewPassword.length < 6) {
+                    NewPasswordError = "Le mot de passe doit contenir au moins 6 caractères"
+                    valide = false
+                }
+            }
+            else {
+                NewPasswordError = "Merci de saisir votre mot de passe actuel"
+                valide = false
+            }
+
+            if (ConfirmNewPassword != NewPassword) {
+                ConfirmNewPasswordError = "Les mots de passe ne correspondent pas"
+                valide = false
+            }
 
 
+
+            if(valide){
+                api.saveNewPassword(context,password, NewPassword){ success ->
+                    if (success) {
+                        showDialog = true // Affiche le dialogue
+                        isSuccess = true
+                        messageDialogue = "Votre mot de passe a été mis à jour avec succès."
+                        Log.d("UI", "Mot de passe mis à jour avec succès")
+                    } else {
+                        showDialog = true // Affiche le dialogue
+                        isSuccess = false
+                        messageDialogue = "Erreur dans la mise à jour du mot de passe"
+                        Log.d("UI", "Erreur lors de la mise à jour du mot de passe")
+                    }
+
+                }
+            }
+        })
 
 
 
@@ -151,13 +216,11 @@ fun SettingsScreen() {
             api.logout(context, context as Activity) // depuis une Activity
         })
 
-        SnackbarHost(hostState = snackbarHostState) { data: SnackbarData ->
-            val isSuccess = data.visuals.message.contains("succès", ignoreCase = true)
-            Snackbar(
-                snackbarData = data,
-                containerColor = if (isSuccess) Color(0xFF4CAF50) else Color(0xFFF44336),
-                contentColor = Color.White
-            )
+        // Et dans le corps de SettingsScreen (en bas du Column par exemple) :
+        if (showDialog) {
+            PopupAlert(messageDialogue, isSuccess) {
+                showDialog = false
+            }
         }
     }
 }
