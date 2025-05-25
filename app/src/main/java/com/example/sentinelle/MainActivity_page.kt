@@ -30,7 +30,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.sentinelle.api.AppColors
 import com.example.sentinelle.api.api_service
-import com.example.sentinelle.page.HomeScreenPreview
+import com.example.sentinelle.page.HomeScreen
 import com.example.sentinelle.page.MapScreen
 import com.example.sentinelle.page.MessageScreen
 import com.example.sentinelle.page.SettingsScreenPreview
@@ -77,7 +77,7 @@ fun BottomMenu(){
             startDestination = "home",
             modifier = Modifier.padding(innerPadding)
         ) {
-            composable("home") { HomeScreenPreview() }
+            composable("home") { HomeScreen() }
             composable("map") { MapScreen() }
             composable("message") { MessageScreen() }
             composable("settings") { SettingsScreenPreview() }

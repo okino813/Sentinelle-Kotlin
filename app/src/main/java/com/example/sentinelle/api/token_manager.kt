@@ -27,7 +27,7 @@ class TokenManager(context: Context) {
     }
 
     // Récupérer le token
-    fun getToken(type: Int): String? {
+    fun getToken(): String? {
         return prefs.getString("auth_token", null)
     }
 
@@ -51,7 +51,7 @@ object ApiClient {
         val tokenManager = TokenManager(context)
 
         return OkHttpClient.Builder()
-            .addInterceptor(AuthInterceptor { tokenManager.getToken(0) })
+            .addInterceptor(AuthInterceptor { tokenManager.getToken() })
             .build()
     }
 }

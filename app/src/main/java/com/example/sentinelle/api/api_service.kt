@@ -119,7 +119,7 @@ class api_service(val context: Context) {
                         val jsonObject = JSONObject(body)
                         AppValues.firstname = jsonObject.getString("firstname")
                         AppValues.lastname = jsonObject.getString("lastname")
-                        AppValues.phone = jsonObject.getString("phone")
+                        AppValues.phone = jsonObject.getString("phones")
                         AppValues.email = jsonObject.getString("email")
                         AppValues.message = jsonObject.getString("message")
 
@@ -135,6 +135,53 @@ class api_service(val context: Context) {
                                 selected = contactJson.getBoolean("selected")
                             )
                             contactsList.add(contact)
+                        }
+                    } catch (e: JSONException) {
+                        Log.e("APICACA", "Erreur parsing JSON : ${e.message}")
+                    }
+                    // Parse JSON ici
+                } else if (response.code == 401) {
+                    Log.w("APICACA", "Token invalide ou expiré")
+                    // Rediriger vers login ?
+                } else {
+                    Log.e("APICACA", "Erreur inconnue : ${response.code}")
+                }
+            }
+        })
+    }
+
+    fun SaveInfoAcount(context: Context,firstname: String, lastname: String,phone: String, callback: (Boolean) -> Unit) {
+        val json = JSONObject().apply {
+            put("firstname", firstname)
+            put("lastname", lastname)
+            put("phone", phone)
+        }
+
+        val body = json.toString().toRequestBody("application/json".toMediaType())
+
+        val request = Request.Builder()
+            .url("${AppValues.base_url}/api/updateInfoAccount/")
+            .post(body)
+            .build()
+
+        ApiClient.getClient(context).newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                Log.e("APICACA", "Erreur : ${e.message}")
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                if (response.isSuccessful) {
+                    val bodys = response.body?.string()
+                    Log.d("APICACA", "Réponse : $bodys")
+                    try {
+                        val jsonObject = JSONObject(bodys)
+                        val status = jsonObject.getBoolean("status")
+                        if (status) {
+                            Log.d("APICACA", "Mise à jour réussie")
+                            callback(true)
+                        } else {
+                            Log.d("APICACA", "Mise à jour échouée")
+                            callback(false)
                         }
                     } catch (e: JSONException) {
                         Log.e("APICACA", "Erreur parsing JSON : ${e.message}")

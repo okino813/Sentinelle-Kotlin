@@ -32,6 +32,7 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -92,6 +93,7 @@ fun Input(
         placeholder = { Text(label, color = Color.Black) },
         isError = errorMessage != null,
         singleLine = true,
+        textStyle = TextStyle(fontSize = 16.sp, color = Color.Black),
         shape = RoundedCornerShape(50.dp),
         colors = TextFieldDefaults.outlinedTextFieldColors(
             focusedBorderColor = AppColors().SentiCyan,
