@@ -37,7 +37,6 @@
     <uses-permission android:name="com.example.sentinelle.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
 
     <application
-        android:name="com.example.sentinelle.App"
         android:allowBackup="true"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -52,54 +51,11 @@
         android:testOnly="true"
         android:theme="@style/Theme.Sentinelle"
         android:usesCleartextTraffic="true" >
-        <activity
-            android:name="com.example.sentinelle.MainActivity_page"
-            android:exported="false" />
-        <activity
-            android:name="com.example.sentinelle.detailSafeJourney_activity"
-            android:exported="false" />
-        <activity
-            android:name="com.example.sentinelle.liste_safe_journey_activity"
-            android:exported="false" />
-        <!--
-             TODO: Before you run your application, you need a Google Maps API key.
-
-             To get one, follow the directions here:
-
-                https://developers.google.com/maps/documentation/android-sdk/get-api-key
-
-             Once you have your API key (it starts with "AIza"), define a new property in your
-             project's local.properties file (e.g. MAPS_API_KEY=Aiza...), and replace the
-             "YOUR_API_KEY" string in this file with "${MAPS_API_KEY}".
-        -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="YOUR_API_KEY" />
 
-        <activity
-            android:name="com.example.sentinelle.page.activity_home"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.sentinelle.login_activity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.sentinelle.page.tuto.TutoFourActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.sentinelle.page.tuto.TutoThreeActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.sentinelle.page.tuto.TutoTwoActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.sentinelle.page.tuto.TutoOneActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" /> <!-- Déclaration de l'activité MainActivity -->
+        <!-- Déclaration de l'activité MainActivity -->
         <activity
             android:name="com.example.sentinelle.MainActivity"
             android:exported="true"
@@ -114,10 +70,6 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
-        <service
-            android:name="com.example.sentinelle.LocationTrackerService"
-            android:foregroundServiceType="location" />
 
         <activity
             android:name="androidx.compose.ui.tooling.PreviewActivity"

@@ -1,8 +1,7 @@
 package com.example.sentinelle
 
 
-import android.Manifest
-import android.content.Intent
+import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
@@ -19,16 +18,14 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
@@ -36,10 +33,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.sentinelle.api.AppColors
+import com.example.sentinelle.api.api_service
 import com.example.sentinelle.page.HomeScreen
 import com.example.sentinelle.page.MapScreen
 import com.example.sentinelle.page.MessageScreen
-import com.example.sentinelle.page.SettingsScreenPreview
+import com.example.sentinelle.page.SettingsScreen
 import com.example.sentinelle.page.tuto.Tuto1
 import com.example.sentinelle.page.tuto.Tuto2
 import com.example.sentinelle.page.tuto.Tuto3
@@ -56,70 +54,53 @@ sealed class Screen(val route: String) {
 
 class MainActivity : ComponentActivity() {
 
+    private lateinit var sharedPreferences : SharedPreferences
+    private var  isLoggedIn = mutableStateOf(false)
+    private lateinit var context: Context
+
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        sharedPreferences = this.getSharedPreferences("auth_prefs", MODE_PRIVATE)
+        isLoggedIn.value = sharedPreferences.getBoolean("is_authentificated", false)
+        context = this
+
+        val api = api_service(context)
+
+
         setContent {
-            val navController = rememberNavController()
-
-            NavHost(navController, startDestination = Screen.Tuto1.route) {
-                composable(Screen.Tuto1.route) { Tuto1() { navController.navigate(Screen.Tuto2.route) } }
-                composable(Screen.Tuto2.route) { Tuto2() { navController.navigate(Screen.Tuto3.route) } }
-                composable(Screen.Tuto3.route) { Tuto3() { navController.navigate(Screen.Tuto4.route) } }
-                composable(Screen.Tuto4.route) { Tuto4() { navController.navigate(Screen.Login.route) } }
-                composable(Screen.Login.route) { LoginScreen { /* etc */ } }
-            }
-
-            sharedPreferences = this.getSharedPreferences("auth_prefs", MODE_PRIVATE)
-            val isAuthentificated = sharedPreferences.getBoolean("is_authentificated", false)
-
-            var isLoggedIn by remember { mutableStateOf(false) }
-
-            if (isLoggedIn) {
+           if (isLoggedIn.value) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     enableEdgeToEdge()
+                    api.getInfo(context)
+                    BottomMenu(
+                        context = context,
+                        sharedPreferences = sharedPreferences,
+                        isLoggedIn = isLoggedIn
+                    )
                 }
-                Apps()
             } else {
-                LoginScreen(onLoginSuccess = { isLoggedIn = true })
-            }
+                val navController = rememberNavController()
 
+                NavHost(navController, startDestination = Screen.Tuto1.route) {
+                    composable(Screen.Tuto1.route) { Tuto1() { navController.navigate(Screen.Tuto2.route) } }
+                    composable(Screen.Tuto2.route) { Tuto2() { navController.navigate(Screen.Tuto3.route) } }
+                    composable(Screen.Tuto3.route) { Tuto3() { navController.navigate(Screen.Tuto4.route) } }
+                    composable(Screen.Tuto4.route) { Tuto4() { navController.navigate(Screen.Login.route) } }
+                    composable(Screen.Login.route) { FormulaireConnexion(onLoginSuccess = {
+                        // Mise à jour de l'état quand l'utilisateur se connecte
+                        isLoggedIn.value = true
+                        // Sauvegarde dans SharedPreferences
+                        sharedPreferences.edit().putBoolean("is_authentificated", true).apply()
+                    })
+                    }
+                }
             }
         }
     }
 }
 
-        // On récupère la varriable isConnected dans le SharedPreferences pour checker si l'utilisateur est déjà connecté
-
-
-        // Si la varriable is_authentificated est à True, alors on redirige vers la page principale
-        if (isAuthentificated) {
-            // Rediriger vers MainActivity_page
-            val intent = Intent(this, MainActivity_page()::class.java)
-            startActivity(intent)
-            finish()
-        } else {
-            // Si la réponse est "null", le token est invalide
-
-
-        }
-    }
-}
-
-
-    // Définition des permissions nécessaires pour accéder à la localisation et afficher des notifications
-    private val permissions = arrayOf(
-        // Permission pour accéder à la localisation approximative
-        Manifest.permission.ACCESS_COARSE_LOCATION,
-
-        // Permission pour accéder à la localisation précise
-        Manifest.permission.ACCESS_FINE_LOCATION,
-
-        // Permission pour poster des notifications
-        Manifest.permission.POST_NOTIFICATIONS
-    )
-
-    lateinit var  sharedPreferences: SharedPreferences
 
 data class BottomNavItem(
     val route: String,
@@ -127,16 +108,14 @@ data class BottomNavItem(
     val label: String
 )
 
-@RequiresApi(Build.VERSION_CODES.Q)
-@Preview
-@Composable
-fun Apps() {
-    BottomMenu()
-}
 
 @RequiresApi(Build.VERSION_CODES.Q)
 @Composable
-fun BottomMenu(){
+fun BottomMenu(
+    context: Context,
+    sharedPreferences: SharedPreferences,
+    isLoggedIn: MutableState<Boolean>
+){
     val navController = rememberNavController()
 
     Scaffold(
@@ -152,7 +131,11 @@ fun BottomMenu(){
             composable("home") { HomeScreen() }
             composable("map") { MapScreen() }
             composable("message") { MessageScreen() }
-            composable("settings") { SettingsScreenPreview() }
+            composable("settings") { SettingsScreen(
+                context = context,
+                sharedPreferences = sharedPreferences,
+                isLoggedIn = isLoggedIn,
+            ) }
         }
     }
 }

@@ -1,12 +1,6 @@
 package com.example.sentinelle
 
-import android.app.Activity
-import android.content.Intent
-import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,7 +24,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.sentinelle.api.AppColors
 import com.example.sentinelle.api.Bouton
@@ -40,7 +33,7 @@ import com.example.sentinelle.api.Titre
 import com.example.sentinelle.api.api_service
 
 @Composable
-fun FormulaireConnexion() {
+fun FormulaireConnexion(onLoginSuccess : () -> Unit) {
     var motDePasse by remember { mutableStateOf("") }
     var motDePasseConfirm by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
@@ -163,10 +156,7 @@ fun FormulaireConnexion() {
                                 val api = api_service(context)
                                 api.register(context, email, motDePasse) { success ->
                                     if (success) {
-                                        val intent = Intent(context, MainActivity_page::class.java)
-                                        context.startActivity(intent)
-                                    } else {
-                                        // gérer l'erreur
+                                        onLoginSuccess()
                                     }
                                 }
                             }
@@ -180,6 +170,7 @@ fun FormulaireConnexion() {
 
                             // Validation
                             var isValid = true
+
                             if (!email.contains("@")) {
                                 emailError = "Email invalide"
                                 isValid = false
@@ -196,7 +187,7 @@ fun FormulaireConnexion() {
                                     loginTried = true
                                 }
                                 // Si login échoué → affiche un message ou autre
-                                if (!loginSuccess && loginTried) {
+                                if (!loginSuccess) {
                                     emailError = "Email ou mot de passse incorect"
                                     motDePasseError = "Email ou mot de passse incorect"
                                 }
@@ -205,13 +196,7 @@ fun FormulaireConnexion() {
                         // Si login réussi → redirection
                         if (loginSuccess && loginTried) {
                             LaunchedEffect(Unit) {
-                                val intent = Intent(context, MainActivity_page::class.java)
-                                context.startActivity(intent)
-
-                                // On "termine" l'activité courante pour empêcher le retour
-                                if (context is Activity) {
-                                    context.finish()
-                                }
+                                onLoginSuccess()
                             }
                         }
                     }
@@ -243,27 +228,6 @@ fun FormulaireConnexion() {
                         )
                     }
                 }
-            }
-        }
-    }
-}
-
-@Preview
-@Composable
-fun PreviewPages(){
-    FormulaireConnexion()
-}
-
-class login_activity : ComponentActivity() {
-
-    private var isSignupMode = false
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            MaterialTheme {
-                PreviewPages()
             }
         }
     }

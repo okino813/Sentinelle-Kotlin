@@ -12,7 +12,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -24,57 +23,13 @@
         android:theme="@style/Theme.Sentinelle"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-        <activity
-            android:name=".MainActivity_page"
-            android:exported="false" />
-        <activity
-            android:name=".detailSafeJourney_activity"
-            android:exported="false" />
-        <activity
-            android:name=".liste_safe_journey_activity"
-            android:exported="false" />
-        <!--
-             TODO: Before you run your application, you need a Google Maps API key.
 
-             To get one, follow the directions here:
-
-                https://developers.google.com/maps/documentation/android-sdk/get-api-key
-
-             Once you have your API key (it starts with "AIza"), define a new property in your
-             project's local.properties file (e.g. MAPS_API_KEY=Aiza...), and replace the
-             "YOUR_API_KEY" string in this file with "${MAPS_API_KEY}".
-        -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="YOUR_API_KEY" />
 
 
-        <activity
-            android:name=".page.activity_home"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".login_activity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".page.tuto.TutoFourActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".page.tuto.TutoThreeActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".page.tuto.TutoTwoActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".page.tuto.TutoOneActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" /> <!-- Déclaration de l'activité MainActivity -->
+        <!-- Déclaration de l'activité MainActivity -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -90,9 +45,6 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <service
-            android:name=".LocationTrackerService"
-            android:foregroundServiceType="location" />
     </application>
 
 </manifest>

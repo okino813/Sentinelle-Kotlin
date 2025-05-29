@@ -2,11 +2,8 @@ package com.example.sentinelle.api
 
 import ApiClient
 import TokenManager
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.util.Log
-import com.example.sentinelle.login_activity
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.MediaType.Companion.toMediaType
@@ -239,35 +236,13 @@ class api_service(val context: Context) {
         })
     }
 
-    fun logout(context: Context, activity: Activity) {
-        val request = Request.Builder()
-            .url("${AppValues.base_url}/api/logout/")
-            .build()
-
-        ApiClient.getClient(context).newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                Log.e("APICACA", "Erreur : ${e.message}")
-            }
-
-            override fun onResponse(call: Call, response: Response) {
-                if (response.isSuccessful) {
-                    val body = response.body?.string()
-                    Log.d("APICACA", "Réponse : $body")
-                    tokenManager.delToken()
-                    activity.runOnUiThread {
-                        val intent = Intent(activity,  login_activity::class.java)
-                        activity.startActivity(intent)
-                        activity.finish()
-                    }
-                    // Parse JSON ici
-                } else if (response.code == 401) {
-                    Log.w("APICACA", "Token invalide ou expiré")
-                    // Rediriger vers login ?
-                } else {
-                    Log.e("APICACA", "Erreur inconnue : ${response.code}")
-                }
-            }
-        })
+    fun logout(
+        context: Context,
+        onLogoutSuccess: () -> Unit,
+        onLogoutFailure: (String) -> Unit = {}
+    ) {
+        tokenManager.delToken()
+        onLogoutSuccess()
     }
 
 }
