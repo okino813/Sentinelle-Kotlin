@@ -3249,10 +3249,8 @@ int font roboto_light 0x7f090013
 int id ALT 0x7f0a0000
 int id BOTTOM_END 0x7f0a0001
 int id BOTTOM_START 0x7f0a0002
-int id BtnShowPopUp 0x7f0a0003
 int id CTRL 0x7f0a0004
 int id FUNCTION 0x7f0a0005
-int id ListViewSafeJourney 0x7f0a0006
 int id META 0x7f0a0007
 int id NO_DEBUG 0x7f0a0008
 int id SHIFT 0x7f0a0009
@@ -3339,7 +3337,6 @@ int id auto 0x7f0a0059
 int id autoComplete 0x7f0a005a
 int id autoCompleteToEnd 0x7f0a005b
 int id autoCompleteToStart 0x7f0a005c
-int id avatar 0x7f0a005d
 int id axisRelative 0x7f0a005e
 int id barrier 0x7f0a005f
 int id baseline 0x7f0a0060
@@ -3353,9 +3350,6 @@ int id bounce 0x7f0a0068
 int id bounceBoth 0x7f0a0069
 int id bounceEnd 0x7f0a006a
 int id bounceStart 0x7f0a006b
-int id btnOngletJourney 0x7f0a006c
-int id btn_alerter 0x7f0a006e
-int id btn_start 0x7f0a0073
 int id buttonPanel 0x7f0a0074
 int id cache_measures 0x7f0a0075
 int id callMeasure 0x7f0a0076
@@ -3384,7 +3378,6 @@ int id compress 0x7f0a008c
 int id confirm_button 0x7f0a008d
 int id constraint 0x7f0a008e
 int id consume_window_insets_tag 0x7f0a008f
-int id contactBtnMenu 0x7f0a0090
 int id container 0x7f0a0091
 int id content 0x7f0a0092
 int id contentPanel 0x7f0a0093
@@ -3406,7 +3399,6 @@ int id decor_content_parent 0x7f0a00a2
 int id default_activity_button 0x7f0a00a3
 int id deltaRelative 0x7f0a00a4
 int id dependency_ordering 0x7f0a00a5
-int id description 0x7f0a00a6
 int id design_bottom_sheet 0x7f0a00a7
 int id design_menu_item_action_area 0x7f0a00a8
 int id design_menu_item_action_area_stub 0x7f0a00a9
@@ -3429,7 +3421,6 @@ int id dragRight 0x7f0a00b9
 int id dragStart 0x7f0a00ba
 int id dragUp 0x7f0a00bb
 int id dropdown_menu 0x7f0a00bc
-int id duree_journey 0x7f0a00bd
 int id easeIn 0x7f0a00be
 int id easeInOut 0x7f0a00bf
 int id easeOut 0x7f0a00c0
@@ -3479,7 +3470,6 @@ int id hide_in_inspector_tag 0x7f0a00f0
 int id hideable 0x7f0a00f1
 int id home 0x7f0a00f2
 int id homeAsUp 0x7f0a00f3
-int id homeBtnMenu 0x7f0a00f4
 int id honorRequest 0x7f0a00f5
 int id horizontal 0x7f0a00f6
 int id horizontal_only 0x7f0a00f7
@@ -3503,9 +3493,7 @@ int id is_pooling_container_tag 0x7f0a0109
 int id italic 0x7f0a010a
 int id itemDelete 0x7f0a010b
 int id itemShow 0x7f0a010c
-int id item_post 0x7f0a010d
 int id item_touch_helper_previous_elevation 0x7f0a010e
-int id journeyBtnMenu 0x7f0a010f
 int id jumpToEnd 0x7f0a0110
 int id jumpToStart 0x7f0a0111
 int id labeled 0x7f0a0112
@@ -3601,9 +3589,6 @@ int id north 0x7f0a016b
 int id notification_background 0x7f0a016c
 int id notification_main_column 0x7f0a016d
 int id notification_main_column_container 0x7f0a016e
-int id np_hours 0x7f0a016f
-int id np_minutes 0x7f0a0170
-int id np_seconds 0x7f0a0171
 int id numberPicker 0x7f0a0172
 int id off 0x7f0a0173
 int id on 0x7f0a0174
@@ -3678,7 +3663,6 @@ int id search_voice_btn 0x7f0a01b9
 int id select_dialog_listview 0x7f0a01ba
 int id selected 0x7f0a01bb
 int id selection_type 0x7f0a01bc
-int id settingBtnMenu 0x7f0a01bd
 int id settings 0x7f0a01be
 int id sharedValueSet 0x7f0a01bf
 int id sharedValueUnset 0x7f0a01c0
@@ -3740,17 +3724,6 @@ int id textSpacerNoButtons 0x7f0a01f7
 int id textSpacerNoTitle 0x7f0a01f8
 int id textStart 0x7f0a01f9
 int id textTop 0x7f0a01fa
-int id textView10 0x7f0a01fc
-int id textView11 0x7f0a01fd
-int id textView12 0x7f0a01fe
-int id textView13 0x7f0a01ff
-int id textView131 0x7f0a0200
-int id textView14 0x7f0a0201
-int id textView15 0x7f0a0202
-int id textView16 0x7f0a0203
-int id textView17 0x7f0a0204
-int id textView9 0x7f0a0205
-int id textView91 0x7f0a0206
 int id text_input_end_icon 0x7f0a0207
 int id text_input_error_icon 0x7f0a0208
 int id text_input_start_icon 0x7f0a0209
@@ -3764,7 +3737,6 @@ int id time 0x7f0a0210
 int id title 0x7f0a0211
 int id titleDividerNoCustom 0x7f0a0212
 int id title_template 0x7f0a0213
-int id titre 0x7f0a0214
 int id toggle 0x7f0a0215
 int id top 0x7f0a0216
 int id topPanel 0x7f0a0217
@@ -3921,9 +3893,6 @@ int layout abc_search_dropdown_item_icons_2line 0x7f0d0018
 int layout abc_search_view 0x7f0d0019
 int layout abc_select_dialog_material 0x7f0d001a
 int layout abc_tooltip 0x7f0d001b
-int layout activity_detail_safe_journey 0x7f0d001c
-int layout activity_home 0x7f0d001d
-int layout activity_liste_safe_journey 0x7f0d001e
 int layout activity_main 0x7f0d001f
 int layout custom_dialog 0x7f0d0025
 int layout design_bottom_navigation_item 0x7f0d0026
@@ -3941,10 +3910,8 @@ int layout design_navigation_menu 0x7f0d0031
 int layout design_navigation_menu_item 0x7f0d0032
 int layout design_text_input_end_icon 0x7f0d0033
 int layout design_text_input_start_icon 0x7f0d0034
-int layout fragment_home 0x7f0d0035
 int layout ime_base_split_test_activity 0x7f0d0039
 int layout ime_secondary_split_test_activity 0x7f0d003a
-int layout item_journey 0x7f0d003b
 int layout m3_alert_dialog 0x7f0d003c
 int layout m3_alert_dialog_actions 0x7f0d003d
 int layout m3_alert_dialog_title 0x7f0d003e

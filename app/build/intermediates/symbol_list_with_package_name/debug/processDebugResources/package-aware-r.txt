@@ -3250,10 +3250,8 @@ font roboto_light
 id ALT
 id BOTTOM_END
 id BOTTOM_START
-id BtnShowPopUp
 id CTRL
 id FUNCTION
-id ListViewSafeJourney
 id META
 id NO_DEBUG
 id SHIFT
@@ -3340,7 +3338,6 @@ id auto
 id autoComplete
 id autoCompleteToEnd
 id autoCompleteToStart
-id avatar
 id axisRelative
 id barrier
 id baseline
@@ -3354,9 +3351,6 @@ id bounce
 id bounceBoth
 id bounceEnd
 id bounceStart
-id btnOngletJourney
-id btn_alerter
-id btn_start
 id buttonPanel
 id cache_measures
 id callMeasure
@@ -3385,7 +3379,6 @@ id compress
 id confirm_button
 id constraint
 id consume_window_insets_tag
-id contactBtnMenu
 id container
 id content
 id contentPanel
@@ -3407,7 +3400,6 @@ id decor_content_parent
 id default_activity_button
 id deltaRelative
 id dependency_ordering
-id description
 id design_bottom_sheet
 id design_menu_item_action_area
 id design_menu_item_action_area_stub
@@ -3430,7 +3422,6 @@ id dragRight
 id dragStart
 id dragUp
 id dropdown_menu
-id duree_journey
 id easeIn
 id easeInOut
 id easeOut
@@ -3480,7 +3471,6 @@ id hide_in_inspector_tag
 id hideable
 id home
 id homeAsUp
-id homeBtnMenu
 id honorRequest
 id horizontal
 id horizontal_only
@@ -3504,9 +3494,7 @@ id is_pooling_container_tag
 id italic
 id itemDelete
 id itemShow
-id item_post
 id item_touch_helper_previous_elevation
-id journeyBtnMenu
 id jumpToEnd
 id jumpToStart
 id labeled
@@ -3602,9 +3590,6 @@ id north
 id notification_background
 id notification_main_column
 id notification_main_column_container
-id np_hours
-id np_minutes
-id np_seconds
 id numberPicker
 id off
 id on
@@ -3679,7 +3664,6 @@ id search_voice_btn
 id select_dialog_listview
 id selected
 id selection_type
-id settingBtnMenu
 id settings
 id sharedValueSet
 id sharedValueUnset
@@ -3741,17 +3725,6 @@ id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
 id textTop
-id textView10
-id textView11
-id textView12
-id textView13
-id textView131
-id textView14
-id textView15
-id textView16
-id textView17
-id textView9
-id textView91
 id text_input_end_icon
 id text_input_error_icon
 id text_input_start_icon
@@ -3765,7 +3738,6 @@ id time
 id title
 id titleDividerNoCustom
 id title_template
-id titre
 id toggle
 id top
 id topPanel
@@ -3922,9 +3894,6 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
-layout activity_detail_safe_journey
-layout activity_home
-layout activity_liste_safe_journey
 layout activity_main
 layout custom_dialog
 layout design_bottom_navigation_item
@@ -3942,10 +3911,8 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
-layout fragment_home
 layout ime_base_split_test_activity
 layout ime_secondary_split_test_activity
-layout item_journey
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
 layout m3_alert_dialog_title

@@ -1,11 +1,5 @@
 package com.example.sentinelle.page.tuto
 
-import android.app.Activity
-import android.content.Intent
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -30,22 +24,10 @@ import androidx.compose.ui.unit.sp
 import com.example.sentinelle.R
 import com.example.sentinelle.api.AppColors
 import com.example.sentinelle.api.AppValues.Montserrat
-import com.example.sentinelle.login_activity
-
-class TutoFourActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-
-        setContent {
-            Tuto4()
-        }
-    }
-}
 
 
 @Composable
-fun Tuto4(){
+fun Tuto4(onNext : () -> Unit){
     val context = LocalContext.current
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -98,9 +80,7 @@ fun Tuto4(){
                     contentDescription = "Logo suivant",
                     modifier = Modifier.align(Alignment.CenterHorizontally)
                         .clickable{
-                            val intent = Intent(context, login_activity::class.java)
-                            context.startActivity(intent)
-                            (context as? Activity)?.finish()
+                            onNext()
                         }
                 )
 
