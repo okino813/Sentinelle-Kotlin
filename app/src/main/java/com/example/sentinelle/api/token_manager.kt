@@ -7,7 +7,7 @@ import okhttp3.Response
 
 class TokenManager(context: Context) {
 
-    private val prefs: SharedPreferences = context.getSharedPreferences("auth_prefs", Context.MODE_PRIVATE)
+    private val prefs: SharedPreferences = context.getSharedPreferences("sentinelle", Context.MODE_PRIVATE)
 
 
     // Enregistrer le token

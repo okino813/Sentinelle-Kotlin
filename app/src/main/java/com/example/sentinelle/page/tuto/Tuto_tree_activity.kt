@@ -31,7 +31,7 @@ fun Tuto3(onNext: () -> Unit){
     val context = LocalContext.current
     Surface(
         modifier = Modifier.fillMaxSize(),
-        color = AppColors().SentiGreen
+        color = AppColors.SentiGreen
     ) {
         Box(
             modifier = Modifier

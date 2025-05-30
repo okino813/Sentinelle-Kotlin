@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -56,15 +57,38 @@ class MainActivity : ComponentActivity() {
 
     private lateinit var sharedPreferences : SharedPreferences
     private var  isLoggedIn = mutableStateOf(false)
+    private var  isContrast = mutableStateOf(false)
     private lateinit var context: Context
 
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        sharedPreferences = this.getSharedPreferences("auth_prefs", MODE_PRIVATE)
+        sharedPreferences = this.getSharedPreferences("sentinelle", MODE_PRIVATE)
         isLoggedIn.value = sharedPreferences.getBoolean("is_authentificated", false)
+        isContrast.value = sharedPreferences.getBoolean("isContraster", false)
+
         context = this
+
+        Log.d("MainActivity", "onCreate: isLoggedIn = ${isLoggedIn.value}, isContast = ${isContrast.value}")
+
+        // On vérifie si le mode contraster est activé
+        if(isContrast.value)
+        {
+            AppColors.SentiBlack = Color.Black
+            AppColors.SentiGreen = Color.Yellow
+            AppColors.SentiDarkBlue = Color.White
+            AppColors.SentiBlue = Color.White
+            AppColors.SentiCyan = Color.Cyan
+        }
+        else{
+            AppColors.SentiBlack = Color(0xff16252B)
+            AppColors.SentiGreen = Color(0xff399d61)
+            AppColors.SentiDarkBlue = Color(0x33289DD2)
+            AppColors.SentiBlue = Color(0xff0097B2)
+            AppColors.SentiCyan = Color(0xff289DD2)
+        }
+
 
         val api = api_service(context)
 
@@ -77,7 +101,8 @@ class MainActivity : ComponentActivity() {
                     BottomMenu(
                         context = context,
                         sharedPreferences = sharedPreferences,
-                        isLoggedIn = isLoggedIn
+                        isLoggedIn = isLoggedIn,
+                        isContrast = isContrast
                     )
                 }
             } else {
@@ -114,7 +139,8 @@ data class BottomNavItem(
 fun BottomMenu(
     context: Context,
     sharedPreferences: SharedPreferences,
-    isLoggedIn: MutableState<Boolean>
+    isLoggedIn: MutableState<Boolean>,
+    isContrast: MutableState<Boolean>,
 ){
     val navController = rememberNavController()
 
@@ -135,6 +161,7 @@ fun BottomMenu(
                 context = context,
                 sharedPreferences = sharedPreferences,
                 isLoggedIn = isLoggedIn,
+                isContrast = isContrast
             ) }
         }
     }
@@ -150,8 +177,8 @@ fun BottomNavigationBar(navController: NavController) {
     )
 
     NavigationBar(
-        containerColor = AppColors().SentiBlack,
-        contentColor = AppColors().SentiGreen,
+        containerColor = AppColors.SentiBlack,
+        contentColor = AppColors.SentiGreen,
         modifier = Modifier
             .fillMaxWidth()
             .drawBehind{
@@ -174,7 +201,7 @@ fun BottomNavigationBar(navController: NavController) {
                         painter = painterResource(id = item.iconRid),
                         contentDescription = item.label,
                         modifier = if (currentRoute == item.route) Modifier.size(40.dp) else Modifier.size(30.dp),
-                        tint = if (currentRoute == item.route) AppColors().SentiGreen else Color.White
+                        tint = if (currentRoute == item.route) AppColors.SentiGreen else Color.White
                     )
                 },
                 selected = currentRoute == item.route,
@@ -191,7 +218,7 @@ fun BottomNavigationBar(navController: NavController) {
                     }
                 },
                 colors = NavigationBarItemDefaults.colors(
-                    indicatorColor = AppColors().SentiBlack // fond quand l'item est sélectionné
+                    indicatorColor = AppColors.SentiBlack // fond quand l'item est sélectionné
                 )
             )
         }

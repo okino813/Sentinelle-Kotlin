@@ -52,13 +52,13 @@ fun HomeScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(AppColors().SentiBlack)
+            .background(AppColors.SentiBlack)
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
             "Minuteur",
-            color = AppColors().SentiBlue,
+            color = AppColors.SentiBlue,
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp,
             modifier = Modifier.align(Alignment.Start)
@@ -76,7 +76,7 @@ fun HomeScreen() {
                 onValueChange = { heures.value = it }
             )
 
-            Text(":", fontSize = 50.sp, color = AppColors().SentiCyan, fontWeight = FontWeight.Bold)
+            Text(":", fontSize = 50.sp, color = AppColors.SentiCyan, fontWeight = FontWeight.Bold)
 
             CustomNumberPicker(
                 selectedValue = minutes.value,
@@ -84,7 +84,7 @@ fun HomeScreen() {
                 onValueChange = { minutes.value = it }
             )
 
-            Text(":", fontSize = 50.sp, color = AppColors().SentiCyan, fontWeight = FontWeight.Bold)
+            Text(":", fontSize = 50.sp, color = AppColors.SentiCyan, fontWeight = FontWeight.Bold)
 
             CustomNumberPicker(
                 selectedValue = secondes.value,
@@ -101,9 +101,9 @@ fun HomeScreen() {
                 .padding(start = 10.dp, end = 10.dp)
 
         ) {
-                Text("Heures", color = AppColors().SentiCyan)
-                Text("Minutes", color = AppColors().SentiCyan)
-                Text("Secondes", color = AppColors().SentiCyan)
+                Text("Heures", color = AppColors.SentiCyan)
+                Text("Minutes", color = AppColors.SentiCyan)
+                Text("Secondes", color = AppColors.SentiCyan)
         }
 
         Spacer(Modifier.height(24.dp))
@@ -117,7 +117,7 @@ fun HomeScreen() {
 
         Text(
             "Vous êtes en danger ?",
-            color = AppColors().SentiBlue,
+            color = AppColors.SentiBlue,
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp,
             modifier = Modifier.align(Alignment.Start)

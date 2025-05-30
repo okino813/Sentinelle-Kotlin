@@ -105,13 +105,13 @@ class api_service(val context: Context) {
 
         ApiClient.getClient(context).newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                Log.e("APICACA", "Erreur : ${e.message}")
+                Log.e("APIRESULTAT", "Erreur : ${e.message}")
             }
 
             override fun onResponse(call: Call, response: Response) {
                 if (response.isSuccessful) {
                     val body = response.body?.string()
-                    Log.d("APICACA", "Réponse : $body")
+                    Log.d("APIRESULTAT", "Réponse : $body")
                     try {
                         val jsonObject = JSONObject(body)
                         AppValues.firstname = jsonObject.getString("firstname")
@@ -134,14 +134,14 @@ class api_service(val context: Context) {
                             contactsList.add(contact)
                         }
                     } catch (e: JSONException) {
-                        Log.e("APICACA", "Erreur parsing JSON : ${e.message}")
+                        Log.e("APIRESULTAT", "Erreur parsing JSON : ${e.message}")
                     }
                     // Parse JSON ici
                 } else if (response.code == 401) {
-                    Log.w("APICACA", "Token invalide ou expiré")
+                    Log.w("APIRESULTAT", "Token invalide ou expiré")
                     // Rediriger vers login ?
                 } else {
-                    Log.e("APICACA", "Erreur inconnue : ${response.code}")
+                    Log.e("APIRESULTAT", "Erreur inconnue : ${response.code}")
                 }
             }
         })
@@ -206,7 +206,7 @@ class api_service(val context: Context) {
 
         ApiClient.getClient(context).newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                Log.e("APICACA", "Erreur : ${e.message}")
+                Log.e("APIRESULTAT", "Erreur : ${e.message}")
             }
 
             override fun onResponse(call: Call, response: Response) {

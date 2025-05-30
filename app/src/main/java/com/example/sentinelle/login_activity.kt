@@ -53,7 +53,7 @@ fun FormulaireConnexion(onLoginSuccess : () -> Unit) {
 
     Surface(
         modifier = Modifier.fillMaxSize(),
-        color = AppColors().SentiBlack
+        color = AppColors.SentiBlack
     ) {
         Box(
             modifier = Modifier
@@ -98,9 +98,9 @@ fun FormulaireConnexion(onLoginSuccess : () -> Unit) {
                             checked = checked,
                             onCheckedChange = { checked = it },
                             colors = androidx.compose.material3.CheckboxDefaults.colors(
-                                checkedColor = AppColors().SentiGreen,
-                                uncheckedColor = AppColors().SentiCyan,
-                                checkmarkColor = AppColors().SentiBlack
+                                checkedColor = AppColors.SentiGreen,
+                                uncheckedColor = AppColors.SentiCyan,
+                                checkmarkColor = AppColors.SentiBlack
                             )
                         )
                         Spacer(modifier = Modifier.padding(8.dp))

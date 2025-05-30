@@ -52,7 +52,7 @@ import androidx.compose.ui.window.Dialog
 import com.example.sentinelle.R
 import com.example.sentinelle.api.AppValues.Montserrat
 
-class AppColors{
+object AppColors{
     var SentiBlack = Color(0xff16252B)
     var SentiGreen = Color(0xff399d61)
     var SentiDarkBlue = Color(0x33289DD2)
@@ -72,7 +72,7 @@ fun Titre(label : String){
             val strokeWidth = 5.dp.toPx()
             val y = size.height - strokeWidth / 3
             drawLine(
-                color= AppColors().SentiCyan,
+                color= AppColors.SentiCyan,
                 start = Offset(0f, y),
                 end = Offset(size.width, y),
                 strokeWidth = strokeWidth
@@ -103,13 +103,13 @@ fun Input(
         textStyle = TextStyle(fontSize = 16.sp, color = Color.Black),
         shape = RoundedCornerShape(50.dp),
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = AppColors().SentiCyan,
-            unfocusedBorderColor = AppColors().SentiGreen,
-            cursorColor = AppColors().SentiBlack,
-            focusedTextColor = AppColors().SentiBlack,
-            unfocusedTextColor = AppColors().SentiBlack,
-            containerColor = AppColors().SentiGreen,
-            errorContainerColor = AppColors().SentiGreen
+            focusedBorderColor = AppColors.SentiCyan,
+            unfocusedBorderColor = AppColors.SentiGreen,
+            cursorColor = AppColors.SentiBlack,
+            focusedTextColor = AppColors.SentiBlack,
+            unfocusedTextColor = AppColors.SentiBlack,
+            containerColor = AppColors.SentiGreen,
+            errorContainerColor = AppColors.SentiGreen
         ),
         visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None,
     )
@@ -128,8 +128,8 @@ fun Bouton(text: String, OnClick: () -> Unit){
     Button(
         onClick = OnClick,
         colors = ButtonDefaults.buttonColors(
-            containerColor = AppColors().SentiBlue,       // Couleur de fond du bouton
-            contentColor = AppColors().SentiBlack         // Couleur du texte
+            containerColor = AppColors.SentiBlue,       // Couleur de fond du bouton
+            contentColor = AppColors.SentiBlack         // Couleur du texte
         ),
         shape = RoundedCornerShape(8.dp),
 
@@ -148,8 +148,8 @@ fun BoutonStartStop(text: String, OnClick: () -> Unit){
     Button(
         onClick = OnClick,
         colors = ButtonDefaults.buttonColors(
-            containerColor = AppColors().SentiGreen,       // Couleur de fond du bouton
-            contentColor = AppColors().SentiBlack         // Couleur du texte
+            containerColor = AppColors.SentiGreen,       // Couleur de fond du bouton
+            contentColor = AppColors.SentiBlack         // Couleur du texte
         ),
         shape = RoundedCornerShape(8.dp)
     ) {
@@ -243,7 +243,7 @@ fun PopupAlert(
         var color = Color.Transparent
         if(isSuccess)
         {
-            color = AppColors().SentiGreen
+            color = AppColors.SentiGreen
         }
         else{
             color = Color.Red
@@ -252,7 +252,7 @@ fun PopupAlert(
             modifier = Modifier
                 .padding(16.dp)
                 .background(
-                    color = AppColors().SentiBlack, // Utilise ta couleur personnalisée
+                    color = AppColors.SentiBlack, // Utilise ta couleur personnalisée
                     shape = RoundedCornerShape(12.dp)
                 )
                 .border(
@@ -271,7 +271,7 @@ fun PopupAlert(
 
                 Text(
                     text = "Attention !",
-                    color = AppColors().SentiGreen,
+                    color = AppColors.SentiGreen,
                     fontSize = 22.sp,
                     fontWeight = FontWeight.Bold,
                     fontStyle = FontStyle.Italic,
@@ -291,7 +291,7 @@ fun PopupAlert(
 
                 Button(
                     onClick = onDismiss,
-                    colors = ButtonDefaults.buttonColors(containerColor = AppColors().SentiGreen)
+                    colors = ButtonDefaults.buttonColors(containerColor = AppColors.SentiGreen)
                 ) {
                     Text("Compris")
                 }

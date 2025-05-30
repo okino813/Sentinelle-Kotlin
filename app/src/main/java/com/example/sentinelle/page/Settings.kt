@@ -31,7 +31,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -48,6 +47,7 @@ fun SettingsScreen(
     context: Context,
     sharedPreferences: SharedPreferences,
     isLoggedIn: MutableState<Boolean>,
+    isContrast: MutableState<Boolean>
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
@@ -79,21 +79,19 @@ fun SettingsScreen(
         lastname = AppValues.lastname.toString()
         phone = AppValues.phone.toString()
     }
-
-    val context = LocalContext.current
     val api = api_service(context)
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .background(AppColors().SentiBlack)
+            .background(AppColors.SentiBlack)
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
             "Mon compte",
-            color = AppColors().SentiBlue,
+            color = AppColors.SentiBlue,
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp,
             modifier = Modifier.align(Alignment.Start)
@@ -158,7 +156,7 @@ fun SettingsScreen(
 
         Text(
             "Sécurité",
-            color = AppColors().SentiBlue,
+            color = AppColors.SentiBlue,
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp,
             modifier = Modifier.align(Alignment.Start)
@@ -225,7 +223,7 @@ fun SettingsScreen(
 
         Text(
             "Autres paramêtre",
-            color = AppColors().SentiBlue,
+            color = AppColors.SentiBlue,
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp,
             modifier = Modifier.align(Alignment.Start)
@@ -236,19 +234,16 @@ fun SettingsScreen(
         Row(
             modifier = Modifier.padding(vertical = 8.dp)
         ) {
-            Text("Mode contraster", color = AppColors().SentiBlue, modifier = Modifier.weight(1f))
-            var isContraster by remember {
-                mutableStateOf(
-                    context.getSharedPreferences("settings", Activity.MODE_PRIVATE)
-                        .getBoolean("isContraster", false)
-                )
-            }
+            Text("Mode contraster", color = AppColors.SentiBlue, modifier = Modifier.weight(1f))
             Switch(
-                checked = isContraster,
+                checked = isContrast.value,
                 onCheckedChange = { checked ->
-                    isContraster = checked
-                    val sharedPreferences = context.getSharedPreferences("settings", Activity.MODE_PRIVATE)
-                    sharedPreferences.edit().putBoolean("isContraster", checked).apply()
+                    isContrast.value = checked
+
+                    sharedPreferences.edit().putBoolean("isContraster", checked).commit()
+
+                    Log.d("MainActivity", "Mode contraster changé : $checked")
+
 
                     // Redémarre l'application
                     val activity = context as? Activity
@@ -259,7 +254,7 @@ fun SettingsScreen(
                     Runtime.getRuntime().exit(0)
                 },
                 colors = SwitchDefaults.colors(
-                    checkedThumbColor = AppColors().SentiBlue
+                    checkedThumbColor = AppColors.SentiBlue
                 )
             )
         }
