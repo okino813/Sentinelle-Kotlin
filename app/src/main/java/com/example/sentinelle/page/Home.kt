@@ -128,7 +128,7 @@ fun HomeScreen() {
         Button(
             onClick = { /* Lancer alerte */ },
             modifier = Modifier
-                .size(150.dp),
+                .size(130.dp),
             shape = CircleShape,
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFFA72525) // ou une autre couleur
@@ -143,7 +143,7 @@ fun HomeScreen() {
             "Appuyez sur ce bouton pour prévenir votre proche",
             fontStyle = FontStyle.Italic,
             color = Color.White,
-            fontSize = 20.sp,
+            fontSize = 14.sp,
             textAlign = TextAlign.Center
         )
 
@@ -152,7 +152,7 @@ fun HomeScreen() {
         Text(
             "Attention : Si vous cliquez sur le bouton “Alerter”, votre contact aura accès à votre localisation ainsi que l’accès à votre micro",
             color = Color.White,
-            fontSize = 14.sp,
+            fontSize = 12.sp,
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(horizontal = 16.dp)
         )

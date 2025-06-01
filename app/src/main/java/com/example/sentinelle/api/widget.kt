@@ -1,6 +1,8 @@
 package com.example.sentinelle.api
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -27,6 +29,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -37,6 +40,7 @@ import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
@@ -58,6 +62,14 @@ object AppColors{
     var SentiDarkBlue = Color(0x33289DD2)
     var SentiBlue = Color(0xff0097B2)
     var SentiCyan = Color(0xff289DD2)
+}
+
+@Composable
+fun UpdateStatusBarColor(color: Color, context: Context) {
+    SideEffect {
+        (context as? Activity)?.window?.statusBarColor = color.toArgb()
+        (context as? Activity)?.window?.navigationBarColor = color.toArgb()
+    }
 }
 
 @Composable

@@ -30,6 +30,7 @@ import com.example.sentinelle.api.Bouton
 import com.example.sentinelle.api.Input
 import com.example.sentinelle.api.Logo
 import com.example.sentinelle.api.Titre
+import com.example.sentinelle.api.UpdateStatusBarColor
 import com.example.sentinelle.api.api_service
 
 @Composable
@@ -50,6 +51,8 @@ fun FormulaireConnexion(onLoginSuccess : () -> Unit) {
     var loginTried by remember { mutableStateOf(false) }
 
     val context = LocalContext.current
+
+    UpdateStatusBarColor(AppColors.SentiBlack, context)
 
     Surface(
         modifier = Modifier.fillMaxSize(),

@@ -3136,6 +3136,7 @@ drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
 drawable ic_search_black_24
+drawable image
 drawable indeterminate_static
 drawable logo_carte_tuto2
 drawable logo_minuteur

@@ -3135,6 +3135,7 @@ int drawable ic_mtrl_chip_checked_black 0x7f0800b3
 int drawable ic_mtrl_chip_checked_circle 0x7f0800b4
 int drawable ic_mtrl_chip_close_circle 0x7f0800b5
 int drawable ic_search_black_24 0x7f0800b6
+int drawable image 0x7f080112
 int drawable indeterminate_static 0x7f0800b7
 int drawable logo_carte_tuto2 0x7f0800b8
 int drawable logo_minuteur 0x7f0800b9

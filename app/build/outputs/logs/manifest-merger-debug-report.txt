@@ -9,6 +9,7 @@ MERGED from [com.google.android.material:material:1.12.0] /home/axel/.gradle/cac
 MERGED from [androidx.constraintlayout:constraintlayout:2.2.0] /home/axel/.gradle/caches/8.11.1/transforms/8d2168cd9ca9a59ac562acf8900ec851/transformed/constraintlayout-2.2.0/AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.appcompat:appcompat-resources:1.7.0] /home/axel/.gradle/caches/8.11.1/transforms/2f9ce599e213acaefdf02f63b81c11a9/transformed/appcompat-resources-1.7.0/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.appcompat:appcompat:1.7.0] /home/axel/.gradle/caches/8.11.1/transforms/2c1a4f82536b8cde1e27dea79e3df279/transformed/appcompat-1.7.0/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.accompanist:accompanist-systemuicontroller:0.30.1] /home/axel/.gradle/caches/8.11.1/transforms/cbffc015b660ce95b0ea6c2644d5ea89/transformed/accompanist-systemuicontroller-0.30.1/AndroidManifest.xml:17:1-25:12
 MERGED from [androidx.navigation:navigation-common:2.7.7] /home/axel/.gradle/caches/8.11.1/transforms/84a0cf8495a8dfac642af6799d457950/transformed/navigation-common-2.7.7/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.navigation:navigation-runtime:2.7.7] /home/axel/.gradle/caches/8.11.1/transforms/f84312a807869c661c19650927122c97/transformed/navigation-runtime-2.7.7/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.navigation:navigation-common-ktx:2.7.7] /home/axel/.gradle/caches/8.11.1/transforms/ce3547e63ad59566936f1f0502c7b781/transformed/navigation-common-ktx-2.7.7/AndroidManifest.xml:2:1-7:12
@@ -232,6 +233,8 @@ MERGED from [androidx.appcompat:appcompat-resources:1.7.0] /home/axel/.gradle/ca
 MERGED from [androidx.appcompat:appcompat-resources:1.7.0] /home/axel/.gradle/caches/8.11.1/transforms/2f9ce599e213acaefdf02f63b81c11a9/transformed/appcompat-resources-1.7.0/AndroidManifest.xml:5:5-44
 MERGED from [androidx.appcompat:appcompat:1.7.0] /home/axel/.gradle/caches/8.11.1/transforms/2c1a4f82536b8cde1e27dea79e3df279/transformed/appcompat-1.7.0/AndroidManifest.xml:5:5-44
 MERGED from [androidx.appcompat:appcompat:1.7.0] /home/axel/.gradle/caches/8.11.1/transforms/2c1a4f82536b8cde1e27dea79e3df279/transformed/appcompat-1.7.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.accompanist:accompanist-systemuicontroller:0.30.1] /home/axel/.gradle/caches/8.11.1/transforms/cbffc015b660ce95b0ea6c2644d5ea89/transformed/accompanist-systemuicontroller-0.30.1/AndroidManifest.xml:21:5-23:42
+MERGED from [com.google.accompanist:accompanist-systemuicontroller:0.30.1] /home/axel/.gradle/caches/8.11.1/transforms/cbffc015b660ce95b0ea6c2644d5ea89/transformed/accompanist-systemuicontroller-0.30.1/AndroidManifest.xml:21:5-23:42
 MERGED from [androidx.navigation:navigation-common:2.7.7] /home/axel/.gradle/caches/8.11.1/transforms/84a0cf8495a8dfac642af6799d457950/transformed/navigation-common-2.7.7/AndroidManifest.xml:20:5-44
 MERGED from [androidx.navigation:navigation-common:2.7.7] /home/axel/.gradle/caches/8.11.1/transforms/84a0cf8495a8dfac642af6799d457950/transformed/navigation-common-2.7.7/AndroidManifest.xml:20:5-44
 MERGED from [androidx.navigation:navigation-runtime:2.7.7] /home/axel/.gradle/caches/8.11.1/transforms/f84312a807869c661c19650927122c97/transformed/navigation-runtime-2.7.7/AndroidManifest.xml:20:5-44
@@ -386,6 +389,8 @@ MERGED from [androidx.annotation:annotation-experimental:1.4.1] /home/axel/.grad
 MERGED from [androidx.annotation:annotation-experimental:1.4.1] /home/axel/.gradle/caches/8.11.1/transforms/bb29b73599d54c2b909100a73a55a3bd/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:5:5-44
 	android:targetSdkVersion
 		INJECTED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml
+	tools:ignore
+		ADDED from [com.google.accompanist:accompanist-systemuicontroller:0.30.1] /home/axel/.gradle/caches/8.11.1/transforms/cbffc015b660ce95b0ea6c2644d5ea89/transformed/accompanist-systemuicontroller-0.30.1/AndroidManifest.xml:23:9-39
 	android:minSdkVersion
 		INJECTED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml
 activity#androidx.compose.ui.tooling.PreviewActivity
