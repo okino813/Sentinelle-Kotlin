@@ -1,32 +1,39 @@
 package com.example.sentinelle.api
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.NumberPicker
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
@@ -40,6 +47,7 @@ import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -156,6 +164,26 @@ fun Bouton(text: String, OnClick: () -> Unit){
 }
 
 @Composable
+fun RedBouton(text: String, OnClick: () -> Unit){
+    Button(
+        onClick = OnClick,
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Color(0xFFF54B4B),       // Couleur de fond du bouton
+            contentColor = AppColors.SentiBlack         // Couleur du texte
+        ),
+        shape = RoundedCornerShape(8.dp),
+
+        ) {
+        Text(
+            text,
+            fontFamily = Montserrat,
+            fontWeight = FontWeight.Bold,
+            fontStyle = FontStyle.Normal,
+        )
+    }
+}
+
+@Composable
 fun BoutonStartStop(text: String, OnClick: () -> Unit){
     Button(
         onClick = OnClick,
@@ -172,7 +200,7 @@ fun BoutonStartStop(text: String, OnClick: () -> Unit){
             fontWeight = FontWeight.Bold,
             fontStyle = FontStyle.Normal,
             fontSize = 16.sp
-            )
+        )
     }
 }
 
@@ -194,9 +222,102 @@ fun Logo(){
     }
 
 }
+@Composable
+fun TimeSelector(
+    initialHours: Int = 0,
+    initialMinutes: Int = 0,
+    initialSeconds: Int = 0,
+    onTimeSelected: (Int, Int, Int) -> Unit
+) {
+    var hours by remember { mutableStateOf(initialHours) }
+    var minutes by remember { mutableStateOf(initialMinutes) }
+    var seconds by remember { mutableStateOf(initialSeconds) }
+
+    var showPickerFor by remember { mutableStateOf<String?>(null) }
+
+    val pickerRange = when (showPickerFor) {
+        "hours" -> 0..24
+        "minutes", "seconds" -> 0..59
+        else -> 0..0
+    }
+
+    val selectedValue = when (showPickerFor) {
+        "hours" -> hours
+        "minutes" -> minutes
+        "seconds" -> seconds
+        else -> 0
+    }
+
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Row(
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth().padding(16.dp)
+        ) {
+            TimeField("Heures", hours) { showPickerFor = "hours" }
+            TimeField("Minutes", minutes) { showPickerFor = "minutes" }
+            TimeField("Secondes", seconds) { showPickerFor = "seconds" }
+        }
+
+        Button(onClick = {
+            onTimeSelected(hours, minutes, seconds)
+        }) {
+            Text("Valider")
+        }
+    }
+
+    if (showPickerFor != null) {
+        AlertDialog(
+            onDismissRequest = { showPickerFor = null },
+            title = { Text("Choisir ${showPickerFor}") },
+            text = {
+                AndroidView(
+                    factory = { context ->
+                        NumberPicker(context).apply {
+                            minValue = pickerRange.first
+                            maxValue = pickerRange.last
+                            value = selectedValue
+                            setOnValueChangedListener { _, _, newVal ->
+                                when (showPickerFor) {
+                                    "hours" -> hours = newVal
+                                    "minutes" -> minutes = newVal
+                                    "seconds" -> seconds = newVal
+                                }
+                            }
+                        }
+                    }
+                )
+            },
+            confirmButton = {
+                TextButton(onClick = { showPickerFor = null }) {
+                    Text("OK")
+                }
+            }
+        )
+    }
+}
+
+@Composable
+fun TimeField(label: String, value: Int, onClick: () -> Unit) {
+    OutlinedTextField(
+        value = value.toString().padStart(2, '0'),
+        onValueChange = {},
+        label = { Text(label) },
+        readOnly = true,
+        modifier = Modifier
+            .width(100.dp)
+            .clickable { onClick() }
+    )
+}
+
+
+
+fun Int.dpToPx(context: Context): Int =
+    (this * context.resources.displayMetrics.density).toInt()
+
+
 
 @RequiresApi(Build.VERSION_CODES.Q)
-@SuppressLint("MissingInflatedId")
 @Composable
 fun CustomNumberPicker(
     selectedValue: Int,
@@ -213,9 +334,44 @@ fun CustomNumberPicker(
 
                 val numberPicker = view.findViewById<NumberPicker>(R.id.numberPicker)
 
+                try {
+                    val count = numberPicker.childCount
+                    for (i in 0 until count) {
+                        val child = numberPicker.getChildAt(i)
+                        if (child is EditText) {
+                            child.setTextColor(AppColors.SentiGreen.toArgb())
+//                            child.textSize = 20f // Facultatif : taille
+                        }
+                    }
+
+                    // Change aussi les lignes du NumberPicker (les dividers)
+                    val fields = NumberPicker::class.java.declaredFields
+                    for (field in fields) {
+                        if (field.name == "mSelectionDivider") {
+                            field.isAccessible = true
+                            field.set(numberPicker, ColorDrawable(AppColors.SentiGreen.toArgb()))
+                            break
+                        }
+                    }
+                    numberPicker.invalidate()
+
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    Log.e("CustomNumberPicker", "Erreur lors de la personnalisation du NumberPicker", e)
+                }
+
+                try {
+                    val selectorWheelPaintField = NumberPicker::class.java.getField("mSelectorWheelPaint")
+                    selectorWheelPaintField.isAccessible = true
+                    val paint = selectorWheelPaintField.get(numberPicker) as Paint
+                    paint.color = AppColors.SentiGreen // ou une autre couleur
+                    numberPicker.invalidate()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
                 numberPicker.layoutParams = LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT
+                    150.dpToPx(context)
                 )
 
                 numberPicker.minValue = list.first()
@@ -303,7 +459,7 @@ fun PopupAlert(
 
                 Button(
                     onClick = onDismiss,
-                    colors = ButtonDefaults.buttonColors(containerColor = AppColors.SentiGreen)
+                    colors = ButtonDefaults.buttonColors(containerColor = AppColors.SentiGreen, contentColor = AppColors.SentiBlack),
                 ) {
                     Text("Compris")
                 }

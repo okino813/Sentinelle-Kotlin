@@ -36,9 +36,9 @@
         <item name="android:background">#00000000</item> 
         <item name="android:textColorPrimary">#3AB077</item> 
         <item name="android:textColorSecondary">#00000000</item> 
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">50sp</item> 
+        <item name="android:layout_width">10dp</item>
+        <item name="android:layout_height">10dp</item>
+        <item name="android:textSize">30sp</item> 
         <item name="android:textStyle">bold</item> 
     </style>
     <style name="Theme.Sentinelle" parent="Base.Theme.Sentinelle"/>

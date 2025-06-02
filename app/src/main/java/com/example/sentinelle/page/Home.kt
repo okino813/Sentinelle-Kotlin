@@ -22,6 +22,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -32,30 +33,33 @@ import androidx.compose.ui.unit.sp
 import com.example.sentinelle.api.AppColors
 import com.example.sentinelle.api.BoutonStartStop
 import com.example.sentinelle.api.CustomNumberPicker
+import com.example.sentinelle.api.UpdateStatusBarColor
+import com.example.sentinelle.api.api_service
 
-/**
- * A simple [androidx.fragment.app.Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 
 @RequiresApi(Build.VERSION_CODES.Q)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    modifier: Modifier = Modifier
+) {
     val heures = remember { mutableStateOf(0) }
     val minutes = remember { mutableStateOf(0) }
     val secondes = remember { mutableStateOf(0) }
 
     val values = (0..59).toList()
     val heuresValues = (0..23).toList()
-
+    var context = LocalContext.current;
+    val api = api_service(context)
+    api.getInfo(context)
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .background(AppColors.SentiBlack)
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        UpdateStatusBarColor(AppColors.SentiBlack, LocalContext.current)
         Text(
             "Minuteur",
             color = AppColors.SentiBlue,
@@ -128,13 +132,13 @@ fun HomeScreen() {
         Button(
             onClick = { /* Lancer alerte */ },
             modifier = Modifier
-                .size(130.dp),
+                .size(120.dp),
             shape = CircleShape,
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFFA72525) // ou une autre couleur
             )
         ) {
-            Text("ALERTER", fontSize = 20.sp, color = Color.White, fontWeight = FontWeight.Bold)
+            Text("ALERTER", fontSize = 16.sp, color = Color.White, fontWeight = FontWeight.Bold)
         }
 
         Spacer(Modifier.height(24.dp))
@@ -154,7 +158,7 @@ fun HomeScreen() {
             color = Color.White,
             fontSize = 12.sp,
             textAlign = TextAlign.Center,
-            modifier = Modifier.padding(horizontal = 16.dp)
+//            modifier = Modifier.padding(horizontal = 16.dp)
         )
     }
 }

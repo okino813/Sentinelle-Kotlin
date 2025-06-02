@@ -9,10 +9,12 @@ import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -23,7 +25,6 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -33,7 +34,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.sentinelle.api.AppColors
@@ -41,11 +45,14 @@ import com.example.sentinelle.api.AppValues
 import com.example.sentinelle.api.Bouton
 import com.example.sentinelle.api.Input
 import com.example.sentinelle.api.PopupAlert
+import com.example.sentinelle.api.RedBouton
+import com.example.sentinelle.api.UpdateStatusBarColor
 import com.example.sentinelle.api.api_service
 
 
 @Composable
 fun SettingsScreen(
+    modifier: Modifier = Modifier,
     context: Context,
     sharedPreferences: SharedPreferences,
     isLoggedIn: MutableState<Boolean>,
@@ -54,13 +61,13 @@ fun SettingsScreen(
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
 
-    var firstname by remember { mutableStateOf("") }
+    var firstname by remember { mutableStateOf(AppValues.firstname.toString()) }
     var firstnameError by remember { mutableStateOf<String?>(null) }
 
-    var lastname by remember { mutableStateOf("") }
+    var lastname by remember { mutableStateOf(AppValues.lastname.toString()) }
     var lastnameError by remember { mutableStateOf<String?>(null) }
 
-    var phone by remember { mutableStateOf("") }
+    var phone by remember { mutableStateOf(AppValues.phone.toString()) }
     var phoneError by remember { mutableStateOf<String?>(null) }
 
     var password by remember { mutableStateOf("") }
@@ -76,21 +83,17 @@ fun SettingsScreen(
     var isSuccess by remember { mutableStateOf<Boolean>(false) }
     var messageDialogue by remember { mutableStateOf("") }
 
-    LaunchedEffect(Unit) {
-        firstname = AppValues.firstname.toString()
-        lastname = AppValues.lastname.toString()
-        phone = AppValues.phone.toString()
-    }
     val api = api_service(context)
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
             .background(AppColors.SentiBlack)
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        UpdateStatusBarColor(AppColors.SentiBlack, LocalContext.current)
         Text(
             "Mon compte",
             color = AppColors.SentiBlue,
@@ -224,7 +227,7 @@ fun SettingsScreen(
         Spacer(Modifier.height(16.dp))
 
         Text(
-            "Autres paramêtre",
+            "Accessibilité",
             color = AppColors.SentiBlue,
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp,
@@ -277,25 +280,98 @@ fun SettingsScreen(
             )
         }
 
+        Spacer(Modifier.height(20.dp))
+
+        Text(
+            "Autres paramêtre",
+            color = AppColors.SentiBlue,
+            fontWeight = FontWeight.Bold,
+            fontSize = 20.sp,
+            modifier = Modifier.align(Alignment.Start)
+        )
+
         Spacer(Modifier.height(16.dp))
 
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
 
-
-        Bouton("Logout", OnClick = {
-            api.logout(
-                context = context,
-                onLogoutSuccess = {
-                    sharedPreferences.edit().putBoolean("is_authentificated", false).apply()
-                    isLoggedIn.value = false
-                },
-                onLogoutFailure = { error ->
-                    Handler(Looper.getMainLooper()).post {
-                        Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
-                    }
-                }
+            Text(
+                "Supprimé tout mes trajets",
+                color = Color(0xFFF54B4B),
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp,
+                textAlign = TextAlign.Center,
             )
-        })
 
+            RedBouton("Supprimer", OnClick = {
+                print("test")
+            })
+
+        }
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+
+            Text(
+                "Supprimé tout mes trajets",
+                color = Color(0xFFF54B4B),
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp,
+                textAlign = TextAlign.Center,
+            )
+
+            RedBouton("Supprimer", OnClick = {
+                print("test")
+            })
+
+        }
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+
+            Text(
+                "Supprimé mon compte",
+                color = Color(0xFFF54B4B),
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp,
+                textAlign = TextAlign.Center,
+            )
+
+            RedBouton("Déconexion", OnClick = {
+                api.logout(
+                    context = context,
+                    onLogoutSuccess = {
+                        sharedPreferences.edit().putBoolean("is_authentificated", false).commit()
+                        sharedPreferences.edit().putBoolean("isContraster", false).commit()
+                        isLoggedIn.value = false
+
+                        // Redémarre l'application
+                        val activity = context as? Activity
+                        val intent =
+                            context.packageManager.getLaunchIntentForPackage(context.packageName)
+                        intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                        context.startActivity(intent)
+                        activity?.finish()
+                        Runtime.getRuntime().exit(0)
+                    },
+                    onLogoutFailure = { error ->
+                        Handler(Looper.getMainLooper()).post {
+                            Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                )
+            })
+
+        }
         // Et dans le corps de SettingsScreen (en bas du Column par exemple) :
         if (showDialog) {
             PopupAlert(messageDialogue, isSuccess) {

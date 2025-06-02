@@ -8,12 +8,12 @@
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/font/montserrat_italic.ttf"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/drawable_logo_minuteur.png.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/drawable/logo_minuteur.png"
-    },
-    {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/font_montserrat_light.ttf.flat",
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/font/montserrat_light.ttf"
+    },
+    {
+        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/drawable_logo_minuteur.png.flat",
+        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/drawable/logo_minuteur.png"
     },
     {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/mipmap-xxhdpi_ic_launcher_round.webp.flat",

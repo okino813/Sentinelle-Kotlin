@@ -7,9 +7,9 @@
         <item name="android:background">#00000000</item> 
         <item name="android:textColorPrimary">#3AB077</item> 
         <item name="android:textColorSecondary">#00000000</item> 
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">50sp</item> 
+        <item name="android:layout_width">10dp</item>
+        <item name="android:layout_height">10dp</item>
+        <item name="android:textSize">30sp</item> 
         <item name="android:textStyle">bold</item> 
     </style></file><file path="/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/res/values/themes.xml" qualifiers=""><style name="Base.Theme.Sentinelle" parent="Theme.Material3.DayNight.NoActionBar">
         

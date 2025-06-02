@@ -161,6 +161,9 @@ fun FormulaireConnexion(onLoginSuccess : () -> Unit) {
                                     if (success) {
                                         onLoginSuccess()
                                     }
+                                    else{
+                                        emailError = "Email déjà utilisé"
+                                    }
                                 }
                             }
                         })
@@ -188,11 +191,14 @@ fun FormulaireConnexion(onLoginSuccess : () -> Unit) {
                                 api.login(email, motDePasse) { success ->
                                     loginSuccess = success
                                     loginTried = true
-                                }
-                                // Si login échoué → affiche un message ou autre
-                                if (!loginSuccess) {
-                                    emailError = "Email ou mot de passse incorect"
-                                    motDePasseError = "Email ou mot de passse incorect"
+                                    if (!success) {
+                                        emailError = "Email ou mot de passe incorrect"
+                                        motDePasseError = "Email ou mot de passe incorrect"
+                                    }
+                                    else{
+                                        emailError = null
+                                        motDePasseError = null
+                                    }
                                 }
                             }
                         })

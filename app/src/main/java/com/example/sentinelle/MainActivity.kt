@@ -90,13 +90,11 @@ class MainActivity : ComponentActivity() {
             if (isLoggedIn.value) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     enableEdgeToEdge()
-                    api.getInfo(context)
-
                     if (isContrast.value) {
                         AppColors.SentiBlack = Color.Black
                         AppColors.SentiGreen = Color.Yellow
                         AppColors.SentiDarkBlue = Color.White
-                        AppColors.SentiBlue = Color.White
+                        AppColors.SentiBlue = Color.Cyan
                         AppColors.SentiCyan = Color.Cyan
                     } else {
                         AppColors.SentiBlack = Color(0xff16252B)
@@ -105,7 +103,6 @@ class MainActivity : ComponentActivity() {
                         AppColors.SentiBlue = Color(0xff0097B2)
                         AppColors.SentiCyan = Color(0xff289DD2)
                     }
-
 
                     SentiTheme {
                         BottomMenu(
@@ -322,10 +319,13 @@ fun ContentScreen(modifier: Modifier = Modifier, selectedIndex : Int,
   isContrast: MutableState<Boolean>
 ){
     when(selectedIndex){
-        0-> HomeScreen()
+        0-> HomeScreen(
+            modifier = modifier
+        )
         1-> MapScreen()
         2-> MessageScreen()
         3-> SettingsScreen(
+            modifier = modifier,
             context = context,
             sharedPreferences = sharedPreferences,
             isLoggedIn = isLoggedIn,
