@@ -20,9 +20,10 @@ object AppValues {
  var firstname: String? = ""
  var lastname: String? = ""
  var phone: String? = ""
- var email: String? = null
- var message: String? = null
+ var email: String? = ""
+ var message: String? = ""
 }
+
 data class Contact(
  val id: Int,
  val name: String,

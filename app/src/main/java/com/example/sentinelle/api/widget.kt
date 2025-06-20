@@ -103,6 +103,45 @@ fun Titre(label : String){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
+fun InputTextArea(
+    label: String,
+    value: String,
+    onValueChange: (String) -> Unit,
+    errorMessage: String? = null,
+    maxLines: Int = 10
+) {
+    OutlinedTextField(
+        modifier = Modifier.fillMaxWidth(),
+        value = value,
+        onValueChange = { onValueChange(it) },
+        placeholder = { Text(label, color = Color.Black) },
+        isError = errorMessage != null,
+        textStyle = TextStyle(fontSize = 16.sp, color = Color.Black),
+        shape = RoundedCornerShape(16.dp),
+        colors = TextFieldDefaults.outlinedTextFieldColors(
+            focusedBorderColor = AppColors.SentiCyan,
+            unfocusedBorderColor = AppColors.SentiGreen,
+            cursorColor = AppColors.SentiBlack,
+            focusedTextColor = AppColors.SentiBlack,
+            unfocusedTextColor = AppColors.SentiBlack,
+            containerColor = AppColors.SentiGreen,
+            errorContainerColor = AppColors.SentiGreen
+        ),
+        maxLines = maxLines,
+        minLines = 7,
+    )
+    if (errorMessage != null) {
+        Text(
+            text = errorMessage,
+            color = Color.Red,
+            style = MaterialTheme.typography.labelSmall,
+            modifier = Modifier.padding(start = 16.dp, top = 4.dp)
+        )
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
 fun Input(
     label: String,
     value: String,

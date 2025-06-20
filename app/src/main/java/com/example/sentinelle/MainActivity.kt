@@ -54,7 +54,7 @@ import com.example.sentinelle.api.UpdateStatusBarColor
 import com.example.sentinelle.api.api_service
 import com.example.sentinelle.page.HomeScreen
 import com.example.sentinelle.page.MapScreen
-import com.example.sentinelle.page.MessageScreen
+import com.example.sentinelle.page.NavigationTabExample
 import com.example.sentinelle.page.SettingsScreen
 import com.example.sentinelle.ui.theme.SentiTheme
 
@@ -323,7 +323,7 @@ fun ContentScreen(modifier: Modifier = Modifier, selectedIndex : Int,
             modifier = modifier
         )
         1-> MapScreen()
-        2-> MessageScreen()
+        2-> NavigationTabExample(modifier = modifier)
         3-> SettingsScreen(
             modifier = modifier,
             context = context,
