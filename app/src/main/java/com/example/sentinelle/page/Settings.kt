@@ -319,7 +319,7 @@ fun SettingsScreen(
         ) {
 
             Text(
-                "Supprimé tout mes trajets",
+                "Supprimer mon compte",
                 color = Color(0xFFF54B4B),
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp,
@@ -339,7 +339,7 @@ fun SettingsScreen(
         ) {
 
             Text(
-                "Supprimé mon compte",
+                "Se Déconnecter ?",
                 color = Color(0xFFF54B4B),
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp,

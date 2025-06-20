@@ -4,6 +4,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -52,114 +53,130 @@ fun HomeScreen(
     var context = LocalContext.current;
     val api = api_service(context)
     api.getInfo(context)
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .background(AppColors.SentiBlack)
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center,
     ) {
-        UpdateStatusBarColor(AppColors.SentiBlack, LocalContext.current)
-        Text(
-            "Minuteur",
-            color = AppColors.SentiBlue,
-            fontWeight = FontWeight.Bold,
-            fontSize = 20.sp,
-            modifier = Modifier.align(Alignment.Start)
-        )
-        Spacer(Modifier.height(16.dp))
-
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
+        Column(
+            modifier = modifier
+                .fillMaxSize()
+                .background(AppColors.SentiBlack)
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
-            CustomNumberPicker(
-                selectedValue = heures.value,
-                list = heuresValues,
-                onValueChange = { heures.value = it }
+            UpdateStatusBarColor(AppColors.SentiBlack, LocalContext.current)
+            Text(
+                "Minuteur",
+                color = AppColors.SentiBlue,
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
+                modifier = Modifier.align(Alignment.Start)
             )
+            Spacer(Modifier.height(16.dp))
 
-            Text(":", fontSize = 50.sp, color = AppColors.SentiCyan, fontWeight = FontWeight.Bold)
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                CustomNumberPicker(
+                    selectedValue = heures.value,
+                    list = heuresValues,
+                    onValueChange = { heures.value = it }
+                )
 
-            CustomNumberPicker(
-                selectedValue = minutes.value,
-                list = values,
-                onValueChange = { minutes.value = it }
-            )
+                Text(
+                    ":",
+                    fontSize = 50.sp,
+                    color = AppColors.SentiCyan,
+                    fontWeight = FontWeight.Bold
+                )
 
-            Text(":", fontSize = 50.sp, color = AppColors.SentiCyan, fontWeight = FontWeight.Bold)
+                CustomNumberPicker(
+                    selectedValue = minutes.value,
+                    list = values,
+                    onValueChange = { minutes.value = it }
+                )
 
-            CustomNumberPicker(
-                selectedValue = secondes.value,
-                list = values,
-                onValueChange = { secondes.value = it }
-            )
-        }
+                Text(
+                    ":",
+                    fontSize = 50.sp,
+                    color = AppColors.SentiCyan,
+                    fontWeight = FontWeight.Bold
+                )
 
-        Spacer(Modifier.height(8.dp))
+                CustomNumberPicker(
+                    selectedValue = secondes.value,
+                    list = values,
+                    onValueChange = { secondes.value = it }
+                )
+            }
 
-        Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.fillMaxWidth()
-                .padding(start = 10.dp, end = 10.dp)
+            Spacer(Modifier.height(8.dp))
 
-        ) {
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxWidth()
+                    .padding(start = 10.dp, end = 10.dp)
+
+            ) {
                 Text("Heures", color = AppColors.SentiCyan)
                 Text("Minutes", color = AppColors.SentiCyan)
                 Text("Secondes", color = AppColors.SentiCyan)
-        }
+            }
 
-        Spacer(Modifier.height(24.dp))
+            Spacer(Modifier.height(24.dp))
 
-        BoutonStartStop(
-            "Départ",
-             { /* Démarrer le minuteur */ },
-        )
-
-        Spacer(Modifier.height(32.dp))
-
-        Text(
-            "Vous êtes en danger ?",
-            color = AppColors.SentiBlue,
-            fontWeight = FontWeight.Bold,
-            fontSize = 20.sp,
-            modifier = Modifier.align(Alignment.Start)
-        )
-
-        Spacer(Modifier.height(26.dp))
-
-        Button(
-            onClick = { /* Lancer alerte */ },
-            modifier = Modifier
-                .size(120.dp),
-            shape = CircleShape,
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFFA72525) // ou une autre couleur
+            BoutonStartStop(
+                "Départ",
+                { /* Démarrer le minuteur */ },
             )
-        ) {
-            Text("ALERTER", fontSize = 16.sp, color = Color.White, fontWeight = FontWeight.Bold)
+
+            Spacer(Modifier.height(32.dp))
+
+            Text(
+                "Vous êtes en danger ?",
+                color = AppColors.SentiBlue,
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
+                modifier = Modifier.align(Alignment.Start)
+            )
+
+            Spacer(Modifier.height(26.dp))
+
+            Button(
+                onClick = { /* Lancer alerte */ },
+                modifier = Modifier
+                    .size(120.dp),
+                shape = CircleShape,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFFA72525) // ou une autre couleur
+                )
+            ) {
+                Text("ALERTER", fontSize = 16.sp, color = Color.White, fontWeight = FontWeight.Bold)
+            }
+
+            Spacer(Modifier.height(24.dp))
+
+            Text(
+                "Appuyez sur ce bouton pour prévenir votre proche",
+                fontStyle = FontStyle.Italic,
+                color = Color.White,
+                fontSize = 14.sp,
+                textAlign = TextAlign.Center
+            )
+
+            Spacer(Modifier.height(8.dp))
+
+            Text(
+                "Attention : Si vous cliquez sur le bouton “Alerter”, votre contact aura accès à votre localisation ainsi que l’accès à votre micro",
+                color = Color.White,
+                fontSize = 12.sp,
+                textAlign = TextAlign.Center,
+                //            modifier = Modifier.padding(horizontal = 16.dp)
+            )
         }
-
-        Spacer(Modifier.height(24.dp))
-
-        Text(
-            "Appuyez sur ce bouton pour prévenir votre proche",
-            fontStyle = FontStyle.Italic,
-            color = Color.White,
-            fontSize = 14.sp,
-            textAlign = TextAlign.Center
-        )
-
-        Spacer(Modifier.height(8.dp))
-
-        Text(
-            "Attention : Si vous cliquez sur le bouton “Alerter”, votre contact aura accès à votre localisation ainsi que l’accès à votre micro",
-            color = Color.White,
-            fontSize = 12.sp,
-            textAlign = TextAlign.Center,
-//            modifier = Modifier.padding(horizontal = 16.dp)
-        )
     }
 }
 

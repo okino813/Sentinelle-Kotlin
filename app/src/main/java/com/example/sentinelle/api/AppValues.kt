@@ -1,5 +1,6 @@
 package com.example.sentinelle.api
 
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
@@ -7,8 +8,8 @@ import androidx.compose.ui.text.font.FontWeight
 import com.example.sentinelle.R
 
 object AppValues {
-// var base_url = "http://192.168.1.100:8000"
- var base_url = "http://10.0.2.2:8000"
+ var base_url = "http://192.168.1.102:8000"
+// var base_url = "http://10.0.2.2:8000"
 
  val Montserrat = FontFamily(
   Font(R.font.montserrat_bold_italic, FontWeight.Bold, FontStyle.Italic),
@@ -22,6 +23,8 @@ object AppValues {
  var phone: String? = ""
  var email: String? = ""
  var message: String? = ""
+ var contacts = mutableStateListOf<Contact>()
+
 }
 
 data class Contact(

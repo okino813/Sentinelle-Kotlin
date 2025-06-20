@@ -8,12 +8,12 @@
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/font/montserrat_italic.ttf"
     },
     {
-        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/font_montserrat_light.ttf.flat",
-        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/font/montserrat_light.ttf"
-    },
-    {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/drawable_logo_minuteur.png.flat",
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/drawable/logo_minuteur.png"
+    },
+    {
+        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/font_montserrat_light.ttf.flat",
+        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/font/montserrat_light.ttf"
     },
     {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
@@ -110,6 +110,10 @@
     {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/drawable_message.xml.flat",
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/drawable/message.xml"
+    },
+    {
+        "merged": "com.example.sentinelle.app-debug-68:/xml_network_security_config.xml.flat",
+        "source": "com.example.sentinelle.app-main-70:/xml/network_security_config.xml"
     },
     {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/drawable_map.xml.flat",
@@ -250,10 +254,6 @@
     {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/drawable_fleche_tuto1.jpg.flat",
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-70:/drawable/fleche_tuto1.jpg"
-    },
-    {
-        "merged": "com.example.sentinelle.app-debug-68:/layout_number_picker.xml.flat",
-        "source": "com.example.sentinelle.app-main-70:/layout/number_picker.xml"
     },
     {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-68:/mipmap-mdpi_ic_launcher.webp.flat",

@@ -2,18 +2,28 @@ package com.example.sentinelle.page
 
 import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.ThumbUp
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Tab
@@ -30,6 +40,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -41,10 +52,12 @@ import androidx.navigation.compose.rememberNavController
 import com.example.sentinelle.api.AppColors
 import com.example.sentinelle.api.AppValues
 import com.example.sentinelle.api.Bouton
+import com.example.sentinelle.api.Input
 import com.example.sentinelle.api.InputTextArea
 import com.example.sentinelle.api.PopupAlert
 import com.example.sentinelle.api.UpdateStatusBarColor
 import com.example.sentinelle.api.api_service
+
 
 /**
  * A simple [androidx.fragment.app.Fragment] subclass.
@@ -104,6 +117,14 @@ fun MessageScreen(modifier: Modifier = Modifier) {
                 messageError
             )
 
+            Text(
+                "A la suite de votre message personnalisé, un liens avec un code permettra à votre contact de consulter votre trajet ainsi que l’environnement sonore.",
+                color = Color.White,
+                fontWeight = FontWeight.Normal,
+                fontSize = 16.sp,
+                modifier = Modifier.align(Alignment.Start)
+            )
+
             Spacer(modifier = Modifier.height(8.dp))
 
             Bouton("Enregistrer", OnClick = {
@@ -149,17 +170,210 @@ fun MessageScreen(modifier: Modifier = Modifier) {
     }
 }
 
-
 @Composable
-fun AlbumScreen(modifier: Modifier = Modifier) {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
+fun ContactScreen(modifier: Modifier = Modifier) {
+    var showDialog by remember { mutableStateOf(false) }
+    var isSuccess by remember { mutableStateOf(false) }
+    var messageDialogue by remember { mutableStateOf("") }
+
+    var name by remember { mutableStateOf("") }
+    var phone by remember { mutableStateOf("") }
+    var nameError by remember { mutableStateOf<String?>(null) }
+    var phoneError by remember { mutableStateOf<String?>(null) }
+
+    val context = LocalContext.current
+    val api = api_service(context)
+    val contacts = AppValues.contacts
+
+    UpdateStatusBarColor(AppColors.SentiBlack, LocalContext.current)
+
+    // Utilisez LazyColumn pour tout le contenu
+    LazyColumn(
+        modifier = modifier
+            .fillMaxSize()
+            .background(AppColors.SentiBlack)
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("Album Screen")
+        item {
+            Text(
+                "Ajouter un contact",
+                color = AppColors.SentiBlue,
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+
+        item {
+            Spacer(Modifier.height(16.dp))
+            Text(
+                "Ajouter votre contact ci-dessous.",
+                color = Color.White,
+                fontWeight = FontWeight.Normal,
+                fontSize = 16.sp,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+
+        item {
+            Text(
+                "Exemple : 0712131415",
+                color = Color.White,
+                fontWeight = FontWeight.Normal,
+                fontStyle = FontStyle.Italic,
+                fontSize = 16.sp,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+
+        item {
+            Spacer(Modifier.height(16.dp))
+        }
+
+        item {
+            Input("Nom et Prénom", value = name, onValueChange = { name = it }, false, nameError)
+        }
+
+        item {
+            Spacer(modifier = Modifier.height(8.dp))
+        }
+
+        item {
+            Input("Numéro de téléphone", value = phone, onValueChange = { phone = it }, false, phoneError)
+        }
+
+        item {
+            Spacer(modifier = Modifier.height(8.dp))
+        }
+
+        item {
+            Bouton("Enregistrer", OnClick = {
+                nameError = null
+                phoneError = null
+                var valide = true
+
+                if (name.length < 1) {
+                    nameError = "Le nom doit être renseigné"
+                    valide = false
+                }
+
+                val phoneRegex = Regex("^0[1-9][0-9]{8}\$")
+                if (!phone.matches(phoneRegex)) {
+                    phoneError = "Numéro de téléphone invalide"
+                    valide = false
+                }
+
+                if (valide) {
+                    api.AddContact(context, name, phone) { success ->
+                        if (success) {
+                            name = ""
+                            phone = ""
+                            showDialog = true
+                            isSuccess = true
+                            messageDialogue = "Contact ajouté !"
+                        } else {
+                            isSuccess = false
+                            showDialog = true
+                            messageDialogue = "Erreur lors de création du contact"
+                        }
+                    }
+                }
+            })
+        }
+
+        item {
+            Text(
+                "Maximum : 5",
+                color = Color.White,
+                fontWeight = FontWeight.Normal,
+                fontStyle = FontStyle.Italic,
+                fontSize = 12.sp,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+
+        item {
+            Spacer(Modifier.height(16.dp))
+        }
+
+        item {
+            Text(
+                "Sélectionner des contacts",
+                color = AppColors.SentiBlue,
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+
+        item {
+            Text(
+                "Veuillez nous indiquer, les contacts, que vous souhaitez que Sentinelle contacte dans le cas où vous ne parvenez pas à désactiver le compte à rebours, ou en cas de déclenchement du bouton ALERTER",
+                color = Color.White,
+                fontWeight = FontWeight.Normal,
+                fontSize = 16.sp,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+
+        item {
+            Spacer(Modifier.height(8.dp))
+        }
+
+        // Ajout direct des contacts dans la même LazyColumn
+        items(contacts) { contact ->
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column(modifier = Modifier.weight(2f)) {
+                    Text(
+                        text = contact.name,
+                        color = Color.White,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        text = contact.phone,
+                        color = Color.Gray,
+                        fontSize = 14.sp
+                    )
+                }
+
+                IconButton(onClick = {
+                    // Logique de suppression ici
+                }) {
+                    Icon(
+                        Icons.Default.Delete,
+                        contentDescription = "Supprimer",
+                        tint = Color.Red
+                    )
+                }
+
+                Checkbox(
+                    checked = contact.selected,
+                    onCheckedChange = {
+                        // Logique de sélection ici
+                    }
+                )
+            }
+        }
+
+        // Ajout d'un espace en bas pour éviter que le dernier élément soit coupé
+        item {
+            Spacer(Modifier.height(16.dp))
+        }
+    }
+
+    if (showDialog) {
+        PopupAlert(messageDialogue, isSuccess) {
+            showDialog = false
+        }
     }
 }
-
 @Composable
 fun PlaylistScreen(modifier: Modifier = Modifier) {
     Box(
@@ -177,7 +391,7 @@ enum class Destination(
     val contentDescription: String
 ) {
     MESSAGE("message", "Message", Icons.Default.ThumbUp, "Message"),
-    ALBUM("album", "Album", Icons.Default.ThumbUp, "Album"),
+    CONTACT("contact", "Contact", Icons.Default.ThumbUp, "Contact"),
     PLAYLISTS("playlist", "Playlist", Icons.Default.Home, "Playlist")
 }
 
@@ -190,50 +404,59 @@ fun NavigationTabExample(modifier: Modifier = Modifier) {
 
     Scaffold(
         modifier = modifier,
-        containerColor = AppColors.SentiBlack
-    ) { contentPadding ->
-        PrimaryTabRow(
-            selectedTabIndex = selectedDestination,
-            modifier = Modifier.padding(contentPadding),
-            containerColor = AppColors.SentiBlack,
-            contentColor = AppColors.SentiBlue,
-        ) {
-            Destination.entries.forEachIndexed { index, destination ->
-                Tab(
-                    selected = selectedDestination == index,
-                    onClick = {
-                        navController.navigate(route = destination.route)
-                        selectedDestination = index
-                    },
-                    text = {
-                        Text(
-                            text = destination.label,
-                            maxLines = 2,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                    }
-                )
+        containerColor = AppColors.SentiBlack,
+        topBar = {
+            PrimaryTabRow(
+                selectedTabIndex = selectedDestination,
+                containerColor = AppColors.SentiBlack,
+                contentColor = AppColors.SentiBlue,
+            ) {
+                Destination.entries.forEachIndexed { index, destination ->
+                    Tab(
+                        selected = selectedDestination == index,
+                        onClick = {
+                            navController.navigate(route = destination.route)
+                            selectedDestination = index
+                        },
+                        text = {
+                            Text(
+                                text = destination.label,
+                                maxLines = 2,
+                                overflow = TextOverflow.Ellipsis
+                            )
+                        }
+                    )
+                }
             }
         }
-        AppNavHost(navController, startDestination)
+    ) { contentPadding ->
+        // Passer le contentPadding au NavHost
+        AppNavHost(
+            navController = navController,
+            startDestination = startDestination,
+            contentPadding = contentPadding
+        )
     }
 }
+
 
 @Composable
 fun AppNavHost(
     navController: NavHostController,
     startDestination: Destination,
+    contentPadding: PaddingValues, // Nouveau paramètre
     modifier: Modifier = Modifier
 ) {
     NavHost(
         navController,
         startDestination = startDestination.route,
+        modifier = modifier.padding(contentPadding) // Appliquer le padding ici
     ) {
         Destination.entries.forEach { destination ->
             composable(destination.route) {
                 when (destination) {
                     Destination.MESSAGE -> MessageScreen()
-                    Destination.ALBUM -> AlbumScreen()
+                    Destination.CONTACT -> ContactScreen()
                     Destination.PLAYLISTS -> PlaylistScreen()
                 }
             }

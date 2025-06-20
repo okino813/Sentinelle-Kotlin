@@ -4,6 +4,7 @@ import ApiClient
 import TokenManager
 import android.content.Context
 import android.util.Log
+import androidx.compose.runtime.mutableStateListOf
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.MediaType.Companion.toMediaType
@@ -121,7 +122,7 @@ class api_service(val context: Context) {
                         AppValues.message = jsonObject.getString("message")
 
                         val contactsJsonArray = jsonObject.getJSONArray("contacts")
-                        val contactsList = mutableListOf<Contact>()
+                        val contactsList = mutableStateListOf<Contact>()
 
                         for (i in 0 until contactsJsonArray.length()) {
                             val contactJson = contactsJsonArray.getJSONObject(i)
@@ -133,6 +134,8 @@ class api_service(val context: Context) {
                             )
                             contactsList.add(contact)
                         }
+
+                        AppValues.contacts = contactsList;
                     } catch (e: JSONException) {
                         Log.e("APIRESULTAT", "Erreur parsing JSON : ${e.message}")
                     }
@@ -215,6 +218,48 @@ class api_service(val context: Context) {
                         val jsonObject = JSONObject(bodys)
                         val status = jsonObject.getBoolean("status")
                         if (status) {
+                            callback(true)
+                        } else {
+                            callback(false)
+                        }
+                    } catch (e: JSONException) {
+                        callback(false)
+                    }
+                } else if (response.code == 401) {
+                    callback(false)
+                } else {
+                    callback(false)
+                }
+            }
+        })
+    }
+
+    fun AddContact(context: Context,name: String, phone: String, callback: (Boolean) -> Unit) {
+        val json = JSONObject().apply {
+            put("name", name)
+            put("phone", phone)
+        }
+
+        val body = json.toString().toRequestBody("application/json".toMediaType())
+
+        val request = Request.Builder()
+            .url("${AppValues.base_url}/api/addcontact/")
+            .post(body)
+            .build()
+
+        ApiClient.getClient(context).newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                callback(false)
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                if (response.isSuccessful) {
+                    val bodys = response.body?.string()
+                    try {
+                        val jsonObject = JSONObject(bodys)
+                        val status = jsonObject.getBoolean("status")
+                        if (status) {
+                           getInfo(context)
                             callback(true)
                         } else {
                             callback(false)
