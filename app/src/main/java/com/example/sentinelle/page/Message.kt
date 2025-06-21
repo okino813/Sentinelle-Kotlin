@@ -344,7 +344,18 @@ fun ContactScreen(modifier: Modifier = Modifier) {
                 }
 
                 IconButton(onClick = {
-                    // Logique de suppression ici
+                    AppValues.contacts.remove(contact)
+
+                    api.deleteContact(
+                        context,
+                        contact.id
+                    ) { success ->
+                        if (success) {
+                            Log.d("TESTDelete", "Contact ${contact.name} (ID: ${contact.id}) deleted successfully")
+                        } else {
+                            Log.d("TESTDelete", "Failed to delete contact ${contact.name} (ID: ${contact.id})")
+                        }
+                    }
                 }) {
                     Icon(
                         Icons.Default.Delete,

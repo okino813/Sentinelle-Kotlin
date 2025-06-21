@@ -320,6 +320,49 @@ class api_service(val context: Context) {
         })
     }
 
+    fun deleteContact(context: Context,id: Int, callback: (Boolean) -> Unit) {
+        val json = JSONObject().apply {
+            put("id_contact", id)
+        }
+
+        val body = json.toString().toRequestBody("application/json".toMediaType())
+
+        val request = Request.Builder()
+            .url("${AppValues.base_url}/api/deletecontact/")
+            .post(body)
+            .build()
+
+        ApiClient.getClient(context).newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                callback(false)
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                if (response.isSuccessful) {
+                    val bodys = response.body?.string()
+                    try {
+                        val jsonObject = JSONObject(bodys)
+                        val status = jsonObject.getBoolean("status")
+                        if (status) {
+                            getInfo(context)
+                            callback(true)
+                        } else {
+                            callback(false)
+                        }
+                    } catch (e: JSONException) {
+                        callback(false)
+                    }
+                } else if (response.code == 401) {
+                    callback(false)
+                } else {
+                    callback(false)
+                }
+            }
+        })
+    }
+
+
+
     fun saveNewPassword(context: Context,password: String, newPassword: String, callback: (Boolean) -> Unit) {
         val json = JSONObject().apply {
             put("password", password)
