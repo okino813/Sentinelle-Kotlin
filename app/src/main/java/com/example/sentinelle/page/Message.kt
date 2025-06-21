@@ -354,9 +354,23 @@ fun ContactScreen(modifier: Modifier = Modifier) {
                 }
 
                 Checkbox(
-                    checked = contact.selected,
-                    onCheckedChange = {
-                        // Logique de sélection ici
+                    checked = contact.selected.value,
+                    onCheckedChange = { check ->
+                        contact.selected.value = check
+
+                        Log.d("TESTCheck", "Contact ${contact.name} updated to selected: $check")
+
+                        api.selectedContact(
+                            context,
+                            contact.id,
+                            check
+                        ) { success ->
+                            if (success) {
+                                Log.d("TESTCheck", "Contact ${contact.name} (ID: ${contact.id}) updated successfully")
+                            } else {
+                                Log.d("TESTCheck", "Failed to update contact ${contact.name} (ID: ${contact.id})")
+                            }
+                        }
                     }
                 )
             }

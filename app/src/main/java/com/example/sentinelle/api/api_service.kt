@@ -5,6 +5,8 @@ import TokenManager
 import android.content.Context
 import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.toMutableStateList
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.MediaType.Companion.toMediaType
@@ -130,12 +132,12 @@ class api_service(val context: Context) {
                                 id = contactJson.getInt("id"),
                                 name = contactJson.getString("name"),
                                 phone = contactJson.getString("phone"),
-                                selected = contactJson.getBoolean("selected")
+                                selected = mutableStateOf(contactJson.getBoolean("selected"))
                             )
                             contactsList.add(contact)
                         }
 
-                        AppValues.contacts = contactsList;
+                        AppValues.contacts = contactsList.toMutableStateList()
                     } catch (e: JSONException) {
                         Log.e("APIRESULTAT", "Erreur parsing JSON : ${e.message}")
                     }
@@ -260,6 +262,48 @@ class api_service(val context: Context) {
                         val status = jsonObject.getBoolean("status")
                         if (status) {
                            getInfo(context)
+                            callback(true)
+                        } else {
+                            callback(false)
+                        }
+                    } catch (e: JSONException) {
+                        callback(false)
+                    }
+                } else if (response.code == 401) {
+                    callback(false)
+                } else {
+                    callback(false)
+                }
+            }
+        })
+    }
+
+    fun selectedContact(context: Context,id: Int, select: Boolean, callback: (Boolean) -> Unit) {
+        val json = JSONObject().apply {
+            put("id_contact", id)
+            put("selected", select)
+        }
+
+        val body = json.toString().toRequestBody("application/json".toMediaType())
+
+        val request = Request.Builder()
+            .url("${AppValues.base_url}/api/updateselectcontact/")
+            .post(body)
+            .build()
+
+        ApiClient.getClient(context).newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                callback(false)
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                if (response.isSuccessful) {
+                    val bodys = response.body?.string()
+                    try {
+                        val jsonObject = JSONObject(bodys)
+                        val status = jsonObject.getBoolean("status")
+                        if (status) {
+                            getInfo(context)
                             callback(true)
                         } else {
                             callback(false)
