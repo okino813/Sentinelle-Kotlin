@@ -21,6 +21,11 @@ object AppValues {
  )
 
  var isTimerRunning = { mutableStateOf(false) }
+
+ var hour = mutableStateOf(0)
+ var minute = mutableStateOf(0)
+ var seconde = mutableStateOf(0)
+
  var firstname: String? = ""
  var lastname: String? = ""
  var phone: String? = ""

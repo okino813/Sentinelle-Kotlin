@@ -41,6 +41,7 @@ import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import com.example.sentinelle.TimerService
 import com.example.sentinelle.api.AppColors
+import com.example.sentinelle.api.AppValues
 import com.example.sentinelle.api.BoutonStartStop
 import com.example.sentinelle.api.CustomNumberPicker
 import com.example.sentinelle.api.PopupAlert
@@ -53,9 +54,9 @@ import com.example.sentinelle.api.api_service
 fun HomeScreen(
     modifier: Modifier = Modifier
 ) {
-    val heures = remember { mutableStateOf(0) }
-    val minutes = remember { mutableStateOf(0) }
-    val secondes = remember { mutableStateOf(0) }
+    val heures = AppValues.hour
+    val minutes = AppValues.minute
+    val secondes = AppValues.seconde
 
     val values = (0..59).toList()
     val heuresValues = (0..23).toList()
@@ -116,7 +117,7 @@ fun HomeScreen(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 CustomNumberPicker(
-                    selectedValue = heures.value,
+                    selectedValue = heures,
                     list = heuresValues,
                     onValueChange = { heures.value = it }
                 )
@@ -129,7 +130,7 @@ fun HomeScreen(
                 )
 
                 CustomNumberPicker(
-                    selectedValue = minutes.value,
+                    selectedValue = minutes,
                     list = values,
                     onValueChange = { minutes.value = it }
                 )
@@ -142,7 +143,7 @@ fun HomeScreen(
                 )
 
                 CustomNumberPicker(
-                    selectedValue = secondes.value,
+                    selectedValue = secondes,
                     list = values,
                     onValueChange = { secondes.value = it }
                 )

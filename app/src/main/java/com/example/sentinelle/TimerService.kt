@@ -10,6 +10,7 @@ import android.os.CountDownTimer
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import com.example.sentinelle.api.AppValues
 
 class TimerService : Service() {
 
@@ -39,9 +40,34 @@ class TimerService : Service() {
             .putLong("end_timestamp", endTimestamp)
             .apply()
 
-        timer = object : CountDownTimer(totalSeconds * 1000L, 10_000L) {
+        var secondsElapsed = 0
+
+        timer = object : CountDownTimer(totalSeconds * 1000L, 1_000L) {
             override fun onTick(millisUntilFinished: Long) {
                 Log.d("TimerService", "Il reste ${millisUntilFinished / 1000} secondes")
+                secondsElapsed++
+
+                // Action chaque seconde
+                var heureRestant = millisUntilFinished / 3600_000
+                var minuteRestant = (millisUntilFinished % 3600_000) / 60_000
+                var secondeRestant = (millisUntilFinished % 60_000) / 1000
+
+                AppValues.hour.value = heureRestant.toInt()
+                AppValues.minute.value = minuteRestant.toInt()
+                AppValues.seconde.value = secondeRestant.toInt()
+
+
+                Log.d("TimerService", "Heure: $heureRestant, Minute: $minuteRestant, Seconde: $secondeRestant")
+
+                if(secondsElapsed % 10 == 0) {
+                    // Action toutes les 10 secondes
+                    Log.d("TimerService", "Action toutes les 10 secondes")
+                }
+
+                if (secondsElapsed % 300 == 0) {
+                    // Action toutes les 5 minutes
+                    Log.d("TimerService", "Action toutes les 5 minutes")
+                }
             }
 
             override fun onFinish() {

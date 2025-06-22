@@ -36,6 +36,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -359,7 +360,7 @@ fun Int.dpToPx(context: Context): Int =
 @RequiresApi(Build.VERSION_CODES.Q)
 @Composable
 fun CustomNumberPicker(
-    selectedValue: Int,
+    selectedValue: MutableState<Int>,
     list: List<Int>,
     onValueChange: (Int) -> Unit
 )
@@ -415,7 +416,7 @@ fun CustomNumberPicker(
 
                 numberPicker.minValue = list.first()
                 numberPicker.maxValue = list.last()
-                numberPicker.value = selectedValue
+                numberPicker.value = selectedValue.value
 
 //                    numberPicker.textSize = 48f
 
@@ -431,7 +432,7 @@ fun CustomNumberPicker(
             update = { view ->
                 view.minValue = list.first()
                 view.maxValue = list.last()
-                view.value = selectedValue
+                view.value = selectedValue.value
             }
 
     )
