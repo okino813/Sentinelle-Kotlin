@@ -1,5 +1,8 @@
 package com.example.sentinelle.page
 
+import android.content.Context
+import android.content.Context.MODE_PRIVATE
+import android.content.Intent
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
@@ -19,6 +22,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -34,13 +38,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat
+import com.example.sentinelle.TimerService
 import com.example.sentinelle.api.AppColors
 import com.example.sentinelle.api.BoutonStartStop
 import com.example.sentinelle.api.CustomNumberPicker
 import com.example.sentinelle.api.PopupAlert
 import com.example.sentinelle.api.UpdateStatusBarColor
 import com.example.sentinelle.api.api_service
-
 
 
 @RequiresApi(Build.VERSION_CODES.Q)
@@ -61,6 +66,27 @@ fun HomeScreen(
 
     var errorMessage by remember { mutableStateOf("") }
     var isSuccess by remember { mutableStateOf(false) }
+
+    var isTimerRunning by remember { mutableStateOf(false) }
+
+    val prefs = context.getSharedPreferences("sentinelle_prefs", MODE_PRIVATE)
+    val isRunning = prefs.getBoolean("is_timer_running", false)
+
+    LaunchedEffect(Unit) {
+        val prefs = context.getSharedPreferences("sentinelle_prefs", Context.MODE_PRIVATE)
+        val isRunning = prefs.getBoolean("is_timer_running", false)
+
+        if (isRunning) {
+            val endTimestamp = prefs.getLong("end_timestamp", 0L)
+            val remainingMillis = endTimestamp - System.currentTimeMillis()
+            if (remainingMillis > 0) {
+                isTimerRunning = true
+            } else {
+                prefs.edit().putBoolean("is_timer_running", false).remove("end_timestamp").apply()
+                isTimerRunning = false
+            }
+        }
+    }
 
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -138,27 +164,40 @@ fun HomeScreen(
             Spacer(Modifier.height(24.dp))
 
             BoutonStartStop(
-                "Départ",
+                if (isTimerRunning) "Stop" else "Départ",
                 {
-                    /* Démarrer le minuteur */
-
-                    // On fais les tests de lancement
-                    api.startTimer(
-                        context,
-                        heures.value,
-                        minutes.value,
-                        secondes.value,
-                    ) { success, error ->
-                        if (success) {
-                            Log.d("TESTCheck", "Timer start successfully")
-                        } else {
-                            Log.d("TESTCheck", "Timer start failed")
-                            errorMessage = error ?: "Erreur inconnue"
-                            isSuccess = false
-                            showErrorDialog = true
+                    if (!isTimerRunning) {
+                        // Vérification de lancement via API
+                        api.startTimer(
+                            context,
+                            heures.value,
+                            minutes.value,
+                            secondes.value,
+                        ) { success, error ->
+                            if (success) {
+                                Log.d("TESTCheck", "Timer started")
+                                val totalseconds = heures.value * 3600 + minutes.value * 60 + secondes.value
+                                val intent = Intent(context, TimerService::class.java).apply {
+                                    action = "START_TIMER"
+                                    putExtra("totalSeconds", totalseconds)
+                                }
+                                ContextCompat.startForegroundService(context, intent)
+                                isTimerRunning = true
+                            } else {
+                                errorMessage = error ?: "Erreur inconnue"
+                                isSuccess = false
+                                showErrorDialog = true
+                            }
                         }
+                    } else {
+                        // Arrêter le minuteur
+                        val intent = Intent(context, TimerService::class.java).apply {
+                            action = "STOP_TIMER"
+                        }
+                        context.startService(intent)
+                        isTimerRunning = false
                     }
-                },
+                }
             )
 
             if (showErrorDialog) {

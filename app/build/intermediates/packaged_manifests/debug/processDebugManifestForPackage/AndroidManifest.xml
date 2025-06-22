@@ -12,6 +12,8 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> <!-- Permission pour enregistrer l'audio -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -66,6 +68,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name="com.example.sentinelle.TimerService"
+            android:exported="false"
+            android:foregroundServiceType="mediaPlayback|dataSync" />
 
         <meta-data
             android:name="preloaded_fonts"
