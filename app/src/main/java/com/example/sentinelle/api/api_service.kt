@@ -361,6 +361,50 @@ class api_service(val context: Context) {
         })
     }
 
+    fun startTimer(context: Context, hour: Int, minute: Int, seconde: Int, callback: (Boolean, String?) -> Unit) {
+        var totalSecond = hour * 60 * 60 + minute * 60 + seconde
+        val json = JSONObject().apply {
+            put("total_second", totalSecond)
+        }
+
+        val body = json.toString().toRequestBody("application/json".toMediaType())
+
+        val request = Request.Builder()
+            .url("${AppValues.base_url}/api/starttimer/")
+            .post(body)
+            .build()
+
+        ApiClient.getClient(context).newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                callback(false, "Erreur de connexion : ${e.message}")
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                if (response.isSuccessful) {
+                    val bodys = response.body?.string()
+                    try {
+                        val jsonObject = JSONObject(bodys)
+                        val status = jsonObject.optBoolean("success", false)
+                        if (status) {
+                            getInfo(context)
+                            callback(true, null)
+                        } else {
+                            val error = jsonObject.optString("error", "Erreur inconnue")
+                            callback(false, error)
+                        }
+                    } catch (e: JSONException) {
+
+                        callback(false, "Erreur de parsing JSON : ${e.message}")
+                    }
+                } else if (response.code == 401) {
+                    callback(false, "Token invalide ou expiré")
+                } else {
+                    callback(false, "Erreur inconnue : ${response.code}")
+                }
+            }
+        })
+    }
+
 
 
     fun saveNewPassword(context: Context,password: String, newPassword: String, callback: (Boolean) -> Unit) {

@@ -248,6 +248,8 @@ fun BottomMenu(
     var selectedIndex by remember {
         mutableIntStateOf(0)
     }
+    val api = api_service(context)
+    api.getInfo(context)
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),

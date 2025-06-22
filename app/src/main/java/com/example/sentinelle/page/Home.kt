@@ -1,6 +1,7 @@
 package com.example.sentinelle.page
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -18,8 +19,10 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -34,6 +37,7 @@ import androidx.compose.ui.unit.sp
 import com.example.sentinelle.api.AppColors
 import com.example.sentinelle.api.BoutonStartStop
 import com.example.sentinelle.api.CustomNumberPicker
+import com.example.sentinelle.api.PopupAlert
 import com.example.sentinelle.api.UpdateStatusBarColor
 import com.example.sentinelle.api.api_service
 
@@ -52,7 +56,12 @@ fun HomeScreen(
     val heuresValues = (0..23).toList()
     var context = LocalContext.current;
     val api = api_service(context)
-    api.getInfo(context)
+
+    var showErrorDialog by remember { mutableStateOf(false) }
+
+    var errorMessage by remember { mutableStateOf("") }
+    var isSuccess by remember { mutableStateOf(false) }
+
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center,
@@ -130,8 +139,33 @@ fun HomeScreen(
 
             BoutonStartStop(
                 "Départ",
-                { /* Démarrer le minuteur */ },
+                {
+                    /* Démarrer le minuteur */
+
+                    // On fais les tests de lancement
+                    api.startTimer(
+                        context,
+                        heures.value,
+                        minutes.value,
+                        secondes.value,
+                    ) { success, error ->
+                        if (success) {
+                            Log.d("TESTCheck", "Timer start successfully")
+                        } else {
+                            Log.d("TESTCheck", "Timer start failed")
+                            errorMessage = error ?: "Erreur inconnue"
+                            isSuccess = false
+                            showErrorDialog = true
+                        }
+                    }
+                },
             )
+
+            if (showErrorDialog) {
+                PopupAlert(errorMessage, isSuccess) {
+                    showErrorDialog = false
+                }
+            }
 
             Spacer(Modifier.height(32.dp))
 
