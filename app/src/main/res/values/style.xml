@@ -4,9 +4,9 @@
         <item name="android:background">#00000000</item> <!-- Fond transparent -->
         <item name="android:textColorPrimary">#3AB077</item> <!-- Texte sélectionné en vert -->
         <item name="android:textColorSecondary">#00000000</item> <!-- Texte non sélectionné en gris foncé -->
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">50sp</item> <!-- Augmentation de la taille du texte -->
+        <item name="android:layout_width">10dp</item>
+        <item name="android:layout_height">10dp</item>
+        <item name="android:textSize">30sp</item> <!-- Augmentation de la taille du texte -->
         <item name="android:textStyle">bold</item> <!-- Texte en gras -->
     </style>
 

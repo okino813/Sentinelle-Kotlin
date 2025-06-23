@@ -1,12 +1,6 @@
 package com.example.sentinelle
 
-import android.app.Activity
-import android.content.Intent
-import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,17 +24,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.sentinelle.api.AppColors
 import com.example.sentinelle.api.Bouton
 import com.example.sentinelle.api.Input
 import com.example.sentinelle.api.Logo
 import com.example.sentinelle.api.Titre
+import com.example.sentinelle.api.UpdateStatusBarColor
 import com.example.sentinelle.api.api_service
 
 @Composable
-fun FormulaireConnexion() {
+fun FormulaireConnexion(onLoginSuccess : () -> Unit) {
     var motDePasse by remember { mutableStateOf("") }
     var motDePasseConfirm by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
@@ -58,9 +52,11 @@ fun FormulaireConnexion() {
 
     val context = LocalContext.current
 
+    UpdateStatusBarColor(AppColors.SentiBlack, context)
+
     Surface(
         modifier = Modifier.fillMaxSize(),
-        color = AppColors().SentiBlack
+        color = AppColors.SentiBlack
     ) {
         Box(
             modifier = Modifier
@@ -105,9 +101,9 @@ fun FormulaireConnexion() {
                             checked = checked,
                             onCheckedChange = { checked = it },
                             colors = androidx.compose.material3.CheckboxDefaults.colors(
-                                checkedColor = AppColors().SentiGreen,
-                                uncheckedColor = AppColors().SentiCyan,
-                                checkmarkColor = AppColors().SentiBlack
+                                checkedColor = AppColors.SentiGreen,
+                                uncheckedColor = AppColors.SentiCyan,
+                                checkmarkColor = AppColors.SentiBlack
                             )
                         )
                         Spacer(modifier = Modifier.padding(8.dp))
@@ -128,7 +124,7 @@ fun FormulaireConnexion() {
                 )
                 {
                     if (inscriptionMode) {
-                        Bouton("S'inscrire'", OnClick = {
+                        Bouton("S'inscrire", OnClick = {
                             // Reset des erreurs
                             emailError = null
                             motDePasseError = null
@@ -161,9 +157,14 @@ fun FormulaireConnexion() {
 
                             if (isValid) {
                                 val api = api_service(context)
-                                api.register(email, motDePasse)
-                                var intent = Intent(context, MainActivity_page::class.java)
-                                context.startActivity(intent)
+                                api.register(context, email, motDePasse) { success ->
+                                    if (success) {
+                                        onLoginSuccess()
+                                    }
+                                    else{
+                                        emailError = "Email déjà utilisé"
+                                    }
+                                }
                             }
                         })
                     }
@@ -175,6 +176,7 @@ fun FormulaireConnexion() {
 
                             // Validation
                             var isValid = true
+
                             if (!email.contains("@")) {
                                 emailError = "Email invalide"
                                 isValid = false
@@ -189,24 +191,21 @@ fun FormulaireConnexion() {
                                 api.login(email, motDePasse) { success ->
                                     loginSuccess = success
                                     loginTried = true
-                                }
-                                // Si login échoué → affiche un message ou autre
-                                if (!loginSuccess && loginTried) {
-                                    emailError = "Email ou mot de passse incorect"
-                                    motDePasseError = "Email ou mot de passse incorect"
+                                    if (!success) {
+                                        emailError = "Email ou mot de passe incorrect"
+                                        motDePasseError = "Email ou mot de passe incorrect"
+                                    }
+                                    else{
+                                        emailError = null
+                                        motDePasseError = null
+                                    }
                                 }
                             }
                         })
                         // Si login réussi → redirection
                         if (loginSuccess && loginTried) {
                             LaunchedEffect(Unit) {
-                                val intent = Intent(context, MainActivity_page::class.java)
-                                context.startActivity(intent)
-
-                                // On "termine" l'activité courante pour empêcher le retour
-                                if (context is Activity) {
-                                    context.finish()
-                                }
+                                onLoginSuccess()
                             }
                         }
                     }
@@ -238,27 +237,6 @@ fun FormulaireConnexion() {
                         )
                     }
                 }
-            }
-        }
-    }
-}
-
-@Preview
-@Composable
-fun PreviewPages(){
-    FormulaireConnexion()
-}
-
-class login_activity : ComponentActivity() {
-
-    private var isSignupMode = false
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            MaterialTheme {
-                PreviewPages()
             }
         }
     }

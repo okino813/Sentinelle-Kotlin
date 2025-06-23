@@ -12,10 +12,15 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> <!-- Permission pour enregistrer l'audio -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
     <!-- Include required permissions for Google Maps API to run. -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -37,7 +42,6 @@
     <uses-permission android:name="com.example.sentinelle.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
 
     <application
-        android:name="com.example.sentinelle.App"
         android:allowBackup="true"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -52,54 +56,11 @@
         android:testOnly="true"
         android:theme="@style/Theme.Sentinelle"
         android:usesCleartextTraffic="true" >
-        <activity
-            android:name="com.example.sentinelle.MainActivity_page"
-            android:exported="false" />
-        <activity
-            android:name="com.example.sentinelle.detailSafeJourney_activity"
-            android:exported="false" />
-        <activity
-            android:name="com.example.sentinelle.liste_safe_journey_activity"
-            android:exported="false" />
-        <!--
-             TODO: Before you run your application, you need a Google Maps API key.
-
-             To get one, follow the directions here:
-
-                https://developers.google.com/maps/documentation/android-sdk/get-api-key
-
-             Once you have your API key (it starts with "AIza"), define a new property in your
-             project's local.properties file (e.g. MAPS_API_KEY=Aiza...), and replace the
-             "YOUR_API_KEY" string in this file with "${MAPS_API_KEY}".
-        -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="YOUR_API_KEY" />
 
-        <activity
-            android:name="com.example.sentinelle.page.activity_home"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.sentinelle.login_activity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.sentinelle.page.tuto.TutoFourActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.sentinelle.page.tuto.TutoThreeActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.sentinelle.page.tuto.TutoTwoActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.sentinelle.page.tuto.TutoOneActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" /> <!-- Déclaration de l'activité MainActivity -->
+        <!-- Déclaration de l'activité MainActivity -->
         <activity
             android:name="com.example.sentinelle.MainActivity"
             android:exported="true"
@@ -111,13 +72,14 @@
             </intent-filter>
         </activity>
 
+        <service
+            android:name="com.example.sentinelle.TimerService"
+            android:exported="false"
+            android:foregroundServiceType="mediaPlayback|dataSync" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
-        <service
-            android:name="com.example.sentinelle.LocationTrackerService"
-            android:foregroundServiceType="location" />
 
         <activity
             android:name="androidx.compose.ui.tooling.PreviewActivity"

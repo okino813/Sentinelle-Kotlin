@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <NumberPicker xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/numberPicker"
-    android:layout_width="wrap_content"
     android:layout_gravity="center"
-    android:layout_marginTop="72dp"
-    android:layout_marginEnd="23dp"
-    android:theme="@style/NumberPickerStyle"
-    android:layout_height="wrap_content">
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
+    android:theme="@style/NumberPickerStyle">
 
 </NumberPicker>
