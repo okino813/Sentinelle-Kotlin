@@ -1,8 +1,10 @@
 package com.example.sentinelle
 
 
+import android.Manifest
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -47,6 +49,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import com.example.sentinelle.api.AppColors
 import com.example.sentinelle.api.AppValues.Montserrat
@@ -75,6 +79,7 @@ class MainActivity : ComponentActivity() {
         isLoggedIn.value = sharedPreferences.getBoolean("is_authentificated", false)
         isContrast.value = sharedPreferences.getBoolean("isContraster", false)
 
+        checkAndRequestPermissions()
 
         context = this
 
@@ -135,6 +140,32 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+    private val LOCATION_PERMISSION_REQUEST_CODE = 1001
+
+    private fun checkAndRequestPermissions() {
+        val permissions = mutableListOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        )
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            permissions.add(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+        }
+
+        val missingPermissions = permissions.filter {
+            ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED
+        }
+
+        if (missingPermissions.isNotEmpty()) {
+            ActivityCompat.requestPermissions(
+                this, // ✅ ici c'est une Activity, donc pas d'erreur
+                missingPermissions.toTypedArray(),
+                LOCATION_PERMISSION_REQUEST_CODE
+            )
+        }
+    }
+
 }
 
 

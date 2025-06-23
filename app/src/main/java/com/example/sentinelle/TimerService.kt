@@ -1,20 +1,34 @@
 package com.example.sentinelle
 
+import android.Manifest
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.Service
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Build
 import android.os.CountDownTimer
 import android.os.IBinder
 import android.util.Log
+import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import com.example.sentinelle.api.AppValues
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+
 
 class TimerService : Service() {
 
     private var timer: CountDownTimer? = null
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+
+    override fun onCreate() {
+        super.onCreate()
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+    }
+
 
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -44,7 +58,6 @@ class TimerService : Service() {
 
         timer = object : CountDownTimer(totalSeconds * 1000L, 1_000L) {
             override fun onTick(millisUntilFinished: Long) {
-                Log.d("TimerService", "Il reste ${millisUntilFinished / 1000} secondes")
                 secondsElapsed++
 
                 // Action chaque seconde
@@ -62,6 +75,7 @@ class TimerService : Service() {
                 if(secondsElapsed % 10 == 0) {
                     // Action toutes les 10 secondes
                     Log.d("TimerService", "Action toutes les 10 secondes")
+                    getLastLocation()
                 }
 
                 if (secondsElapsed % 300 == 0) {
@@ -70,12 +84,30 @@ class TimerService : Service() {
                 }
             }
 
+
             override fun onFinish() {
                 clearTimerState()
                 stopSelf()
                 timer = null
             }
         }.start()
+    }
+
+    private fun getLastLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Log.w("TimerService", "Permissions de localisation manquantes")
+            return
+        }
+
+        fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+            if (location != null) {
+                Log.d("TimerService", "Localisation → lat: ${location.latitude}, lng: ${location.longitude}")
+                // Tu peux sauvegarder ou envoyer la position ici
+            } else {
+                Log.d("TimerService", "Localisation non disponible")
+            }
+        }
     }
 
     private fun buildNotification(): Notification {
