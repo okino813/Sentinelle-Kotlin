@@ -1,6 +1,9 @@
 package com.example.sentinelle
 
+import android.content.Intent
+import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -32,9 +35,14 @@ import com.example.sentinelle.api.Logo
 import com.example.sentinelle.api.Titre
 import com.example.sentinelle.api.UpdateStatusBarColor
 import com.example.sentinelle.api.api_service
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 
 @Composable
-fun FormulaireConnexion(onLoginSuccess : () -> Unit) {
+fun FormulaireConnexion(
+    googleSignInClient: GoogleSignInClient,
+    launcher: ActivityResultLauncher<Intent>,
+    onLoginSuccess : () -> Unit
+) {
     var motDePasse by remember { mutableStateOf("") }
     var motDePasseConfirm by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
@@ -201,18 +209,6 @@ fun FormulaireConnexion(onLoginSuccess : () -> Unit) {
                                         motDePasseError = "Email ou mot de passe incorrect"
                                     }
                                 }
-//                                api.login(email, motDePasse) { success ->
-//                                    loginSuccess = success
-//                                    loginTried = true
-//                                    if (!success) {
-//                                        emailError = "Email ou mot de passe incorrect"
-//                                        motDePasseError = "Email ou mot de passe incorrect"
-//                                    }
-//                                    else{
-//                                        emailError = null
-//                                        motDePasseError = null
-//                                    }
-//                                }
                             }
                         })
                         // Si login réussi → redirection
@@ -248,6 +244,14 @@ fun FormulaireConnexion(onLoginSuccess : () -> Unit) {
                                     inscriptionMode = !inscriptionMode
                                 }
                         )
+                    }
+                }
+                Bouton("Connexion avec Google") {
+                    Log.d("GoogleSignIn", "Bouton Google cliqué")
+                    activity.signInWithGoogle { success ->
+                        if (success) {
+                            onLoginSuccess()
+                        }
                     }
                 }
             }

@@ -4271,6 +4271,7 @@ int string template_percent 0x7f13010d
 int string title_activity_maps 0x7f13010e
 int string tooltip_description 0x7f13010f
 int string tooltip_label 0x7f130110
+int string web_client_id 0x7f130111
 int style AlertDialog_AppCompat 0x7f140000
 int style AlertDialog_AppCompat_Light 0x7f140001
 int style Animation_AppCompat_Dialog 0x7f140002

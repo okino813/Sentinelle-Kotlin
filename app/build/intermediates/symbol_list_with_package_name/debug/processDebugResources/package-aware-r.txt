@@ -4272,6 +4272,7 @@ string template_percent
 string title_activity_maps
 string tooltip_description
 string tooltip_label
+string web_client_id
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog

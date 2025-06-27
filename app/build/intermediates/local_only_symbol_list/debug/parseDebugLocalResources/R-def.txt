@@ -84,6 +84,7 @@ string google_storage_bucket
 string hello_blank_fragment
 string project_id
 string title_activity_maps
+string web_client_id
 style Base.Theme.Sentinelle
 style NumberPickerStyle
 style Theme.Sentinelle

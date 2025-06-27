@@ -86,12 +86,52 @@ class MainActivity : ComponentActivity() {
     private var isContrast = mutableStateOf(false)
     private lateinit var context: Context
 
-    private val googleSignInLauncher = registerForActivityResult(
+    private var googleSignInCallback: ((Boolean) -> Unit)? = null
+
+    private fun getStatusCodeMeaning(statusCode: Int): String {
+        return when (statusCode) {
+            12500 -> "SIGN_IN_REQUIRED - Config Firebase manquante"
+            12501 -> "SIGN_IN_CANCELLED - Utilisateur a annulé"
+            12502 -> "SIGN_IN_CURRENTLY_IN_PROGRESS"
+            12600 -> "SIGN_IN_FAILED - Échec général"
+            10 -> "DEVELOPER_ERROR - Config incorrecte (SHA-1, Client ID...)"
+            7 -> "NETWORK_ERROR - Problème réseau"
+            4 -> "SIGN_IN_REQUIRED - Pas de compte"
+            else -> "Code inconnu: $statusCode"
+        }
+    }
+
+    private var googleSignInLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
+
+        if (result.data != null) {
+            try {
+                val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+                if (task.exception != null) {
+                    val exception = task.exception!!
+                    if (exception is ApiException) {
+                        val apiException = exception as ApiException
+                    }
+                } else {
+                    if (task.isSuccessful) {
+                        val account = task.result
+                    }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
         if (result.resultCode == Activity.RESULT_OK) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
-            handleGoogleSignIn(task)
+            handleGoogleSignIn(task) { success ->
+                googleSignInCallback?.invoke(success)
+                googleSignInCallback = null
+            }
+        } else {
+            googleSignInCallback?.invoke(false)
+            googleSignInCallback = null
         }
     }
 
@@ -104,7 +144,7 @@ class MainActivity : ComponentActivity() {
 
         // Configurer Google Sign-In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken("286545274111-u24hnvet7cn3ia1illpc0iua9d6m3i4q.apps.googleusercontent.com") // Remplace par ton Web client ID
+            .requestIdToken(getString(R.string.web_client_id)) // Remplace par ton Web client ID
             .requestEmail()
             .build()
 
@@ -117,11 +157,6 @@ class MainActivity : ComponentActivity() {
         checkAndRequestPermissions()
 
         context = this
-
-        Log.d(
-            "MainActivity",
-            "onCreate: isLoggedIn = ${isLoggedIn.value}, isContast = ${isContrast.value}"
-        )
 
         // On vérifie si le mode contraster est activé
         val api = api_service(context)
@@ -161,8 +196,15 @@ class MainActivity : ComponentActivity() {
                         appState = AppState.Auth
                     })
 
-                    is AppState.Auth -> FormulaireConnexion(onLoginSuccess = {
-                        appState = AppState.Main
+                    is AppState.Auth -> FormulaireConnexion(
+                        googleSignInClient = googleSignInClient,
+                        launcher = googleSignInLauncher,
+                        onLoginSuccess = {
+                            isLoggedIn.value = true
+                            sharedPreferences.edit().putBoolean("is_authentificated", true).apply()
+
+                            appState = AppState.Main
+
                     })
 
                     is AppState.Main -> BottomMenu(
@@ -176,35 +218,48 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    fun signInWithGoogle() {
-        val signInIntent = googleSignInClient.signInIntent
-        googleSignInLauncher.launch(signInIntent)
-    }
+    fun signInWithGoogle(callback: (Boolean) -> Unit) {
+        Log.d("GoogleSignIn", "Début de la connexion Google")
 
-    private fun handleGoogleSignIn(task: Task<GoogleSignInAccount>) {
         try {
-            val account = task.getResult(ApiException::class.java)
-            firebaseAuthWithGoogle(account.idToken!!)
-        } catch (e: ApiException) {
-            Toast.makeText(this, "Google Sign-In échoué", Toast.LENGTH_SHORT).show()
+            googleSignInCallback = callback
+            val signInIntent = googleSignInClient.signInIntent
+
+            googleSignInLauncher.launch(signInIntent)
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+            callback(false)
         }
     }
 
-    private fun firebaseAuthWithGoogle(idToken: String) {
-        val credential = GoogleAuthProvider.getCredential(idToken, null)
-        auth.signInWithCredential(credential)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val user = auth.currentUser
-                    Toast.makeText(this, "Connecté avec Google !", Toast.LENGTH_SHORT).show()
-                    // Mettre à jour l'état de connexion
-                    isLoggedIn.value = true
-                    sharedPreferences.edit().putBoolean("is_authentificated", true).apply()
-                } else {
-                    Toast.makeText(this, "Authentification échouée", Toast.LENGTH_SHORT).show()
+
+    private fun handleGoogleSignIn(task: Task<GoogleSignInAccount>, callback: (Boolean) -> Unit){
+        try {
+            val account = task.getResult(ApiException::class.java)
+            val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+
+            auth.signInWithCredential(credential)
+                .addOnCompleteListener(this) { signInTask ->
+                    if (signInTask.isSuccessful) {
+                        // Connexion réussie
+                        val user = auth.currentUser
+                        sharedPreferences.edit().putBoolean("is_authentificated", true).apply()
+                        isLoggedIn.value = true
+
+                        Toast.makeText(this, "Connexion Google réussie", Toast.LENGTH_SHORT).show()
+                        callback(true)
+                    } else {
+                        // Échec
+                        Toast.makeText(this, "Échec de la connexion : ${signInTask.exception?.message}", Toast.LENGTH_LONG).show()
+                        callback(false)
+                    }
                 }
-            }
+        } catch (e: ApiException) {
+            Toast.makeText(this, "Erreur Google SignIn : ${e.message}", Toast.LENGTH_LONG).show()
+        }
     }
+
 
     // ✅ Fonctions pour email/password
     fun signInWithEmail(email: String, password: String, callback: (Boolean) -> Unit){
@@ -239,18 +294,6 @@ class MainActivity : ComponentActivity() {
                     callback(false)
                 }
             }
-    }
-
-    // Vérifier si utilisateur connecté
-    fun checkCurrentUser() {
-        val currentUser = auth.currentUser
-        if (currentUser != null) {
-            // Utilisateur connecté
-            println("Utilisateur: ${currentUser.email}")
-        } else {
-            // Pas connecté
-            println("Pas d'utilisateur connecté")
-        }
     }
 
     // Déconnexion
