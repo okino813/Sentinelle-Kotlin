@@ -31,6 +31,7 @@ import com.example.sentinelle.api.Input
 import com.example.sentinelle.api.Logo
 import com.example.sentinelle.api.Titre
 import com.example.sentinelle.api.UpdateStatusBarColor
+import com.example.sentinelle.api.api_service
 
 @Composable
 fun FormulaireConnexion(onLoginSuccess : () -> Unit) {
@@ -188,7 +189,7 @@ fun FormulaireConnexion(onLoginSuccess : () -> Unit) {
                             }
 
                             if (isValid) {
-//                                val api = api_service(context)
+                                val api = api_service(context)
                                 activity.signInWithEmail(email, motDePasse) {
                                         success ->
                                     if (success) {

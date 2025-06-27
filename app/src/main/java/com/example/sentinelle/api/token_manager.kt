@@ -1,6 +1,7 @@
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.google.firebase.auth.FirebaseAuth
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -8,6 +9,23 @@ import okhttp3.Response
 class TokenManager(context: Context) {
 
     private val prefs: SharedPreferences = context.getSharedPreferences("sentinelle", Context.MODE_PRIVATE)
+
+    fun fetchFirebaseToken(context: Context, onResult: (String?) -> Unit) {
+        val user = FirebaseAuth.getInstance().currentUser
+        user?.getIdToken(true)
+            ?.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val token = task.result?.token
+                    if (token != null) {
+                        // Enregistre le token si tu veux
+                        TokenManager(context).saveToken(token)
+                    }
+                    onResult(token)
+                } else {
+                    onResult(null)
+                }
+            }
+    }
 
 
     // Enregistrer le token
@@ -39,7 +57,7 @@ class AuthInterceptor(val tokenProvider: () -> String?) : Interceptor {
 
         val token = tokenProvider()
         if (!token.isNullOrEmpty()) {
-            requestBuilder.addHeader("Authorization", "Token $token")
+            requestBuilder.addHeader("Authorization", "Bearer $token")
         }
 
         return chain.proceed(requestBuilder.build())

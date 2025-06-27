@@ -135,7 +135,7 @@ fun SettingsScreen(
             }
 
             if(valide){
-                api.SaveInfoAcount(context,firstname, lastname, phone){ success ->
+                api.SaveInfoAccount(context,firstname, lastname, phone){ success ->
                     if (success) {
                         AppValues.firstname = firstname
                         AppValues.lastname = lastname
