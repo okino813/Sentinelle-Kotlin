@@ -1,26 +1,44 @@
 {
   "project_info": {
-    "project_number": "286545274111",
-    "project_id": "sentinelle-kotlin",
-    "storage_bucket": "sentinelle-kotlin.firebasestorage.app"
+    "project_number": "967578377728",
+    "project_id": "sentinelle-2025",
+    "storage_bucket": "sentinelle-2025.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:286545274111:android:61151a1b2aee5ea640d8ca",
+        "mobilesdk_app_id": "1:967578377728:android:e0247348a4bab3f86d42e5",
         "android_client_info": {
-          "package_name": "com.exemple.sentinelle"
+          "package_name": "com.example.sentinelle"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "967578377728-9smf88s003hms56n7pb217hv5q6r4tm0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sentinelle",
+            "certificate_hash": "b88f8344592406282bae063e5ac0173c3e9f0068"
+          }
+        },
+        {
+          "client_id": "967578377728-on83ruav2728lc0n41qrjb0fdlkmdvm6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyAwvt4mnrPjLEhub3_kMi_KCyEEaszILV4"
+          "current_key": "AIzaSyD3AhVi71jRE_vXpEWDU7EC5_KEfc-4iH8"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "967578377728-on83ruav2728lc0n41qrjb0fdlkmdvm6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

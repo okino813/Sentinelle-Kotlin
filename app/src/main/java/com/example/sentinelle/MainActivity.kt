@@ -2,15 +2,18 @@ package com.example.sentinelle
 
 
 import android.Manifest
+import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -61,19 +64,51 @@ import com.example.sentinelle.page.MapScreen
 import com.example.sentinelle.page.NavigationTabExample
 import com.example.sentinelle.page.SettingsScreen
 import com.example.sentinelle.ui.theme.SentiTheme
-
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : ComponentActivity() {
+
+    private lateinit var auth: FirebaseAuth
+    private lateinit var googleSignInClient: GoogleSignInClient
+
 
     private lateinit var sharedPreferences: SharedPreferences
     private var isLoggedIn = mutableStateOf(false)
     private var isContrast = mutableStateOf(false)
     private lateinit var context: Context
 
+    private val googleSignInLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+            handleGoogleSignIn(task)
+        }
+    }
+
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
+
+        auth = Firebase.auth
+
+        // Configurer Google Sign-In
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken("286545274111-u24hnvet7cn3ia1illpc0iua9d6m3i4q.apps.googleusercontent.com") // Remplace par ton Web client ID
+            .requestEmail()
+            .build()
+
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
 
         sharedPreferences = this.getSharedPreferences("sentinelle", MODE_PRIVATE)
         isLoggedIn.value = sharedPreferences.getBoolean("is_authentificated", false)
@@ -139,6 +174,90 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    fun signInWithGoogle() {
+        val signInIntent = googleSignInClient.signInIntent
+        googleSignInLauncher.launch(signInIntent)
+    }
+
+    private fun handleGoogleSignIn(task: Task<GoogleSignInAccount>) {
+        try {
+            val account = task.getResult(ApiException::class.java)
+            firebaseAuthWithGoogle(account.idToken!!)
+        } catch (e: ApiException) {
+            Toast.makeText(this, "Google Sign-In échoué", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun firebaseAuthWithGoogle(idToken: String) {
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val user = auth.currentUser
+                    Toast.makeText(this, "Connecté avec Google !", Toast.LENGTH_SHORT).show()
+                    // Mettre à jour l'état de connexion
+                    isLoggedIn.value = true
+                    sharedPreferences.edit().putBoolean("is_authentificated", true).apply()
+                } else {
+                    Toast.makeText(this, "Authentification échouée", Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
+    // ✅ Fonctions pour email/password
+    fun signInWithEmail(email: String, password: String, callback: (Boolean) -> Unit){
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val user = auth.currentUser
+                    Toast.makeText(this, "Connecté !", Toast.LENGTH_SHORT).show()
+                    // Mettre à jour l'état de connexion
+                    isLoggedIn.value = true
+                    sharedPreferences.edit().putBoolean("is_authentificated", true).apply()
+                    callback(true)
+                } else {
+                    Toast.makeText(this, "Erreur: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                    callback(false)
+                }
+            }
+    }
+
+    fun signUpWithEmail(email: String, password: String, callback: (Boolean) -> Unit) {
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val user = auth.currentUser
+                    Toast.makeText(this, "Compte créé !", Toast.LENGTH_SHORT).show()
+                    // Mettre à jour l'état de connexion
+                    isLoggedIn.value = true
+                    sharedPreferences.edit().putBoolean("is_authentificated", true).apply()
+                    callback(true)
+                } else {
+                    Toast.makeText(this, "Erreur: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                    callback(false)
+                }
+            }
+    }
+
+    // Vérifier si utilisateur connecté
+    fun checkCurrentUser() {
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            // Utilisateur connecté
+            println("Utilisateur: ${currentUser.email}")
+        } else {
+            // Pas connecté
+            println("Pas d'utilisateur connecté")
+        }
+    }
+
+    // Déconnexion
+    fun signOut() {
+        auth.signOut()
+        googleSignInClient.signOut()
+        Toast.makeText(this, "Déconnecté", Toast.LENGTH_SHORT).show()
     }
 
     private val LOCATION_PERMISSION_REQUEST_CODE = 1001

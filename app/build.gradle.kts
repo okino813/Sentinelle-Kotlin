@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
+    id("com.google.gms.google-services")
+
 }
 
 android {
@@ -88,4 +90,9 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.7.7")
 
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.30.1")
+
+    // Firebase Auth
+    implementation("com.google.firebase:firebase-auth-ktx:22.3.0")
+    // Google Sign-In
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
 }

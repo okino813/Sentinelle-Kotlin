@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.sentinelle.app-mergeDebugResources-66:/values-h720dp-v13/values-h720dp-v13.xml",
+            "outputFile": "com.example.sentinelle.app-mergeDebugResources-70:/values-h720dp-v13/values-h720dp-v13.xml",
             "map": [
                 {
-                    "source": "/home/axel/.gradle/caches/8.11.1/transforms/2c1a4f82536b8cde1e27dea79e3df279/transformed/appcompat-1.7.0/res/values-h720dp-v13/values-h720dp-v13.xml",
+                    "source": "/home/axel/.gradle/caches/8.11.1/transforms/4c6b39299ddd4717b3019c7072d4e4f3/transformed/appcompat-1.7.0/res/values-h720dp-v13/values-h720dp-v13.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

@@ -31,7 +31,6 @@ import com.example.sentinelle.api.Input
 import com.example.sentinelle.api.Logo
 import com.example.sentinelle.api.Titre
 import com.example.sentinelle.api.UpdateStatusBarColor
-import com.example.sentinelle.api.api_service
 
 @Composable
 fun FormulaireConnexion(onLoginSuccess : () -> Unit) {
@@ -51,6 +50,7 @@ fun FormulaireConnexion(onLoginSuccess : () -> Unit) {
     var loginTried by remember { mutableStateOf(false) }
 
     val context = LocalContext.current
+    val activity = context as MainActivity
 
     UpdateStatusBarColor(AppColors.SentiBlack, context)
 
@@ -156,12 +156,13 @@ fun FormulaireConnexion(onLoginSuccess : () -> Unit) {
                             }
 
                             if (isValid) {
-                                val api = api_service(context)
-                                api.register(context, email, motDePasse) { success ->
+                                activity.signUpWithEmail(email, motDePasse) {
+                                    success ->
                                     if (success) {
+                                        emailError = null
+                                        motDePasseError = null
                                         onLoginSuccess()
-                                    }
-                                    else{
+                                    } else {
                                         emailError = "Email déjà utilisé"
                                     }
                                 }
@@ -187,19 +188,30 @@ fun FormulaireConnexion(onLoginSuccess : () -> Unit) {
                             }
 
                             if (isValid) {
-                                val api = api_service(context)
-                                api.login(email, motDePasse) { success ->
-                                    loginSuccess = success
-                                    loginTried = true
-                                    if (!success) {
+//                                val api = api_service(context)
+                                activity.signInWithEmail(email, motDePasse) {
+                                        success ->
+                                    if (success) {
+                                        emailError = null
+                                        motDePasseError = null
+                                        onLoginSuccess()
+                                    } else {
                                         emailError = "Email ou mot de passe incorrect"
                                         motDePasseError = "Email ou mot de passe incorrect"
                                     }
-                                    else{
-                                        emailError = null
-                                        motDePasseError = null
-                                    }
                                 }
+//                                api.login(email, motDePasse) { success ->
+//                                    loginSuccess = success
+//                                    loginTried = true
+//                                    if (!success) {
+//                                        emailError = "Email ou mot de passe incorrect"
+//                                        motDePasseError = "Email ou mot de passe incorrect"
+//                                    }
+//                                    else{
+//                                        emailError = null
+//                                        motDePasseError = null
+//                                    }
+//                                }
                             }
                         })
                         // Si login réussi → redirection
