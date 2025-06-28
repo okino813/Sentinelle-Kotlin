@@ -138,6 +138,58 @@ class api_service(val context: Context) {
         )
     }
 
+    fun stopTimer(
+        context: Context,
+        callback: (Boolean, String?) -> Unit
+    ) {
+        ApiHelper.apiGet(
+            context = context,
+            endpoint = "stoptimer",
+            onSuccess = { responseJson ->
+                val success = responseJson.optBoolean("success", false)
+                if (success) {
+                    callback(true, null)
+                } else {
+                    val error = responseJson.optString("error", "Erreur inconnue")
+                    callback(false, error)
+                }
+            },
+            onError = {
+                callback(false, "Erreur lors de l'appel à l'API")
+            }
+        )
+    }
+
+    fun sendLocation(
+        context: Context,
+        latitude: String,
+        longitude: String,
+        callback: (Boolean) -> Unit
+    ) {
+
+        val json = JSONObject().apply {
+            put("latitude", latitude)
+            put("longitude", longitude)
+        }
+
+        ApiHelper.apiPost(
+            context = context,
+            endpoint = "sendlocation",
+            json = json,
+            onSuccess = { responseJson ->
+                val success = responseJson.optBoolean("success", false)
+                if (success) {
+                    callback(true)
+                } else {
+                    callback(false)
+                }
+            },
+            onError = {
+                callback(false)
+            }
+        )
+    }
+
     fun saveNewPassword(context: Context,password: String, newPassword: String, callback: (Boolean) -> Unit) {
         val json = JSONObject().apply {
             put("password", password)

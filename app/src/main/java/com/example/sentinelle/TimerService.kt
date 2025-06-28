@@ -15,6 +15,7 @@ import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import com.example.sentinelle.api.AppValues
+import com.example.sentinelle.api.api_service
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 
@@ -76,6 +77,7 @@ class TimerService : Service() {
                     // Action toutes les 10 secondes
                     Log.d("TimerService", "Action toutes les 10 secondes")
                     getLastLocation()
+
                 }
 
                 if (secondsElapsed % 300 == 0) {
@@ -104,6 +106,18 @@ class TimerService : Service() {
             if (location != null) {
                 Log.d("TimerService", "Localisation → lat: ${location.latitude}, lng: ${location.longitude}")
                 // Tu peux sauvegarder ou envoyer la position ici
+                var api = api_service(this)
+                api.sendLocation(
+                    context = this,
+                    latitude = location.latitude.toString(),
+                    longitude = location.longitude.toString()
+                ) { success ->
+                    if (success) {
+                        Log.d("TimerService", "Localisation envoyée avec succès")
+                    } else {
+                        Log.e("TimerService", "Erreur lors de l'envoi de la localisation")
+                    }
+                }
             } else {
                 Log.d("TimerService", "Localisation non disponible")
             }
