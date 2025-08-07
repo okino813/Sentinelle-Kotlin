@@ -4,7 +4,7 @@
             "outputFile": "com.example.sentinelle.app-mergeDebugResources-70:/values-watch-v20/values-watch-v20.xml",
             "map": [
                 {
-                    "source": "/home/axel/.gradle/caches/8.11.1/transforms/e610880ab307c82e15870d2cb2612345/transformed/play-services-auth-20.7.0/res/values-watch-v20/values.xml",
+                    "source": "/home/axel/.gradle/caches/8.11.1/transforms/d56bba3541952d0c29818e9be8225809/transformed/play-services-auth-20.7.0/res/values-watch-v20/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11",
                         "startColumns": "0,0,0,0,0,0,0,0",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "/home/axel/.gradle/caches/8.11.1/transforms/4c6b39299ddd4717b3019c7072d4e4f3/transformed/appcompat-1.7.0/res/values-watch-v20/values-watch-v20.xml",
+                    "source": "/home/axel/.gradle/caches/8.11.1/transforms/c82c2da0e8bbf21a0e8bc90e7c1e3a10/transformed/appcompat-1.7.0/res/values-watch-v20/values-watch-v20.xml",
                     "from": {
                         "startLines": "2,5,8",
                         "startColumns": "4,4,4",

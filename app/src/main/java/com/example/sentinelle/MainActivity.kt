@@ -56,6 +56,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import com.example.sentinelle.api.AppColors
+import com.example.sentinelle.api.AppValues
 import com.example.sentinelle.api.AppValues.Montserrat
 import com.example.sentinelle.api.UpdateStatusBarColor
 import com.example.sentinelle.api.api_service
@@ -139,7 +140,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
-
+        setContentView(R.layout.activity_main)
         auth = Firebase.auth
 
         // Configurer Google Sign-In
@@ -153,6 +154,9 @@ class MainActivity : ComponentActivity() {
         sharedPreferences = this.getSharedPreferences("sentinelle", MODE_PRIVATE)
         isLoggedIn.value = sharedPreferences.getBoolean("is_authentificated", false)
         isContrast.value = sharedPreferences.getBoolean("isContraster", false)
+
+        var ctext = Color(0xff399d61)
+
 
         checkAndRequestPermissions()
 
@@ -207,7 +211,9 @@ class MainActivity : ComponentActivity() {
 
                     })
 
-                    is AppState.Main -> BottomMenu(
+
+                    is AppState.Main ->
+                        BottomMenu(
                         context= context,
                         sharedPreferences = sharedPreferences,
                         isLoggedIn = isLoggedIn,
@@ -428,7 +434,25 @@ fun BottomMenu(
     modifier: Modifier = Modifier
 ) {
 
+    // Listes des couleurs :
+    var colorList by remember {
+        mutableStateOf(
+            if (AppValues.isContrasted)
+                AppValues.contrastColors
+            else
+                AppValues.defaultColors
+        )
+    }
 
+    fun changeColor(index: Int) {
+        Log.d("ChangementColor", "Changement de couleur à l'index: $index")
+        if(AppValues.isContrasted)
+            colorList = AppValues.contrastColors
+        else
+            colorList = AppValues.defaultColors
+
+        AppValues.isContrasted = !AppValues.isContrasted
+    }
 
     val navItemList = listOf(
         NavItem("Home", R.drawable.home,0),
@@ -448,8 +472,8 @@ fun BottomMenu(
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
             NavigationBar(
-                containerColor = AppColors.SentiBlack,
-                contentColor = AppColors.SentiGreen,
+                containerColor = colorList[0],
+                contentColor = colorList[1],
                 modifier = Modifier
                     .fillMaxWidth()
                     .drawBehind {
@@ -485,8 +509,8 @@ fun BottomMenu(
 
                         },
                         colors = NavigationBarItemDefaults.colors(
-                            indicatorColor = AppColors.SentiBlack,
-                            selectedIconColor = AppColors.SentiGreen,
+                            indicatorColor = colorList[0],
+                            selectedIconColor = colorList[1],
                             unselectedIconColor = Color.White,
                         ),
                     )
@@ -500,7 +524,9 @@ fun BottomMenu(
             context = context,
             sharedPreferences = sharedPreferences,
             isLoggedIn = isLoggedIn,
-            isContrast = isContrast
+            isContrast = isContrast,
+            colorList = colorList,
+            onChangeColor = ::changeColor
         )
     }
 }
@@ -508,14 +534,18 @@ fun BottomMenu(
 @RequiresApi(Build.VERSION_CODES.Q)
 @Composable
 fun ContentScreen(modifier: Modifier = Modifier, selectedIndex : Int,
-  context: Context,
-  sharedPreferences: SharedPreferences,
-  isLoggedIn: MutableState<Boolean>,
-  isContrast: MutableState<Boolean>
+    context: Context,
+    sharedPreferences: SharedPreferences,
+    isLoggedIn: MutableState<Boolean>,
+    isContrast: MutableState<Boolean>,
+    colorList: List<Color>,
+    onChangeColor: (Int) -> Unit
 ){
     when(selectedIndex){
         0-> HomeScreen(
-            modifier = modifier
+            colorList,
+            modifier = modifier,
+            onChangeColor = onChangeColor,
         )
         1-> MapScreen()
         2-> NavigationTabExample(modifier = modifier)

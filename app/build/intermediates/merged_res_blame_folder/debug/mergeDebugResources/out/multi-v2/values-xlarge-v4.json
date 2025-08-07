@@ -4,7 +4,7 @@
             "outputFile": "com.example.sentinelle.app-mergeDebugResources-70:/values-xlarge-v4/values-xlarge-v4.xml",
             "map": [
                 {
-                    "source": "/home/axel/.gradle/caches/8.11.1/transforms/4c6b39299ddd4717b3019c7072d4e4f3/transformed/appcompat-1.7.0/res/values-xlarge-v4/values-xlarge-v4.xml",
+                    "source": "/home/axel/.gradle/caches/8.11.1/transforms/c82c2da0e8bbf21a0e8bc90e7c1e3a10/transformed/appcompat-1.7.0/res/values-xlarge-v4/values-xlarge-v4.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7",
                         "startColumns": "4,4,4,4,4,4",
