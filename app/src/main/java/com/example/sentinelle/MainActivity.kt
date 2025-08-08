@@ -544,8 +544,7 @@ fun ContentScreen(modifier: Modifier = Modifier, selectedIndex : Int,
     when(selectedIndex){
         0-> HomeScreen(
             colorList,
-            modifier = modifier,
-            onChangeColor = onChangeColor,
+            modifier = modifier
         )
         1-> MapScreen()
         2-> NavigationTabExample(modifier = modifier)
@@ -554,7 +553,8 @@ fun ContentScreen(modifier: Modifier = Modifier, selectedIndex : Int,
             context = context,
             sharedPreferences = sharedPreferences,
             isLoggedIn = isLoggedIn,
-            isContrast = isContrast
+            isContrast = isContrast,
+            onChangeColor = onChangeColor
         )
     }
 }

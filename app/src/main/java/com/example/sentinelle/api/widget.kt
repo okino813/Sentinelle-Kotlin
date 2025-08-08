@@ -224,12 +224,12 @@ fun RedBouton(text: String, OnClick: () -> Unit){
 }
 
 @Composable
-fun BoutonStartStop(text: String, OnClick: () -> Unit){
+fun BoutonStartStop(text: String, colors: List<Color>, OnClick: () -> Unit){
     Button(
         onClick = OnClick,
         colors = ButtonDefaults.buttonColors(
-            containerColor = AppColors.SentiGreen,       // Couleur de fond du bouton
-            contentColor = AppColors.SentiBlack         // Couleur du texte
+            containerColor = colors[1],       // Couleur de fond du bouton
+            contentColor = colors[0]         // Couleur du texte
         ),
         shape = RoundedCornerShape(8.dp)
     ) {

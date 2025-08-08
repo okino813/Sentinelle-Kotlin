@@ -56,7 +56,9 @@ fun SettingsScreen(
     context: Context,
     sharedPreferences: SharedPreferences,
     isLoggedIn: MutableState<Boolean>,
-    isContrast: MutableState<Boolean>
+    isContrast: MutableState<Boolean>,
+    onChangeColor: (Int) -> Unit
+
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
@@ -253,20 +255,20 @@ fun SettingsScreen(
             Switch(
                 checked = isContrast.value,
                 onCheckedChange = { checked ->
-                    isContrast.value = checked
+                    onChangeColor(0)
 
-                    sharedPreferences.edit().putBoolean("isContraster", checked).commit()
-
-                    Log.d("MainActivity", "Mode contraster changé : $checked")
-
-
-                    // Redémarre l'application
-                    val activity = context as? Activity
-                    val intent = context.packageManager.getLaunchIntentForPackage(context.packageName)
-                    intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-                    context.startActivity(intent)
-                    activity?.finish()
-                    Runtime.getRuntime().exit(0)
+//                    sharedPreferences.edit().putBoolean("isContraster", checked).commit()
+//
+//                    Log.d("MainActivity", "Mode contraster changé : $checked")
+//
+//
+//                    // Redémarre l'application
+//                    val activity = context as? Activity
+//                    val intent = context.packageManager.getLaunchIntentForPackage(context.packageName)
+//                    intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+//                    context.startActivity(intent)
+//                    activity?.finish()
+//                    Runtime.getRuntime().exit(0)
                 },
 
                 modifier = Modifier.padding(end = 8.dp),
