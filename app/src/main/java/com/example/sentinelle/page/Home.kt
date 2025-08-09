@@ -12,10 +12,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -89,64 +92,68 @@ fun HomeScreen(
         }
     }
 
-
     fun startTimer(context : Context){
-        if (isTimerRunning) "Stop" else "Départ"
-            if (!isTimerRunning) {
-                // Vérification de lancement via API
-                api.startTimer(
-                    context,
-                    heures.value,
-                    minutes.value,
-                    secondes.value,
-                ) { success, error ->
-                    if (success) {
-                        Log.d("TESTCheck", "Timer started")
-                        val totalseconds =
-                            heures.value * 3600 + minutes.value * 60 + secondes.value
-                        val intent = Intent(context, TimerService::class.java).apply {
-                            action = "START_TIMER"
-                            putExtra("totalSeconds", totalseconds)
-                        }
-                        ContextCompat.startForegroundService(context, intent)
-                        isTimerRunning = true
-                    } else {
-                        errorMessage = error ?: "Erreur inconnue"
-                        isSuccess = false
-                        showErrorDialog = true
+        if (!isTimerRunning) {
+            // Vérification de lancement via API
+            textBtnStartStop ="Stop"
+            api.startTimer(
+                context,
+                heures.value,
+                minutes.value,
+                secondes.value,
+            ) { success, error ->
+                if (success) {
+                    Log.d("TESTCheck", "Timer started")
+                    val totalseconds =
+                        heures.value * 3600 + minutes.value * 60 + secondes.value
+                    val intent = Intent(context, TimerService::class.java).apply {
+                        action = "START_TIMER"
+                        putExtra("totalSeconds", totalseconds)
                     }
-                }
-            } else {
-                // Arrêter le minuteur
-                val intent = Intent(context, TimerService::class.java).apply {
-                    action = "STOP_TIMER"
-                }
-
-                context.startService(intent)
-                isTimerRunning = false
-
-                Log.d("TimerService", "Timer stopped, reset values")
-
-                api.stopTimer(context) { success, error ->
-                    if (success) {
-                        // Remise à zéro des valeurs du minuteur
-                        heures.value = 0
-                        minutes.value = 0
-                        secondes.value = 0
-
-                    } else {
-                        errorMessage = error ?: "Erreur inconnue"
-                        isSuccess = false
-                        showErrorDialog = true
-                    }
+                    ContextCompat.startForegroundService(context, intent)
+                    isTimerRunning = true
+                } else {
+                    errorMessage = error ?: "Erreur inconnue"
+                    isSuccess = false
+                    showErrorDialog = true
                 }
             }
+        } else {
+            textBtnStartStop = "Départ"
+            // Arrêter le minuteur
+            val intent = Intent(context, TimerService::class.java).apply {
+                action = "STOP_TIMER"
+            }
+
+            context.startService(intent)
+            isTimerRunning = false
+
+            Log.d("TimerService", "Timer stopped, reset values")
+
+            api.stopTimer(context) { success, error ->
+                if (success) {
+                    // Remise à zéro des valeurs du minuteur
+                    heures.value = 0
+                    minutes.value = 0
+                    secondes.value = 0
+
+                } else {
+                    errorMessage = error ?: "Erreur inconnue"
+                    isSuccess = false
+                    showErrorDialog = true
+                }
+            }
+        }
         }
 
     if (showErrorDialog) {
         PopupAlert(errorMessage, isSuccess) {
             showErrorDialog = false
         }
+    }
+
+    fun SendAlertManual(){
+        // On lance l'alerte
     }
 
     HomeScreenStateless(
@@ -158,21 +165,12 @@ fun HomeScreen(
         minutesValues = minutesValues,
         secondes = secondes,
         textBtnStartStop = textBtnStartStop,
-        clickLaunchTimer = {startTimer(context)}
+        clickLaunchTimer = {startTimer(context)},
+        sendAlertManual = { SendAlertManual() }
 
     )
-//        Button(
-//            onClick = { /* Lancer alerte */ },
-//            modifier = Modifier
-//                .size(120.dp),
-//            shape = CircleShape,
-//            colors = ButtonDefaults.buttonColors(
-//                containerColor = Color(0xFFA72525) // ou une autre couleur
-//            )
-//        ) {
-//            Text("ALERTER", fontSize = 16.sp, color = Color.White, fontWeight = FontWeight.Bold)
-//
-//        }
+
+
 }
 
 @Composable
@@ -193,17 +191,17 @@ fun HomeScreenStateless(
     secondes: MutableState<Int>,
     textBtnStartStop: String,
     clickLaunchTimer: () -> Unit,
+    sendAlertManual: () -> Unit
 
 
     ) {
     Box(
-        modifier = modifier.fillMaxSize(),
+        modifier = Modifier
+            .background(colors[0]),
         contentAlignment = Alignment.Center,
     ){
         Column(
             modifier = modifier
-                .fillMaxSize()
-                .background(colors[0])
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
@@ -282,7 +280,18 @@ fun HomeScreenStateless(
 
             Spacer(Modifier.height(26.dp))
 
-            // Bouton Alerter manuel
+            Button(
+                onClick = { sendAlertManual() },
+                modifier = Modifier
+                    .size(120.dp),
+                shape = CircleShape,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFFA72525) // ou une autre couleur
+                )
+            ) {
+                Text("ALERTER", fontSize = 16.sp, color = Color.White, fontWeight = FontWeight.Bold)
+
+            }
 
             Spacer(Modifier.height(24.dp))
 
