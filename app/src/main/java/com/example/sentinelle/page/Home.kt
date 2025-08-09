@@ -310,7 +310,6 @@ fun HomeScreenStateless(
                 color = Color.White,
                 fontSize = 12.sp,
                 textAlign = TextAlign.Center,
-                //            modifier = Modifier.padding(horizontal = 16.dp)
             )
             }
         }

@@ -547,7 +547,10 @@ fun ContentScreen(modifier: Modifier = Modifier, selectedIndex : Int,
             modifier = modifier
         )
         1-> MapScreen()
-        2-> NavigationTabExample(modifier = modifier)
+        2-> NavigationTabExample(
+            colorList,
+            modifier = modifier,
+        )
         3-> SettingsScreen(
             modifier = modifier,
             context = context,

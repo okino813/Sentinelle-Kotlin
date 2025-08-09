@@ -14,8 +14,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Home
@@ -67,7 +65,9 @@ import com.example.sentinelle.api.api_service
  */
 
 @Composable
-fun MessageScreen(modifier: Modifier = Modifier) {
+fun MessageScreen(
+    colors: List<Color>,
+) {
 
     var showDialog by remember { mutableStateOf(false) }
     var isSuccess by remember { mutableStateOf<Boolean>(false) }
@@ -76,24 +76,80 @@ fun MessageScreen(modifier: Modifier = Modifier) {
     var message by remember { mutableStateOf(AppValues.message.toString()) }
     var messageError by remember { mutableStateOf<String?>(null) }
 
-
     var context = LocalContext.current
     val api = api_service(context)
+
+    fun validationMessage(){
+        var valide = true;
+
+
+        if (message.length < 50) {
+            messageError = "Le message doit faire plus de 50 caractères"
+            valide = false
+        }
+
+
+        if (valide) {
+            messageError = null
+            api.SaveMessage(context, message) { success ->
+                if (success) {
+                    AppValues.message = message
+                    showDialog = true // Affiche le dialogue
+                    isSuccess = true
+                    messageDialogue = "Infos mises à jour avec succès"
+
+                    Log.d("UI", "Infos mises à jour avec succès")
+                } else {
+                    isSuccess = false
+                    showDialog = true // Affiche le dialogue
+                    messageDialogue = "Erreur lors de la mise à jour des infos"
+                    Log.d("UI", "Erreur lors de la mise à jour des infos")
+                }
+
+            }
+        }
+    }
+
+
+    MessageScreenStateless(
+        colors = colors,
+        message = message,
+        messageError = messageError,
+        onMessageChange = { message = it },
+        validationMessage = { validationMessage() } // Fonction de validation
+    )
+
+    // Et dans le corps de SettingsScreen (en bas du Column par exemple) :
+    if (showDialog) {
+        PopupAlert(messageDialogue, isSuccess) {
+            showDialog = false
+        }
+    }
+
+
+}
+@Composable
+fun MessageScreenStateless(
+    colors: List<Color>,
+    message: String,
+    messageError: String?,
+    onMessageChange: (String) -> Unit,
+    validationMessage: () -> Unit // Fonction de validation par défaut
+) {
     Box(
         modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
     ) {
         Column(
-            modifier = modifier
-                .verticalScroll(rememberScrollState())
-                .background(AppColors.SentiBlack)
+            modifier = Modifier
+                .background(colors[0])
                 .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            UpdateStatusBarColor(AppColors.SentiBlack, LocalContext.current)
+            UpdateStatusBarColor(colors[0], LocalContext.current)
+            Spacer(Modifier.height(16.dp))
+
             Text(
                 "Message personalisé",
-                color = AppColors.SentiBlue,
+                color = colors[3],
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
                 modifier = Modifier.align(Alignment.Start)
@@ -114,7 +170,7 @@ fun MessageScreen(modifier: Modifier = Modifier) {
             InputTextArea(
                 "Entre votre messages personnalisé",
                 value = message,
-                onValueChange = { message = it },
+                onValueChange = onMessageChange,
                 messageError
             )
 
@@ -129,44 +185,8 @@ fun MessageScreen(modifier: Modifier = Modifier) {
             Spacer(modifier = Modifier.height(8.dp))
 
             Bouton("Enregistrer", OnClick = {
-                // Reset des erreurs
-                messageError = null
-                var valide = true;
-
-                if (message.length < 50) {
-                    messageError = "Le message doit faire plus de 50 caractères"
-                    valide = false
-                }
-
-
-                if (valide) {
-                    api.SaveMessage(context, message) { success ->
-                        if (success) {
-                            AppValues.message = message
-                            showDialog = true // Affiche le dialogue
-                            isSuccess = true
-                            messageDialogue = "Infos mises à jour avec succès"
-
-                            Log.d("UI", "Infos mises à jour avec succès")
-                        } else {
-                            isSuccess = false
-                            showDialog = true // Affiche le dialogue
-                            messageDialogue = "Erreur lors de la mise à jour des infos"
-                            Log.d("UI", "Erreur lors de la mise à jour des infos")
-                        }
-
-                    }
-                }
+                validationMessage()
             })
-
-            // Et dans le corps de SettingsScreen (en bas du Column par exemple) :
-            if (showDialog) {
-                PopupAlert(messageDialogue, isSuccess) {
-                    showDialog = false
-                }
-            }
-
-
         }
     }
 }
@@ -424,19 +444,22 @@ enum class Destination(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NavigationTabExample(modifier: Modifier = Modifier) {
+fun NavigationTabExample(
+    colors : List<Color>,
+    modifier: Modifier = Modifier
+) {
     val navController = rememberNavController()
     val startDestination = Destination.MESSAGE
     var selectedDestination by rememberSaveable { mutableIntStateOf(startDestination.ordinal) }
 
     Scaffold(
         modifier = modifier,
-        containerColor = AppColors.SentiBlack,
+        containerColor = colors[0],
         topBar = {
             PrimaryTabRow(
                 selectedTabIndex = selectedDestination,
-                containerColor = AppColors.SentiBlack,
-                contentColor = AppColors.SentiBlue,
+                containerColor = colors[0],
+                contentColor = colors[3],
             ) {
                 Destination.entries.forEachIndexed { index, destination ->
                     Tab(
@@ -459,6 +482,7 @@ fun NavigationTabExample(modifier: Modifier = Modifier) {
     ) { contentPadding ->
         // Passer le contentPadding au NavHost
         AppNavHost(
+            colors,
             navController = navController,
             startDestination = startDestination,
             contentPadding = contentPadding
@@ -469,6 +493,7 @@ fun NavigationTabExample(modifier: Modifier = Modifier) {
 
 @Composable
 fun AppNavHost(
+    colors: List<Color>,
     navController: NavHostController,
     startDestination: Destination,
     contentPadding: PaddingValues, // Nouveau paramètre
@@ -482,7 +507,9 @@ fun AppNavHost(
         Destination.entries.forEach { destination ->
             composable(destination.route) {
                 when (destination) {
-                    Destination.MESSAGE -> MessageScreen()
+                    Destination.MESSAGE -> MessageScreen(
+                        colors = colors
+                    )
                     Destination.CONTACT -> ContactScreen()
                     Destination.PLAYLISTS -> PlaylistScreen()
                 }
