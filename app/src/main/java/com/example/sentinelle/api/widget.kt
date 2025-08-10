@@ -14,7 +14,6 @@ import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,13 +22,11 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
@@ -39,7 +36,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -71,14 +67,6 @@ import androidx.compose.ui.window.Dialog
 import com.example.sentinelle.R
 import com.example.sentinelle.api.AppValues.Montserrat
 
-object AppColors{
-    var SentiBlack = Color(0xff16252B)
-    var SentiGreen = Color(0xff399d61)
-    var SentiDarkBlue = Color(0x33289DD2)
-    var SentiBlue = Color(0xff0097B2)
-    var SentiCyan = Color(0xff289DD2)
-}
-
 @Composable
 fun UpdateStatusBarColor(color: Color, context: Context) {
     SideEffect {
@@ -88,7 +76,7 @@ fun UpdateStatusBarColor(color: Color, context: Context) {
 }
 
 @Composable
-fun Titre(label : String){
+fun Titre(label : String, colors: List<Color>){
     Text(
         text= label,
         color = Color.White,
@@ -99,7 +87,7 @@ fun Titre(label : String){
             val strokeWidth = 5.dp.toPx()
             val y = size.height - strokeWidth / 3
             drawLine(
-                color= AppColors.SentiCyan,
+                color= colors[3],
                 start = Offset(0f, y),
                 end = Offset(size.width, y),
                 strokeWidth = strokeWidth
@@ -113,6 +101,7 @@ fun Titre(label : String){
 fun InputTextArea(
     label: String,
     value: String,
+    colors: List<Color>,
     onValueChange: (String) -> Unit,
     errorMessage: String? = null,
     maxLines: Int = 10
@@ -121,18 +110,18 @@ fun InputTextArea(
         modifier = Modifier.fillMaxWidth(),
         value = value,
         onValueChange = { onValueChange(it) },
-        placeholder = { Text(label, color = Color.Black) },
+        placeholder = { Text(label, color = colors[0]) },
         isError = errorMessage != null,
-        textStyle = TextStyle(fontSize = 16.sp, color = Color.Black),
+        textStyle = TextStyle(fontSize = 16.sp, color = colors[0]),
         shape = RoundedCornerShape(16.dp),
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = AppColors.SentiCyan,
-            unfocusedBorderColor = AppColors.SentiGreen,
-            cursorColor = AppColors.SentiBlack,
-            focusedTextColor = AppColors.SentiBlack,
-            unfocusedTextColor = AppColors.SentiBlack,
-            containerColor = AppColors.SentiGreen,
-            errorContainerColor = AppColors.SentiGreen
+            focusedBorderColor = colors[4],
+            unfocusedBorderColor = colors[1],
+            cursorColor = colors[0],
+            focusedTextColor = colors[0],
+            unfocusedTextColor = colors[0],
+            containerColor = colors[1],
+            errorContainerColor = colors[1]
         ),
         maxLines = maxLines,
         minLines = 7,
@@ -152,6 +141,7 @@ fun InputTextArea(
 fun Input(
     label: String,
     value: String,
+    colors: List<Color>,
     onValueChange: (String) -> Unit,
     isPassword: Boolean = false,
     errorMessage: String? = null
@@ -163,19 +153,19 @@ fun Input(
         onValueChange = {
             onValueChange(it)
         },
-        placeholder = { Text(label, color = Color.Black) },
+        placeholder = { Text(label, color = colors[0]) },
         isError = errorMessage != null,
         singleLine = true,
-        textStyle = TextStyle(fontSize = 16.sp, color = Color.Black),
+        textStyle = TextStyle(fontSize = 16.sp, color = colors[0]),
         shape = RoundedCornerShape(50.dp),
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = AppColors.SentiCyan,
-            unfocusedBorderColor = AppColors.SentiGreen,
-            cursorColor = AppColors.SentiBlack,
-            focusedTextColor = AppColors.SentiBlack,
-            unfocusedTextColor = AppColors.SentiBlack,
-            containerColor = AppColors.SentiGreen,
-            errorContainerColor = AppColors.SentiGreen
+            focusedBorderColor = colors[4],
+            unfocusedBorderColor = colors[1],
+            cursorColor = colors[0],
+            focusedTextColor = colors[0],
+            unfocusedTextColor = colors[0],
+            containerColor = colors[1],
+            errorContainerColor = colors[1]
         ),
         visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None,
     )
@@ -213,14 +203,14 @@ fun Bouton(text: String,colors: List<Color>, modifier: Modifier = Modifier, OnCl
 }
 
 @Composable
-fun RedBouton(text: String, OnClick: () -> Unit){
+fun RedBouton(text: String, colors: List<Color>, OnClick: () -> Unit){
     Button(
         onClick = OnClick,
         modifier = Modifier
             .wrapContentWidth(Alignment.CenterHorizontally),
         colors = ButtonDefaults.buttonColors(
             containerColor = Color(0xFFF54B4B),       // Couleur de fond du bouton
-            contentColor = AppColors.SentiBlack         // Couleur du texte
+            contentColor = colors[0]        // Couleur du texte
         ),
         shape = RoundedCornerShape(8.dp),
 
@@ -273,94 +263,6 @@ fun Logo(){
     }
 
 }
-@Composable
-fun TimeSelector(
-    initialHours: Int = 0,
-    initialMinutes: Int = 0,
-    initialSeconds: Int = 0,
-    onTimeSelected: (Int, Int, Int) -> Unit
-) {
-    var hours by remember { mutableStateOf(initialHours) }
-    var minutes by remember { mutableStateOf(initialMinutes) }
-    var seconds by remember { mutableStateOf(initialSeconds) }
-
-    var showPickerFor by remember { mutableStateOf<String?>(null) }
-
-    val pickerRange = when (showPickerFor) {
-        "hours" -> 0..24
-        "minutes", "seconds" -> 0..59
-        else -> 0..0
-    }
-
-    val selectedValue = when (showPickerFor) {
-        "hours" -> hours
-        "minutes" -> minutes
-        "seconds" -> seconds
-        else -> 0
-    }
-
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Row(
-            horizontalArrangement = Arrangement.SpaceEvenly,
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.fillMaxWidth().padding(16.dp)
-        ) {
-            TimeField("Heures", hours) { showPickerFor = "hours" }
-            TimeField("Minutes", minutes) { showPickerFor = "minutes" }
-            TimeField("Secondes", seconds) { showPickerFor = "seconds" }
-        }
-
-        Button(onClick = {
-            onTimeSelected(hours, minutes, seconds)
-        }) {
-            Text("Valider")
-        }
-    }
-
-    if (showPickerFor != null) {
-        AlertDialog(
-            onDismissRequest = { showPickerFor = null },
-            title = { Text("Choisir ${showPickerFor}") },
-            text = {
-                AndroidView(
-                    factory = { context ->
-                        NumberPicker(context).apply {
-                            minValue = pickerRange.first
-                            maxValue = pickerRange.last
-                            value = selectedValue
-                            setOnValueChangedListener { _, _, newVal ->
-                                when (showPickerFor) {
-                                    "hours" -> hours = newVal
-                                    "minutes" -> minutes = newVal
-                                    "seconds" -> seconds = newVal
-                                }
-                            }
-                        }
-                    }
-                )
-            },
-            confirmButton = {
-                TextButton(onClick = { showPickerFor = null }) {
-                    Text("OK")
-                }
-            }
-        )
-    }
-}
-
-@Composable
-fun TimeField(label: String, value: Int, onClick: () -> Unit) {
-    OutlinedTextField(
-        value = value.toString().padStart(2, '0'),
-        onValueChange = {},
-        label = { Text(label) },
-        readOnly = true,
-        modifier = Modifier
-            .width(100.dp)
-            .clickable { onClick() }
-    )
-}
-
 
 
 fun Int.dpToPx(context: Context): Int =
@@ -373,6 +275,7 @@ fun Int.dpToPx(context: Context): Int =
 fun CustomNumberPicker(
     selectedValue: MutableState<Int>,
     list: List<Int>,
+    colors: List<Color>,
     onValueChange: (Int) -> Unit
 )
 {
@@ -390,7 +293,7 @@ fun CustomNumberPicker(
                     for (i in 0 until count) {
                         val child = numberPicker.getChildAt(i)
                         if (child is EditText) {
-                            child.setTextColor(AppColors.SentiGreen.toArgb())
+                            child.setTextColor(colors[1].toArgb())
 //                            child.textSize = 20f // Facultatif : taille
                         }
                     }
@@ -400,7 +303,7 @@ fun CustomNumberPicker(
                     for (field in fields) {
                         if (field.name == "mSelectionDivider") {
                             field.isAccessible = true
-                            field.set(numberPicker, ColorDrawable(AppColors.SentiGreen.toArgb()))
+                            field.set(numberPicker, ColorDrawable(colors[1].toArgb()))
                             break
                         }
                     }
@@ -415,7 +318,7 @@ fun CustomNumberPicker(
                     val selectorWheelPaintField = NumberPicker::class.java.getField("mSelectorWheelPaint")
                     selectorWheelPaintField.isAccessible = true
                     val paint = selectorWheelPaintField.get(numberPicker) as Paint
-                    paint.color = AppColors.SentiGreen // ou une autre couleur
+                    paint.color = colors[1] // ou une autre couleur
                     numberPicker.invalidate()
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -455,6 +358,7 @@ fun CustomNumberPicker(
 fun PopupAlert(
     message: String,
     isSuccess: Boolean,
+    colors: List<Color>,
     onDismiss: () -> Unit
 ) {
 
@@ -462,7 +366,7 @@ fun PopupAlert(
         var color = Color.Transparent
         if(isSuccess)
         {
-            color = AppColors.SentiGreen
+            color = colors[1]
         }
         else{
             color = Color.Red
@@ -471,12 +375,12 @@ fun PopupAlert(
             modifier = Modifier
                 .padding(16.dp)
                 .background(
-                    color = AppColors.SentiBlack, // Utilise ta couleur personnalisée
+                    color = colors[0],
                     shape = RoundedCornerShape(12.dp)
                 )
                 .border(
                     width = 2.dp,
-                    color = color, // Utilise ta couleur personnalisée
+                    color = color,
                     shape = RoundedCornerShape(12.dp)
                 )
                 .padding(16.dp)
@@ -490,7 +394,7 @@ fun PopupAlert(
 
                 Text(
                     text = "Attention !",
-                    color = AppColors.SentiGreen,
+                    color = colors[1],
                     fontSize = 22.sp,
                     fontWeight = FontWeight.Bold,
                     fontStyle = FontStyle.Italic,
@@ -510,7 +414,7 @@ fun PopupAlert(
 
                 Button(
                     onClick = onDismiss,
-                    colors = ButtonDefaults.buttonColors(containerColor = AppColors.SentiGreen, contentColor = AppColors.SentiBlack),
+                    colors = ButtonDefaults.buttonColors(containerColor = colors[1], contentColor = colors[0]),
                 ) {
                     Text("Compris")
                 }

@@ -40,7 +40,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.sentinelle.api.AppColors
 import com.example.sentinelle.api.AppValues
 import com.example.sentinelle.api.Bouton
 import com.example.sentinelle.api.Input
@@ -92,14 +91,14 @@ fun SettingsScreen(
         modifier = modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .background(AppColors.SentiBlack)
+            .background(colors[0])
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        UpdateStatusBarColor(AppColors.SentiBlack, LocalContext.current)
+        UpdateStatusBarColor(colors[0], LocalContext.current)
         Text(
             "Mon compte",
-            color = AppColors.SentiBlue,
+            color = colors[3],
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp,
             modifier = Modifier.align(Alignment.Start)
@@ -107,11 +106,11 @@ fun SettingsScreen(
 
         Spacer(Modifier.height(16.dp))
 
-        Input("Prénom", value = firstname, onValueChange = { firstname = it }, false, firstnameError)
+        Input("Prénom", value = firstname, colors = colors,onValueChange = { firstname = it }, false, firstnameError)
         Spacer(modifier = Modifier.height(8.dp))
-        Input("Nom", value = lastname, onValueChange = { lastname = it }, false, lastnameError)
+        Input("Nom", value = lastname, colors = colors, onValueChange = { lastname = it }, false, lastnameError)
         Spacer(modifier = Modifier.height(8.dp))
-        Input("Numéro de téléphone", value = phone, onValueChange = { phone = it }, false, phoneError)
+        Input("Numéro de téléphone", value = phone, colors = colors, onValueChange = { phone = it }, false, phoneError)
         Spacer(modifier = Modifier.height(8.dp))
 
         Bouton("Enregistrer", colors = colors, OnClick = {
@@ -164,18 +163,18 @@ fun SettingsScreen(
 
         Text(
             "Sécurité",
-            color = AppColors.SentiBlue,
+            color = colors[3],
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp,
             modifier = Modifier.align(Alignment.Start)
         )
         Spacer(Modifier.height(16.dp))
 
-        Input("Mot de passe actuel", value = password, onValueChange = { password = it }, true, passwordError)
+        Input("Mot de passe actuel", value = password, colors = colors, onValueChange = { password = it }, true, passwordError)
         Spacer(modifier = Modifier.height(8.dp))
-        Input("Nouveau mot de passe", value = NewPassword, onValueChange = { NewPassword = it }, true, NewPasswordError)
+        Input("Nouveau mot de passe", value = NewPassword, colors = colors, onValueChange = { NewPassword = it }, true, NewPasswordError)
         Spacer(modifier = Modifier.height(8.dp))
-        Input("Confirmation du mot de passe", value = ConfirmNewPassword, onValueChange = { ConfirmNewPassword = it }, true, ConfirmNewPasswordError)
+        Input("Confirmation du mot de passe", value = ConfirmNewPassword, colors = colors, onValueChange = { ConfirmNewPassword = it }, true, ConfirmNewPasswordError)
         Spacer(modifier = Modifier.height(8.dp))
 
         Bouton("Enregistrer", colors = colors, OnClick = {
@@ -231,7 +230,7 @@ fun SettingsScreen(
 
         Text(
             "Accessibilité",
-            color = AppColors.SentiBlue,
+            color = colors[3],
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp,
             modifier = Modifier.align(Alignment.Start)
@@ -242,43 +241,31 @@ fun SettingsScreen(
         Row(
             modifier = Modifier
                 .clip(RoundedCornerShape(50.dp)) // <-- coins arrondis
-                .background(AppColors.SentiGreen),
+                .background(colors[1]),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = androidx.compose.foundation.layout.Arrangement.SpaceBetween
 
         ) {
             Text(
                 "Mode contraster",
-                color = AppColors.SentiBlack,
+                color = colors[0],
                 modifier = Modifier.weight(1f).padding(start = 16.dp, top = 4.dp),
 //                style = MaterialTheme.typography.labelSmall
             )
             Switch(
                 checked = isContrast.value,
                 onCheckedChange = { checked ->
+                    isContrast.value = checked
                     onChangeColor(0)
-
-//                    sharedPreferences.edit().putBoolean("isContraster", checked).commit()
-//
-//                    Log.d("MainActivity", "Mode contraster changé : $checked")
-//
-//
-//                    // Redémarre l'application
-//                    val activity = context as? Activity
-//                    val intent = context.packageManager.getLaunchIntentForPackage(context.packageName)
-//                    intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-//                    context.startActivity(intent)
-//                    activity?.finish()
-//                    Runtime.getRuntime().exit(0)
                 },
 
                 modifier = Modifier.padding(end = 8.dp),
 
                 colors = SwitchDefaults.colors(
-                    checkedThumbColor = AppColors.SentiCyan,
-                    uncheckedThumbColor = AppColors.SentiCyan,
-                    checkedTrackColor = AppColors.SentiBlack,
-                    uncheckedTrackColor = AppColors.SentiBlack,
+                    checkedThumbColor = colors[4],
+                    uncheckedThumbColor = colors[4],
+                    checkedTrackColor = colors[0],
+                    uncheckedTrackColor = colors[0],
                 )
             )
         }
@@ -287,7 +274,7 @@ fun SettingsScreen(
 
         Text(
             "Autres paramêtre",
-            color = AppColors.SentiBlue,
+            color = colors[3],
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp,
             modifier = Modifier.align(Alignment.Start)
@@ -309,10 +296,9 @@ fun SettingsScreen(
                 textAlign = TextAlign.Center,
             )
 
-            RedBouton("Supprimer", OnClick = {
+            RedBouton("Supprimer", colors = colors, OnClick = {
                 print("test")
             })
-
         }
 
         Row(
@@ -329,7 +315,7 @@ fun SettingsScreen(
                 textAlign = TextAlign.Center,
             )
 
-            RedBouton("Supprimer", OnClick = {
+            RedBouton("Supprimer", colors = colors, OnClick = {
                 print("test")
             })
 
@@ -349,7 +335,7 @@ fun SettingsScreen(
                 textAlign = TextAlign.Center,
             )
 
-            RedBouton("Déconexion", OnClick = {
+            RedBouton("Déconexion", colors = colors, OnClick = {
                 api.logout(
                     context = context,
                     onLogoutSuccess = {
@@ -377,7 +363,7 @@ fun SettingsScreen(
         }
         // Et dans le corps de SettingsScreen (en bas du Column par exemple) :
         if (showDialog) {
-            PopupAlert(messageDialogue, isSuccess) {
+            PopupAlert(messageDialogue, colors = colors, isSuccess = isSuccess) {
                 showDialog = false
             }
         }

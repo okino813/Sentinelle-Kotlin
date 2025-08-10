@@ -148,7 +148,7 @@ fun HomeScreen(
         }
 
     if (showErrorDialog) {
-        PopupAlert(errorMessage, isSuccess) {
+        PopupAlert(errorMessage, colors = colors, isSuccess = isSuccess) {
             showErrorDialog = false
         }
     }
@@ -226,6 +226,7 @@ fun HomeScreenStateless(
                 CustomNumberPicker(
                     selectedValue = heures,
                     list = heuresValues,
+                    colors = colors,
                     onValueChange = { heures.value = it }
                 )
                 Text(
@@ -237,6 +238,7 @@ fun HomeScreenStateless(
                 CustomNumberPicker(
                     selectedValue = minutes,
                     list = minutesValues,
+                    colors = colors,
                     onValueChange = { minutes.value = it }
                 )
                 Text(
@@ -248,6 +250,7 @@ fun HomeScreenStateless(
                 CustomNumberPicker(
                     selectedValue = secondes,
                     list = minutesValues, // Cette liste vaut pour les secondes et minutes
+                    colors = colors,
                     onValueChange = { secondes.value = it }
                 )
             }

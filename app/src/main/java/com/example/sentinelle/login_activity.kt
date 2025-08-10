@@ -28,7 +28,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.example.sentinelle.api.AppColors
 import com.example.sentinelle.api.Bouton
 import com.example.sentinelle.api.Input
 import com.example.sentinelle.api.Logo
@@ -62,11 +61,11 @@ fun FormulaireConnexion(
     val context = LocalContext.current
     val activity = context as MainActivity
 
-    UpdateStatusBarColor(AppColors.SentiBlack, context)
+    UpdateStatusBarColor(colors[0], context)
 
     Surface(
         modifier = Modifier.fillMaxSize(),
-        color = AppColors.SentiBlack
+        color = colors[0]
     ) {
         Box(
             modifier = Modifier
@@ -82,23 +81,23 @@ fun FormulaireConnexion(
                 Logo()
 
                 if (inscriptionMode) {
-                    Titre("Inscription")
+                    Titre("Inscription", colors = colors)
                 } else {
-                    Titre("Connexion")
+                    Titre("Connexion", colors = colors)
                 }
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                Input("Email", value = email, onValueChange = { email = it }, false, emailError)
+                Input("Email", value = email,colors = colors, onValueChange = { email = it }, false, emailError)
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                Input("Mot de passe",value = motDePasse, onValueChange = { motDePasse = it }, true, errorMessage = motDePasseError)
+                Input("Mot de passe",value = motDePasse, colors = colors, onValueChange = { motDePasse = it }, true, errorMessage = motDePasseError)
 
                 Spacer(modifier = Modifier.height(8.dp))
 
                 if (inscriptionMode) {
-                    Input("Confirmation du mot de passe", value = motDePasseConfirm, onValueChange = { motDePasseConfirm = it }, true, errorMessage = ConfrimmotDePasseError)
+                    Input("Confirmation du mot de passe", value = motDePasseConfirm,  colors = colors, onValueChange = { motDePasseConfirm = it }, true, errorMessage = ConfrimmotDePasseError)
                 }
                 Spacer(modifier = Modifier.height(8.dp))
 
@@ -111,9 +110,9 @@ fun FormulaireConnexion(
                             checked = checked,
                             onCheckedChange = { checked = it },
                             colors = androidx.compose.material3.CheckboxDefaults.colors(
-                                checkedColor = AppColors.SentiGreen,
-                                uncheckedColor = AppColors.SentiCyan,
-                                checkmarkColor = AppColors.SentiBlack
+                                checkedColor = colors[1],
+                                uncheckedColor = colors[3],
+                                checkmarkColor = colors[0]
                             )
                         )
                         Spacer(modifier = Modifier.padding(8.dp))

@@ -55,7 +55,6 @@ import androidx.compose.ui.unit.sp
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
-import com.example.sentinelle.api.AppColors
 import com.example.sentinelle.api.AppValues
 import com.example.sentinelle.api.AppValues.Montserrat
 import com.example.sentinelle.api.UpdateStatusBarColor
@@ -169,20 +168,6 @@ class MainActivity : ComponentActivity() {
             if (isLoggedIn.value) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     enableEdgeToEdge()
-                    if (isContrast.value) {
-                        AppColors.SentiBlack = Color.Black
-                        AppColors.SentiGreen = Color.Yellow
-                        AppColors.SentiDarkBlue = Color.White
-                        AppColors.SentiBlue = Color.Cyan
-                        AppColors.SentiCyan = Color.Cyan
-                    } else {
-                        AppColors.SentiBlack = Color(0xff16252B)
-                        AppColors.SentiGreen = Color(0xff399d61)
-                        AppColors.SentiDarkBlue = Color(0x33289DD2)
-                        AppColors.SentiBlue = Color(0xff0097B2)
-                        AppColors.SentiCyan = Color(0xff289DD2)
-                    }
-
                     SentiTheme {
                         BottomMenu(
                             context = context,
@@ -196,7 +181,7 @@ class MainActivity : ComponentActivity() {
                 var appState by remember { mutableStateOf<AppState>(AppState.Tutorial) }
 
                 when (appState) {
-                    is AppState.Tutorial -> TutorialScreens(onTutorialFinished = {
+                    is AppState.Tutorial -> TutorialScreens(colors = AppValues.defaultColors, onTutorialFinished = {
                         appState = AppState.Auth
                     })
 
@@ -215,10 +200,10 @@ class MainActivity : ComponentActivity() {
 
                     is AppState.Main ->
                         BottomMenu(
-                        context= context,
-                        sharedPreferences = sharedPreferences,
-                        isLoggedIn = isLoggedIn,
-                        isContrast = isContrast
+                            context= context,
+                            sharedPreferences = sharedPreferences,
+                            isLoggedIn = isLoggedIn,
+                            isContrast = isContrast
                     )
                 }
             }
@@ -339,31 +324,31 @@ class MainActivity : ComponentActivity() {
 
 
 @Composable
-fun TutorialScreens(onTutorialFinished: () -> Unit) {
+fun TutorialScreens(colors : List<Color>, onTutorialFinished: () -> Unit) {
     var index by remember { mutableStateOf(0) }
 
     when (index) {
         0 -> TutoPage(title = "Un minuteur pas comme les autres ...", text = "Lorsque vous sortez de chez vous, vous programmer un minuteur jusqu'à votre retour !",
             imageRes = R.drawable.logo_minuteur,
-            color = AppColors.SentiBlack,
+            color = colors[0],
             fleche = R.drawable.fleche_tuto1) {
             index++
         }
         1 -> TutoPage(title = "Suivie de votre parcours", text = "Votre trajet est enregistrer pour vous et vos proche. En cas de problème, ils vous trouverons rapidement !",
             imageRes = R.drawable.logo_carte_tuto2,
-            color = AppColors.SentiBlue,
+            color = colors[3],
             fleche = R.drawable.fleche_tuto2) {
             index++
         }
         2 -> TutoPage(title = "Environnement sonore", text = "Votre environnement sonore est enregistrer. En cas d’agression, cela peux permettre de prouver la culpabilité de l’agresseur",
             imageRes = R.drawable.logo_record_tuto3,
-            color = AppColors.SentiGreen,
+            color = colors[1],
             fleche = R.drawable.fleche_tuto3) {
             index++
         }
         3 -> TutoPage(title = "Prévenir vos proches", text = "Ajoutez des contacts pour que Sentinelle puisse les prévenir en cas de danger",
             imageRes = R.drawable.logo_proche_tuto_4,
-            color = AppColors.SentiCyan,
+            color = colors[4],
             fleche = R.drawable.fleche_tuto4) {
             onTutorialFinished()
         }
@@ -435,24 +420,26 @@ fun BottomMenu(
     modifier: Modifier = Modifier
 ) {
 
-    // Listes des couleurs :
-    var colorList by remember {
-        mutableStateOf(
-            if (AppValues.isContrasted)
-                AppValues.contrastColors
-            else
-                AppValues.defaultColors
-        )
+    AppValues.isContrasted = sharedPreferences.getBoolean("isContraster", false)
+
+    var colorList by remember { mutableStateOf(AppValues.defaultColors) }
+
+    // On vérifie si le mode contraster est activé
+    if(AppValues.isContrasted) {
+        colorList = AppValues.contrastColors
+    }
+    else{
+        colorList = AppValues.defaultColors
     }
 
     fun changeColor(index: Int) {
-        Log.d("ChangementColor", "Changement de couleur à l'index: $index")
+        AppValues.isContrasted = !AppValues.isContrasted
+
         if(AppValues.isContrasted)
             colorList = AppValues.contrastColors
         else
             colorList = AppValues.defaultColors
-
-        AppValues.isContrasted = !AppValues.isContrasted
+        sharedPreferences.edit().putBoolean("isContraster", AppValues.isContrasted).commit()
     }
 
     val navItemList = listOf(

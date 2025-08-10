@@ -118,7 +118,7 @@ fun MessageScreen(
 
     // Et dans le corps de SettingsScreen (en bas du Column par exemple) :
     if (showDialog) {
-        PopupAlert(messageDialogue, isSuccess) {
+        PopupAlert(messageDialogue,colors = colors, isSuccess = isSuccess) {
             showDialog = false
         }
     }
@@ -168,6 +168,7 @@ fun MessageScreenStateless(
             InputTextArea(
                 "Entre votre messages personnalisé",
                 value = message,
+                colors = colors,
                 onValueChange = onMessageChange,
                 messageError
             )
@@ -379,7 +380,7 @@ fun ContactScreen(
     )
 
     if (showDialog) {
-        PopupAlert(messageDialogue, isSuccess) {
+        PopupAlert(messageDialogue, colors = colors, isSuccess = isSuccess) {
             showDialog = false
         }
     }
@@ -437,11 +438,11 @@ fun ContactScreenStateless(
 
         Spacer(Modifier.height(16.dp))
 
-        Input("Nom et Prénom", value = name, onValueChange = onNameChange, false, nameError)
+        Input("Nom et Prénom", value = name, colors = colors, onValueChange = onNameChange, false, nameError)
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        Input("Numéro de téléphone", value = phone, onValueChange = onPhoneChange, false, phoneError)
+        Input("Numéro de téléphone", value = phone, colors = colors, onValueChange = onPhoneChange, false, phoneError)
 
         Spacer(modifier = Modifier.height(8.dp))
 
