@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -197,14 +198,14 @@ fun HomeScreenStateless(
     ) {
     Box(
         modifier = Modifier
-            .background(colors[0]),
-        contentAlignment = Alignment.Center,
+            .background(colors[0])
     ){
         Column(
             modifier = modifier
-                .padding(16.dp),
+                .padding(16.dp)
+                .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.SpaceBetween,
         )
         {
             UpdateStatusBarColor(colors[0], LocalContext.current)

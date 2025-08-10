@@ -1,6 +1,6 @@
 package com.example.sentinelle.api
 
-import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
@@ -11,8 +11,8 @@ import androidx.compose.ui.text.font.FontWeight
 import com.example.sentinelle.R
 
 object AppValues {
-// var base_url = "http://192.168.1.102:8000"
- var base_url = "http://10.0.2.2:8000"
+ var base_url = "http://192.168.1.102:8000"
+// var base_url = "http://10.0.2.2:8000"
 
  val Montserrat = FontFamily(
   Font(R.font.montserrat_bold_italic, FontWeight.Bold, FontStyle.Italic),
@@ -56,9 +56,10 @@ val contrastColors = listOf(
 
 }
 
+@Immutable
 data class Contact(
  val id: Int,
  val name: String,
  val phone: String,
- var selected: MutableState<Boolean>
+ var selected: Boolean
 )

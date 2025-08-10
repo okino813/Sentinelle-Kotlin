@@ -201,6 +201,7 @@ class MainActivity : ComponentActivity() {
                     })
 
                     is AppState.Auth -> FormulaireConnexion(
+                        colors = AppValues.defaultColors,
                         googleSignInClient = googleSignInClient,
                         launcher = googleSignInLauncher,
                         onLoginSuccess = {
@@ -533,7 +534,7 @@ fun BottomMenu(
 
 @RequiresApi(Build.VERSION_CODES.Q)
 @Composable
-fun ContentScreen(modifier: Modifier = Modifier, selectedIndex : Int,
+fun ContentScreen(modifier: Modifier, selectedIndex : Int,
     context: Context,
     sharedPreferences: SharedPreferences,
     isLoggedIn: MutableState<Boolean>,
@@ -554,6 +555,7 @@ fun ContentScreen(modifier: Modifier = Modifier, selectedIndex : Int,
         3-> SettingsScreen(
             modifier = modifier,
             context = context,
+            colors = colorList,
             sharedPreferences = sharedPreferences,
             isLoggedIn = isLoggedIn,
             isContrast = isContrast,

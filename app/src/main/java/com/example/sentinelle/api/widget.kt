@@ -25,11 +25,17 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -184,12 +190,15 @@ fun Input(
 }
 
 @Composable
-fun Bouton(text: String, OnClick: () -> Unit){
+fun Bouton(text: String,colors: List<Color>, modifier: Modifier = Modifier, OnClick: () -> Unit){
     Button(
         onClick = OnClick,
+        // Centrer le bouton
+        modifier = modifier
+            .padding(8.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = AppColors.SentiBlue,       // Couleur de fond du bouton
-            contentColor = AppColors.SentiBlack         // Couleur du texte
+            containerColor = colors[3],       // Couleur de fond du bouton
+            contentColor = colors[0]      // Couleur du texte
         ),
         shape = RoundedCornerShape(8.dp),
 
@@ -207,6 +216,8 @@ fun Bouton(text: String, OnClick: () -> Unit){
 fun RedBouton(text: String, OnClick: () -> Unit){
     Button(
         onClick = OnClick,
+        modifier = Modifier
+            .wrapContentWidth(Alignment.CenterHorizontally),
         colors = ButtonDefaults.buttonColors(
             containerColor = Color(0xFFF54B4B),       // Couleur de fond du bouton
             contentColor = AppColors.SentiBlack         // Couleur du texte
@@ -505,5 +516,34 @@ fun PopupAlert(
                 }
             }
         }
+    }
+}
+
+@Composable
+fun ContactItem(
+    contact: Contact,
+    onDelete: () -> Unit,
+    onSelect: (Boolean) -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Column(modifier = Modifier.weight(2f)) {
+            Text(contact.name, color = Color.White, fontWeight = FontWeight.Bold)
+            Text(contact.phone, color = Color.Gray, fontSize = 14.sp)
+        }
+
+        IconButton(onClick = onDelete) {
+            Icon(Icons.Default.Delete, contentDescription = "Supprimer", tint = Color.Red)
+        }
+
+        Checkbox(
+            checked = contact.selected,
+            onCheckedChange = onSelect
+        )
     }
 }

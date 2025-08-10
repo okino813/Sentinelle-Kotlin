@@ -91,6 +91,8 @@ dependencies {
 
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.30.1")
 
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.0")
+
     // Firebase Auth
     implementation("com.google.firebase:firebase-auth-ktx:22.3.0")
     // Google Sign-In

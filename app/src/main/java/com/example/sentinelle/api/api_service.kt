@@ -3,7 +3,6 @@ package com.example.sentinelle.api
 import android.content.Context
 import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.toMutableStateList
 import com.example.sentinelle.ApiHelper
 import org.json.JSONObject
@@ -28,7 +27,7 @@ class api_service(val context: Context) {
                     id = contactJson.getInt("id"),
                     name = contactJson.getString("name"),
                     phone = contactJson.getString("phone"),
-                    selected = mutableStateOf(contactJson.getBoolean("selected"))
+                    selected = contactJson.getBoolean("selected")
                 )
                 contactsList.add(contact)
             }
@@ -66,17 +65,16 @@ class api_service(val context: Context) {
         })
     }
 
-    fun AddContact(context: Context,name: String, phone: String, callback: (Boolean) -> Unit) {
+    fun AddContact(context: Context,name: String, phone: String, callback: (Boolean, Int) -> Unit) {
         val json = JSONObject().apply {
             put("name", name)
             put("phone", phone)
         }
 
         ApiHelper.apiPost(context, "addcontact", json, { jsonObj ->
-            getInfo(context)
-            callback(jsonObj.optBoolean("status", false))
+            callback(jsonObj.optBoolean("status", false), jsonObj.optString("id_contact").toInt())
         }, {
-            callback(false)
+            callback(false, 0)
         })
     }
 
@@ -100,7 +98,6 @@ class api_service(val context: Context) {
         }
 
         ApiHelper.apiPost(context, "deletecontact", json, { jsonObj ->
-            getInfo(context)
             callback(jsonObj.optBoolean("status", false))
         }, {
             callback(false)

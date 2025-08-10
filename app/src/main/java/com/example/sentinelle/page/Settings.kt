@@ -53,6 +53,7 @@ import com.example.sentinelle.api.api_service
 @Composable
 fun SettingsScreen(
     modifier: Modifier = Modifier,
+    colors : List<Color>,
     context: Context,
     sharedPreferences: SharedPreferences,
     isLoggedIn: MutableState<Boolean>,
@@ -113,7 +114,7 @@ fun SettingsScreen(
         Input("Numéro de téléphone", value = phone, onValueChange = { phone = it }, false, phoneError)
         Spacer(modifier = Modifier.height(8.dp))
 
-        Bouton("Enregistrer", OnClick = {
+        Bouton("Enregistrer", colors = colors, OnClick = {
             // Reset des erreurs
             firstnameError = null
             lastnameError = null
@@ -177,7 +178,7 @@ fun SettingsScreen(
         Input("Confirmation du mot de passe", value = ConfirmNewPassword, onValueChange = { ConfirmNewPassword = it }, true, ConfirmNewPasswordError)
         Spacer(modifier = Modifier.height(8.dp))
 
-        Bouton("Enregistrer", OnClick = {
+        Bouton("Enregistrer", colors = colors, OnClick = {
             // Reset des erreurs
             passwordError = null
             NewPasswordError = null

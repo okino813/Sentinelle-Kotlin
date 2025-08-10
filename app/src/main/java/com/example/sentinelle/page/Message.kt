@@ -2,11 +2,9 @@ package com.example.sentinelle.page
 
 import android.util.Log
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,13 +13,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.ThumbUp
-import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Tab
@@ -44,13 +38,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.sentinelle.api.AppColors
 import com.example.sentinelle.api.AppValues
 import com.example.sentinelle.api.Bouton
+import com.example.sentinelle.api.Contact
+import com.example.sentinelle.api.ContactItem
 import com.example.sentinelle.api.Input
 import com.example.sentinelle.api.InputTextArea
 import com.example.sentinelle.api.PopupAlert
@@ -142,7 +139,8 @@ fun MessageScreenStateless(
         Column(
             modifier = Modifier
                 .background(colors[0])
-                .padding(16.dp),
+                .padding(16.dp)
+                .fillMaxSize(),
         ) {
             UpdateStatusBarColor(colors[0], LocalContext.current)
             Spacer(Modifier.height(16.dp))
@@ -184,15 +182,72 @@ fun MessageScreenStateless(
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            Bouton("Enregistrer", OnClick = {
+            Bouton("Enregistrer",modifier = Modifier.align(Alignment.CenterHorizontally), colors = colors,
+                OnClick = {
                 validationMessage()
             })
         }
     }
 }
 
+class ContactViewModel : ViewModel() {
+
+    // State observable par Compose
+    var contacts by mutableStateOf<List<Contact>>(emptyList())
+        private set
+
+    init {
+        // Initialisation depuis AppValues si tu utilises un stockage global
+        // Adapte le mapping selon la structure réelle des objets dans AppValues.contacts
+        try {
+            contacts = AppValues.contacts.map { c ->
+                Contact(
+                    id = c.id,
+                    name = c.name,
+                    phone = c.phone,
+                    selected = c.selected // si AppValues stocke selected
+                )
+            }
+        } catch (e: Exception) {
+            // fallback si AppValues n'existe pas ou format différent
+            contacts = emptyList()
+        }
+    }
+
+    // Ajoute (immutably)
+    fun addContact(contact: Contact) {
+        contacts = contacts + contact
+    }
+
+    // Supprime (immutably)
+    fun deleteContact(contactId: Int) {
+        contacts = contacts.filterNot { it.id == contactId }
+    }
+
+    // Basculer la sélection (optimistic update)
+    fun setContactSelected(contactId: Int, isSelected: Boolean) {
+        contacts = contacts.map { c ->
+            if (c.id == contactId) c.copy(selected = isSelected) else c
+        }
+    }
+
+    // Remettre une liste complète (utile si tu veux re-sync depuis le serveur)
+    fun updateContacts(newList: List<Contact>) {
+        contacts = newList
+    }
+}
+
+
 @Composable
-fun ContactScreen(modifier: Modifier = Modifier) {
+fun ContactScreen(
+    colors: List<Color>,
+    modifier: Modifier = Modifier,
+    viewModel: ContactViewModel = viewModel() // import : androidx.lifecycle.viewmodel.compose.viewModel
+) {
+    val context = LocalContext.current
+    val api = api_service(context) // ton service réseau
+    val contacts = viewModel.contacts // lecture directe du state (recomposition automatique)
+
     var showDialog by remember { mutableStateOf(false) }
     var isSuccess by remember { mutableStateOf(false) }
     var messageDialogue by remember { mutableStateOf("") }
@@ -202,218 +257,126 @@ fun ContactScreen(modifier: Modifier = Modifier) {
     var nameError by remember { mutableStateOf<String?>(null) }
     var phoneError by remember { mutableStateOf<String?>(null) }
 
-    val context = LocalContext.current
-    val api = api_service(context)
-    val contacts = AppValues.contacts
+    // --- Fonctions locales utilisant le ViewModel (optimistic UI) ---
 
-    UpdateStatusBarColor(AppColors.SentiBlack, LocalContext.current)
+    // Sélection d'un contact : on met à jour l'UI immédiatement,
+    // on appelle l'API et on revert si échec
+    fun onSelectContact(contact: Contact, checked: Boolean) {
+        Log.d("ContactScreen", "optimistic select ${contact.name} -> $checked")
+        // Optimistic update
+        viewModel.setContactSelected(contact.id, checked)
 
-    // Utilisez LazyColumn pour tout le contenu
-    LazyColumn(
-        modifier = modifier
-            .fillMaxSize()
-            .background(AppColors.SentiBlack)
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        item {
-            Text(
-                "Ajouter un contact",
-                color = AppColors.SentiBlue,
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp,
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
-
-        item {
-            Spacer(Modifier.height(16.dp))
-            Text(
-                "Ajouter votre contact ci-dessous.",
-                color = Color.White,
-                fontWeight = FontWeight.Normal,
-                fontSize = 16.sp,
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
-
-        item {
-            Text(
-                "Exemple : 0712131415",
-                color = Color.White,
-                fontWeight = FontWeight.Normal,
-                fontStyle = FontStyle.Italic,
-                fontSize = 16.sp,
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
-
-        item {
-            Spacer(Modifier.height(16.dp))
-        }
-
-        item {
-            Input("Nom et Prénom", value = name, onValueChange = { name = it }, false, nameError)
-        }
-
-        item {
-            Spacer(modifier = Modifier.height(8.dp))
-        }
-
-        item {
-            Input("Numéro de téléphone", value = phone, onValueChange = { phone = it }, false, phoneError)
-        }
-
-        item {
-            Spacer(modifier = Modifier.height(8.dp))
-        }
-
-        item {
-            Bouton("Enregistrer", OnClick = {
-                nameError = null
-                phoneError = null
-                var valide = true
-
-                if (name.length < 1) {
-                    nameError = "Le nom doit être renseigné"
-                    valide = false
-                }
-
-                val phoneRegex = Regex("^0[1-9][0-9]{8}\$")
-                if (!phone.matches(phoneRegex)) {
-                    phoneError = "Numéro de téléphone invalide"
-                    valide = false
-                }
-
-                if (valide) {
-                    api.AddContact(context, name, phone) { success ->
-                        if (success) {
-                            name = ""
-                            phone = ""
-                            showDialog = true
-                            isSuccess = true
-                            messageDialogue = "Contact ajouté !"
-                        } else {
-                            isSuccess = false
-                            showDialog = true
-                            messageDialogue = "Erreur lors de création du contact"
-                        }
-                    }
-                }
-            })
-        }
-
-        item {
-            Text(
-                "Maximum : 5",
-                color = Color.White,
-                fontWeight = FontWeight.Normal,
-                fontStyle = FontStyle.Italic,
-                fontSize = 12.sp,
-                modifier = Modifier.fillMaxWidth(),
-                textAlign = TextAlign.Center
-            )
-        }
-
-        item {
-            Spacer(Modifier.height(16.dp))
-        }
-
-        item {
-            Text(
-                "Sélectionner des contacts",
-                color = AppColors.SentiBlue,
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp,
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
-
-        item {
-            Text(
-                "Veuillez nous indiquer, les contacts, que vous souhaitez que Sentinelle contacte dans le cas où vous ne parvenez pas à désactiver le compte à rebours, ou en cas de déclenchement du bouton ALERTER",
-                color = Color.White,
-                fontWeight = FontWeight.Normal,
-                fontSize = 16.sp,
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
-
-        item {
-            Spacer(Modifier.height(8.dp))
-        }
-
-        // Ajout direct des contacts dans la même LazyColumn
-        items(contacts) { contact ->
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Column(modifier = Modifier.weight(2f)) {
-                    Text(
-                        text = contact.name,
-                        color = Color.White,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text(
-                        text = contact.phone,
-                        color = Color.Gray,
-                        fontSize = 14.sp
-                    )
-                }
-
-                IconButton(onClick = {
-                    AppValues.contacts.remove(contact)
-
-                    api.deleteContact(
-                        context,
-                        contact.id
-                    ) { success ->
-                        if (success) {
-                            Log.d("TESTDelete", "Contact ${contact.name} (ID: ${contact.id}) deleted successfully")
-                        } else {
-                            Log.d("TESTDelete", "Failed to delete contact ${contact.name} (ID: ${contact.id})")
-                        }
-                    }
-                }) {
-                    Icon(
-                        Icons.Default.Delete,
-                        contentDescription = "Supprimer",
-                        tint = Color.Red
-                    )
-                }
-
-                Checkbox(
-                    checked = contact.selected.value,
-                    onCheckedChange = { check ->
-                        contact.selected.value = check
-
-                        Log.d("TESTCheck", "Contact ${contact.name} updated to selected: $check")
-
-                        api.selectedContact(
-                            context,
-                            contact.id,
-                            check
-                        ) { success ->
-                            if (success) {
-                                Log.d("TESTCheck", "Contact ${contact.name} (ID: ${contact.id}) updated successfully")
-                            } else {
-                                Log.d("TESTCheck", "Failed to update contact ${contact.name} (ID: ${contact.id})")
-                            }
-                        }
-                    }
-                )
+        api.selectedContact(context, contact.id, checked) { success ->
+            if (!success) {
+                Log.d("ContactScreen", "API failed to update selection for ${contact.id}, reverting")
+                // revert
+                viewModel.setContactSelected(contact.id, !checked)
+                isSuccess = false
+                messageDialogue = "Impossible de mettre à jour la sélection (réseau)"
+                showDialog = true
+            } else {
+                // Si tu veux synchroniser AppValues global :
+                try {
+                    AppValues.contacts.find { it.id == contact.id }?.selected = checked
+                } catch (_: Exception) { /* ignore si AppValues pas présent */ }
             }
         }
+    }
 
-        // Ajout d'un espace en bas pour éviter que le dernier élément soit coupé
-        item {
-            Spacer(Modifier.height(16.dp))
+    // Suppression : on supprime localement, tente la suppression réseau, et ré-ajoute en cas d'échec
+    fun onDeleteContact(contact: Contact) {
+        val previous = contacts // snapshot
+        viewModel.deleteContact(contact.id)
+
+        api.deleteContact(context, contact.id) { success ->
+            if (!success) {
+                Log.d("ContactScreen", "Failed to delete ${contact.id}, restoring local state")
+                // restore previous list
+                viewModel.updateContacts(previous)
+                isSuccess = false
+                messageDialogue = "Suppression impossible (réseau)"
+                showDialog = true
+            } else {
+                // sync AppValues if needed
+                try {
+                    AppValues.contacts.removeAll { it.id == contact.id }
+                } catch (_: Exception) {}
+            }
         }
     }
+
+    // Ajout d'un contact (on attend la réponse de l'API pour récupérer l'ID réel)
+    fun onAddContact() {
+        nameError = null
+        phoneError = null
+        var valide = true
+
+        if (name.isBlank()) {
+            nameError = "Le nom doit être renseigné"
+            valide = false
+        }
+
+        val phoneRegex = Regex("^0[1-9][0-9]{8}\$")
+        if (!phone.matches(phoneRegex)) {
+            phoneError = "Numéro de téléphone invalide"
+            valide = false
+        }
+
+        if (!valide) return
+
+        // appel réseau
+        api.AddContact(context, name, phone) { success, id_contact ->
+            if (success && id_contact != null) {
+                val newContact = Contact(
+                    id = id_contact,
+                    name = name,
+                    phone = phone,
+                    selected = false
+                )
+                // mettre à jour ViewModel (source de vérité)
+                viewModel.addContact(newContact)
+
+                // sync AppValues si tu en as besoin
+                try {
+                    AppValues.contacts.add(
+                        Contact(
+                            id = id_contact,
+                            name = name,
+                            phone = phone,
+                            selected = false
+                        )
+                    )
+                } catch (_: Exception) { }
+
+                // feedback UI
+                name = ""
+                phone = ""
+                isSuccess = true
+                messageDialogue = "Contact ajouté !"
+                showDialog = true
+            } else {
+                isSuccess = false
+                messageDialogue = "Erreur lors de création du contact"
+                showDialog = true
+            }
+        }
+    }
+
+    // --- Affichage ---
+    ContactScreenStateless(
+        colors = colors,
+        modifier = modifier,
+        phone = phone,
+        phoneError = phoneError,
+        name = name,
+        nameError = nameError,
+        onNameChange = { name = it },
+        onPhoneChange = { phone = it },
+        valideNewContact = { onAddContact() },
+        contacts = contacts,
+        onDeleteContact = { onDeleteContact(it) },
+        onSelectContact = { contact, checked -> onSelectContact(contact, checked) }
+    )
 
     if (showDialog) {
         PopupAlert(messageDialogue, isSuccess) {
@@ -421,6 +384,126 @@ fun ContactScreen(modifier: Modifier = Modifier) {
         }
     }
 }
+
+@Composable
+fun ContactScreenStateless(
+    colors: List<Color>,
+    modifier: Modifier = Modifier,
+    phone: String,
+    phoneError: String?,
+    name: String,
+    nameError: String?,
+    onNameChange : (String) -> Unit,
+    onPhoneChange : (String) -> Unit,
+    valideNewContact: () -> Unit,
+    contacts: List<Contact>,
+    onDeleteContact: (Contact) -> Unit,
+    onSelectContact: (Contact, Boolean) -> Unit,
+) {
+    UpdateStatusBarColor(colors[0], LocalContext.current)
+
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .background(colors[0])
+            .padding(top = 16.dp, start = 16.dp, end = 16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        // --- Formulaire ---
+        Text(
+            "Ajouter un contact",
+            color = colors[3],
+            fontWeight = FontWeight.Bold,
+            fontSize = 20.sp,
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(Modifier.height(16.dp))
+
+        Text(
+            "Ajouter votre contact ci-dessous.",
+            color = Color.White,
+            fontSize = 16.sp,
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Text(
+            "Exemple : 0712131415",
+            color = Color.White,
+            fontStyle = FontStyle.Italic,
+            fontSize = 16.sp,
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(Modifier.height(16.dp))
+
+        Input("Nom et Prénom", value = name, onValueChange = onNameChange, false, nameError)
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Input("Numéro de téléphone", value = phone, onValueChange = onPhoneChange, false, phoneError)
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Box(
+            modifier = Modifier.fillMaxWidth(),
+            contentAlignment = Alignment.Center
+        ) {
+            Bouton("Enregistrer", colors = colors, OnClick = {
+                valideNewContact()
+            })
+        }
+
+        Text(
+            "Maximum : 5",
+            color = Color.White,
+            fontStyle = FontStyle.Italic,
+            fontSize = 12.sp,
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.Center
+        )
+
+        Spacer(Modifier.height(16.dp))
+
+        Text(
+            "Sélectionner des contacts",
+            color = colors[3],
+            fontWeight = FontWeight.Bold,
+            fontSize = 20.sp,
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Text(
+            "Veuillez nous indiquer les contacts que vous souhaitez que Sentinelle contacte ...",
+            color = Color.White,
+            fontSize = 16.sp,
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(Modifier.height(8.dp))
+
+        // LazyColumn prend le reste de l'espace pour permettre le scroll correctement
+        Box(modifier = Modifier.fillMaxSize()) {
+
+            LazyColumn(
+                modifier = Modifier.fillMaxSize()
+            ) {
+                items(contacts, key = { it.id }) { contact ->
+                    ContactItem(
+                        contact = contact,
+                        onDelete = { onDeleteContact(contact) },
+                        onSelect = { checked -> onSelectContact(contact, checked) }
+                    )
+                }
+            }
+        }
+
+//        Spacer(Modifier.height(16.dp))
+    }
+}
+
+
+
 @Composable
 fun PlaylistScreen(modifier: Modifier = Modifier) {
     Box(
@@ -510,7 +593,9 @@ fun AppNavHost(
                     Destination.MESSAGE -> MessageScreen(
                         colors = colors
                     )
-                    Destination.CONTACT -> ContactScreen()
+                    Destination.CONTACT -> ContactScreen(
+                        colors = colors
+                    )
                     Destination.PLAYLISTS -> PlaylistScreen()
                 }
             }

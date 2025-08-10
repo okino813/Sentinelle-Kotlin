@@ -39,6 +39,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 
 @Composable
 fun FormulaireConnexion(
+    colors : List<Color>,
     googleSignInClient: GoogleSignInClient,
     launcher: ActivityResultLauncher<Intent>,
     onLoginSuccess : () -> Unit
@@ -133,7 +134,7 @@ fun FormulaireConnexion(
                 )
                 {
                     if (inscriptionMode) {
-                        Bouton("S'inscrire", OnClick = {
+                        Bouton("S'inscrire", colors = colors, OnClick = {
                             // Reset des erreurs
                             emailError = null
                             motDePasseError = null
@@ -179,7 +180,7 @@ fun FormulaireConnexion(
                         })
                     }
                     else {
-                        Bouton("Se connecter", OnClick = {
+                        Bouton("Se connecter", colors = colors, OnClick = {
                             // Reset des erreurs
                             emailError = null
                             motDePasseError = null
@@ -246,7 +247,7 @@ fun FormulaireConnexion(
                         )
                     }
                 }
-                Bouton("Connexion avec Google") {
+                Bouton("Connexion avec Google", colors = colors) {
                     Log.d("GoogleSignIn", "Bouton Google cliqué")
                     activity.signInWithGoogle { success ->
                         if (success) {
