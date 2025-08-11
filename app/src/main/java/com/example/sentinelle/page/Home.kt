@@ -290,7 +290,7 @@ fun HomeScreenStateless(
                     .size(120.dp),
                 shape = CircleShape,
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFFA72525) // ou une autre couleur
+                    containerColor = colors[5] // ou une autre couleur
                 )
             ) {
                 Text("ALERTER", fontSize = 16.sp, color = Color.White, fontWeight = FontWeight.Bold)

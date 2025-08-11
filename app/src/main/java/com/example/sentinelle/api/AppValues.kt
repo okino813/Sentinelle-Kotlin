@@ -28,7 +28,8 @@ object AppValues {
   Color(0xff399d61), // SentiGreen
   Color(0x33289DD2), // SentiDarkBlue
   Color(0xff0097B2), // SentiBlue
-  Color(0xff289DD2)  // SentiCyan
+  Color(0xff289DD2),  // SentiCyan
+  Color(0xFFA72525)  // SentiRed
  )
 
 
@@ -37,7 +38,8 @@ val contrastColors = listOf(
  Color.Yellow, // SentiGreenContrast
  Color.White, // SentiDarkBlueContrast
  Color.Cyan, // SentiBlueContrast
- Color.Cyan // SentiCyanContrast
+ Color.Cyan, // SentiCyanContrast
+ Color.Red, // SentiRedContrast
 )
 
 

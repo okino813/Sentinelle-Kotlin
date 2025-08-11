@@ -129,7 +129,7 @@ fun InputTextArea(
     if (errorMessage != null) {
         Text(
             text = errorMessage,
-            color = Color.Red,
+            color = colors[5],
             style = MaterialTheme.typography.labelSmall,
             modifier = Modifier.padding(start = 16.dp, top = 4.dp)
         )
@@ -172,7 +172,7 @@ fun Input(
     if (errorMessage != null) {
         Text(
             text = errorMessage,
-            color = Color.Red,
+            color = colors[5],
             style = MaterialTheme.typography.labelSmall,
             modifier = Modifier.padding(start = 16.dp, top = 4.dp)
         )
@@ -209,7 +209,7 @@ fun RedBouton(text: String, colors: List<Color>, OnClick: () -> Unit){
         modifier = Modifier
             .wrapContentWidth(Alignment.CenterHorizontally),
         colors = ButtonDefaults.buttonColors(
-            containerColor = Color(0xFFF54B4B),       // Couleur de fond du bouton
+            containerColor = colors[5],       // Couleur de fond du bouton
             contentColor = colors[0]        // Couleur du texte
         ),
         shape = RoundedCornerShape(8.dp),
@@ -332,7 +332,7 @@ fun CustomNumberPicker(
                 numberPicker.maxValue = list.last()
                 numberPicker.value = selectedValue.value
 
-//                    numberPicker.textSize = 48f
+                numberPicker.textSize = 100f
 
                 numberPicker.setOnValueChangedListener { numberPicker, old, new ->
                     onValueChange(numberPicker.value)
@@ -369,7 +369,7 @@ fun PopupAlert(
             color = colors[1]
         }
         else{
-            color = Color.Red
+            color = colors[5]
         }
         Box(
             modifier = Modifier
@@ -426,6 +426,7 @@ fun PopupAlert(
 @Composable
 fun ContactItem(
     contact: Contact,
+    colors: List<Color>,
     onDelete: () -> Unit,
     onSelect: (Boolean) -> Unit
 ) {
@@ -442,7 +443,7 @@ fun ContactItem(
         }
 
         IconButton(onClick = onDelete) {
-            Icon(Icons.Default.Delete, contentDescription = "Supprimer", tint = Color.Red)
+            Icon(Icons.Default.Delete, contentDescription = "Supprimer", tint = colors[5])
         }
 
         Checkbox(

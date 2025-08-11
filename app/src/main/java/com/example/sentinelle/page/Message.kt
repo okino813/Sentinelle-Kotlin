@@ -492,6 +492,7 @@ fun ContactScreenStateless(
                 items(contacts, key = { it.id }) { contact ->
                     ContactItem(
                         contact = contact,
+                        colors = colors,
                         onDelete = { onDeleteContact(contact) },
                         onSelect = { checked -> onSelectContact(contact, checked) }
                     )
