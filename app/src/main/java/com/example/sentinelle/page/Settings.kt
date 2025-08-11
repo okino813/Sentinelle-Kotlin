@@ -20,7 +20,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
@@ -29,7 +28,6 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -60,9 +58,6 @@ fun SettingsScreen(
     onChangeColor: (Int) -> Unit
 
 ) {
-    val snackbarHostState = remember { SnackbarHostState() }
-    val coroutineScope = rememberCoroutineScope()
-
     var firstname by remember { mutableStateOf(AppValues.firstname.toString()) }
     var firstnameError by remember { mutableStateOf<String?>(null) }
 
@@ -87,6 +82,189 @@ fun SettingsScreen(
 
     val api = api_service(context)
 
+    fun changeInfoPerso(){
+        firstnameError = null
+        lastnameError = null
+        phoneError = null
+        var valide = true;
+
+        if(firstname.length < 1) {
+            firstnameError = "Prénom invalide"
+            valide = false
+        }
+
+        if(lastname.length < 1) {
+            lastnameError = "Nom de famille invalide"
+            valide = false
+        }
+
+        val phoneRegex = Regex("^0[1-9][0-9]{8}\$")
+        if (!phone.matches(phoneRegex)) {
+            phoneError = "Numéro de téléphone invalide"
+            valide = false
+        }
+
+        if(valide){
+            api.SaveInfoAccount(context,firstname, lastname, phone){ success ->
+                if (success) {
+                    AppValues.firstname = firstname
+                    AppValues.lastname = lastname
+                    AppValues.phone = phone
+                    showDialog = true // Affiche le dialogue
+                    isSuccess = true
+                    messageDialogue ="Infos mises à jour avec succès"
+
+                    Log.d("UI", "Infos mises à jour avec succès")
+                } else {
+                    isSuccess = false
+                    showDialog = true // Affiche le dialogue
+                    messageDialogue ="Erreur lors de la mise à jour des infos"
+                    Log.d("UI", "Erreur lors de la mise à jour des infos")
+                }
+
+            }
+        }
+    }
+
+    fun changePassword(){
+        // Reset des erreurs
+        passwordError = null
+        NewPasswordError = null
+        ConfirmNewPasswordError = null
+        var valide = true;
+
+        if(password.length < 1) {
+            passwordError = "Merci de saisir votre mot de passe actuel"
+            valide = false
+        }
+
+        if(NewPassword.length >= 1) {
+            if (NewPassword.length < 6) {
+                NewPasswordError = "Le mot de passe doit contenir au moins 6 caractères"
+                valide = false
+            }
+        }
+        else {
+            NewPasswordError = "Merci de saisir votre mot de passe actuel"
+            valide = false
+        }
+
+        if (ConfirmNewPassword != NewPassword) {
+            ConfirmNewPasswordError = "Les mots de passe ne correspondent pas"
+            valide = false
+        }
+
+
+
+        if(valide){
+            api.saveNewPassword(context,password, NewPassword){ success ->
+                if (success) {
+                    showDialog = true // Affiche le dialogue
+                    isSuccess = true
+                    messageDialogue = "Votre mot de passe a été mis à jour avec succès."
+                    Log.d("UI", "Mot de passe mis à jour avec succès")
+                } else {
+                    showDialog = true // Affiche le dialogue
+                    isSuccess = false
+                    messageDialogue = "Erreur dans la mise à jour du mot de passe"
+                    Log.d("UI", "Erreur lors de la mise à jour du mot de passe")
+                }
+
+            }
+        }
+    }
+
+    fun logout(){
+        api.logout(
+            context = context,
+            onLogoutSuccess = {
+                sharedPreferences.edit().putBoolean("is_authentificated", false).commit()
+                sharedPreferences.edit().putBoolean("isContraster", false).commit()
+                isLoggedIn.value = false
+
+                // Redémarre l'application
+                val activity = context as? Activity
+                val intent =
+                    context.packageManager.getLaunchIntentForPackage(context.packageName)
+                intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                context.startActivity(intent)
+                activity?.finish()
+                Runtime.getRuntime().exit(0)
+            },
+            onLogoutFailure = { error ->
+                Handler(Looper.getMainLooper()).post {
+                    Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+                }
+            }
+        )
+    }
+
+    SettingsScreenStateless(
+        modifier = modifier,
+        colors = colors,
+        isContrast = isContrast,
+        firstname = firstname,
+        lastname = lastname,
+        phone = phone,
+        password = password,
+        NewPassword = NewPassword,
+        ConfirmNewPassword = ConfirmNewPassword,
+        firstnameError = firstnameError ?: "",
+        lastnameError = lastnameError ?: "",
+        phoneError = phoneError ?: "",
+        passwordError = passwordError ?: "",
+        NewPasswordError = NewPasswordError ?: "",
+        ConfirmNewPasswordError = ConfirmNewPasswordError ?: "",
+        onFirstnameChange = { firstname = it },
+        onLastnameChange = { lastname = it },
+        onPhoneChange = { phone = it },
+        onPasswordChange = { password = it },
+        onNewPasswordChange = { NewPassword = it },
+        onNewConfirmPassword = { ConfirmNewPassword = it },
+        onChangeColor = onChangeColor,
+        valideInfoPerso = { changeInfoPerso() },
+        validePassword = { changePassword() },
+        logout = { logout() }
+    )
+
+
+    if (showDialog) {
+        PopupAlert(messageDialogue, colors = colors, isSuccess = isSuccess) {
+            showDialog = false
+        }
+    }
+
+}
+
+@Composable
+fun SettingsScreenStateless(
+    modifier: Modifier = Modifier,
+    colors : List<Color>,
+    isContrast: MutableState<Boolean>,
+    firstname : String,
+    lastname: String,
+    phone: String,
+    password: String,
+    ConfirmNewPassword: String,
+    NewPassword: String,
+    firstnameError: String,
+    lastnameError: String,
+    phoneError: String,
+    passwordError: String,
+    NewPasswordError: String,
+    ConfirmNewPasswordError: String,
+    onFirstnameChange: (String) -> Unit,
+    onLastnameChange: (String) -> Unit,
+    onPhoneChange: (String) -> Unit,
+    onPasswordChange: (String) -> Unit,
+    onNewPasswordChange: (String) -> Unit,
+    onNewConfirmPassword: (String) -> Unit,
+    onChangeColor: (Int) -> Unit,
+    valideInfoPerso: () -> Unit,
+    validePassword: () -> Unit,
+    logout: () -> Unit,
+){
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -106,56 +284,15 @@ fun SettingsScreen(
 
         Spacer(Modifier.height(16.dp))
 
-        Input("Prénom", value = firstname, colors = colors,onValueChange = { firstname = it }, false, firstnameError)
+        Input("Prénom", value = firstname, colors = colors, onValueChange = onFirstnameChange, false, firstnameError)
         Spacer(modifier = Modifier.height(8.dp))
-        Input("Nom", value = lastname, colors = colors, onValueChange = { lastname = it }, false, lastnameError)
+        Input("Nom", value = lastname, colors = colors, onValueChange = onLastnameChange, false, lastnameError)
         Spacer(modifier = Modifier.height(8.dp))
-        Input("Numéro de téléphone", value = phone, colors = colors, onValueChange = { phone = it }, false, phoneError)
+        Input("Numéro de téléphone", value = phone, colors = colors, onValueChange =  onPhoneChange, false, phoneError)
         Spacer(modifier = Modifier.height(8.dp))
 
         Bouton("Enregistrer", colors = colors, OnClick = {
-            // Reset des erreurs
-            firstnameError = null
-            lastnameError = null
-            phoneError = null
-            var valide = true;
-
-            if(firstname.length < 1) {
-                firstnameError = "Prénom invalide"
-                valide = false
-            }
-
-            if(lastname.length < 1) {
-                lastnameError = "Nom de famille invalide"
-                valide = false
-            }
-
-            val phoneRegex = Regex("^0[1-9][0-9]{8}\$")
-            if (!phone.matches(phoneRegex)) {
-                phoneError = "Numéro de téléphone invalide"
-                valide = false
-            }
-
-            if(valide){
-                api.SaveInfoAccount(context,firstname, lastname, phone){ success ->
-                    if (success) {
-                        AppValues.firstname = firstname
-                        AppValues.lastname = lastname
-                        AppValues.phone = phone
-                        showDialog = true // Affiche le dialogue
-                        isSuccess = true
-                        messageDialogue ="Infos mises à jour avec succès"
-
-                        Log.d("UI", "Infos mises à jour avec succès")
-                    } else {
-                        isSuccess = false
-                        showDialog = true // Affiche le dialogue
-                        messageDialogue ="Erreur lors de la mise à jour des infos"
-                        Log.d("UI", "Erreur lors de la mise à jour des infos")
-                    }
-
-                }
-            }
+            valideInfoPerso()
         })
 
 
@@ -170,59 +307,15 @@ fun SettingsScreen(
         )
         Spacer(Modifier.height(16.dp))
 
-        Input("Mot de passe actuel", value = password, colors = colors, onValueChange = { password = it }, true, passwordError)
+        Input("Mot de passe actuel", value = password, colors = colors, onValueChange = onPasswordChange, true, passwordError)
         Spacer(modifier = Modifier.height(8.dp))
-        Input("Nouveau mot de passe", value = NewPassword, colors = colors, onValueChange = { NewPassword = it }, true, NewPasswordError)
+        Input("Nouveau mot de passe", value = NewPassword, colors = colors, onValueChange = onNewPasswordChange, true, NewPasswordError)
         Spacer(modifier = Modifier.height(8.dp))
-        Input("Confirmation du mot de passe", value = ConfirmNewPassword, colors = colors, onValueChange = { ConfirmNewPassword = it }, true, ConfirmNewPasswordError)
+        Input("Confirmation du mot de passe", value = ConfirmNewPassword, colors = colors, onValueChange = onNewConfirmPassword, true, ConfirmNewPasswordError)
         Spacer(modifier = Modifier.height(8.dp))
 
         Bouton("Enregistrer", colors = colors, OnClick = {
-            // Reset des erreurs
-            passwordError = null
-            NewPasswordError = null
-            ConfirmNewPasswordError = null
-            var valide = true;
-
-            if(password.length < 1) {
-                passwordError = "Merci de saisir votre mot de passe actuel"
-                valide = false
-            }
-
-            if(NewPassword.length >= 1) {
-                if (NewPassword.length < 6) {
-                    NewPasswordError = "Le mot de passe doit contenir au moins 6 caractères"
-                    valide = false
-                }
-            }
-            else {
-                NewPasswordError = "Merci de saisir votre mot de passe actuel"
-                valide = false
-            }
-
-            if (ConfirmNewPassword != NewPassword) {
-                ConfirmNewPasswordError = "Les mots de passe ne correspondent pas"
-                valide = false
-            }
-
-
-
-            if(valide){
-                api.saveNewPassword(context,password, NewPassword){ success ->
-                    if (success) {
-                        showDialog = true // Affiche le dialogue
-                        isSuccess = true
-                        messageDialogue = "Votre mot de passe a été mis à jour avec succès."
-                        Log.d("UI", "Mot de passe mis à jour avec succès")
-                    } else {
-                        showDialog = true // Affiche le dialogue
-                        isSuccess = false
-                        messageDialogue = "Erreur dans la mise à jour du mot de passe"
-                        Log.d("UI", "Erreur lors de la mise à jour du mot de passe")
-                    }
-
-                }
-            }
+            validePassword()
         })
 
 
@@ -240,7 +333,7 @@ fun SettingsScreen(
 
         Row(
             modifier = Modifier
-                .clip(RoundedCornerShape(50.dp)) // <-- coins arrondis
+                .clip(RoundedCornerShape(50.dp))
                 .background(colors[1]),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = androidx.compose.foundation.layout.Arrangement.SpaceBetween
@@ -250,7 +343,6 @@ fun SettingsScreen(
                 "Mode contraster",
                 color = colors[0],
                 modifier = Modifier.weight(1f).padding(start = 16.dp, top = 4.dp),
-//                style = MaterialTheme.typography.labelSmall
             )
             Switch(
                 checked = isContrast.value,
@@ -336,36 +428,9 @@ fun SettingsScreen(
             )
 
             RedBouton("Déconexion", colors = colors, OnClick = {
-                api.logout(
-                    context = context,
-                    onLogoutSuccess = {
-                        sharedPreferences.edit().putBoolean("is_authentificated", false).commit()
-                        sharedPreferences.edit().putBoolean("isContraster", false).commit()
-                        isLoggedIn.value = false
-
-                        // Redémarre l'application
-                        val activity = context as? Activity
-                        val intent =
-                            context.packageManager.getLaunchIntentForPackage(context.packageName)
-                        intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-                        context.startActivity(intent)
-                        activity?.finish()
-                        Runtime.getRuntime().exit(0)
-                    },
-                    onLogoutFailure = { error ->
-                        Handler(Looper.getMainLooper()).post {
-                            Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                )
+                logout()
             })
 
-        }
-        // Et dans le corps de SettingsScreen (en bas du Column par exemple) :
-        if (showDialog) {
-            PopupAlert(messageDialogue, colors = colors, isSuccess = isSuccess) {
-                showDialog = false
-            }
         }
     }
 }
