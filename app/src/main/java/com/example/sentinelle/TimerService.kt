@@ -8,6 +8,7 @@ import android.app.Service
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
+import android.media.MediaRecorder
 import android.os.Build
 import android.os.CountDownTimer
 import android.os.IBinder
@@ -18,12 +19,17 @@ import com.example.sentinelle.api.AppValues
 import com.example.sentinelle.api.api_service
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-
+import java.io.File
 
 class TimerService : Service() {
 
     private var timer: CountDownTimer? = null
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+
+    private var mediaRecorder: MediaRecorder? = null
+    private var isRecording = false
+    private var currentAudioFile: File? = null
+    private val audioFileQueue = ArrayList<File>()
 
     override fun onCreate() {
         super.onCreate()
@@ -57,6 +63,9 @@ class TimerService : Service() {
 
         var secondsElapsed = 0
 
+        // Démarrer l'enregistrement audio
+        startAudioRecording()
+
         timer = object : CountDownTimer(totalSeconds * 1000L, 1_000L) {
             override fun onTick(millisUntilFinished: Long) {
                 secondsElapsed++
@@ -80,19 +89,128 @@ class TimerService : Service() {
 
                 }
 
-                if (secondsElapsed % 300 == 0) {
+                if(secondsElapsed % 300 == 0) {
                     // Action toutes les 5 minutes
+                    // Ici il faudrait que l'enregistrement audio se coupe. S'enregistre et le path
+                    // soit stocker dans un tableau pour l'envoi à l'API
+                    // Une fois stocker dans le tableau, on démare un autre enregistrement audio
+                    // Le tableau s'envoie à l'api toute les 5 minutes.
+                    // Le tableau sert pour si jamais l'utilisateur n'a pas de réseau, les données sont stockées
+                    // et envoyées plus tard.
+                    handleAudioRecording()
+                    sendQueuedAudioFiles()
                     Log.d("TimerService", "Action toutes les 5 minutes")
                 }
             }
 
 
             override fun onFinish() {
+                stopAudioRecording()
+                sendQueuedAudioFiles()
                 clearTimerState()
                 stopSelf()
                 timer = null
             }
         }.start()
+    }
+
+    private fun startAudioRecording() {
+        if (!hasAudioPermission()) {
+            Log.w("TimerService", "Permission RECORD_AUDIO manquante")
+            return
+        }
+
+        try {
+            // Créer un fichier unique pour l'enregistrement
+            val timestamp = System.currentTimeMillis()
+            currentAudioFile = File(getExternalFilesDir(null), "audio_$timestamp.m4a")
+
+            mediaRecorder = MediaRecorder().apply {
+                setAudioSource(MediaRecorder.AudioSource.MIC)
+                setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)   // conteneur MP4
+                setAudioEncoder(MediaRecorder.AudioEncoder.AAC)      // codec AAC
+                setAudioEncodingBitRate(128000)                      // meilleure qualité
+                setAudioSamplingRate(44100)                          // qualité CD
+                setOutputFile(currentAudioFile?.absolutePath)
+
+                prepare()
+                start()
+
+
+            isRecording = true
+                Log.d("TimerService", "Enregistrement audio démarré: ${currentAudioFile?.name}")
+            }
+        } catch (e: Exception) {
+            Log.e("TimerService", "Erreur lors du démarrage de l'enregistrement: ${e.message}")
+            isRecording = false
+        }
+    }
+
+    private fun stopAudioRecording() {
+        if (isRecording && mediaRecorder != null) {
+            try {
+                mediaRecorder?.stop()
+                mediaRecorder?.release()
+                mediaRecorder = null
+                isRecording = false
+
+                // Ajouter le fichier à la queue d'envoi
+                currentAudioFile?.let { file ->
+                    if (file.exists() && file.length() > 0) {
+                        audioFileQueue.add(file)
+                        Log.d("TimerService", "Fichier audio ajouté à la queue: ${file.name}")
+                    } else {
+                        Log.w("TimerService", "Fichier audio vide ou inexistant")
+                    }
+                }
+
+            } catch (e: Exception) {
+                Log.e("TimerService", "Erreur lors de l'arrêt de l'enregistrement: ${e.message}")
+            }
+        }
+    }
+
+    private fun handleAudioRecording() {
+        // Arrêter l'enregistrement en cours
+        stopAudioRecording()
+
+        // Démarrer un nouvel enregistrement
+        startAudioRecording()
+    }
+
+
+    private fun sendQueuedAudioFiles() {
+        if (audioFileQueue.isNotEmpty()) {
+            val api = api_service(this)
+            val filesToSend = ArrayList(audioFileQueue)
+
+            // Envoyer chaque fichier
+            filesToSend.forEach { file ->
+                api.sendAudioFile(
+                    context = this,
+                    audioFile = file
+                ) { success ->
+                    if (success) {
+                        Log.d("TimerService", "Fichier audio envoyé avec succès: ${file.name}")
+                        // Supprimer le fichier de la queue et du système
+                        audioFileQueue.remove(file)
+                        if (file.exists()) {
+                            file.delete()
+                        }
+                    } else {
+                        Log.e("TimerService", "Erreur lors de l'envoi du fichier audio: ${file.name}")
+                        // Le fichier reste dans la queue pour un nouvel essai
+                    }
+                }
+            }
+        }
+    }
+
+    private fun hasAudioPermission(): Boolean {
+        return ActivityCompat.checkSelfPermission(
+            this,
+            Manifest.permission.RECORD_AUDIO
+        ) == PackageManager.PERMISSION_GRANTED
     }
 
     private fun getLastLocation() {
@@ -151,8 +269,23 @@ class TimerService : Service() {
     private fun stopCountdown() {
         timer?.cancel()
         timer = null
+
+        // Arrêter l'enregistrement en cours
+        stopAudioRecording()
+
+        // Envoyer les fichiers restants
+        sendQueuedAudioFiles()
+
         clearTimerState()
         stopSelf()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // S'assurer que l'enregistrement est arrêté
+        if (isRecording) {
+            stopAudioRecording()
+        }
     }
 
     override fun onBind(intent: Intent?): IBinder? = null

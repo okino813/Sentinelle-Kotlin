@@ -5,6 +5,8 @@ import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.os.Build
 import android.util.Log
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -76,6 +78,27 @@ fun HomeScreen(
     val prefs = context.getSharedPreferences("sentinelle_prefs", MODE_PRIVATE)
     val isRunning = prefs.getBoolean("is_timer_running", false)
 
+    val permissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        val allGranted = permissions.values.all { it }
+        if (allGranted) {
+            // → Si toutes les permissions sont acceptées, démarrer le service
+            val totalseconds = heures.value * 3600 + minutes.value * 60 + secondes.value
+            val intent = Intent(context, TimerService::class.java).apply {
+                action = "START_TIMER"
+                putExtra("totalSeconds", totalseconds)
+            }
+            ContextCompat.startForegroundService(context, intent)
+            isTimerRunning = true
+            textBtnStartStop = "Stop"
+        } else {
+            errorMessage = "Les permissions micro et stockage sont nécessaires pour lancer le minuteur."
+            isSuccess = false
+            showErrorDialog = true
+        }
+    }
+
     LaunchedEffect(Unit) {
         val prefs = context.getSharedPreferences("sentinelle_prefs", Context.MODE_PRIVATE)
         val isRunning = prefs.getBoolean("is_timer_running", false)
@@ -105,8 +128,7 @@ fun HomeScreen(
             ) { success, error ->
                 if (success) {
                     Log.d("TESTCheck", "Timer started")
-                    val totalseconds =
-                        heures.value * 3600 + minutes.value * 60 + secondes.value
+                    val totalseconds = heures.value * 3600 + minutes.value * 60 + secondes.value
                     val intent = Intent(context, TimerService::class.java).apply {
                         action = "START_TIMER"
                         putExtra("totalSeconds", totalseconds)

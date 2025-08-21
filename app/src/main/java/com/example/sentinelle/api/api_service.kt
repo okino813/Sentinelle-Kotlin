@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.toMutableStateList
 import com.example.sentinelle.ApiHelper
 import org.json.JSONObject
+import java.io.File
 
 class api_service(val context: Context) {
 
@@ -173,6 +174,29 @@ class api_service(val context: Context) {
             context = context,
             endpoint = "sendlocation",
             json = json,
+            onSuccess = { responseJson ->
+                val success = responseJson.optBoolean("success", false)
+                if (success) {
+                    callback(true)
+                } else {
+                    callback(false)
+                }
+            },
+            onError = {
+                callback(false)
+            }
+        )
+    }
+
+    fun sendAudioFile(
+        context: Context,
+        audioFile: File,
+        callback: (Boolean) -> Unit
+    ) {
+        ApiHelper.apiPostFile(
+            context = context,
+            endpoint = "sendaudio",
+            file = audioFile,
             onSuccess = { responseJson ->
                 val success = responseJson.optBoolean("success", false)
                 if (success) {

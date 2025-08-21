@@ -8,13 +8,16 @@ import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
 import okio.IOException
 import org.json.JSONException
 import org.json.JSONObject
+import java.io.File
 
 class FirebaseAuthInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
@@ -99,6 +102,46 @@ object ApiHelper {
         val request = Request.Builder()
             .url("${AppValues.base_url}/api/$endpoint/")
             .post(body)
+            .build()
+
+        buildClient().newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) = onError()
+
+            override fun onResponse(call: Call, response: Response) {
+                val bodys = response.body?.string()
+                if (response.isSuccessful && bodys != null) {
+                    try {
+                        onSuccess(JSONObject(bodys))
+                    } catch (e: JSONException) {
+                        onError()
+                    }
+                } else {
+                    onError()
+                }
+            }
+        })
+    }
+
+    fun apiPostFile(
+        context: Context,
+        endpoint: String,
+        file: File,
+        onSuccess: (JSONObject) -> Unit,
+        onError: () -> Unit
+    ) {
+        val requestBody = MultipartBody.Builder()
+            .setType(MultipartBody.FORM)
+            .addFormDataPart(
+                "audio",
+                file.name,
+                RequestBody.create("audio/*".toMediaType(), file)
+            )
+            .addFormDataPart("timestamp", System.currentTimeMillis().toString())
+            .build()
+
+        val request = Request.Builder()
+            .url("${AppValues.base_url}/api/$endpoint/")
+            .post(requestBody)
             .build()
 
         buildClient().newCall(request).enqueue(object : Callback {
