@@ -14,6 +14,7 @@ import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,10 +23,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -66,6 +69,9 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.window.Dialog
 import com.example.sentinelle.R
 import com.example.sentinelle.api.AppValues.Montserrat
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 @Composable
 fun UpdateStatusBarColor(color: Color, context: Context) {
@@ -450,5 +456,120 @@ fun ContactItem(
             checked = contact.selected,
             onCheckedChange = onSelect
         )
+    }
+}
+
+@Composable
+fun SaferiderItem(
+    saferider: Saferider,
+    colors: List<Color>,
+    onDelete: () -> Unit,
+    onClick: (Int) -> Unit,
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable {
+                // 👉 Ici tu rediriges vers ton écran de détail
+                onClick(saferider.id)
+            }
+            .padding(vertical = 8.dp)
+            ,
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+
+    ) {
+        // Icon
+        Icon(Icons.Default.CheckCircle, contentDescription = "Supprimer", tint = colors[1],
+            modifier = Modifier.size(50.dp))
+
+        // Convertion timestamp to date
+        fun getDate(s: String): String? {
+            return try {
+                val sdf = SimpleDateFormat("dd MMMM yyyy", Locale.FRENCH) // mois abrégé
+                val netDate = Date(s.toLong() * 1000)
+                val formatted = sdf.format(netDate)
+
+                var list = formatted.split(" ")
+                var day = list[0]
+                var month = list[1]
+                var year = list[2]
+
+                // Mettre la première lettre du mois en majuscule
+                month = month.replaceFirstChar { it.uppercase()}
+
+                return "$day $month $year"
+            } catch (e: Exception) {
+                e.toString()
+            }
+        }
+
+        // Convertion timestamp to hour and minute
+        fun getHourMinute(s: String?): String {
+            return try {
+                if (s.isNullOrEmpty()) {
+                    "?"
+                } else {
+                    val sdf = SimpleDateFormat("HH:mm", Locale.FRENCH)
+                    val netDate = Date(s.toLong() * 1000)
+                    sdf.format(netDate).replace(":", "h") // remplace : par h
+                }
+            } catch (e: Exception) {
+                "?"
+            }
+        }
+
+        // Calcul durée entre 2 timestamps
+        fun getDuration(start: String, end: String): String {
+            return try {
+                if (end.isEmpty() || end == "0") {
+                    "En cours"
+                } else {
+                    val startDate = Date(start.toLong() * 1000)
+                    val endDate = Date(end.toLong() * 1000)
+                    val duration = endDate.time - startDate.time
+                    val minutes = (duration / 1000 / 60) % 60
+                    val hours = (duration / 1000 / 60 / 60)
+                    if (hours > 0) {
+                        "${hours}h ${minutes}m"
+                    } else {
+                        "${minutes}m"
+                    }
+                }
+            } catch (e: Exception) {
+                "?"
+            }
+        }
+
+        // Row
+            //Column
+                // Date de lancement
+                // Row
+                    // Heure de début
+                    // Heure de fin
+            // Durée
+            // 3 pitit points
+        Log.d("SaferiderItem", "Theorotical end date: ${getHourMinute(saferider.theorotical_end_date)}")
+        Column(modifier = Modifier.weight(2f)) {
+            Text(getDate(saferider.start_date).toString(), color = Color.White, fontWeight = FontWeight.Bold)
+            Text("${getHourMinute(saferider.start_date).toString()} - ${getHourMinute(saferider.real_end_date).toString()}", color = Color.Gray, fontSize = 14.sp)
+        }
+
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ){
+            Text("${getDuration(saferider.start_date, saferider.real_end_date)}", color = Color.White, fontSize = 15.sp)
+
+            IconButton(onClick = onDelete) {
+                Icon(Icons.Default.Delete, contentDescription = "Supprimer", tint = colors[5])
+            }
+        }
+
+
+
+//        Checkbox(
+//            checked = contact.selected,
+//            onCheckedChange = onSelect
+//        )
     }
 }

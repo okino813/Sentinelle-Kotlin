@@ -22,6 +22,9 @@ class api_service(val context: Context) {
             val contactsJsonArray = jsonObject.getJSONArray("contacts")
             val contactsList = mutableStateListOf<Contact>()
 
+            val saferidersJsonArray = jsonObject.getJSONArray("saferiders")
+            val saferidersList = mutableStateListOf<Saferider>()
+
             for (i in 0 until contactsJsonArray.length()) {
                 val contactJson = contactsJsonArray.getJSONObject(i)
                 val contact = Contact(
@@ -33,7 +36,23 @@ class api_service(val context: Context) {
                 contactsList.add(contact)
             }
 
+            for (i in 0 until saferidersJsonArray.length()) {
+                val saferiderJson = saferidersJsonArray.getJSONObject(i)
+                val saferider = Saferider(
+                    id = saferiderJson.getInt("id"),
+                    path = saferiderJson.getString("path"),
+                    start_date = saferiderJson.getString("start_date"),
+                    theorotical_end_date = saferiderJson.getString("theorotical_end_date"),
+                    real_end_date = saferiderJson.getString("real_end_date"),
+                    locked = saferiderJson.getBoolean("locked"),
+                    status = saferiderJson.getInt("status")
+                )
+                saferidersList.add(saferider)
+            }
+
+
             AppValues.contacts = contactsList.toMutableStateList()
+            AppValues.saferiders = saferidersList.toMutableStateList()
 
         }, {
             Log.e("APIRESULTAT", "Erreur lors de la récupération des infos")

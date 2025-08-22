@@ -195,7 +195,7 @@ class ContactViewModel : ViewModel() {
 
     // State observable par Compose
     var contacts by mutableStateOf<List<Contact>>(emptyList())
-        private set
+//        private set
 
     init {
         // Initialisation depuis AppValues si tu utilises un stockage global

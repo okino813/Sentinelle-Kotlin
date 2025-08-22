@@ -55,6 +55,7 @@ val contrastColors = listOf(
  var email: String? = ""
  var message: String? = ""
  var contacts = mutableStateListOf<Contact>()
+ var saferiders = mutableStateListOf<Saferider>()
 
 }
 
@@ -64,4 +65,15 @@ data class Contact(
  val name: String,
  val phone: String,
  var selected: Boolean
+)
+
+@Immutable
+data class Saferider(
+ val id: Int,
+ val path: String,
+ val start_date: String,
+ val theorotical_end_date: String,
+ val real_end_date: String,
+ val locked: Boolean,
+ val status: Int,
 )

@@ -49,7 +49,6 @@ import com.example.sentinelle.api.PopupAlert
 import com.example.sentinelle.api.UpdateStatusBarColor
 import com.example.sentinelle.api.api_service
 
-
 @RequiresApi(Build.VERSION_CODES.Q)
 @Composable
 fun HomeScreen(
@@ -77,6 +76,8 @@ fun HomeScreen(
 
     val prefs = context.getSharedPreferences("sentinelle_prefs", MODE_PRIVATE)
     val isRunning = prefs.getBoolean("is_timer_running", false)
+
+
 
     val permissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestMultiplePermissions()
@@ -115,6 +116,8 @@ fun HomeScreen(
             }
         }
     }
+
+
 
     fun startTimer(context : Context){
         if (!isTimerRunning) {

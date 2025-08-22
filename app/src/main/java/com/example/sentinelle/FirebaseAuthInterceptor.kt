@@ -1,7 +1,9 @@
 package com.example.sentinelle
 
 import android.content.Context
+import android.util.Log
 import com.example.sentinelle.api.AppValues
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.auth.FirebaseAuth
 import okhttp3.Call
@@ -57,6 +59,20 @@ class FirebaseAuthInterceptor : Interceptor {
         }
 
         return response
+    }
+
+    public fun printFirebaseToken() {
+        val user = FirebaseAuth.getInstance().currentUser
+        user?.getIdToken(false)?.addOnCompleteListener(OnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val token = task.result?.token
+                Log.d("FIREBASE_TOKEN", "Token: $token")
+                // 👉 Tu peux aussi faire un Toast si tu veux le voir directement
+                // Toast.makeText(context, token, Toast.LENGTH_LONG).show()
+            } else {
+                Log.e("FIREBASE_TOKEN", "Impossible de récupérer le token", task.exception)
+            }
+        })
     }
 }
 

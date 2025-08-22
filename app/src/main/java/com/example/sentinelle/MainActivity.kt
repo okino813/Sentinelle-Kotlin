@@ -61,8 +61,8 @@ import com.example.sentinelle.api.AppValues.Montserrat
 import com.example.sentinelle.api.UpdateStatusBarColor
 import com.example.sentinelle.api.api_service
 import com.example.sentinelle.page.HomeScreen
-import com.example.sentinelle.page.MapScreen
 import com.example.sentinelle.page.NavigationTabExample
+import com.example.sentinelle.page.SaferidersScreen
 import com.example.sentinelle.page.SettingsScreen
 import com.example.sentinelle.ui.theme.SentiTheme
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -165,13 +165,14 @@ class MainActivity : ComponentActivity() {
 
         context = this
 
-        // ✅ DÉPLACER ICI - Demander les permissions dès le lancement
+        // Demande les permissions dès le lancement
         checkAndRequestPermissions()
 
         setContent {
             if (isLoggedIn.value) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     enableEdgeToEdge()
+
                     SentiTheme {
                         BottomMenu(
                             context = context,
@@ -179,9 +180,9 @@ class MainActivity : ComponentActivity() {
                             isLoggedIn = isLoggedIn,
                             isContrast = isContrast
                         )
-                        // ❌ ENLEVER D'ICI
-                        // checkAndRequestPermissions()
                     }
+                    printFirebaseToken()
+
                 }
             } else {
                 var appState by remember { mutableStateOf<AppState>(AppState.Tutorial) }
@@ -205,6 +206,7 @@ class MainActivity : ComponentActivity() {
                             checkAndRequestPermissions()
                         })
 
+
                     is AppState.Main ->
                         BottomMenu(
                             context = context,
@@ -213,6 +215,18 @@ class MainActivity : ComponentActivity() {
                             isContrast = isContrast
                         )
                 }
+            }
+        }
+    }
+
+    private fun printFirebaseToken() {
+        val user = FirebaseAuth.getInstance().currentUser
+        user?.getIdToken(false)?.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val token = task.result?.token
+                Log.d("FIREBASE_TOKEN", "Token: $token")
+            } else {
+                Log.e("FIREBASE_TOKEN", "Impossible de récupérer le token", task.exception)
             }
         }
     }
@@ -304,20 +318,6 @@ class MainActivity : ComponentActivity() {
             .setCancelable(false)
             .show()
     }
-
-    // Fonction à appeler avant de démarrer le TimerService
-//    private fun startTimerService(totalSeconds: Int) {
-//        // Vérifier une dernière fois les permissions avant de démarrer
-//        if (hasAllPermissions()) {
-//            val intent = Intent(this, TimerService::class.java).apply {
-//                action = "START_TIMER"
-//                putExtra("totalSeconds", totalSeconds)
-//            }
-//            startForegroundService(intent)
-//        } else {
-//            showPermissionDeniedDialog()
-//        }
-//    }
 
     private fun hasAllPermissions(): Boolean {
         val basicPermissionsGranted = REQUIRED_PERMISSIONS.all { permission ->
@@ -689,7 +689,10 @@ fun ContentScreen(modifier: Modifier, selectedIndex : Int,
             colorList,
             modifier = modifier
         )
-        1-> MapScreen()
+        1-> SaferidersScreen(
+            colorList,
+            modifier = modifier
+        )
         2-> NavigationTabExample(
             colorList,
             modifier = modifier,
