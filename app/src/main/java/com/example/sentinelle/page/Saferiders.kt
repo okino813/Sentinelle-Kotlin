@@ -1,6 +1,5 @@
 package com.example.sentinelle.page
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,17 +22,47 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.sentinelle.api.AppValues
 import com.example.sentinelle.api.Saferider
 import com.example.sentinelle.api.SaferiderItem
 import com.example.sentinelle.api.api_service
 
-/**
- * A simple [androidx.fragment.app.Fragment] subclass.
- * Use the [MapFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+@Composable
+fun AppNavigation(saferiders: List<Saferider>, colors: List<Color>) {
+    val navController = rememberNavController()
+
+    NavHost(
+        navController = navController,
+        startDestination = "list"
+    ) {
+        // Écran liste
+        composable("list") {
+            SaferidersScreen(
+                saferiders = saferiders,
+                colors = colors,
+                onNavigateToDetail = { id ->
+                    navController.navigate("detail/$id")
+                },
+                modifier = Modifier,
+            )
+        }
+
+        // Écran détail (avec paramètre)
+        composable(
+            route = "detail/{id}",
+            arguments = listOf(navArgument("id") { type = NavType.IntType })
+        ) { backStackEntry ->
+            val saferiderId = backStackEntry.arguments?.getInt("id")
+            SaferiderDetailScreen(saferiderId)
+        }
+    }
+}
+
 class SaferiderViewModel : ViewModel() {
 
     // State observable par Compose
@@ -63,54 +92,14 @@ class SaferiderViewModel : ViewModel() {
 
 @Composable
 fun SaferidersScreen(
-    colorList: List<Color>,
+    colors: List<Color>,
     modifier: Modifier,
-    viewModel: SaferiderViewModel = viewModel()
+    saferiders: List<Saferider>,
+    onNavigateToDetail: (Int) -> Unit,
 ) {
     // Déclaration des variables
     val context = LocalContext.current
     val api = api_service(context) // ton service réseau
-    val saferiders = viewModel.saferiders // lecture directe du state (recomposition automatique)
-
-    SaferidersStateless(
-        colors = colorList,
-        modifier = modifier,
-        saferiders = saferiders,
-    )
-}
-
-
-
-    // Ajoute (immutably)
-//    fun addContact(contact: Contact) {
-//        contacts = contacts + contact
-//    }
-//
-//    // Supprime (immutably)
-//    fun deleteContact(contactId: Int) {
-//        contacts = contacts.filterNot { it.id == contactId }
-//    }
-//
-//    // Basculer la sélection (optimistic update)
-//    fun setContactSelected(contactId: Int, isSelected: Boolean) {
-//        contacts = contacts.map { c ->
-//            if (c.id == contactId) c.copy(selected = isSelected) else c
-//        }
-//    }
-//
-//    // Remettre une liste complète (utile si tu veux re-sync depuis le serveur)
-//    fun updateContacts(newList: List<Contact>) {
-//        contacts = newList
-//    }
-
-
-
-@Composable
-fun SaferidersStateless(
-    colors: List<Color>,
-    modifier: Modifier,
-    saferiders: List<Saferider>,
-) {
     Box(
         modifier = Modifier
             .background(colors[0])
@@ -151,10 +140,9 @@ fun SaferidersStateless(
                             colors = colors,
                             onDelete = {
 //                                onDeleteContact(contact)
-                           },
-                            onClick = {
-                                // Action lors du clic sur un élément
-                                Log.d("SaferidersScreen", "Clicked on Saferider ID: ${saferider.id}")
+                            },
+                            onClick = {id ->
+                                onNavigateToDetail(id)
                             }
                         )
                     }
@@ -162,5 +150,55 @@ fun SaferidersStateless(
             }
         }
 
+    }
+}
+
+
+
+    // Ajoute (immutably)
+//    fun addContact(contact: Contact) {
+//        contacts = contacts + contact
+//    }
+//
+//    // Supprime (immutably)
+//    fun deleteContact(contactId: Int) {
+//        contacts = contacts.filterNot { it.id == contactId }
+//    }
+//
+//    // Basculer la sélection (optimistic update)
+//    fun setContactSelected(contactId: Int, isSelected: Boolean) {
+//        contacts = contacts.map { c ->
+//            if (c.id == contactId) c.copy(selected = isSelected) else c
+//        }
+//    }
+//
+//    // Remettre une liste complète (utile si tu veux re-sync depuis le serveur)
+//    fun updateContacts(newList: List<Contact>) {
+//        contacts = newList
+//    }
+
+
+
+//@Composable
+//fun SaferidersStateless(
+//    colors: List<Color>,
+//    modifier: Modifier,
+//    onNavigateToDetail: (Int) -> Unit = {},
+//    saferiders: List<Saferider>,
+//) {
+//
+//}
+
+@Composable
+fun SaferiderDetailScreen(id: Int?) {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        if (id != null) {
+            Text("Détail du Saferider #$id", fontSize = 24.sp, fontWeight = FontWeight.Bold)
+        } else {
+            Text("Aucun ID trouvé", color = Color.Red)
+        }
     }
 }

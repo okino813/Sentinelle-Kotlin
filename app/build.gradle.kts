@@ -60,7 +60,7 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.9.1") // Ajoute OkHttp ici
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
     implementation(libs.play.services.location)
-    implementation(libs.play.services.maps) // Ajoute logging-interceptor (facultatif)
+    implementation(libs.play.services.maps)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -60,9 +60,9 @@ import com.example.sentinelle.api.AppValues
 import com.example.sentinelle.api.AppValues.Montserrat
 import com.example.sentinelle.api.UpdateStatusBarColor
 import com.example.sentinelle.api.api_service
+import com.example.sentinelle.page.AppNavigation
 import com.example.sentinelle.page.HomeScreen
 import com.example.sentinelle.page.NavigationTabExample
-import com.example.sentinelle.page.SaferidersScreen
 import com.example.sentinelle.page.SettingsScreen
 import com.example.sentinelle.ui.theme.SentiTheme
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -689,9 +689,9 @@ fun ContentScreen(modifier: Modifier, selectedIndex : Int,
             colorList,
             modifier = modifier
         )
-        1-> SaferidersScreen(
+        1-> AppNavigation(
+            saferiders = AppValues.saferiders,
             colorList,
-            modifier = modifier
         )
         2-> NavigationTabExample(
             colorList,
