@@ -38,366 +38,367 @@
 20    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 20-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:14:5-81
 20-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:14:22-78
-21    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-21-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:13:5-71
-21-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:13:22-68
-22    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-22-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:14:5-81
-22-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:14:22-78
-23    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-23-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:7:5-79
-23-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:7:22-76
-24    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-24-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:6:5-81
-24-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:6:22-78
-25    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-25-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:19:5-85
-25-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:19:22-82
+21    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+21-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:15:5-85
+21-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:15:22-82
+22    <uses-permission android:name="android.permission.WAKE_LOCK" />
+22-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:16:5-68
+22-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:16:22-65
+23
+24    <!-- Pour Android 9+ (API 28+) : éviter les optimisations de batterie -->
+25    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+25-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:19:5-95
+25-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:19:22-92
 26
-27    <!-- Include required permissions for Google Maps API to run. -->
-28    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-28-->[com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.11.1/transforms/c93038d01bf336ed8796c2008badd489/transformed/play-services-maps-19.0.0/AndroidManifest.xml:23:5-79
-28-->[com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.11.1/transforms/c93038d01bf336ed8796c2008badd489/transformed/play-services-maps-19.0.0/AndroidManifest.xml:23:22-76
+27    <!-- Pour Android 12+ (API 31+) : service en arrière-plan -->
+28    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
+28-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:22:5-88
+28-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:22:22-85
 29
-30    <uses-feature
-30-->[com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.11.1/transforms/c93038d01bf336ed8796c2008badd489/transformed/play-services-maps-19.0.0/AndroidManifest.xml:26:5-28:35
-31        android:glEsVersion="0x00020000"
-31-->[com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.11.1/transforms/c93038d01bf336ed8796c2008badd489/transformed/play-services-maps-19.0.0/AndroidManifest.xml:27:9-41
-32        android:required="true" />
-32-->[com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.11.1/transforms/c93038d01bf336ed8796c2008badd489/transformed/play-services-maps-19.0.0/AndroidManifest.xml:28:9-32
-33
-34    <queries>
-34-->[com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.11.1/transforms/c93038d01bf336ed8796c2008badd489/transformed/play-services-maps-19.0.0/AndroidManifest.xml:30:5-34:15
-35
-36        <!-- Needs to be explicitly declared on Android R+ -->
-37        <package android:name="com.google.android.apps.maps" />
-37-->[com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.11.1/transforms/c93038d01bf336ed8796c2008badd489/transformed/play-services-maps-19.0.0/AndroidManifest.xml:33:9-64
-37-->[com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.11.1/transforms/c93038d01bf336ed8796c2008badd489/transformed/play-services-maps-19.0.0/AndroidManifest.xml:33:18-61
-38    </queries>
-39
-40    <permission
-40-->[androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.11.1/transforms/0d995d64911cf7d1b0e540f68b9d6559/transformed/core-1.15.0/AndroidManifest.xml:22:5-24:47
-41        android:name="com.example.sentinelle.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-41-->[androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.11.1/transforms/0d995d64911cf7d1b0e540f68b9d6559/transformed/core-1.15.0/AndroidManifest.xml:23:9-81
-42        android:protectionLevel="signature" />
-42-->[androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.11.1/transforms/0d995d64911cf7d1b0e540f68b9d6559/transformed/core-1.15.0/AndroidManifest.xml:24:9-44
-43
-44    <uses-permission android:name="com.example.sentinelle.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-44-->[androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.11.1/transforms/0d995d64911cf7d1b0e540f68b9d6559/transformed/core-1.15.0/AndroidManifest.xml:26:5-97
-44-->[androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.11.1/transforms/0d995d64911cf7d1b0e540f68b9d6559/transformed/core-1.15.0/AndroidManifest.xml:26:22-94
-45
-46    <application
-46-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:21:5-63:19
-47        android:allowBackup="true"
-47-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:22:9-35
-48        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-48-->[androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.11.1/transforms/0d995d64911cf7d1b0e540f68b9d6559/transformed/core-1.15.0/AndroidManifest.xml:28:18-86
-49        android:dataExtractionRules="@xml/data_extraction_rules"
-49-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:23:9-65
-50        android:debuggable="true"
-51        android:extractNativeLibs="false"
-52        android:fullBackupContent="@xml/backup_rules"
-52-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:24:9-54
-53        android:icon="@mipmap/icon_main_app_dark"
-53-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:25:9-50
-54        android:label="@string/app_name"
-54-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:26:9-41
-55        android:networkSecurityConfig="@xml/network_security_config"
-55-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:27:9-69
-56        android:roundIcon="@mipmap/ic_launcher_round"
-56-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:28:9-54
-57        android:supportsRtl="true"
-57-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:29:9-35
-58        android:testOnly="true"
-59        android:theme="@style/Theme.Sentinelle"
-59-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:30:9-48
-60        android:usesCleartextTraffic="true" >
-60-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:31:9-44
-61        <meta-data
-61-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:34:9-36:44
-62            android:name="com.google.android.geo.API_KEY"
-62-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:35:13-58
-63            android:value="YOUR_API_KEY" />
-63-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:36:13-41
-64
-65        <!-- Déclaration de l'activité MainActivity -->
-66        <activity
-66-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:42:9-52:20
-67            android:name="com.example.sentinelle.MainActivity"
-67-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:43:13-41
-68            android:exported="true"
-68-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:44:13-36
-69            android:screenOrientation="portrait" >
-69-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:45:13-49
-70            <intent-filter>
-70-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:46:13-50:29
-71                <action android:name="android.intent.action.MAIN" />
-71-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:47:17-69
-71-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:47:25-66
-72
-73                <category android:name="android.intent.category.LAUNCHER" />
-73-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:49:17-77
-73-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:49:27-74
-74            </intent-filter>
-75        </activity>
-76
-77        <service
-77-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:54:9-57:40
-78            android:name="com.example.sentinelle.TimerService"
-78-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:55:13-41
-79            android:exported="false"
-79-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:57:13-37
-80            android:foregroundServiceType="mediaPlayback|dataSync" />
-80-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:56:13-67
-81
-82        <meta-data
-82-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:59:9-61:57
-83            android:name="preloaded_fonts"
-83-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:60:13-43
-84            android:resource="@array/preloaded_fonts" />
-84-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:61:13-54
-85
-86        <activity
-86-->[androidx.compose.ui:ui-tooling-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/838bdf84f81a3ee29113e71c2ff0cde4/transformed/ui-tooling-release/AndroidManifest.xml:23:9-25:39
-87            android:name="androidx.compose.ui.tooling.PreviewActivity"
-87-->[androidx.compose.ui:ui-tooling-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/838bdf84f81a3ee29113e71c2ff0cde4/transformed/ui-tooling-release/AndroidManifest.xml:24:13-71
-88            android:exported="true" /> <!-- Needs to be explicitly declared on P+ -->
-88-->[androidx.compose.ui:ui-tooling-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/838bdf84f81a3ee29113e71c2ff0cde4/transformed/ui-tooling-release/AndroidManifest.xml:25:13-36
-89        <uses-library
-89-->[com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.11.1/transforms/c93038d01bf336ed8796c2008badd489/transformed/play-services-maps-19.0.0/AndroidManifest.xml:39:9-41:40
-90            android:name="org.apache.http.legacy"
-90-->[com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.11.1/transforms/c93038d01bf336ed8796c2008badd489/transformed/play-services-maps-19.0.0/AndroidManifest.xml:40:13-50
-91            android:required="false" />
-91-->[com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.11.1/transforms/c93038d01bf336ed8796c2008badd489/transformed/play-services-maps-19.0.0/AndroidManifest.xml:41:13-37
-92
-93        <activity
-93-->[com.google.android.gms:play-services-auth:20.7.0] /home/axel/.gradle/caches/8.11.1/transforms/d56bba3541952d0c29818e9be8225809/transformed/play-services-auth-20.7.0/AndroidManifest.xml:23:9-27:75
-94            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
-94-->[com.google.android.gms:play-services-auth:20.7.0] /home/axel/.gradle/caches/8.11.1/transforms/d56bba3541952d0c29818e9be8225809/transformed/play-services-auth-20.7.0/AndroidManifest.xml:24:13-93
-95            android:excludeFromRecents="true"
-95-->[com.google.android.gms:play-services-auth:20.7.0] /home/axel/.gradle/caches/8.11.1/transforms/d56bba3541952d0c29818e9be8225809/transformed/play-services-auth-20.7.0/AndroidManifest.xml:25:13-46
-96            android:exported="false"
-96-->[com.google.android.gms:play-services-auth:20.7.0] /home/axel/.gradle/caches/8.11.1/transforms/d56bba3541952d0c29818e9be8225809/transformed/play-services-auth-20.7.0/AndroidManifest.xml:26:13-37
-97            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-97-->[com.google.android.gms:play-services-auth:20.7.0] /home/axel/.gradle/caches/8.11.1/transforms/d56bba3541952d0c29818e9be8225809/transformed/play-services-auth-20.7.0/AndroidManifest.xml:27:13-72
-98        <!--
-99            Service handling Google Sign-In user revocation. For apps that do not integrate with
-100            Google Sign-In, this service will never be started.
-101        -->
-102        <service
-102-->[com.google.android.gms:play-services-auth:20.7.0] /home/axel/.gradle/caches/8.11.1/transforms/d56bba3541952d0c29818e9be8225809/transformed/play-services-auth-20.7.0/AndroidManifest.xml:33:9-37:51
-103            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
-103-->[com.google.android.gms:play-services-auth:20.7.0] /home/axel/.gradle/caches/8.11.1/transforms/d56bba3541952d0c29818e9be8225809/transformed/play-services-auth-20.7.0/AndroidManifest.xml:34:13-89
-104            android:exported="true"
-104-->[com.google.android.gms:play-services-auth:20.7.0] /home/axel/.gradle/caches/8.11.1/transforms/d56bba3541952d0c29818e9be8225809/transformed/play-services-auth-20.7.0/AndroidManifest.xml:35:13-36
-105            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
-105-->[com.google.android.gms:play-services-auth:20.7.0] /home/axel/.gradle/caches/8.11.1/transforms/d56bba3541952d0c29818e9be8225809/transformed/play-services-auth-20.7.0/AndroidManifest.xml:36:13-107
-106            android:visibleToInstantApps="true" />
-106-->[com.google.android.gms:play-services-auth:20.7.0] /home/axel/.gradle/caches/8.11.1/transforms/d56bba3541952d0c29818e9be8225809/transformed/play-services-auth-20.7.0/AndroidManifest.xml:37:13-48
-107        <service
-107-->[com.google.firebase:firebase-auth-ktx:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/12720578383c4c216a607d3f5d7c42d8/transformed/firebase-auth-ktx-22.3.0/AndroidManifest.xml:8:9-14:19
-108            android:name="com.google.firebase.components.ComponentDiscoveryService"
-108-->[com.google.firebase:firebase-auth-ktx:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/12720578383c4c216a607d3f5d7c42d8/transformed/firebase-auth-ktx-22.3.0/AndroidManifest.xml:9:13-84
-109            android:directBootAware="true"
-109-->[com.google.firebase:firebase-common:20.4.2] /home/axel/.gradle/caches/8.11.1/transforms/8f3f665736dc20c5877ab36144966c2a/transformed/firebase-common-20.4.2/AndroidManifest.xml:32:13-43
-110            android:exported="false" >
-110-->[com.google.firebase:firebase-auth-ktx:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/12720578383c4c216a607d3f5d7c42d8/transformed/firebase-auth-ktx-22.3.0/AndroidManifest.xml:10:13-37
-111            <meta-data
-111-->[com.google.firebase:firebase-auth-ktx:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/12720578383c4c216a607d3f5d7c42d8/transformed/firebase-auth-ktx-22.3.0/AndroidManifest.xml:11:13-13:85
-112                android:name="com.google.firebase.components:com.google.firebase.auth.ktx.FirebaseAuthLegacyRegistrar"
-112-->[com.google.firebase:firebase-auth-ktx:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/12720578383c4c216a607d3f5d7c42d8/transformed/firebase-auth-ktx-22.3.0/AndroidManifest.xml:12:17-119
-113                android:value="com.google.firebase.components.ComponentRegistrar" />
-113-->[com.google.firebase:firebase-auth-ktx:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/12720578383c4c216a607d3f5d7c42d8/transformed/firebase-auth-ktx-22.3.0/AndroidManifest.xml:13:17-82
+30    <!-- Include required permissions for Google Maps API to run. -->
+31    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+31-->[com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.11.1/transforms/c93038d01bf336ed8796c2008badd489/transformed/play-services-maps-19.0.0/AndroidManifest.xml:23:5-79
+31-->[com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.11.1/transforms/c93038d01bf336ed8796c2008badd489/transformed/play-services-maps-19.0.0/AndroidManifest.xml:23:22-76
+32
+33    <uses-feature
+33-->[com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.11.1/transforms/c93038d01bf336ed8796c2008badd489/transformed/play-services-maps-19.0.0/AndroidManifest.xml:26:5-28:35
+34        android:glEsVersion="0x00020000"
+34-->[com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.11.1/transforms/c93038d01bf336ed8796c2008badd489/transformed/play-services-maps-19.0.0/AndroidManifest.xml:27:9-41
+35        android:required="true" />
+35-->[com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.11.1/transforms/c93038d01bf336ed8796c2008badd489/transformed/play-services-maps-19.0.0/AndroidManifest.xml:28:9-32
+36
+37    <queries>
+37-->[com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.11.1/transforms/c93038d01bf336ed8796c2008badd489/transformed/play-services-maps-19.0.0/AndroidManifest.xml:30:5-34:15
+38
+39        <!-- Needs to be explicitly declared on Android R+ -->
+40        <package android:name="com.google.android.apps.maps" />
+40-->[com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.11.1/transforms/c93038d01bf336ed8796c2008badd489/transformed/play-services-maps-19.0.0/AndroidManifest.xml:33:9-64
+40-->[com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.11.1/transforms/c93038d01bf336ed8796c2008badd489/transformed/play-services-maps-19.0.0/AndroidManifest.xml:33:18-61
+41    </queries>
+42
+43    <permission
+43-->[androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.11.1/transforms/0d995d64911cf7d1b0e540f68b9d6559/transformed/core-1.15.0/AndroidManifest.xml:22:5-24:47
+44        android:name="com.example.sentinelle.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+44-->[androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.11.1/transforms/0d995d64911cf7d1b0e540f68b9d6559/transformed/core-1.15.0/AndroidManifest.xml:23:9-81
+45        android:protectionLevel="signature" />
+45-->[androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.11.1/transforms/0d995d64911cf7d1b0e540f68b9d6559/transformed/core-1.15.0/AndroidManifest.xml:24:9-44
+46
+47    <uses-permission android:name="com.example.sentinelle.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+47-->[androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.11.1/transforms/0d995d64911cf7d1b0e540f68b9d6559/transformed/core-1.15.0/AndroidManifest.xml:26:5-97
+47-->[androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.11.1/transforms/0d995d64911cf7d1b0e540f68b9d6559/transformed/core-1.15.0/AndroidManifest.xml:26:22-94
+48
+49    <application
+49-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:25:5-67:19
+50        android:allowBackup="true"
+50-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:26:9-35
+51        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+51-->[androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.11.1/transforms/0d995d64911cf7d1b0e540f68b9d6559/transformed/core-1.15.0/AndroidManifest.xml:28:18-86
+52        android:dataExtractionRules="@xml/data_extraction_rules"
+52-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:27:9-65
+53        android:debuggable="true"
+54        android:extractNativeLibs="false"
+55        android:fullBackupContent="@xml/backup_rules"
+55-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:28:9-54
+56        android:icon="@mipmap/icon_main_app_dark"
+56-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:29:9-50
+57        android:label="@string/app_name"
+57-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:30:9-41
+58        android:networkSecurityConfig="@xml/network_security_config"
+58-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:31:9-69
+59        android:roundIcon="@mipmap/ic_launcher_round"
+59-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:32:9-54
+60        android:supportsRtl="true"
+60-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:33:9-35
+61        android:testOnly="true"
+62        android:theme="@style/Theme.Sentinelle"
+62-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:34:9-48
+63        android:usesCleartextTraffic="true" >
+63-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:35:9-44
+64        <meta-data
+64-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:38:9-40:44
+65            android:name="com.google.android.geo.API_KEY"
+65-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:39:13-58
+66            android:value="YOUR_API_KEY" />
+66-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:40:13-41
+67
+68        <!-- Déclaration de l'activité MainActivity -->
+69        <activity
+69-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:46:9-56:20
+70            android:name="com.example.sentinelle.MainActivity"
+70-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:47:13-41
+71            android:exported="true"
+71-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:48:13-36
+72            android:screenOrientation="portrait" >
+72-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:49:13-49
+73            <intent-filter>
+73-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:50:13-54:29
+74                <action android:name="android.intent.action.MAIN" />
+74-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:51:17-69
+74-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:51:25-66
+75
+76                <category android:name="android.intent.category.LAUNCHER" />
+76-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:53:17-77
+76-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:53:27-74
+77            </intent-filter>
+78        </activity>
+79
+80        <service
+80-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:58:9-61:40
+81            android:name="com.example.sentinelle.TimerService"
+81-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:59:13-41
+82            android:exported="false"
+82-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:61:13-37
+83            android:foregroundServiceType="microphone|location|mediaPlayback|dataSync" />
+83-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:60:13-87
+84
+85        <meta-data
+85-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:63:9-65:57
+86            android:name="preloaded_fonts"
+86-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:64:13-43
+87            android:resource="@array/preloaded_fonts" />
+87-->/home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:65:13-54
+88
+89        <activity
+89-->[androidx.compose.ui:ui-tooling-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/838bdf84f81a3ee29113e71c2ff0cde4/transformed/ui-tooling-release/AndroidManifest.xml:23:9-25:39
+90            android:name="androidx.compose.ui.tooling.PreviewActivity"
+90-->[androidx.compose.ui:ui-tooling-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/838bdf84f81a3ee29113e71c2ff0cde4/transformed/ui-tooling-release/AndroidManifest.xml:24:13-71
+91            android:exported="true" /> <!-- Needs to be explicitly declared on P+ -->
+91-->[androidx.compose.ui:ui-tooling-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/838bdf84f81a3ee29113e71c2ff0cde4/transformed/ui-tooling-release/AndroidManifest.xml:25:13-36
+92        <uses-library
+92-->[com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.11.1/transforms/c93038d01bf336ed8796c2008badd489/transformed/play-services-maps-19.0.0/AndroidManifest.xml:39:9-41:40
+93            android:name="org.apache.http.legacy"
+93-->[com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.11.1/transforms/c93038d01bf336ed8796c2008badd489/transformed/play-services-maps-19.0.0/AndroidManifest.xml:40:13-50
+94            android:required="false" />
+94-->[com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.11.1/transforms/c93038d01bf336ed8796c2008badd489/transformed/play-services-maps-19.0.0/AndroidManifest.xml:41:13-37
+95
+96        <activity
+96-->[com.google.android.gms:play-services-auth:20.7.0] /home/axel/.gradle/caches/8.11.1/transforms/d56bba3541952d0c29818e9be8225809/transformed/play-services-auth-20.7.0/AndroidManifest.xml:23:9-27:75
+97            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+97-->[com.google.android.gms:play-services-auth:20.7.0] /home/axel/.gradle/caches/8.11.1/transforms/d56bba3541952d0c29818e9be8225809/transformed/play-services-auth-20.7.0/AndroidManifest.xml:24:13-93
+98            android:excludeFromRecents="true"
+98-->[com.google.android.gms:play-services-auth:20.7.0] /home/axel/.gradle/caches/8.11.1/transforms/d56bba3541952d0c29818e9be8225809/transformed/play-services-auth-20.7.0/AndroidManifest.xml:25:13-46
+99            android:exported="false"
+99-->[com.google.android.gms:play-services-auth:20.7.0] /home/axel/.gradle/caches/8.11.1/transforms/d56bba3541952d0c29818e9be8225809/transformed/play-services-auth-20.7.0/AndroidManifest.xml:26:13-37
+100            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+100-->[com.google.android.gms:play-services-auth:20.7.0] /home/axel/.gradle/caches/8.11.1/transforms/d56bba3541952d0c29818e9be8225809/transformed/play-services-auth-20.7.0/AndroidManifest.xml:27:13-72
+101        <!--
+102            Service handling Google Sign-In user revocation. For apps that do not integrate with
+103            Google Sign-In, this service will never be started.
+104        -->
+105        <service
+105-->[com.google.android.gms:play-services-auth:20.7.0] /home/axel/.gradle/caches/8.11.1/transforms/d56bba3541952d0c29818e9be8225809/transformed/play-services-auth-20.7.0/AndroidManifest.xml:33:9-37:51
+106            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+106-->[com.google.android.gms:play-services-auth:20.7.0] /home/axel/.gradle/caches/8.11.1/transforms/d56bba3541952d0c29818e9be8225809/transformed/play-services-auth-20.7.0/AndroidManifest.xml:34:13-89
+107            android:exported="true"
+107-->[com.google.android.gms:play-services-auth:20.7.0] /home/axel/.gradle/caches/8.11.1/transforms/d56bba3541952d0c29818e9be8225809/transformed/play-services-auth-20.7.0/AndroidManifest.xml:35:13-36
+108            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
+108-->[com.google.android.gms:play-services-auth:20.7.0] /home/axel/.gradle/caches/8.11.1/transforms/d56bba3541952d0c29818e9be8225809/transformed/play-services-auth-20.7.0/AndroidManifest.xml:36:13-107
+109            android:visibleToInstantApps="true" />
+109-->[com.google.android.gms:play-services-auth:20.7.0] /home/axel/.gradle/caches/8.11.1/transforms/d56bba3541952d0c29818e9be8225809/transformed/play-services-auth-20.7.0/AndroidManifest.xml:37:13-48
+110        <service
+110-->[com.google.firebase:firebase-auth-ktx:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/12720578383c4c216a607d3f5d7c42d8/transformed/firebase-auth-ktx-22.3.0/AndroidManifest.xml:8:9-14:19
+111            android:name="com.google.firebase.components.ComponentDiscoveryService"
+111-->[com.google.firebase:firebase-auth-ktx:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/12720578383c4c216a607d3f5d7c42d8/transformed/firebase-auth-ktx-22.3.0/AndroidManifest.xml:9:13-84
+112            android:directBootAware="true"
+112-->[com.google.firebase:firebase-common:20.4.2] /home/axel/.gradle/caches/8.11.1/transforms/8f3f665736dc20c5877ab36144966c2a/transformed/firebase-common-20.4.2/AndroidManifest.xml:32:13-43
+113            android:exported="false" >
+113-->[com.google.firebase:firebase-auth-ktx:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/12720578383c4c216a607d3f5d7c42d8/transformed/firebase-auth-ktx-22.3.0/AndroidManifest.xml:10:13-37
 114            <meta-data
-114-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:69:13-71:85
-115                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
-115-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:70:17-109
+114-->[com.google.firebase:firebase-auth-ktx:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/12720578383c4c216a607d3f5d7c42d8/transformed/firebase-auth-ktx-22.3.0/AndroidManifest.xml:11:13-13:85
+115                android:name="com.google.firebase.components:com.google.firebase.auth.ktx.FirebaseAuthLegacyRegistrar"
+115-->[com.google.firebase:firebase-auth-ktx:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/12720578383c4c216a607d3f5d7c42d8/transformed/firebase-auth-ktx-22.3.0/AndroidManifest.xml:12:17-119
 116                android:value="com.google.firebase.components.ComponentRegistrar" />
-116-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:71:17-82
+116-->[com.google.firebase:firebase-auth-ktx:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/12720578383c4c216a607d3f5d7c42d8/transformed/firebase-auth-ktx-22.3.0/AndroidManifest.xml:13:17-82
 117            <meta-data
-117-->[com.google.firebase:firebase-common-ktx:20.4.2] /home/axel/.gradle/caches/8.11.1/transforms/5c5463e8a62f7bf2decb3bd652890214/transformed/firebase-common-ktx-20.4.2/AndroidManifest.xml:12:13-14:85
-118                android:name="com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonLegacyRegistrar"
-118-->[com.google.firebase:firebase-common-ktx:20.4.2] /home/axel/.gradle/caches/8.11.1/transforms/5c5463e8a62f7bf2decb3bd652890214/transformed/firebase-common-ktx-20.4.2/AndroidManifest.xml:13:17-116
+117-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:69:13-71:85
+118                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
+118-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:70:17-109
 119                android:value="com.google.firebase.components.ComponentRegistrar" />
-119-->[com.google.firebase:firebase-common-ktx:20.4.2] /home/axel/.gradle/caches/8.11.1/transforms/5c5463e8a62f7bf2decb3bd652890214/transformed/firebase-common-ktx-20.4.2/AndroidManifest.xml:14:17-82
+119-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:71:17-82
 120            <meta-data
-120-->[com.google.firebase:firebase-common:20.4.2] /home/axel/.gradle/caches/8.11.1/transforms/8f3f665736dc20c5877ab36144966c2a/transformed/firebase-common-20.4.2/AndroidManifest.xml:35:13-37:85
-121                android:name="com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar"
-121-->[com.google.firebase:firebase-common:20.4.2] /home/axel/.gradle/caches/8.11.1/transforms/8f3f665736dc20c5877ab36144966c2a/transformed/firebase-common-20.4.2/AndroidManifest.xml:36:17-109
+120-->[com.google.firebase:firebase-common-ktx:20.4.2] /home/axel/.gradle/caches/8.11.1/transforms/5c5463e8a62f7bf2decb3bd652890214/transformed/firebase-common-ktx-20.4.2/AndroidManifest.xml:12:13-14:85
+121                android:name="com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonLegacyRegistrar"
+121-->[com.google.firebase:firebase-common-ktx:20.4.2] /home/axel/.gradle/caches/8.11.1/transforms/5c5463e8a62f7bf2decb3bd652890214/transformed/firebase-common-ktx-20.4.2/AndroidManifest.xml:13:17-116
 122                android:value="com.google.firebase.components.ComponentRegistrar" />
-122-->[com.google.firebase:firebase-common:20.4.2] /home/axel/.gradle/caches/8.11.1/transforms/8f3f665736dc20c5877ab36144966c2a/transformed/firebase-common-20.4.2/AndroidManifest.xml:37:17-82
-123        </service>
-124
-125        <activity
-125-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:29:9-46:20
-126            android:name="com.google.firebase.auth.internal.GenericIdpActivity"
-126-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:30:13-80
-127            android:excludeFromRecents="true"
-127-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:31:13-46
-128            android:exported="true"
-128-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:32:13-36
-129            android:launchMode="singleTask"
-129-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:33:13-44
-130            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-130-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:34:13-72
-131            <intent-filter>
-131-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:35:13-45:29
-132                <action android:name="android.intent.action.VIEW" />
-132-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:36:17-69
-132-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:36:25-66
-133
-134                <category android:name="android.intent.category.DEFAULT" />
-134-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:38:17-76
-134-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:38:27-73
-135                <category android:name="android.intent.category.BROWSABLE" />
-135-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:39:17-78
-135-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:39:27-75
+122-->[com.google.firebase:firebase-common-ktx:20.4.2] /home/axel/.gradle/caches/8.11.1/transforms/5c5463e8a62f7bf2decb3bd652890214/transformed/firebase-common-ktx-20.4.2/AndroidManifest.xml:14:17-82
+123            <meta-data
+123-->[com.google.firebase:firebase-common:20.4.2] /home/axel/.gradle/caches/8.11.1/transforms/8f3f665736dc20c5877ab36144966c2a/transformed/firebase-common-20.4.2/AndroidManifest.xml:35:13-37:85
+124                android:name="com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar"
+124-->[com.google.firebase:firebase-common:20.4.2] /home/axel/.gradle/caches/8.11.1/transforms/8f3f665736dc20c5877ab36144966c2a/transformed/firebase-common-20.4.2/AndroidManifest.xml:36:17-109
+125                android:value="com.google.firebase.components.ComponentRegistrar" />
+125-->[com.google.firebase:firebase-common:20.4.2] /home/axel/.gradle/caches/8.11.1/transforms/8f3f665736dc20c5877ab36144966c2a/transformed/firebase-common-20.4.2/AndroidManifest.xml:37:17-82
+126        </service>
+127
+128        <activity
+128-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:29:9-46:20
+129            android:name="com.google.firebase.auth.internal.GenericIdpActivity"
+129-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:30:13-80
+130            android:excludeFromRecents="true"
+130-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:31:13-46
+131            android:exported="true"
+131-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:32:13-36
+132            android:launchMode="singleTask"
+132-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:33:13-44
+133            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+133-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:34:13-72
+134            <intent-filter>
+134-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:35:13-45:29
+135                <action android:name="android.intent.action.VIEW" />
+135-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:36:17-69
+135-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:36:25-66
 136
-137                <data
-137-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:41:17-44:51
-138                    android:host="firebase.auth"
-138-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:42:21-49
-139                    android:path="/"
-139-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:43:21-37
-140                    android:scheme="genericidp" />
-140-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:44:21-48
-141            </intent-filter>
-142        </activity>
-143        <activity
-143-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:47:9-64:20
-144            android:name="com.google.firebase.auth.internal.RecaptchaActivity"
-144-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:48:13-79
-145            android:excludeFromRecents="true"
-145-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:49:13-46
-146            android:exported="true"
-146-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:50:13-36
-147            android:launchMode="singleTask"
-147-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:51:13-44
-148            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-148-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:52:13-72
-149            <intent-filter>
-149-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:53:13-63:29
-150                <action android:name="android.intent.action.VIEW" />
-150-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:36:17-69
-150-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:36:25-66
-151
-152                <category android:name="android.intent.category.DEFAULT" />
-152-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:38:17-76
-152-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:38:27-73
-153                <category android:name="android.intent.category.BROWSABLE" />
-153-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:39:17-78
-153-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:39:27-75
+137                <category android:name="android.intent.category.DEFAULT" />
+137-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:38:17-76
+137-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:38:27-73
+138                <category android:name="android.intent.category.BROWSABLE" />
+138-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:39:17-78
+138-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:39:27-75
+139
+140                <data
+140-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:41:17-44:51
+141                    android:host="firebase.auth"
+141-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:42:21-49
+142                    android:path="/"
+142-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:43:21-37
+143                    android:scheme="genericidp" />
+143-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:44:21-48
+144            </intent-filter>
+145        </activity>
+146        <activity
+146-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:47:9-64:20
+147            android:name="com.google.firebase.auth.internal.RecaptchaActivity"
+147-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:48:13-79
+148            android:excludeFromRecents="true"
+148-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:49:13-46
+149            android:exported="true"
+149-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:50:13-36
+150            android:launchMode="singleTask"
+150-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:51:13-44
+151            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+151-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:52:13-72
+152            <intent-filter>
+152-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:53:13-63:29
+153                <action android:name="android.intent.action.VIEW" />
+153-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:36:17-69
+153-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:36:25-66
 154
-155                <data
-155-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:41:17-44:51
-156                    android:host="firebase.auth"
-156-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:42:21-49
-157                    android:path="/"
-157-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:43:21-37
-158                    android:scheme="recaptcha" />
-158-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:44:21-48
-159            </intent-filter>
-160        </activity>
-161        <activity
-161-->[com.google.android.gms:play-services-base:18.5.0] /home/axel/.gradle/caches/8.11.1/transforms/9c4ad1580af9dde5d4b6b8380b4456a9/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:9-173
-162            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-162-->[com.google.android.gms:play-services-base:18.5.0] /home/axel/.gradle/caches/8.11.1/transforms/9c4ad1580af9dde5d4b6b8380b4456a9/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:19-85
-163            android:exported="false"
-163-->[com.google.android.gms:play-services-base:18.5.0] /home/axel/.gradle/caches/8.11.1/transforms/9c4ad1580af9dde5d4b6b8380b4456a9/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:146-170
-164            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-164-->[com.google.android.gms:play-services-base:18.5.0] /home/axel/.gradle/caches/8.11.1/transforms/9c4ad1580af9dde5d4b6b8380b4456a9/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:86-145
-165
-166        <provider
-166-->[com.google.firebase:firebase-common:20.4.2] /home/axel/.gradle/caches/8.11.1/transforms/8f3f665736dc20c5877ab36144966c2a/transformed/firebase-common-20.4.2/AndroidManifest.xml:23:9-28:39
-167            android:name="com.google.firebase.provider.FirebaseInitProvider"
-167-->[com.google.firebase:firebase-common:20.4.2] /home/axel/.gradle/caches/8.11.1/transforms/8f3f665736dc20c5877ab36144966c2a/transformed/firebase-common-20.4.2/AndroidManifest.xml:24:13-77
-168            android:authorities="com.example.sentinelle.firebaseinitprovider"
-168-->[com.google.firebase:firebase-common:20.4.2] /home/axel/.gradle/caches/8.11.1/transforms/8f3f665736dc20c5877ab36144966c2a/transformed/firebase-common-20.4.2/AndroidManifest.xml:25:13-72
-169            android:directBootAware="true"
-169-->[com.google.firebase:firebase-common:20.4.2] /home/axel/.gradle/caches/8.11.1/transforms/8f3f665736dc20c5877ab36144966c2a/transformed/firebase-common-20.4.2/AndroidManifest.xml:26:13-43
-170            android:exported="false"
-170-->[com.google.firebase:firebase-common:20.4.2] /home/axel/.gradle/caches/8.11.1/transforms/8f3f665736dc20c5877ab36144966c2a/transformed/firebase-common-20.4.2/AndroidManifest.xml:27:13-37
-171            android:initOrder="100" />
-171-->[com.google.firebase:firebase-common:20.4.2] /home/axel/.gradle/caches/8.11.1/transforms/8f3f665736dc20c5877ab36144966c2a/transformed/firebase-common-20.4.2/AndroidManifest.xml:28:13-36
-172        <provider
-172-->[androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.11.1/transforms/8c5696fe7196f34dc05fa47c4e3ba282/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
-173            android:name="androidx.startup.InitializationProvider"
-173-->[androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.11.1/transforms/8c5696fe7196f34dc05fa47c4e3ba282/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67
-174            android:authorities="com.example.sentinelle.androidx-startup"
-174-->[androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.11.1/transforms/8c5696fe7196f34dc05fa47c4e3ba282/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68
-175            android:exported="false" >
-175-->[androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.11.1/transforms/8c5696fe7196f34dc05fa47c4e3ba282/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37
-176            <meta-data
-176-->[androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.11.1/transforms/8c5696fe7196f34dc05fa47c4e3ba282/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
-177                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-177-->[androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.11.1/transforms/8c5696fe7196f34dc05fa47c4e3ba282/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
-178                android:value="androidx.startup" />
-178-->[androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.11.1/transforms/8c5696fe7196f34dc05fa47c4e3ba282/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
+155                <category android:name="android.intent.category.DEFAULT" />
+155-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:38:17-76
+155-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:38:27-73
+156                <category android:name="android.intent.category.BROWSABLE" />
+156-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:39:17-78
+156-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:39:27-75
+157
+158                <data
+158-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:41:17-44:51
+159                    android:host="firebase.auth"
+159-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:42:21-49
+160                    android:path="/"
+160-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:43:21-37
+161                    android:scheme="recaptcha" />
+161-->[com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/ef4dc45640ca3dc2001c84defd0f5c76/transformed/firebase-auth-22.3.0/AndroidManifest.xml:44:21-48
+162            </intent-filter>
+163        </activity>
+164        <activity
+164-->[com.google.android.gms:play-services-base:18.5.0] /home/axel/.gradle/caches/8.11.1/transforms/9c4ad1580af9dde5d4b6b8380b4456a9/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:9-173
+165            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+165-->[com.google.android.gms:play-services-base:18.5.0] /home/axel/.gradle/caches/8.11.1/transforms/9c4ad1580af9dde5d4b6b8380b4456a9/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:19-85
+166            android:exported="false"
+166-->[com.google.android.gms:play-services-base:18.5.0] /home/axel/.gradle/caches/8.11.1/transforms/9c4ad1580af9dde5d4b6b8380b4456a9/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:146-170
+167            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+167-->[com.google.android.gms:play-services-base:18.5.0] /home/axel/.gradle/caches/8.11.1/transforms/9c4ad1580af9dde5d4b6b8380b4456a9/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:86-145
+168
+169        <provider
+169-->[com.google.firebase:firebase-common:20.4.2] /home/axel/.gradle/caches/8.11.1/transforms/8f3f665736dc20c5877ab36144966c2a/transformed/firebase-common-20.4.2/AndroidManifest.xml:23:9-28:39
+170            android:name="com.google.firebase.provider.FirebaseInitProvider"
+170-->[com.google.firebase:firebase-common:20.4.2] /home/axel/.gradle/caches/8.11.1/transforms/8f3f665736dc20c5877ab36144966c2a/transformed/firebase-common-20.4.2/AndroidManifest.xml:24:13-77
+171            android:authorities="com.example.sentinelle.firebaseinitprovider"
+171-->[com.google.firebase:firebase-common:20.4.2] /home/axel/.gradle/caches/8.11.1/transforms/8f3f665736dc20c5877ab36144966c2a/transformed/firebase-common-20.4.2/AndroidManifest.xml:25:13-72
+172            android:directBootAware="true"
+172-->[com.google.firebase:firebase-common:20.4.2] /home/axel/.gradle/caches/8.11.1/transforms/8f3f665736dc20c5877ab36144966c2a/transformed/firebase-common-20.4.2/AndroidManifest.xml:26:13-43
+173            android:exported="false"
+173-->[com.google.firebase:firebase-common:20.4.2] /home/axel/.gradle/caches/8.11.1/transforms/8f3f665736dc20c5877ab36144966c2a/transformed/firebase-common-20.4.2/AndroidManifest.xml:27:13-37
+174            android:initOrder="100" />
+174-->[com.google.firebase:firebase-common:20.4.2] /home/axel/.gradle/caches/8.11.1/transforms/8f3f665736dc20c5877ab36144966c2a/transformed/firebase-common-20.4.2/AndroidManifest.xml:28:13-36
+175        <provider
+175-->[androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.11.1/transforms/8c5696fe7196f34dc05fa47c4e3ba282/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
+176            android:name="androidx.startup.InitializationProvider"
+176-->[androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.11.1/transforms/8c5696fe7196f34dc05fa47c4e3ba282/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67
+177            android:authorities="com.example.sentinelle.androidx-startup"
+177-->[androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.11.1/transforms/8c5696fe7196f34dc05fa47c4e3ba282/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68
+178            android:exported="false" >
+178-->[androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.11.1/transforms/8c5696fe7196f34dc05fa47c4e3ba282/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37
 179            <meta-data
-179-->[androidx.lifecycle:lifecycle-process:2.8.0] /home/axel/.gradle/caches/8.11.1/transforms/7f66d9eabd23cee2fbc15c21447b551e/transformed/lifecycle-process-2.8.0/AndroidManifest.xml:29:13-31:52
-180                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-180-->[androidx.lifecycle:lifecycle-process:2.8.0] /home/axel/.gradle/caches/8.11.1/transforms/7f66d9eabd23cee2fbc15c21447b551e/transformed/lifecycle-process-2.8.0/AndroidManifest.xml:30:17-78
+179-->[androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.11.1/transforms/8c5696fe7196f34dc05fa47c4e3ba282/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
+180                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+180-->[androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.11.1/transforms/8c5696fe7196f34dc05fa47c4e3ba282/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
 181                android:value="androidx.startup" />
-181-->[androidx.lifecycle:lifecycle-process:2.8.0] /home/axel/.gradle/caches/8.11.1/transforms/7f66d9eabd23cee2fbc15c21447b551e/transformed/lifecycle-process-2.8.0/AndroidManifest.xml:31:17-49
+181-->[androidx.emoji2:emoji2:1.3.0] /home/axel/.gradle/caches/8.11.1/transforms/8c5696fe7196f34dc05fa47c4e3ba282/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
 182            <meta-data
-182-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:29:13-31:52
-183                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-183-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:30:17-85
+182-->[androidx.lifecycle:lifecycle-process:2.8.0] /home/axel/.gradle/caches/8.11.1/transforms/7f66d9eabd23cee2fbc15c21447b551e/transformed/lifecycle-process-2.8.0/AndroidManifest.xml:29:13-31:52
+183                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+183-->[androidx.lifecycle:lifecycle-process:2.8.0] /home/axel/.gradle/caches/8.11.1/transforms/7f66d9eabd23cee2fbc15c21447b551e/transformed/lifecycle-process-2.8.0/AndroidManifest.xml:30:17-78
 184                android:value="androidx.startup" />
-184-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:31:17-49
-185        </provider>
-186
-187        <meta-data
-187-->[com.google.android.gms:play-services-basement:18.4.0] /home/axel/.gradle/caches/8.11.1/transforms/9f67e3640d2d5184f10fadc9807c9d49/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:9-122
-188            android:name="com.google.android.gms.version"
-188-->[com.google.android.gms:play-services-basement:18.4.0] /home/axel/.gradle/caches/8.11.1/transforms/9f67e3640d2d5184f10fadc9807c9d49/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:20-65
-189            android:value="@integer/google_play_services_version" />
-189-->[com.google.android.gms:play-services-basement:18.4.0] /home/axel/.gradle/caches/8.11.1/transforms/9f67e3640d2d5184f10fadc9807c9d49/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:66-119
-190
-191        <activity
-191-->[androidx.compose.ui:ui-test-manifest:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/1efaa3d897d97f96fb1de7b3f5c14745/transformed/ui-test-manifest-1.6.1/AndroidManifest.xml:23:9-25:39
-192            android:name="androidx.activity.ComponentActivity"
-192-->[androidx.compose.ui:ui-test-manifest:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/1efaa3d897d97f96fb1de7b3f5c14745/transformed/ui-test-manifest-1.6.1/AndroidManifest.xml:24:13-63
-193            android:exported="true" />
-193-->[androidx.compose.ui:ui-test-manifest:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/1efaa3d897d97f96fb1de7b3f5c14745/transformed/ui-test-manifest-1.6.1/AndroidManifest.xml:25:13-36
-194
-195        <receiver
-195-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:34:9-52:20
-196            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-196-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:35:13-76
-197            android:directBootAware="false"
-197-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:36:13-44
-198            android:enabled="true"
-198-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:37:13-35
-199            android:exported="true"
-199-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:38:13-36
-200            android:permission="android.permission.DUMP" >
-200-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:39:13-57
-201            <intent-filter>
-201-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:40:13-42:29
-202                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-202-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:41:17-91
-202-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:41:25-88
-203            </intent-filter>
+184-->[androidx.lifecycle:lifecycle-process:2.8.0] /home/axel/.gradle/caches/8.11.1/transforms/7f66d9eabd23cee2fbc15c21447b551e/transformed/lifecycle-process-2.8.0/AndroidManifest.xml:31:17-49
+185            <meta-data
+185-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:29:13-31:52
+186                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+186-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:30:17-85
+187                android:value="androidx.startup" />
+187-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:31:17-49
+188        </provider>
+189
+190        <meta-data
+190-->[com.google.android.gms:play-services-basement:18.4.0] /home/axel/.gradle/caches/8.11.1/transforms/9f67e3640d2d5184f10fadc9807c9d49/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:9-122
+191            android:name="com.google.android.gms.version"
+191-->[com.google.android.gms:play-services-basement:18.4.0] /home/axel/.gradle/caches/8.11.1/transforms/9f67e3640d2d5184f10fadc9807c9d49/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:20-65
+192            android:value="@integer/google_play_services_version" />
+192-->[com.google.android.gms:play-services-basement:18.4.0] /home/axel/.gradle/caches/8.11.1/transforms/9f67e3640d2d5184f10fadc9807c9d49/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:66-119
+193
+194        <activity
+194-->[androidx.compose.ui:ui-test-manifest:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/1efaa3d897d97f96fb1de7b3f5c14745/transformed/ui-test-manifest-1.6.1/AndroidManifest.xml:23:9-25:39
+195            android:name="androidx.activity.ComponentActivity"
+195-->[androidx.compose.ui:ui-test-manifest:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/1efaa3d897d97f96fb1de7b3f5c14745/transformed/ui-test-manifest-1.6.1/AndroidManifest.xml:24:13-63
+196            android:exported="true" />
+196-->[androidx.compose.ui:ui-test-manifest:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/1efaa3d897d97f96fb1de7b3f5c14745/transformed/ui-test-manifest-1.6.1/AndroidManifest.xml:25:13-36
+197
+198        <receiver
+198-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:34:9-52:20
+199            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+199-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:35:13-76
+200            android:directBootAware="false"
+200-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:36:13-44
+201            android:enabled="true"
+201-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:37:13-35
+202            android:exported="true"
+202-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:38:13-36
+203            android:permission="android.permission.DUMP" >
+203-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:39:13-57
 204            <intent-filter>
-204-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:43:13-45:29
-205                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-205-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:44:17-85
-205-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:44:25-82
+204-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:40:13-42:29
+205                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+205-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:41:17-91
+205-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:41:25-88
 206            </intent-filter>
 207            <intent-filter>
-207-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:46:13-48:29
-208                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-208-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:47:17-88
-208-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:47:25-85
+207-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:43:13-45:29
+208                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+208-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:44:17-85
+208-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:44:25-82
 209            </intent-filter>
 210            <intent-filter>
-210-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:49:13-51:29
-211                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-211-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:50:17-95
-211-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:50:25-92
+210-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:46:13-48:29
+211                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+211-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:47:17-88
+211-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:47:25-85
 212            </intent-filter>
-213        </receiver>
-214    </application>
-215
-216</manifest>
+213            <intent-filter>
+213-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:49:13-51:29
+214                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+214-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:50:17-95
+214-->[androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/a5296ba26eaf96537209fac6687c1633/transformed/profileinstaller-1.4.0/AndroidManifest.xml:50:25-92
+215            </intent-filter>
+216        </receiver>
+217    </application>
+218
+219</manifest>

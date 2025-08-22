@@ -3,6 +3,7 @@ package com.example.sentinelle
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
@@ -75,6 +76,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
+
 class MainActivity : ComponentActivity() {
 
     private lateinit var auth: FirebaseAuth
@@ -85,6 +87,13 @@ class MainActivity : ComponentActivity() {
     private var isLoggedIn = mutableStateOf(false)
     private var isContrast = mutableStateOf(false)
     private lateinit var context: Context
+
+    private val AUDIO_PERMISSION_REQUEST_CODE = 200
+    private val REQUIRED_PERMISSIONS = arrayOf(
+        Manifest.permission.RECORD_AUDIO,
+        Manifest.permission.ACCESS_FINE_LOCATION,
+        Manifest.permission.ACCESS_COARSE_LOCATION
+    )
 
     private var googleSignInCallback: ((Boolean) -> Unit)? = null
 
@@ -144,7 +153,7 @@ class MainActivity : ComponentActivity() {
 
         // Configurer Google Sign-In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.web_client_id)) // Remplace par ton Web client ID
+            .requestIdToken(getString(R.string.web_client_id))
             .requestEmail()
             .build()
 
@@ -154,15 +163,10 @@ class MainActivity : ComponentActivity() {
         isLoggedIn.value = sharedPreferences.getBoolean("is_authentificated", false)
         isContrast.value = sharedPreferences.getBoolean("isContraster", false)
 
-        var ctext = Color(0xff399d61)
-
-
-        checkAndRequestPermissions()
-
         context = this
 
-        // On vérifie si le mode contraster est activé
-        val api = api_service(context)
+        // ✅ DÉPLACER ICI - Demander les permissions dès le lancement
+        checkAndRequestPermissions()
 
         setContent {
             if (isLoggedIn.value) {
@@ -175,15 +179,19 @@ class MainActivity : ComponentActivity() {
                             isLoggedIn = isLoggedIn,
                             isContrast = isContrast
                         )
+                        // ❌ ENLEVER D'ICI
+                        // checkAndRequestPermissions()
                     }
                 }
             } else {
                 var appState by remember { mutableStateOf<AppState>(AppState.Tutorial) }
 
                 when (appState) {
-                    is AppState.Tutorial -> TutorialScreens(colors = AppValues.defaultColors, onTutorialFinished = {
-                        appState = AppState.Auth
-                    })
+                    is AppState.Tutorial -> TutorialScreens(
+                        colors = AppValues.defaultColors,
+                        onTutorialFinished = {
+                            appState = AppState.Auth
+                        })
 
                     is AppState.Auth -> FormulaireConnexion(
                         colors = AppValues.defaultColors,
@@ -192,23 +200,140 @@ class MainActivity : ComponentActivity() {
                         onLoginSuccess = {
                             isLoggedIn.value = true
                             sharedPreferences.edit().putBoolean("is_authentificated", true).apply()
-
                             appState = AppState.Main
-
-                    })
-
+                            // ✅ DEMANDER LES PERMISSIONS APRÈS LA CONNEXION
+                            checkAndRequestPermissions()
+                        })
 
                     is AppState.Main ->
                         BottomMenu(
-                            context= context,
+                            context = context,
                             sharedPreferences = sharedPreferences,
                             isLoggedIn = isLoggedIn,
                             isContrast = isContrast
-                    )
+                        )
                 }
             }
         }
     }
+
+    private fun requestBackgroundLocationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+                AlertDialog.Builder(this)
+                    .setTitle("Permission de localisation en arrière-plan")
+                    .setMessage("Pour votre sécurité, l'application a besoin d'accéder à votre localisation même en arrière-plan.")
+                    .setPositiveButton("Autoriser") { _, _ ->
+                        ActivityCompat.requestPermissions(
+                            this,
+                            arrayOf(Manifest.permission.ACCESS_BACKGROUND_LOCATION),
+                            LOCATION_PERMISSION_REQUEST_CODE
+                        )
+                    }
+                    .setNegativeButton("Plus tard", null)
+                    .show()
+            }
+        }
+    }
+
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        when (requestCode) {
+            AUDIO_PERMISSION_REQUEST_CODE -> {
+                Log.d("PERMISSIONS", "Réponse reçue pour AUDIO_PERMISSION_REQUEST_CODE")
+
+                val granted = mutableListOf<String>()
+                val denied = mutableListOf<String>()
+
+                for (i in permissions.indices) {
+                    if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                        granted.add(permissions[i])
+                    } else {
+                        denied.add(permissions[i])
+                    }
+                }
+
+                Log.d("PERMISSIONS", "Accordées: $granted")
+                Log.d("PERMISSIONS", "Refusées: $denied")
+
+                if (denied.isEmpty()) {
+                    Toast.makeText(this, "Toutes les permissions accordées ✅", Toast.LENGTH_SHORT).show()
+
+                    // Si on est sur Android 10+ et qu'on n'a pas encore la permission background
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        requestBackgroundLocationPermission()
+                    }
+                } else {
+                    showPermissionDeniedDialog()
+                }
+            }
+
+            LOCATION_PERMISSION_REQUEST_CODE -> {
+                Log.d("PERMISSIONS", "Réponse reçue pour LOCATION_PERMISSION_REQUEST_CODE")
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, "Permission de localisation en arrière-plan accordée ✅", Toast.LENGTH_SHORT).show()
+                } else {
+                    Log.w("PERMISSIONS", "Permission de localisation en arrière-plan refusée")
+                }
+            }
+        }
+    }
+
+    private fun showPermissionDeniedDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("Permissions requises")
+            .setMessage("Sentinelle a besoin de ces permissions pour assurer votre sécurité :\n\n" +
+                    "• 📍 Localisation : pour suivre votre parcours\n" +
+                    "• 🎤 Microphone : pour enregistrer l'environnement sonore\n\n" +
+                    "Ces données restent privées et ne sont utilisées qu'en cas d'urgence.")
+            .setPositiveButton("Réessayer") { _, _ ->
+                checkAndRequestPermissions()
+            }
+            .setNegativeButton("Continuer sans") { dialog, _ ->
+                dialog.dismiss()
+                Toast.makeText(this, "⚠️ Certaines fonctionnalités seront limitées", Toast.LENGTH_LONG).show()
+            }
+            .setCancelable(false)
+            .show()
+    }
+
+    // Fonction à appeler avant de démarrer le TimerService
+//    private fun startTimerService(totalSeconds: Int) {
+//        // Vérifier une dernière fois les permissions avant de démarrer
+//        if (hasAllPermissions()) {
+//            val intent = Intent(this, TimerService::class.java).apply {
+//                action = "START_TIMER"
+//                putExtra("totalSeconds", totalSeconds)
+//            }
+//            startForegroundService(intent)
+//        } else {
+//            showPermissionDeniedDialog()
+//        }
+//    }
+
+    private fun hasAllPermissions(): Boolean {
+        val basicPermissionsGranted = REQUIRED_PERMISSIONS.all { permission ->
+            ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
+        }
+
+        val backgroundLocationGranted = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED
+        } else {
+            true // Pas nécessaire sur les versions antérieures
+        }
+
+        return basicPermissionsGranted && backgroundLocationGranted
+    }
+
+
 
     fun signInWithGoogle(callback: (Boolean) -> Unit) {
         Log.d("GoogleSignIn", "Début de la connexion Google")
@@ -298,25 +423,55 @@ class MainActivity : ComponentActivity() {
     private val LOCATION_PERMISSION_REQUEST_CODE = 1001
 
     private fun checkAndRequestPermissions() {
-        val permissions = mutableListOf(
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION
-        )
+        Log.d("PERMISSIONS", "Vérification des permissions")
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            permissions.add(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+        val allPermissions = mutableListOf<String>().apply {
+            // Permissions de base
+            addAll(REQUIRED_PERMISSIONS)
+
+            // Permission de localisation en arrière-plan pour Android 10+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                add(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+            }
         }
 
-        val missingPermissions = permissions.filter {
-            ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED
+        val missingPermissions = allPermissions.filter { permission ->
+            ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED
         }
 
         if (missingPermissions.isNotEmpty()) {
-            ActivityCompat.requestPermissions(
-                this, // ✅ ici c'est une Activity, donc pas d'erreur
-                missingPermissions.toTypedArray(),
-                LOCATION_PERMISSION_REQUEST_CODE
-            )
+            Log.d("PERMISSIONS", "Permissions manquantes: $missingPermissions")
+
+            // Pour Android 11+, demander d'abord les permissions normales, puis la localisation en arrière-plan
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R &&
+                missingPermissions.contains(Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
+
+                // Séparer les permissions
+                val normalPermissions = missingPermissions.filter {
+                    it != Manifest.permission.ACCESS_BACKGROUND_LOCATION
+                }
+
+                if (normalPermissions.isNotEmpty()) {
+                    // D'abord demander les permissions normales
+                    ActivityCompat.requestPermissions(
+                        this,
+                        normalPermissions.toTypedArray(),
+                        AUDIO_PERMISSION_REQUEST_CODE
+                    )
+                } else {
+                    // Si seule la permission background est manquante
+                    requestBackgroundLocationPermission()
+                }
+            } else {
+                // Demander toutes les permissions d'un coup pour les versions antérieures
+                ActivityCompat.requestPermissions(
+                    this,
+                    missingPermissions.toTypedArray(),
+                    AUDIO_PERMISSION_REQUEST_CODE
+                )
+            }
+        } else {
+            Log.d("PERMISSIONS", "Toutes les permissions sont accordées")
         }
     }
 

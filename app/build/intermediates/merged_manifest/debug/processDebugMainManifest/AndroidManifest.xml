@@ -18,11 +18,14 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> <!-- Permission pour enregistrer l'audio -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!-- Pour Android 9+ (API 28+) : éviter les optimisations de batterie -->
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+
+    <!-- Pour Android 12+ (API 31+) : service en arrière-plan -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
 
     <!-- Include required permissions for Google Maps API to run. -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -77,7 +80,7 @@
         <service
             android:name="com.example.sentinelle.TimerService"
             android:exported="false"
-            android:foregroundServiceType="mediaPlayback|dataSync" />
+            android:foregroundServiceType="microphone|location|mediaPlayback|dataSync" />
 
         <meta-data
             android:name="preloaded_fonts"
