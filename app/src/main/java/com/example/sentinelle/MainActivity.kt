@@ -690,8 +690,8 @@ fun ContentScreen(modifier: Modifier, selectedIndex : Int,
             modifier = modifier
         )
         1-> AppNavigation(
-            saferiders = AppValues.saferiders,
             colorList,
+            AppValues.saferiders,
         )
         2-> NavigationTabExample(
             colorList,

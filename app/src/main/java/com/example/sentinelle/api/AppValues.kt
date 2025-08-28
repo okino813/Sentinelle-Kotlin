@@ -1,5 +1,6 @@
 package com.example.sentinelle.api
 
+import android.icu.text.SimpleDateFormat
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -9,6 +10,8 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import com.example.sentinelle.R
+import java.util.Date
+import java.util.Locale
 
 object AppValues {
  var base_url = "http://192.168.1.102:8000"
@@ -76,4 +79,56 @@ data class Saferider(
  val real_end_date: String,
  val locked: Boolean,
  val status: Int,
-)
+) {
+ // Formatter statiques (créés une seule fois)
+ companion object {
+  private val dateFormatter = SimpleDateFormat("dd MMMM yyyy", Locale.FRENCH)
+  private val hourFormatter = SimpleDateFormat("HH:mm", Locale.FRENCH)
+
+  private fun getDate(s: String): String {
+   return try {
+    val netDate = Date(s.toLong() * 1000)
+    val formatted = dateFormatter.format(netDate)
+    val parts = formatted.split(" ")
+    val day = parts[0]
+    val month = parts[1].replaceFirstChar { it.uppercase() }
+    val year = parts[2]
+    "$day $month $year"
+   } catch (e: Exception) {
+    "?"
+   }
+  }
+
+  private fun getHourMinute(s: String?): String {
+   return try {
+    if (s.isNullOrEmpty()) "?"
+    else hourFormatter.format(Date(s.toLong() * 1000)).replace(":", "h")
+   } catch (e: Exception) {
+    "?"
+   }
+  }
+
+  private fun getDuration(start: String, end: String): String {
+   return try {
+    if (end.isEmpty() || end == "0") {
+     "En cours"
+    } else {
+     val startDate = Date(start.toLong() * 1000)
+     val endDate = Date(end.toLong() * 1000)
+     val duration = endDate.time - startDate.time
+     val minutes = (duration / 1000 / 60) % 60
+     val hours = (duration / 1000 / 60 / 60)
+     if (hours > 0) "${hours}h ${minutes}m" else "${minutes}m"
+    }
+   } catch (e: Exception) {
+    "?"
+   }
+  }
+ }
+
+ // ✅ Valeurs dérivées précalculées
+ val formattedDate: String = getDate(start_date)
+ val timeRange: String = "${getHourMinute(start_date)} - ${getHourMinute(real_end_date)}"
+ val duration: String = getDuration(start_date, real_end_date)
+ val theoroticalEndTime: String = getHourMinute(theorotical_end_date)
+}

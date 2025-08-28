@@ -244,6 +244,22 @@ class api_service(val context: Context) {
 
     }
 
+
+    fun GetSafeRiderDetail(context: Context, id_saferider: Int?, callback: (JSONObject) -> Unit) {
+        val json = JSONObject().apply {
+            put("id_saferider", id_saferider)
+        }
+
+        ApiHelper.apiPost(context, "getsaferiderdetail", json, { jsonObject ->
+            callback(jsonObject)
+        }, {
+            callback(
+                JSONObject().put("satus", false)
+            )
+        })
+
+    }
+
     fun logout(
         context: Context,
         onLogoutSuccess: () -> Unit,

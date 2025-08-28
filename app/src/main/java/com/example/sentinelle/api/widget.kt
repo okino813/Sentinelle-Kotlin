@@ -18,14 +18,18 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
@@ -70,8 +74,10 @@ import androidx.compose.ui.window.Dialog
 import com.example.sentinelle.R
 import com.example.sentinelle.api.AppValues.Montserrat
 import java.text.SimpleDateFormat
-import java.util.Date
 import java.util.Locale
+
+private val dateFormatter = SimpleDateFormat("dd MMMM yyyy", Locale.FRENCH)
+private val hourFormatter = SimpleDateFormat("HH:mm", Locale.FRENCH)
 
 @Composable
 fun UpdateStatusBarColor(color: Color, context: Context) {
@@ -459,6 +465,7 @@ fun ContactItem(
     }
 }
 
+
 @Composable
 fun SaferiderItem(
     saferider: Saferider,
@@ -468,7 +475,7 @@ fun SaferiderItem(
 ) {
     Row(
         modifier = Modifier
-            .fillMaxWidth()
+//            .fillMaxWidth()
             .clickable {
                 // 👉 Ici tu rediriges vers ton écran de détail
                 onClick(saferider.id)
@@ -482,84 +489,13 @@ fun SaferiderItem(
         // Icon
         Icon(Icons.Default.CheckCircle, contentDescription = "Supprimer", tint = colors[1],
             modifier = Modifier.size(50.dp))
-
-        // Convertion timestamp to date
-        fun getDate(s: String): String? {
-            return try {
-                val sdf = SimpleDateFormat("dd MMMM yyyy", Locale.FRENCH) // mois abrégé
-                val netDate = Date(s.toLong() * 1000)
-                val formatted = sdf.format(netDate)
-
-                var list = formatted.split(" ")
-                var day = list[0]
-                var month = list[1]
-                var year = list[2]
-
-                // Mettre la première lettre du mois en majuscule
-                month = month.replaceFirstChar { it.uppercase()}
-
-                return "$day $month $year"
-            } catch (e: Exception) {
-                e.toString()
-            }
-        }
-
-        // Convertion timestamp to hour and minute
-        fun getHourMinute(s: String?): String {
-            return try {
-                if (s.isNullOrEmpty()) {
-                    "?"
-                } else {
-                    val sdf = SimpleDateFormat("HH:mm", Locale.FRENCH)
-                    val netDate = Date(s.toLong() * 1000)
-                    sdf.format(netDate).replace(":", "h") // remplace : par h
-                }
-            } catch (e: Exception) {
-                "?"
-            }
-        }
-
-        // Calcul durée entre 2 timestamps
-        fun getDuration(start: String, end: String): String {
-            return try {
-                if (end.isEmpty() || end == "0") {
-                    "En cours"
-                } else {
-                    val startDate = Date(start.toLong() * 1000)
-                    val endDate = Date(end.toLong() * 1000)
-                    val duration = endDate.time - startDate.time
-                    val minutes = (duration / 1000 / 60) % 60
-                    val hours = (duration / 1000 / 60 / 60)
-                    if (hours > 0) {
-                        "${hours}h ${minutes}m"
-                    } else {
-                        "${minutes}m"
-                    }
-                }
-            } catch (e: Exception) {
-                "?"
-            }
-        }
-
-        // Row
-            //Column
-                // Date de lancement
-                // Row
-                    // Heure de début
-                    // Heure de fin
-            // Durée
-            // 3 pitit points
-        Log.d("SaferiderItem", "Theorotical end date: ${getHourMinute(saferider.theorotical_end_date)}")
         Column(modifier = Modifier.weight(2f)) {
-            Text(getDate(saferider.start_date).toString(), color = Color.White, fontWeight = FontWeight.Bold)
-            Text("${getHourMinute(saferider.start_date).toString()} - ${getHourMinute(saferider.real_end_date).toString()}", color = Color.Gray, fontSize = 14.sp)
+            Text(saferider.formattedDate, color = Color.White, fontWeight = FontWeight.Bold)
+            Text(saferider.timeRange, color = Color.Gray, fontSize = 14.sp)
         }
 
-        Row(
-            verticalAlignment = Alignment.CenterVertically
-        ){
-            Text("${getDuration(saferider.start_date, saferider.real_end_date)}", color = Color.White, fontSize = 15.sp)
-
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(saferider.duration, color = Color.White, fontSize = 15.sp)
             IconButton(onClick = onDelete) {
                 Icon(Icons.Default.Delete, contentDescription = "Supprimer", tint = colors[5])
             }
@@ -571,5 +507,89 @@ fun SaferiderItem(
 //            checked = contact.selected,
 //            onCheckedChange = onSelect
 //        )
+    }
+}
+
+@Composable
+fun SaferiderItemWrapper(
+    saferider: Saferider,
+    colors: List<Color>,
+    onDelete: () -> Unit,
+    onClick: (Int) -> Unit
+) {
+    SaferiderItem(
+        saferider = saferider,
+        colors = colors,
+        onDelete = onDelete,
+        onClick = onClick
+    )
+}
+
+@Composable
+fun SaferidersScreenWithPaging(
+    colors: List<Color>,
+    modifier: Modifier,
+    saferiders: List<Saferider>,
+    onNavigateToDetail: (Int) -> Unit,
+) {
+    // ✅ Chunking manuel pour simuler le paging
+    val itemsPerPage = 20
+    var currentPage by remember { mutableStateOf(0) }
+    val displayedItems = remember(saferiders, currentPage) {
+        saferiders.take((currentPage + 1) * itemsPerPage)
+    }
+
+    Box(modifier = Modifier.background(colors[0])) {
+        Column(
+            modifier = modifier
+                .padding(16.dp)
+                .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Text(
+                "Liste des SafeRiders",
+                color = colors[3],
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
+                modifier = Modifier.align(Alignment.Start)
+            )
+
+            Spacer(Modifier.height(16.dp))
+
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                contentPadding = PaddingValues(vertical = 8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                items(
+                    items = displayedItems,
+                    key = { it.id }
+                ) { saferider ->
+                    SaferiderItem(
+                        saferider = saferider,
+                        colors = colors,
+                        onDelete = { },
+                        onClick = onNavigateToDetail
+                    )
+                }
+
+                // ✅ Bouton "Charger plus" si nécessaire
+                if (displayedItems.size < saferiders.size) {
+                    item {
+                        Button(
+                            onClick = { currentPage++ },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp),
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = colors[3]
+                            )
+                        ) {
+                            Text("Charger plus", color = colors[0])
+                        }
+                    }
+                }
+            }
+        }
     }
 }
