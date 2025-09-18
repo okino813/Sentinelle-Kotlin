@@ -18,18 +18,14 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
@@ -525,71 +521,3 @@ fun SaferiderItemWrapper(
     )
 }
 
-@Composable
-fun SaferidersScreenWithPaging(
-    colors: List<Color>,
-    modifier: Modifier,
-    saferiders: List<Saferider>,
-    onNavigateToDetail: (Int) -> Unit,
-) {
-    // ✅ Chunking manuel pour simuler le paging
-    val itemsPerPage = 20
-    var currentPage by remember { mutableStateOf(0) }
-    val displayedItems = remember(saferiders, currentPage) {
-        saferiders.take((currentPage + 1) * itemsPerPage)
-    }
-
-    Box(modifier = Modifier.background(colors[0])) {
-        Column(
-            modifier = modifier
-                .padding(16.dp)
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Text(
-                "Liste des SafeRiders",
-                color = colors[3],
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp,
-                modifier = Modifier.align(Alignment.Start)
-            )
-
-            Spacer(Modifier.height(16.dp))
-
-            LazyColumn(
-                modifier = Modifier.fillMaxSize(),
-                contentPadding = PaddingValues(vertical = 8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                items(
-                    items = displayedItems,
-                    key = { it.id }
-                ) { saferider ->
-                    SaferiderItem(
-                        saferider = saferider,
-                        colors = colors,
-                        onDelete = { },
-                        onClick = onNavigateToDetail
-                    )
-                }
-
-                // ✅ Bouton "Charger plus" si nécessaire
-                if (displayedItems.size < saferiders.size) {
-                    item {
-                        Button(
-                            onClick = { currentPage++ },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(16.dp),
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = colors[3]
-                            )
-                        ) {
-                            Text("Charger plus", color = colors[0])
-                        }
-                    }
-                }
-            }
-        }
-    }
-}

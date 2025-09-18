@@ -3117,6 +3117,7 @@ int drawable fleche_tuto2 0x7f08009b
 int drawable fleche_tuto3 0x7f08009c
 int drawable fleche_tuto4 0x7f08009d
 int drawable fleche_tuto_1 0x7f08009e
+int drawable frame 0x7f080113
 int drawable googleg_disabled_color_18 0x7f08009f
 int drawable googleg_standard_color_18 0x7f0800a0
 int drawable home 0x7f0800a1

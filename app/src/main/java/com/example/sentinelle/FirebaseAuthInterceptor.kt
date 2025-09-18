@@ -20,8 +20,15 @@ import okio.IOException
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.File
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
+
 
 class FirebaseAuthInterceptor : Interceptor {
+
+
+
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
         val user = FirebaseAuth.getInstance().currentUser
@@ -82,6 +89,26 @@ object ApiHelper {
         return OkHttpClient.Builder()
             .addInterceptor(FirebaseAuthInterceptor())
             .build()
+    }
+
+    suspend fun getToken(): String {
+        val user = FirebaseAuth.getInstance().currentUser
+            ?: throw Exception("Utilisateur non connecté")
+
+        return suspendCoroutine { cont ->
+            user.getIdToken(false) // false = utilise le cache si valide
+                .addOnSuccessListener { result ->
+                    val token = result.token
+                    if (token != null) {
+                        cont.resume(token)
+                    } else {
+                        cont.resumeWithException(Exception("Token Firebase invalide"))
+                    }
+                }
+                .addOnFailureListener { e ->
+                    cont.resumeWithException(e)
+                }
+        }
     }
 
     fun apiGet(context: Context, endpoint: String, onSuccess: (JSONObject) -> Unit, onError: () -> Unit) {

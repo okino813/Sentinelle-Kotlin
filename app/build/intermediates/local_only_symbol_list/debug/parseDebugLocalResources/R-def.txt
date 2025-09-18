@@ -15,6 +15,7 @@ drawable fleche_tuto2
 drawable fleche_tuto3
 drawable fleche_tuto4
 drawable fleche_tuto_1
+drawable frame
 drawable home
 drawable ic_launcher_background
 drawable ic_launcher_foreground

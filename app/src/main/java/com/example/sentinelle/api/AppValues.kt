@@ -14,8 +14,8 @@ import java.util.Date
 import java.util.Locale
 
 object AppValues {
- var base_url = "http://192.168.1.102:8000"
-// var base_url = "http://10.0.2.2:8000"
+// const val base_url = "http://192.168.1.102:8000"
+const val base_url = "http://10.0.2.2:8000"
 
  val Montserrat = FontFamily(
   Font(R.font.montserrat_bold_italic, FontWeight.Bold, FontStyle.Italic),
@@ -131,4 +131,16 @@ data class Saferider(
  val timeRange: String = "${getHourMinute(start_date)} - ${getHourMinute(real_end_date)}"
  val duration: String = getDuration(start_date, real_end_date)
  val theoroticalEndTime: String = getHourMinute(theorotical_end_date)
+}
+
+@Immutable
+data class AudioRecord(
+ val id: Int,
+ val date: String,
+ val path: String
+) {
+ val formattedDate: String = try {
+  val sdf = SimpleDateFormat("HH:mm:ss dd/MM/yyyy", Locale.FRENCH)
+  sdf.format(Date(date.toLong() * 1000))
+ } catch (e: Exception) { "?" }
 }

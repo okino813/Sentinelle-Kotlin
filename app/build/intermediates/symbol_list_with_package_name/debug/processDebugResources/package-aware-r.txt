@@ -3118,6 +3118,7 @@ drawable fleche_tuto2
 drawable fleche_tuto3
 drawable fleche_tuto4
 drawable fleche_tuto_1
+drawable frame
 drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
 drawable home
