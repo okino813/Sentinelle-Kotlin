@@ -82,10 +82,10 @@ data class Saferider(
 ) {
  // Formatter statiques (créés une seule fois)
  companion object {
-  private val dateFormatter = SimpleDateFormat("dd MMMM yyyy", Locale.FRENCH)
-  private val hourFormatter = SimpleDateFormat("HH:mm", Locale.FRENCH)
+  val dateFormatter = SimpleDateFormat("dd MMMM yyyy", Locale.FRENCH)
+  val hourFormatter = SimpleDateFormat("HH:mm", Locale.FRENCH)
 
-  private fun getDate(s: String): String {
+  fun getDate(s: String): String {
    return try {
     val netDate = Date(s.toLong() * 1000)
     val formatted = dateFormatter.format(netDate)
@@ -99,7 +99,7 @@ data class Saferider(
    }
   }
 
-  private fun getHourMinute(s: String?): String {
+  fun getHourMinute(s: String?): String {
    return try {
     if (s.isNullOrEmpty()) "?"
     else hourFormatter.format(Date(s.toLong() * 1000)).replace(":", "h")
@@ -108,7 +108,7 @@ data class Saferider(
    }
   }
 
-  private fun getDuration(start: String, end: String): String {
+  fun getDuration(start: String, end: String): String {
    return try {
     if (end.isEmpty() || end == "0") {
      "En cours"

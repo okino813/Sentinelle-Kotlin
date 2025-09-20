@@ -4,6 +4,7 @@ import android.media.MediaPlayer
 import android.net.Uri
 import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,6 +27,7 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -36,10 +38,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -50,6 +56,8 @@ import com.example.sentinelle.R
 import com.example.sentinelle.api.AppValues
 import com.example.sentinelle.api.AudioRecord
 import com.example.sentinelle.api.Saferider
+import com.example.sentinelle.api.Saferider.Companion.getDate
+import com.example.sentinelle.api.Saferider.Companion.getHourMinute
 import com.example.sentinelle.api.SaferiderItemWrapper
 import com.example.sentinelle.api.api_service
 import kotlinx.coroutines.delay
@@ -66,30 +74,30 @@ fun AppNavigation(
         color = colors[0]
     ) {
 
-    NavHost(
-        navController = navController,
-        startDestination = "list"
-    ) {
-        composable("list") {
-            SaferidersScreen(
-                saferiders = saferiders,
-                colors = colors,
-                onNavigateToDetail = { id: Int ->
-                    navController.navigate("detail/$id")
-                },
-                modifier = Modifier,
-            )
-        }
+        NavHost(
+            navController = navController,
+            startDestination = "list"
+        ) {
+            composable("list") {
+                SaferidersScreen(
+                    saferiders = saferiders,
+                    colors = colors,
+                    onNavigateToDetail = { id: Int ->
+                        navController.navigate("detail/$id")
+                    },
+                    modifier = Modifier,
+                )
+            }
 
-        composable(
-            route = "detail/{id}",
-            arguments = listOf(navArgument("id") { type = NavType.IntType })
-        ) { backStackEntry ->
-            val saferiderId = backStackEntry.arguments?.getInt("id")
-            SaferiderDetailScreen(saferiderId, colors = colors)
+            composable(
+                route = "detail/{id}",
+                arguments = listOf(navArgument("id") { type = NavType.IntType })
+            ) { backStackEntry ->
+                val saferiderId = backStackEntry.arguments?.getInt("id")
+                SaferiderDetailScreen(saferiderId, colors = colors)
+            }
         }
     }
-        }
 }
 
 @Composable
@@ -160,6 +168,19 @@ fun SaferiderDetailScreen(id: Int?, colors: List<Color>) {
 
     var audioList by remember { mutableStateOf<List<AudioRecord>>(emptyList()) }
 
+    var saferider by remember { mutableStateOf<Saferider?>(null) }
+
+
+
+    // Varriable pour stocker les données du Saferider
+    var id_saferider by remember { mutableStateOf("") }
+    var path by remember { mutableStateOf("") }
+    var start_date by remember { mutableStateOf("") }
+    var real_end_date by remember { mutableStateOf("") }
+    var theorotical_end_date by remember { mutableStateOf("") }
+    var locked by remember { mutableStateOf("") }
+    var status by remember { mutableStateOf("") }
+
     val api = api_service(context)
     LaunchedEffect(id) {
         try {
@@ -167,6 +188,8 @@ fun SaferiderDetailScreen(id: Int?, colors: List<Color>) {
                 api.GetSafeRiderDetail(context, id) { jsonObject ->
                     val list = mutableListOf<AudioRecord>()
                     val dataObject = jsonObject.getJSONObject("data")
+                    // Créer l'objet Saferider avec les données du JSON
+
                     val audioArray = dataObject.getJSONArray("audio_records")
                     Log.d("SaferiderDetail", "Détails du Saferider: $jsonObject")
                     for (i in 0 until audioArray.length()) {
@@ -180,6 +203,15 @@ fun SaferiderDetailScreen(id: Int?, colors: List<Color>) {
                         )
                     }
                     audioList = list
+                    saferider = Saferider(
+                        id = dataObject.optInt("id_saferider"),
+                        path = dataObject.optString("path", ""),
+                        start_date = dataObject.optString("start_date", ""),
+                        theorotical_end_date = dataObject.optString("theorotical_end_date", ""),
+                        real_end_date = dataObject.optString("real_end_date", ""),
+                        locked = dataObject.optBoolean("locked", false),
+                        status = dataObject.optInt("status", 0)
+                    )
                 }
             }
         } catch (e: Exception) {
@@ -194,16 +226,146 @@ fun SaferiderDetailScreen(id: Int?, colors: List<Color>) {
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .padding(top = 50.dp, start = 16.dp, end = 16.dp)
             .background(colors[0])
-            .padding(16.dp)
     ) {
-        Text(
-            "Détail du Saferider #$id",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold
-        )
-        Spacer(modifier = Modifier.height(16.dp))
 
+
+        Text(
+            "Trajet Protégé",
+            color = colors[3],
+            fontWeight = FontWeight.Bold,
+            fontSize = 20.sp,
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(Modifier.height(16.dp))
+
+        saferider?.let { s ->
+
+            Row {
+                Text(
+                    "Début : ",
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 17.sp,
+                )
+
+                Text(
+                    " ${getDate(s.start_date)} à ${getHourMinute(s.start_date)}",
+                    color = Color.White,
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 17.sp,
+                    fontStyle = FontStyle.Italic
+                )
+            }
+
+            Row {
+                Text(
+                    "Fin      : ",
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 17.sp,
+                )
+
+                Text(
+                    " ${getDate(s.real_end_date)} à ${getHourMinute(s.real_end_date)}",
+                    color = Color.White,
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 17.sp,
+                    fontStyle = FontStyle.Italic
+                )
+            }
+
+            Spacer(Modifier.height(16.dp))
+
+            Row( verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween)
+            {
+
+                if(s.status == 1){
+                    Row {
+                        Icon(
+                            painterResource(id = R.drawable.validate),
+                            contentDescription = "Audio",
+                            tint = Color.Unspecified,
+                            modifier = Modifier.padding(end = 8.dp).size(30.dp),
+                        )
+
+                        Text(
+                            "Arrêté à temps",
+                            color = Color.White,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 17.sp,
+                        )
+                    }
+                } else if(s.status == 0){
+                    Row {
+                        Icon(
+                            painterResource(id = R.drawable.pending),
+                            contentDescription = "Audio",
+                            tint = Color.Unspecified,
+                            modifier = Modifier.padding(end = 8.dp).size(30.dp),
+                        )
+
+                        Text(
+                            "En cours",
+                            color = Color.White,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 17.sp,
+                        )
+                    }
+                } else {
+                    Row {
+
+                        Icon(
+                            painterResource(id = R.drawable.danger),
+                            contentDescription = "Audio",
+                            tint = Color.Unspecified,
+                            modifier = Modifier.padding(end = 8.dp).size(30.dp),
+                        )
+
+                        Text(
+                            "A été déclanché",
+                            color = Color.White,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 17.sp,
+                        )
+                    }
+                }
+
+                // Icon download et delete.
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End),
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Icon(
+                        painterResource(id = R.drawable.download),
+                        contentDescription = "Download",
+                        tint = Color.Unspecified,
+                        modifier = Modifier
+                            .size(30.dp)
+                            .clickable {
+                                // Code à exécuter au clic
+                                Log.d("IconClick", "Icône downloads !")
+                            }
+//                            .padding(end = 10.dp)
+                    )
+                    Icon(
+                        painterResource(id = R.drawable.trash),
+                        contentDescription = "Delete",
+                        tint = Color.Unspecified,
+                        modifier = Modifier
+                            .size(30.dp)
+                            .clickable {
+                                Log.d("IconClick", "Icône supprimé !")
+                            }
+                    )
+                }
+            }
+
+
+        }
         LazyColumn {
             items(audioList, key = { it.id }) { audio ->
                 AudioPlayer(audio = audio, mediaPlayer = mediaPlayer, colors = colors)
@@ -217,6 +379,31 @@ fun AudioPlayer(audio: AudioRecord, mediaPlayer: MediaPlayer, colors: List<Color
     var isPlaying by remember { mutableStateOf(false) }
     var progress by remember { mutableStateOf(0f) }
     var duration by remember { mutableStateOf(0) }
+
+
+    val lifecycleOwner = LocalLifecycleOwner.current
+
+    // Arrêter le son quand la fenêtre est détruite ou mise en pause
+    DisposableEffect(lifecycleOwner) {
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_STOP || event == Lifecycle.Event.ON_PAUSE) {
+                if (mediaPlayer.isPlaying) {
+                    mediaPlayer.stop()
+                    isPlaying = false
+                }
+            }
+        }
+        lifecycleOwner.lifecycle.addObserver(observer)
+
+        onDispose {
+            lifecycleOwner.lifecycle.removeObserver(observer)
+            if (mediaPlayer.isPlaying) {
+                mediaPlayer.stop()
+                isPlaying = false
+            }
+            mediaPlayer.release()
+        }
+    }
 
     // Met à jour la progression toutes les 500ms
     LaunchedEffect(isPlaying) {
@@ -234,7 +421,7 @@ fun AudioPlayer(audio: AudioRecord, mediaPlayer: MediaPlayer, colors: List<Color
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp)
+            .padding(start = 8.dp, top= 50.dp ,end = 8.dp)
     ) {
 
         Row(
@@ -284,7 +471,8 @@ fun AudioPlayer(audio: AudioRecord, mediaPlayer: MediaPlayer, colors: List<Color
                         Icon(
                             imageVector = if (isPlaying) Icons.Default.Close else Icons.Default.PlayArrow,
                             contentDescription = if (isPlaying) "Pause" else "Lecture",
-                            tint = colors[4]
+                            tint = colors[4],
+                            modifier = Modifier.size(40.dp)
                         )
                     }
 

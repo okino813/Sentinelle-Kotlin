@@ -3108,11 +3108,13 @@ drawable common_google_signin_btn_text_light
 drawable common_google_signin_btn_text_light_focused
 drawable common_google_signin_btn_text_light_normal
 drawable common_google_signin_btn_text_light_normal_background
+drawable danger
 drawable design_fab_background
 drawable design_ic_visibility
 drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
+drawable download
 drawable fleche_tuto1
 drawable fleche_tuto2
 drawable fleche_tuto3
@@ -3234,6 +3236,8 @@ drawable test_level_drawable
 drawable tick
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
+drawable trash
+drawable validate
 drawable warning
 font inter_medium
 font montserrat_black

@@ -10,6 +10,8 @@ color blue_sky
 color cyan
 color dark_blue
 color white
+drawable danger
+drawable download
 drawable fleche_tuto1
 drawable fleche_tuto2
 drawable fleche_tuto3
@@ -35,6 +37,8 @@ drawable rounde_edit_text
 drawable rounded_button_app
 drawable settings
 drawable tick
+drawable trash
+drawable validate
 drawable warning
 font inter_medium
 font montserrat_black
