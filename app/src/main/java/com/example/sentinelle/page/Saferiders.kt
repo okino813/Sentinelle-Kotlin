@@ -1,7 +1,5 @@
 package com.example.sentinelle.page
 
-import android.media.MediaPlayer
-import android.net.Uri
 import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -38,14 +36,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleEventObserver
+import androidx.media3.common.MediaItem
+import androidx.media3.common.PlaybackException
+import androidx.media3.common.Player
+import androidx.media3.common.util.UnstableApi
+import androidx.media3.datasource.DefaultHttpDataSource
+import androidx.media3.exoplayer.ExoPlayer
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -60,6 +61,13 @@ import com.example.sentinelle.api.Saferider.Companion.getDate
 import com.example.sentinelle.api.Saferider.Companion.getHourMinute
 import com.example.sentinelle.api.SaferiderItemWrapper
 import com.example.sentinelle.api.api_service
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.Marker
+import com.google.maps.android.compose.MarkerState
+import com.google.maps.android.compose.Polyline
+import com.google.maps.android.compose.rememberCameraPositionState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -162,24 +170,52 @@ fun SaferidersScreen(
 }
 
 @Composable
+fun SafeRiderMap(coordinates: List<Pair<Double, Double>>) {
+    // Convertir la liste en LatLng
+    val path = coordinates.map { LatLng(it.first, it.second) }
+
+    // Centrer la caméra sur le premier point
+    val cameraPositionState = rememberCameraPositionState {
+        position = CameraPosition.fromLatLngZoom(
+            path.firstOrNull() ?: LatLng(0.0, 0.0),
+            15f // Zoom
+        )
+    }
+
+    GoogleMap(
+        modifier = Modifier.fillMaxWidth()
+            .height(300.dp)
+//            .clip(RoundedCornerShape(12.dp))
+        ,
+        cameraPositionState = cameraPositionState
+    ) {
+        // Tracé de la route
+        if (path.isNotEmpty()) {
+            Polyline(points = path)
+        }
+
+        // Marqueurs (début & fin)
+        path.firstOrNull()?.let {
+            Marker(
+                state = MarkerState(position = it),
+                title = "Départ"
+            )
+        }
+        path.lastOrNull()?.let {
+            Marker(
+                state = MarkerState(position = it),
+                title = "Arrivée"
+            )
+        }
+    }
+}
+
+@Composable
 fun SaferiderDetailScreen(id: Int?, colors: List<Color>) {
     val context = LocalContext.current
-    val mediaPlayer = remember { MediaPlayer() }
-
     var audioList by remember { mutableStateOf<List<AudioRecord>>(emptyList()) }
-
     var saferider by remember { mutableStateOf<Saferider?>(null) }
-
-
-
-    // Varriable pour stocker les données du Saferider
-    var id_saferider by remember { mutableStateOf("") }
-    var path by remember { mutableStateOf("") }
-    var start_date by remember { mutableStateOf("") }
-    var real_end_date by remember { mutableStateOf("") }
-    var theorotical_end_date by remember { mutableStateOf("") }
-    var locked by remember { mutableStateOf("") }
-    var status by remember { mutableStateOf("") }
+    var coords by remember { mutableStateOf<List<Pair<Double, Double>>>(emptyList()) }
 
     val api = api_service(context)
     LaunchedEffect(id) {
@@ -188,7 +224,6 @@ fun SaferiderDetailScreen(id: Int?, colors: List<Color>) {
                 api.GetSafeRiderDetail(context, id) { jsonObject ->
                     val list = mutableListOf<AudioRecord>()
                     val dataObject = jsonObject.getJSONObject("data")
-                    // Créer l'objet Saferider avec les données du JSON
 
                     val audioArray = dataObject.getJSONArray("audio_records")
                     Log.d("SaferiderDetail", "Détails du Saferider: $jsonObject")
@@ -212,14 +247,18 @@ fun SaferiderDetailScreen(id: Int?, colors: List<Color>) {
                         locked = dataObject.optBoolean("locked", false),
                         status = dataObject.optInt("status", 0)
                     )
+
+                    coords = buildList {
+                        val coordArray = dataObject.getJSONArray("coordinates")
+                        for (i in 0 until coordArray.length()) {
+                            val item = coordArray.getJSONObject(i)
+                            add(Pair(item.getString("latitude").toDouble(), item.getString("longitude").toDouble()))
+                        }
+                    }
                 }
             }
         } catch (e: Exception) {
-            Log.e(
-                "SaferiderDetail",
-                "Erreur lors de la récupération des détails du Saferider",
-                e
-            )
+            Log.e("SaferiderDetail", "Erreur lors de la récupération des détails du Saferider", e)
         }
     }
 
@@ -229,8 +268,6 @@ fun SaferiderDetailScreen(id: Int?, colors: List<Color>) {
             .padding(top = 50.dp, start = 16.dp, end = 16.dp)
             .background(colors[0])
     ) {
-
-
         Text(
             "Trajet Protégé",
             color = colors[3],
@@ -242,7 +279,6 @@ fun SaferiderDetailScreen(id: Int?, colors: List<Color>) {
         Spacer(Modifier.height(16.dp))
 
         saferider?.let { s ->
-
             Row {
                 Text(
                     "Début : ",
@@ -279,10 +315,12 @@ fun SaferiderDetailScreen(id: Int?, colors: List<Color>) {
 
             Spacer(Modifier.height(16.dp))
 
-            Row( verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween)
-            {
-
-                if(s.status == 1){
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                if (s.status == 1) {
                     Row {
                         Icon(
                             painterResource(id = R.drawable.validate),
@@ -298,7 +336,7 @@ fun SaferiderDetailScreen(id: Int?, colors: List<Color>) {
                             fontSize = 17.sp,
                         )
                     }
-                } else if(s.status == 0){
+                } else if (s.status == 0) {
                     Row {
                         Icon(
                             painterResource(id = R.drawable.pending),
@@ -316,7 +354,6 @@ fun SaferiderDetailScreen(id: Int?, colors: List<Color>) {
                     }
                 } else {
                     Row {
-
                         Icon(
                             painterResource(id = R.drawable.danger),
                             contentDescription = "Audio",
@@ -333,7 +370,6 @@ fun SaferiderDetailScreen(id: Int?, colors: List<Color>) {
                     }
                 }
 
-                // Icon download et delete.
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End),
                     verticalAlignment = Alignment.CenterVertically,
@@ -346,10 +382,8 @@ fun SaferiderDetailScreen(id: Int?, colors: List<Color>) {
                         modifier = Modifier
                             .size(30.dp)
                             .clickable {
-                                // Code à exécuter au clic
                                 Log.d("IconClick", "Icône downloads !")
                             }
-//                            .padding(end = 10.dp)
                     )
                     Icon(
                         painterResource(id = R.drawable.trash),
@@ -363,109 +397,137 @@ fun SaferiderDetailScreen(id: Int?, colors: List<Color>) {
                     )
                 }
             }
-
-
         }
+
         LazyColumn {
             items(audioList, key = { it.id }) { audio ->
-                AudioPlayer(audio = audio, mediaPlayer = mediaPlayer, colors = colors)
+                ExoPlayerAudioPlayer(audio = audio, colors = colors)
             }
         }
     }
 }
 
+@androidx.annotation.OptIn(UnstableApi::class)
 @Composable
-fun AudioPlayer(audio: AudioRecord, mediaPlayer: MediaPlayer, colors: List<Color>) {
+fun ExoPlayerAudioPlayer(audio: AudioRecord, colors: List<Color>) {
+    val context = LocalContext.current
     var isPlaying by remember { mutableStateOf(false) }
+    val coroutineScope = rememberCoroutineScope()
     var progress by remember { mutableStateOf(0f) }
-    var duration by remember { mutableStateOf(0) }
+    var duration by remember { mutableStateOf(0L) }
+    var currentPosition by remember { mutableStateOf(0L) }
 
+    // Créer ExoPlayer pour ce composant spécifique
+    val exoPlayer = remember {
+        ExoPlayer.Builder(context).build().apply {
+            // Listener pour les changements d'état
+            addListener(object : Player.Listener {
+                override fun onIsPlayingChanged(playing: Boolean) {
+                    isPlaying = playing
+                    Log.d("ExoPlayer", "Playing state changed: $playing")
+                }
 
-    val lifecycleOwner = LocalLifecycleOwner.current
-
-    // Arrêter le son quand la fenêtre est détruite ou mise en pause
-    DisposableEffect(lifecycleOwner) {
-        val observer = LifecycleEventObserver { _, event ->
-            if (event == Lifecycle.Event.ON_STOP || event == Lifecycle.Event.ON_PAUSE) {
-                if (mediaPlayer.isPlaying) {
-                    mediaPlayer.stop()
+                override fun onPlayerError(error: PlaybackException) {
+                    Log.e("ExoPlayer", "Erreur de lecture: ${error.message}", error)
                     isPlaying = false
                 }
-            }
-        }
-        lifecycleOwner.lifecycle.addObserver(observer)
 
-        onDispose {
-            lifecycleOwner.lifecycle.removeObserver(observer)
-            if (mediaPlayer.isPlaying) {
-                mediaPlayer.stop()
-                isPlaying = false
-            }
-            mediaPlayer.release()
+                override fun onPlaybackStateChanged(state: Int) {
+                    when (state) {
+                        Player.STATE_READY -> {
+                            duration = this@apply.duration
+                            Log.d("ExoPlayer", "Player ready, duration: $duration")
+                        }
+                        Player.STATE_ENDED -> {
+                            isPlaying = false
+                            progress = 0f
+                            Log.d("ExoPlayer", "Playback ended")
+                        }
+                        else -> {}
+                    }
+                }
+            })
         }
     }
 
-    // Met à jour la progression toutes les 500ms
+    // Nettoyer l'ExoPlayer quand le composable est détruit
+    DisposableEffect(exoPlayer) {
+        onDispose {
+            exoPlayer.release()
+            Log.d("ExoPlayer", "Player released")
+        }
+    }
+
+    // Mettre à jour la progression
     LaunchedEffect(isPlaying) {
         if (isPlaying) {
-            while (mediaPlayer.isPlaying) {
-                progress = mediaPlayer.currentPosition / mediaPlayer.duration.toFloat()
+            while (isPlaying && exoPlayer.isPlaying) {
+                currentPosition = exoPlayer.currentPosition
+                if (duration > 0) {
+                    progress = currentPosition / duration.toFloat()
+                }
                 delay(500)
             }
-        }
-        else{
-            progress = 0f
         }
     }
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 8.dp, top= 50.dp ,end = 8.dp)
+            .padding(start = 8.dp, top = 50.dp, end = 8.dp)
     ) {
-
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
-
             Icon(
                 painterResource(id = R.drawable.frame),
                 contentDescription = "Audio",
                 tint = colors[1],
-                modifier = Modifier.padding(end = 8.dp).size(60.dp)
+                modifier = Modifier
+                    .padding(end = 8.dp)
+                    .size(60.dp)
             )
 
-            var context = LocalContext.current
-            var api = api_service(context)
-            val scope = rememberCoroutineScope()
             Column {
                 Row {
-
                     IconButton(onClick = {
+                        Log.d("ExoPlayer", "Clic sur le bouton play/pause")
+
                         if (isPlaying) {
-                            mediaPlayer.stop()
-                            isPlaying = false
+                            exoPlayer.pause()
+                        } else {
+                            if (exoPlayer.mediaItemCount == 0) {
+                                // Préparer le media item avec headers
+                                coroutineScope.launch {
+                                    try {
+                                    val token = ApiHelper.getToken()
+                                        val url = "${AppValues.base_url}/api/listen/${audio.path}"
 
-                            return@IconButton
-                        }
-                        scope.launch {
-                            try {
-                                val token = ApiHelper.getToken()
-                                val headers = mapOf("Authorization" to "Bearer $token")
-                                val url =
-                                    Uri.parse("${AppValues.base_url}/api/listen/${audio.path}")
+                                        Log.d("ExoPlayer", "URL: $url")
 
-                                mediaPlayer.reset()
-                                mediaPlayer.setDataSource(context, url, headers)
-                                mediaPlayer.prepareAsync()
-                                mediaPlayer.setOnPreparedListener {
-                                    it.start()
-                                    duration = it.duration
-                                    isPlaying = true
+                                        // Créer DataSource avec headers d'authentification
+                                        val dataSourceFactory = DefaultHttpDataSource.Factory()
+                                            .setDefaultRequestProperties(
+                                                mapOf("Authorization" to "Bearer $token")
+                                            )
+
+                                        // Créer le MediaItem
+                                        val mediaItem = MediaItem.fromUri(url)
+
+                                        // Configurer ExoPlayer avec la DataSource
+                                        exoPlayer.setMediaSource(
+                                            androidx.media3.exoplayer.source.ProgressiveMediaSource
+                                                .Factory(dataSourceFactory)
+                                                .createMediaSource(mediaItem)
+                                        )
+
+                                        exoPlayer.prepare()
+                                    } catch (e: Exception) {
+                                        Log.e("ExoPlayer", "Erreur lors de la préparation", e)
+                                    }
                                 }
-                            } catch (e: Exception) {
-                                Log.e("AudioPlay", "Erreur lecture audio", e)
                             }
+                            exoPlayer.play()
                         }
                     }) {
                         Icon(
@@ -479,7 +541,6 @@ fun AudioPlayer(audio: AudioRecord, mediaPlayer: MediaPlayer, colors: List<Color
                     Text(
                         "Enregistrement à ${audio.formattedDate}",
                         color = Color.White
-
                     )
                 }
 
@@ -490,11 +551,13 @@ fun AudioPlayer(audio: AudioRecord, mediaPlayer: MediaPlayer, colors: List<Color
                     },
                     onValueChangeFinished = {
                         if (duration > 0) {
-                            val seekTo = (progress * duration).toInt()
-                            mediaPlayer.seekTo(seekTo)
+                            val seekPosition = (progress * duration).toLong()
+                            exoPlayer.seekTo(seekPosition)
                         }
                     },
-                    modifier = Modifier.fillMaxWidth().padding(end = 10.dp, start = 10.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(end = 10.dp, start = 10.dp),
                     colors = androidx.compose.material3.SliderDefaults.colors(
                         thumbColor = colors[3],
                         activeTrackColor = colors[1],
@@ -503,6 +566,5 @@ fun AudioPlayer(audio: AudioRecord, mediaPlayer: MediaPlayer, colors: List<Color
                 )
             }
         }
-
     }
 }

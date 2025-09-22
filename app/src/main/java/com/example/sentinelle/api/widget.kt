@@ -38,8 +38,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.SideEffect
@@ -114,6 +115,7 @@ fun InputTextArea(
     errorMessage: String? = null,
     maxLines: Int = 10
 ) {
+    val containerColor = colors[1]
     OutlinedTextField(
         modifier = Modifier.fillMaxWidth(),
         value = value,
@@ -122,15 +124,17 @@ fun InputTextArea(
         isError = errorMessage != null,
         textStyle = TextStyle(fontSize = 16.sp, color = colors[0]),
         shape = RoundedCornerShape(16.dp),
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = colors[4],
-            unfocusedBorderColor = colors[1],
-            cursorColor = colors[0],
-            focusedTextColor = colors[0],
-            unfocusedTextColor = colors[0],
-            containerColor = colors[1],
-            errorContainerColor = colors[1]
-        ),
+        colors = OutlinedTextFieldDefaults.colors(
+                focusedTextColor = colors[0],
+                unfocusedTextColor = colors[0],
+                focusedContainerColor = containerColor,
+                unfocusedContainerColor = containerColor,
+                disabledContainerColor = containerColor,
+                errorContainerColor = colors[1],
+                cursorColor = colors[0],
+                focusedBorderColor = colors[4],
+                unfocusedBorderColor = colors[1],
+            ),
         maxLines = maxLines,
         minLines = 7,
     )
@@ -144,7 +148,6 @@ fun InputTextArea(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Input(
     label: String,
@@ -155,26 +158,29 @@ fun Input(
     errorMessage: String? = null
 ) {
     var error by remember { mutableStateOf<String?>(null) }
-    OutlinedTextField(
+    val containerColor = colors[1]
+    TextField(
         modifier = Modifier.fillMaxWidth(),
         value = value,
         onValueChange = {
             onValueChange(it)
         },
         placeholder = { Text(label, color = colors[0]) },
-        isError = errorMessage != null,
-        singleLine = true,
+        isError = false,
+        singleLine = false,
         textStyle = TextStyle(fontSize = 16.sp, color = colors[0]),
         shape = RoundedCornerShape(50.dp),
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = colors[4],
-            unfocusedBorderColor = colors[1],
-            cursorColor = colors[0],
-            focusedTextColor = colors[0],
-            unfocusedTextColor = colors[0],
-            containerColor = colors[1],
-            errorContainerColor = colors[1]
-        ),
+        colors = OutlinedTextFieldDefaults.colors(
+                focusedTextColor = colors[0],
+                unfocusedTextColor = colors[0],
+                focusedContainerColor = containerColor,
+                unfocusedContainerColor = containerColor,
+                disabledContainerColor = containerColor,
+                errorContainerColor = colors[1],
+                cursorColor = colors[0],
+                focusedBorderColor = colors[0],
+                unfocusedBorderColor = colors[0],
+            ),
         visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None,
     )
     if (errorMessage != null) {

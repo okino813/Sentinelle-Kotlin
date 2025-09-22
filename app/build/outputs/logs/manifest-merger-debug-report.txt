@@ -4,6 +4,8 @@ ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/a
 INJECTED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:2:1-69:12
 INJECTED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:2:1-69:12
 INJECTED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:2:1-69:12
+MERGED from [com.google.maps.android:maps-compose:4.3.3] /home/axel/.gradle/caches/8.11.1/transforms/ab4e4cd712be9cbe29567dbd6c2b20ca/transformed/maps-compose-4.3.3/AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.maps.android:maps-ktx:5.0.0] /home/axel/.gradle/caches/8.11.1/transforms/89964a1f0a84a39d8cbdc93d6caf4932/transformed/maps-ktx-5.0.0/AndroidManifest.xml:18:1-23:12
 MERGED from [androidx.databinding:viewbinding:8.10.1] /home/axel/.gradle/caches/8.11.1/transforms/f2f4dfdad209df41d75a2bfed2c7307c/transformed/viewbinding-8.10.1/AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.material:material:1.12.0] /home/axel/.gradle/caches/8.11.1/transforms/35d5b624636b9d77bbfe6345c5ca5c3a/transformed/material-1.12.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.2.0] /home/axel/.gradle/caches/8.11.1/transforms/3e2b636f21be9b062450a5f4fb5a1bb2/transformed/constraintlayout-2.2.0/AndroidManifest.xml:2:1-9:12
@@ -16,13 +18,13 @@ MERGED from [androidx.navigation:navigation-common-ktx:2.7.7] /home/axel/.gradle
 MERGED from [androidx.navigation:navigation-runtime-ktx:2.7.7] /home/axel/.gradle/caches/8.11.1/transforms/e127173b73277e26f9e3281413b115ec/transformed/navigation-runtime-ktx-2.7.7/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.navigation:navigation-compose:2.7.7] /home/axel/.gradle/caches/8.11.1/transforms/887c0136bf7e565b36723b337394560b/transformed/navigation-compose-2.7.7/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.compose.material3:material3-android:1.2.0] /home/axel/.gradle/caches/8.11.1/transforms/e14f14ce29685d60144f321fce9e8872/transformed/material3-release/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.compose.material:material-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/3afeeba328a8f89fc8c6ac8a47cf76b8/transformed/material-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.material:material-icons-core-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/fa74cbd6d47195eb891e088afa0a93c1/transformed/material-icons-core-release/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.compose.material:material-ripple-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/14e901389e92ea960914210085b9e1dd/transformed/material-ripple-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.foundation:foundation-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/9d98a5e7d75e9e4d784acdc47a9a55f9/transformed/foundation-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.compose.foundation:foundation-layout-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/ccd9e938e6ea2544cc426a679761cb6e/transformed/foundation-layout-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material:material-icons-core-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/fa74cbd6d47195eb891e088afa0a93c1/transformed/material-icons-core-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material:material-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/3afeeba328a8f89fc8c6ac8a47cf76b8/transformed/material-release/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.compose.animation:animation-core-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/f03c7704c32ce14cc70ca4ad260f4376/transformed/animation-core-release/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.compose.animation:animation-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/e532f662f1a5537acdca477217e2121c/transformed/animation-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/ccd9e938e6ea2544cc426a679761cb6e/transformed/foundation-layout-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.foundation:foundation-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/9d98a5e7d75e9e4d784acdc47a9a55f9/transformed/foundation-release/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.compose.ui:ui-tooling-data-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/311b85472cdecbbd909ec3f7e3024b0c/transformed/ui-tooling-data-release/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.compose.ui:ui-unit-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/5a868c4fec41b599c03fe3044d2f8825/transformed/ui-unit-release/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.compose.ui:ui-geometry-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/766595ce51fdcc8e94dc289b8e8d1628/transformed/ui-geometry-release/AndroidManifest.xml:2:1-7:12
@@ -76,12 +78,21 @@ MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose-android:2.8.0] /home
 MERGED from [androidx.compose.ui:ui-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/7bba036ed2d14ce125d804ef189d13d7/transformed/ui-release/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.compose.ui:ui-test-manifest:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/ea3c7989cf75471f6e08b08cf684bdc0/transformed/ui-test-manifest-1.6.1/AndroidManifest.xml:17:1-28:12
 MERGED from [androidx.activity:activity:1.9.3] /home/axel/.gradle/caches/8.11.1/transforms/e73e9ce1969062484b2f6315515f300e/transformed/activity-1.9.3/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media3:media3-ui:1.1.1] /home/axel/.gradle/caches/8.11.1/transforms/9cce1695e4e76da4071e3a3d2e40e628/transformed/media3-ui-1.1.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.media3:media3-extractor:1.1.1] /home/axel/.gradle/caches/8.11.1/transforms/187933006c8fcb8b6f9b997c9a01a746/transformed/media3-extractor-1.1.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.media3:media3-container:1.1.1] /home/axel/.gradle/caches/8.11.1/transforms/41307b933bedb07e4ee9ae92351a3ceb/transformed/media3-container-1.1.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.media3:media3-datasource:1.1.1] /home/axel/.gradle/caches/8.11.1/transforms/0b4b7d2c4ea917bcf7fd9b88053f352c/transformed/media3-datasource-1.1.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.media3:media3-decoder:1.1.1] /home/axel/.gradle/caches/8.11.1/transforms/43568c110ef8d3bc7191f667ce15bb62/transformed/media3-decoder-1.1.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.media3:media3-database:1.1.1] /home/axel/.gradle/caches/8.11.1/transforms/c61f047bcf66a080faad548b1e818519/transformed/media3-database-1.1.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.media3:media3-common:1.1.1] /home/axel/.gradle/caches/8.11.1/transforms/ae8f7793aa08e371f53a429e122fedc8/transformed/media3-common-1.1.1/AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.media3:media3-exoplayer:1.1.1] /home/axel/.gradle/caches/8.11.1/transforms/aa69082ee5c70524ce57c5bf5f792c59/transformed/media3-exoplayer-1.1.1/AndroidManifest.xml:17:1-26:12
 MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /home/axel/.gradle/caches/8.11.1/transforms/ab51de49d5f1433a1803cb342face612/transformed/drawerlayout-1.1.1/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /home/axel/.gradle/caches/8.11.1/transforms/17abbdb366fd300ede524847e69d26fe/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/axel/.gradle/caches/8.11.1/transforms/141a19614964b77367b3a119d3ad8dd4/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/axel/.gradle/caches/8.11.1/transforms/03567bf0dc6f130d7eb1458271af29c8/transformed/vectordrawable-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.recyclerview:recyclerview:1.3.0] /home/axel/.gradle/caches/8.11.1/transforms/5413c086877995de218802d4a4ce60f9/transformed/recyclerview-1.3.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media:media:1.6.0] /home/axel/.gradle/caches/8.11.1/transforms/9674f6a3e7da2eb29c9ab1af4f4468b5/transformed/media-1.6.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.viewpager:viewpager:1.0.0] /home/axel/.gradle/caches/8.11.1/transforms/1fce656a3d052d9e094d56d2305cc2e9/transformed/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.recyclerview:recyclerview:1.1.0] /home/axel/.gradle/caches/8.11.1/transforms/379545af5a040e775548536629884de8/transformed/recyclerview-1.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.customview:customview:1.1.0] /home/axel/.gradle/caches/8.11.1/transforms/a27912a76d53994cdca4bc9272ea46e4/transformed/customview-1.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.browser:browser:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/4a3e14cf310982f50af16ba390266b5e/transformed/browser-1.4.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.autofill:autofill:1.0.0] /home/axel/.gradle/caches/8.11.1/transforms/5c45bbeb03f65b70a4073959e889ca3c/transformed/autofill-1.0.0/AndroidManifest.xml:17:1-24:12
@@ -292,6 +303,10 @@ uses-sdk
 INJECTED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml
 INJECTED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml
+MERGED from [com.google.maps.android:maps-compose:4.3.3] /home/axel/.gradle/caches/8.11.1/transforms/ab4e4cd712be9cbe29567dbd6c2b20ca/transformed/maps-compose-4.3.3/AndroidManifest.xml:20:5-44
+MERGED from [com.google.maps.android:maps-compose:4.3.3] /home/axel/.gradle/caches/8.11.1/transforms/ab4e4cd712be9cbe29567dbd6c2b20ca/transformed/maps-compose-4.3.3/AndroidManifest.xml:20:5-44
+MERGED from [com.google.maps.android:maps-ktx:5.0.0] /home/axel/.gradle/caches/8.11.1/transforms/89964a1f0a84a39d8cbdc93d6caf4932/transformed/maps-ktx-5.0.0/AndroidManifest.xml:21:5-44
+MERGED from [com.google.maps.android:maps-ktx:5.0.0] /home/axel/.gradle/caches/8.11.1/transforms/89964a1f0a84a39d8cbdc93d6caf4932/transformed/maps-ktx-5.0.0/AndroidManifest.xml:21:5-44
 MERGED from [androidx.databinding:viewbinding:8.10.1] /home/axel/.gradle/caches/8.11.1/transforms/f2f4dfdad209df41d75a2bfed2c7307c/transformed/viewbinding-8.10.1/AndroidManifest.xml:5:5-44
 MERGED from [androidx.databinding:viewbinding:8.10.1] /home/axel/.gradle/caches/8.11.1/transforms/f2f4dfdad209df41d75a2bfed2c7307c/transformed/viewbinding-8.10.1/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.material:material:1.12.0] /home/axel/.gradle/caches/8.11.1/transforms/35d5b624636b9d77bbfe6345c5ca5c3a/transformed/material-1.12.0/AndroidManifest.xml:20:5-44
@@ -316,20 +331,20 @@ MERGED from [androidx.navigation:navigation-compose:2.7.7] /home/axel/.gradle/ca
 MERGED from [androidx.navigation:navigation-compose:2.7.7] /home/axel/.gradle/caches/8.11.1/transforms/887c0136bf7e565b36723b337394560b/transformed/navigation-compose-2.7.7/AndroidManifest.xml:5:5-44
 MERGED from [androidx.compose.material3:material3-android:1.2.0] /home/axel/.gradle/caches/8.11.1/transforms/e14f14ce29685d60144f321fce9e8872/transformed/material3-release/AndroidManifest.xml:20:5-44
 MERGED from [androidx.compose.material3:material3-android:1.2.0] /home/axel/.gradle/caches/8.11.1/transforms/e14f14ce29685d60144f321fce9e8872/transformed/material3-release/AndroidManifest.xml:20:5-44
-MERGED from [androidx.compose.material:material-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/3afeeba328a8f89fc8c6ac8a47cf76b8/transformed/material-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.material:material-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/3afeeba328a8f89fc8c6ac8a47cf76b8/transformed/material-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.material:material-icons-core-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/fa74cbd6d47195eb891e088afa0a93c1/transformed/material-icons-core-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.material:material-icons-core-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/fa74cbd6d47195eb891e088afa0a93c1/transformed/material-icons-core-release/AndroidManifest.xml:5:5-44
 MERGED from [androidx.compose.material:material-ripple-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/14e901389e92ea960914210085b9e1dd/transformed/material-ripple-release/AndroidManifest.xml:5:5-44
 MERGED from [androidx.compose.material:material-ripple-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/14e901389e92ea960914210085b9e1dd/transformed/material-ripple-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.foundation:foundation-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/9d98a5e7d75e9e4d784acdc47a9a55f9/transformed/foundation-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.foundation:foundation-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/9d98a5e7d75e9e4d784acdc47a9a55f9/transformed/foundation-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.foundation:foundation-layout-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/ccd9e938e6ea2544cc426a679761cb6e/transformed/foundation-layout-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.compose.foundation:foundation-layout-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/ccd9e938e6ea2544cc426a679761cb6e/transformed/foundation-layout-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-core-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/fa74cbd6d47195eb891e088afa0a93c1/transformed/material-icons-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-core-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/fa74cbd6d47195eb891e088afa0a93c1/transformed/material-icons-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/3afeeba328a8f89fc8c6ac8a47cf76b8/transformed/material-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/3afeeba328a8f89fc8c6ac8a47cf76b8/transformed/material-release/AndroidManifest.xml:5:5-44
 MERGED from [androidx.compose.animation:animation-core-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/f03c7704c32ce14cc70ca4ad260f4376/transformed/animation-core-release/AndroidManifest.xml:5:5-44
 MERGED from [androidx.compose.animation:animation-core-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/f03c7704c32ce14cc70ca4ad260f4376/transformed/animation-core-release/AndroidManifest.xml:5:5-44
 MERGED from [androidx.compose.animation:animation-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/e532f662f1a5537acdca477217e2121c/transformed/animation-release/AndroidManifest.xml:5:5-44
 MERGED from [androidx.compose.animation:animation-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/e532f662f1a5537acdca477217e2121c/transformed/animation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/ccd9e938e6ea2544cc426a679761cb6e/transformed/foundation-layout-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/ccd9e938e6ea2544cc426a679761cb6e/transformed/foundation-layout-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/9d98a5e7d75e9e4d784acdc47a9a55f9/transformed/foundation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/9d98a5e7d75e9e4d784acdc47a9a55f9/transformed/foundation-release/AndroidManifest.xml:5:5-44
 MERGED from [androidx.compose.ui:ui-tooling-data-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/311b85472cdecbbd909ec3f7e3024b0c/transformed/ui-tooling-data-release/AndroidManifest.xml:5:5-44
 MERGED from [androidx.compose.ui:ui-tooling-data-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/311b85472cdecbbd909ec3f7e3024b0c/transformed/ui-tooling-data-release/AndroidManifest.xml:5:5-44
 MERGED from [androidx.compose.ui:ui-unit-android:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/5a868c4fec41b599c03fe3044d2f8825/transformed/ui-unit-release/AndroidManifest.xml:5:5-44
@@ -436,6 +451,22 @@ MERGED from [androidx.compose.ui:ui-test-manifest:1.6.1] /home/axel/.gradle/cach
 MERGED from [androidx.compose.ui:ui-test-manifest:1.6.1] /home/axel/.gradle/caches/8.11.1/transforms/ea3c7989cf75471f6e08b08cf684bdc0/transformed/ui-test-manifest-1.6.1/AndroidManifest.xml:20:5-44
 MERGED from [androidx.activity:activity:1.9.3] /home/axel/.gradle/caches/8.11.1/transforms/e73e9ce1969062484b2f6315515f300e/transformed/activity-1.9.3/AndroidManifest.xml:20:5-44
 MERGED from [androidx.activity:activity:1.9.3] /home/axel/.gradle/caches/8.11.1/transforms/e73e9ce1969062484b2f6315515f300e/transformed/activity-1.9.3/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-ui:1.1.1] /home/axel/.gradle/caches/8.11.1/transforms/9cce1695e4e76da4071e3a3d2e40e628/transformed/media3-ui-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-ui:1.1.1] /home/axel/.gradle/caches/8.11.1/transforms/9cce1695e4e76da4071e3a3d2e40e628/transformed/media3-ui-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-extractor:1.1.1] /home/axel/.gradle/caches/8.11.1/transforms/187933006c8fcb8b6f9b997c9a01a746/transformed/media3-extractor-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-extractor:1.1.1] /home/axel/.gradle/caches/8.11.1/transforms/187933006c8fcb8b6f9b997c9a01a746/transformed/media3-extractor-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-container:1.1.1] /home/axel/.gradle/caches/8.11.1/transforms/41307b933bedb07e4ee9ae92351a3ceb/transformed/media3-container-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-container:1.1.1] /home/axel/.gradle/caches/8.11.1/transforms/41307b933bedb07e4ee9ae92351a3ceb/transformed/media3-container-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-datasource:1.1.1] /home/axel/.gradle/caches/8.11.1/transforms/0b4b7d2c4ea917bcf7fd9b88053f352c/transformed/media3-datasource-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-datasource:1.1.1] /home/axel/.gradle/caches/8.11.1/transforms/0b4b7d2c4ea917bcf7fd9b88053f352c/transformed/media3-datasource-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-decoder:1.1.1] /home/axel/.gradle/caches/8.11.1/transforms/43568c110ef8d3bc7191f667ce15bb62/transformed/media3-decoder-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-decoder:1.1.1] /home/axel/.gradle/caches/8.11.1/transforms/43568c110ef8d3bc7191f667ce15bb62/transformed/media3-decoder-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-database:1.1.1] /home/axel/.gradle/caches/8.11.1/transforms/c61f047bcf66a080faad548b1e818519/transformed/media3-database-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-database:1.1.1] /home/axel/.gradle/caches/8.11.1/transforms/c61f047bcf66a080faad548b1e818519/transformed/media3-database-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-common:1.1.1] /home/axel/.gradle/caches/8.11.1/transforms/ae8f7793aa08e371f53a429e122fedc8/transformed/media3-common-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-common:1.1.1] /home/axel/.gradle/caches/8.11.1/transforms/ae8f7793aa08e371f53a429e122fedc8/transformed/media3-common-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-exoplayer:1.1.1] /home/axel/.gradle/caches/8.11.1/transforms/aa69082ee5c70524ce57c5bf5f792c59/transformed/media3-exoplayer-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-exoplayer:1.1.1] /home/axel/.gradle/caches/8.11.1/transforms/aa69082ee5c70524ce57c5bf5f792c59/transformed/media3-exoplayer-1.1.1/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /home/axel/.gradle/caches/8.11.1/transforms/ab51de49d5f1433a1803cb342face612/transformed/drawerlayout-1.1.1/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /home/axel/.gradle/caches/8.11.1/transforms/ab51de49d5f1433a1803cb342face612/transformed/drawerlayout-1.1.1/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /home/axel/.gradle/caches/8.11.1/transforms/17abbdb366fd300ede524847e69d26fe/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
@@ -444,10 +475,12 @@ MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/axel/.
 MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/axel/.gradle/caches/8.11.1/transforms/141a19614964b77367b3a119d3ad8dd4/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/axel/.gradle/caches/8.11.1/transforms/03567bf0dc6f130d7eb1458271af29c8/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/axel/.gradle/caches/8.11.1/transforms/03567bf0dc6f130d7eb1458271af29c8/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.3.0] /home/axel/.gradle/caches/8.11.1/transforms/5413c086877995de218802d4a4ce60f9/transformed/recyclerview-1.3.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.3.0] /home/axel/.gradle/caches/8.11.1/transforms/5413c086877995de218802d4a4ce60f9/transformed/recyclerview-1.3.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.6.0] /home/axel/.gradle/caches/8.11.1/transforms/9674f6a3e7da2eb29c9ab1af4f4468b5/transformed/media-1.6.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media:media:1.6.0] /home/axel/.gradle/caches/8.11.1/transforms/9674f6a3e7da2eb29c9ab1af4f4468b5/transformed/media-1.6.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.viewpager:viewpager:1.0.0] /home/axel/.gradle/caches/8.11.1/transforms/1fce656a3d052d9e094d56d2305cc2e9/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.viewpager:viewpager:1.0.0] /home/axel/.gradle/caches/8.11.1/transforms/1fce656a3d052d9e094d56d2305cc2e9/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.recyclerview:recyclerview:1.1.0] /home/axel/.gradle/caches/8.11.1/transforms/379545af5a040e775548536629884de8/transformed/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.recyclerview:recyclerview:1.1.0] /home/axel/.gradle/caches/8.11.1/transforms/379545af5a040e775548536629884de8/transformed/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.customview:customview:1.1.0] /home/axel/.gradle/caches/8.11.1/transforms/a27912a76d53994cdca4bc9272ea46e4/transformed/customview-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.customview:customview:1.1.0] /home/axel/.gradle/caches/8.11.1/transforms/a27912a76d53994cdca4bc9272ea46e4/transformed/customview-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.browser:browser:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/4a3e14cf310982f50af16ba390266b5e/transformed/browser-1.4.0/AndroidManifest.xml:20:5-22:41
@@ -506,6 +539,10 @@ MERGED from [com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches
 MERGED from [com.google.firebase:firebase-auth:22.3.0] /home/axel/.gradle/caches/8.11.1/transforms/651903c1d0fa94d474edacfcec36a293/transformed/firebase-auth-22.3.0/AndroidManifest.xml:26:5-79
 MERGED from [com.google.android.recaptcha:recaptcha:18.1.2] /home/axel/.gradle/caches/8.11.1/transforms/9fd398f8ce8e559c2412ad56c98b607b/transformed/recaptcha-18.1.2/AndroidManifest.xml:8:5-79
 MERGED from [com.google.android.recaptcha:recaptcha:18.1.2] /home/axel/.gradle/caches/8.11.1/transforms/9fd398f8ce8e559c2412ad56c98b607b/transformed/recaptcha-18.1.2/AndroidManifest.xml:8:5-79
+MERGED from [androidx.media3:media3-common:1.1.1] /home/axel/.gradle/caches/8.11.1/transforms/ae8f7793aa08e371f53a429e122fedc8/transformed/media3-common-1.1.1/AndroidManifest.xml:24:5-79
+MERGED from [androidx.media3:media3-common:1.1.1] /home/axel/.gradle/caches/8.11.1/transforms/ae8f7793aa08e371f53a429e122fedc8/transformed/media3-common-1.1.1/AndroidManifest.xml:24:5-79
+MERGED from [androidx.media3:media3-exoplayer:1.1.1] /home/axel/.gradle/caches/8.11.1/transforms/aa69082ee5c70524ce57c5bf5f792c59/transformed/media3-exoplayer-1.1.1/AndroidManifest.xml:24:5-79
+MERGED from [androidx.media3:media3-exoplayer:1.1.1] /home/axel/.gradle/caches/8.11.1/transforms/aa69082ee5c70524ce57c5bf5f792c59/transformed/media3-exoplayer-1.1.1/AndroidManifest.xml:24:5-79
 	android:name
 		ADDED from [com.google.android.gms:play-services-maps:19.0.0] /home/axel/.gradle/caches/8.11.1/transforms/3d25d109634bcf0492398a7b0c135936/transformed/play-services-maps-19.0.0/AndroidManifest.xml:23:22-76
 uses-feature#0x00020000

@@ -97,4 +97,13 @@ dependencies {
     implementation("com.google.firebase:firebase-auth-ktx:22.3.0")
     // Google Sign-In
     implementation("com.google.android.gms:play-services-auth:20.7.0")
+
+    implementation("androidx.media3:media3-exoplayer:1.1.1")
+    implementation("androidx.media3:media3-ui:1.1.1")
+    implementation("androidx.media3:media3-common:1.1.1")
+
+
+    // La carte
+    implementation("com.google.maps.android:maps-compose:4.3.3")
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
 }

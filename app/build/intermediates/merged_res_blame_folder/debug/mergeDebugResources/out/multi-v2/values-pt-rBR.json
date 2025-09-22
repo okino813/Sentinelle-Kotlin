@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.sentinelle.app-mergeDebugResources-70:/values-pt-rBR/values-pt-rBR.xml",
+            "outputFile": "com.example.sentinelle.app-mergeDebugResources-74:/values-pt-rBR/values-pt-rBR.xml",
             "map": [
                 {
                     "source": "/home/axel/.gradle/caches/8.11.1/transforms/9d98a5e7d75e9e4d784acdc47a9a55f9/transformed/foundation-release/res/values-pt-rBR/values-pt-rBR.xml",
