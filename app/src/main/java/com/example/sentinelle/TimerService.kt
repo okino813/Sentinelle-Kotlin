@@ -25,6 +25,7 @@ class TimerService : Service() {
 
     private var timer: CountDownTimer? = null
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var locationCallback: com.google.android.gms.location.LocationCallback
 
     private var mediaRecorder: MediaRecorder? = null
     private var isRecording = false
@@ -34,6 +35,60 @@ class TimerService : Service() {
     override fun onCreate() {
         super.onCreate()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+        // Préparer le callback pour les mises à jour de localisation
+        locationCallback = object : com.google.android.gms.location.LocationCallback() {
+            override fun onLocationResult(result: com.google.android.gms.location.LocationResult) {
+                for (location in result.locations) {
+                    Log.d("TimerService", "Localisation → lat: ${location.latitude}, lng: ${location.longitude}")
+
+                    // Envoyer à l'API
+                    val api = api_service(this@TimerService)
+                    api.sendLocation(
+                        context = this@TimerService,
+                        latitude = location.latitude.toString(),
+                        longitude = location.longitude.toString()
+                    ) { success ->
+                        if (success) {
+                            Log.d("TimerService", "Localisation envoyée avec succès")
+                        } else {
+                            Log.e("TimerService", "Erreur lors de l'envoi de la localisation")
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun startLocationUpdates() {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            Log.w("TimerService", "Permissions de localisation manquantes")
+            return
+        }
+
+        val locationRequest = com.google.android.gms.location.LocationRequest.Builder(
+            10_000L // 10 secondes
+        )
+            .setPriority(com.google.android.gms.location.Priority.PRIORITY_HIGH_ACCURACY)
+            .build()
+
+        fusedLocationClient.requestLocationUpdates(
+            locationRequest,
+            locationCallback,
+            mainLooper
+        )
+    }
+
+    private fun stopLocationUpdates() {
+        fusedLocationClient.removeLocationUpdates(locationCallback)
     }
 
 
@@ -47,6 +102,8 @@ class TimerService : Service() {
             }
             "STOP_TIMER" -> {
                 stopCountdown()
+                stopLocationUpdates()
+
             }
         }
         return START_STICKY
@@ -85,7 +142,7 @@ class TimerService : Service() {
                 if(secondsElapsed % 10 == 0) {
                     // Action toutes les 10 secondes
                     Log.d("TimerService", "Action toutes les 10 secondes")
-                    getLastLocation()
+                    startLocationUpdates()
 
                 }
 
@@ -284,7 +341,9 @@ class TimerService : Service() {
         super.onDestroy()
         // S'assurer que l'enregistrement est arrêté
         if (isRecording) {
-            stopAudioRecording()
+            stopCountdown()
+            stopLocationUpdates()
+
         }
     }
 
