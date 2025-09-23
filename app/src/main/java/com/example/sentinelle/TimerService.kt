@@ -5,10 +5,15 @@ import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.Service
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.location.Location
 import android.media.MediaRecorder
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.CountDownTimer
 import android.os.IBinder
@@ -21,6 +26,13 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import java.io.File
 
+// Classe pour stocker les coordonnées GPS
+data class LocationData(
+    val latitude: String,
+    val longitude: String,
+    val timestamp: Long = System.currentTimeMillis()
+)
+
 class TimerService : Service() {
 
     private var timer: CountDownTimer? = null
@@ -32,9 +44,29 @@ class TimerService : Service() {
     private var currentAudioFile: File? = null
     private val audioFileQueue = ArrayList<File>()
 
+    // Queue pour les coordonnées GPS
+    private val locationQueue = ArrayList<LocationData>()
+
+    // BroadcastReceiver pour détecter les changements de connectivité
+    private val networkReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            if (intent.action == ConnectivityManager.CONNECTIVITY_ACTION) {
+                if (isNetworkAvailable()) {
+                    Log.d("TimerService", "Connexion rétablie - envoi des queues")
+                    sendQueuedLocations()
+                    sendQueuedAudioFiles()
+                }
+            }
+        }
+    }
+
     override fun onCreate() {
         super.onCreate()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+        // Enregistrer le receiver pour les changements de réseau
+        val filter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+        registerReceiver(networkReceiver, filter)
 
         // Préparer le callback pour les mises à jour de localisation
         locationCallback = object : com.google.android.gms.location.LocationCallback() {
@@ -42,21 +74,41 @@ class TimerService : Service() {
                 for (location in result.locations) {
                     Log.d("TimerService", "Localisation → lat: ${location.latitude}, lng: ${location.longitude}")
 
-                    // Envoyer à l'API
-                    val api = api_service(this@TimerService)
-                    api.sendLocation(
-                        context = this@TimerService,
+                    // Ajouter à la queue au lieu d'envoyer directement
+                    val locationData = LocationData(
                         latitude = location.latitude.toString(),
                         longitude = location.longitude.toString()
-                    ) { success ->
-                        if (success) {
-                            Log.d("TimerService", "Localisation envoyée avec succès")
-                        } else {
-                            Log.e("TimerService", "Erreur lors de l'envoi de la localisation")
-                        }
+                    )
+                    locationQueue.add(locationData)
+                    Log.d("TimerService", "Coordonnées ajoutées à la queue (${locationQueue.size} en attente)")
+
+                    // Tenter d'envoyer immédiatement si connexion disponible
+                    if (isNetworkAvailable()) {
+                        sendQueuedLocations()
                     }
                 }
             }
+        }
+    }
+
+    private fun isNetworkAvailable(): Boolean {
+        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val network = connectivityManager.activeNetwork ?: return false
+            val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
+
+            return when {
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+                else -> false
+            }
+        } else {
+            @Suppress("DEPRECATION")
+            val networkInfo = connectivityManager.activeNetworkInfo ?: return false
+            @Suppress("DEPRECATION")
+            return networkInfo.isConnected
         }
     }
 
@@ -91,8 +143,6 @@ class TimerService : Service() {
         fusedLocationClient.removeLocationUpdates(locationCallback)
     }
 
-
-
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         when (intent?.action) {
             "START_TIMER" -> {
@@ -103,13 +153,10 @@ class TimerService : Service() {
             "STOP_TIMER" -> {
                 stopCountdown()
                 stopLocationUpdates()
-
             }
         }
         return START_STICKY
     }
-
-
 
     private fun startCountdown(totalSeconds: Int) {
         val endTimestamp = System.currentTimeMillis() + totalSeconds * 1000L
@@ -136,39 +183,112 @@ class TimerService : Service() {
                 AppValues.minute.value = minuteRestant.toInt()
                 AppValues.seconde.value = secondeRestant.toInt()
 
-
                 Log.d("TimerService", "Heure: $heureRestant, Minute: $minuteRestant, Seconde: $secondeRestant")
 
                 if(secondsElapsed % 10 == 0) {
                     // Action toutes les 10 secondes
                     Log.d("TimerService", "Action toutes les 10 secondes")
                     startLocationUpdates()
-
                 }
 
                 if(secondsElapsed % 300 == 0) {
                     // Action toutes les 5 minutes
-                    // Ici il faudrait que l'enregistrement audio se coupe. S'enregistre et le path
-                    // soit stocker dans un tableau pour l'envoi à l'API
-                    // Une fois stocker dans le tableau, on démare un autre enregistrement audio
-                    // Le tableau s'envoie à l'api toute les 5 minutes.
-                    // Le tableau sert pour si jamais l'utilisateur n'a pas de réseau, les données sont stockées
-                    // et envoyées plus tard.
                     handleAudioRecording()
-                    sendQueuedAudioFiles()
+
+                    // Tenter d'envoyer les queues si connexion disponible
+                    if (isNetworkAvailable()) {
+                        sendQueuedAudioFiles()
+                        sendQueuedLocations()
+                    } else {
+                        Log.d("TimerService", "Pas de connexion - données en queue (Audio: ${audioFileQueue.size}, GPS: ${locationQueue.size})")
+                    }
+
                     Log.d("TimerService", "Action toutes les 5 minutes")
                 }
             }
 
-
             override fun onFinish() {
                 stopAudioRecording()
+
+                // Envoi final - même sans connexion pour vider les queues à l'arrêt
                 sendQueuedAudioFiles()
+                sendQueuedLocations()
+
                 clearTimerState()
                 stopSelf()
                 timer = null
             }
         }.start()
+    }
+
+    private fun sendQueuedLocations() {
+        if (locationQueue.isEmpty()) {
+            return
+        }
+
+        if (!isNetworkAvailable()) {
+            Log.d("TimerService", "Pas de connexion réseau - ${locationQueue.size} coordonnées en attente")
+            return
+        }
+
+        val api = api_service(this)
+        val locationsToSend = ArrayList(locationQueue)
+
+        Log.d("TimerService", "Envoi de ${locationsToSend.size} coordonnées en queue")
+
+        // Envoyer chaque coordonnée
+        locationsToSend.forEach { locationData ->
+            api.sendLocation(
+                context = this,
+                latitude = locationData.latitude,
+                longitude = locationData.longitude
+            ) { success ->
+                if (success) {
+                    Log.d("TimerService", "Coordonnées envoyées avec succès: lat=${locationData.latitude}, lng=${locationData.longitude}")
+                    // Supprimer de la queue
+                    locationQueue.remove(locationData)
+                } else {
+                    Log.e("TimerService", "Erreur lors de l'envoi des coordonnées: lat=${locationData.latitude}, lng=${locationData.longitude}")
+                    // Les coordonnées restent dans la queue pour un nouvel essai
+                }
+            }
+        }
+    }
+
+    private fun sendQueuedAudioFiles() {
+        if (audioFileQueue.isEmpty()) {
+            return
+        }
+
+        if (!isNetworkAvailable()) {
+            Log.d("TimerService", "Pas de connexion réseau - ${audioFileQueue.size} fichiers audio en attente")
+            return
+        }
+
+        val api = api_service(this)
+        val filesToSend = ArrayList(audioFileQueue)
+
+        Log.d("TimerService", "Envoi de ${filesToSend.size} fichiers audio en queue")
+
+        // Envoyer chaque fichier
+        filesToSend.forEach { file ->
+            api.sendAudioFile(
+                context = this,
+                audioFile = file
+            ) { success ->
+                if (success) {
+                    Log.d("TimerService", "Fichier audio envoyé avec succès: ${file.name}")
+                    // Supprimer le fichier de la queue et du système
+                    audioFileQueue.remove(file)
+                    if (file.exists()) {
+                        file.delete()
+                    }
+                } else {
+                    Log.e("TimerService", "Erreur lors de l'envoi du fichier audio: ${file.name}")
+                    // Le fichier reste dans la queue pour un nouvel essai
+                }
+            }
+        }
     }
 
     private fun startAudioRecording() {
@@ -192,11 +312,10 @@ class TimerService : Service() {
 
                 prepare()
                 start()
-
+            }
 
             isRecording = true
-                Log.d("TimerService", "Enregistrement audio démarré: ${currentAudioFile?.name}")
-            }
+            Log.d("TimerService", "Enregistrement audio démarré: ${currentAudioFile?.name}")
         } catch (e: Exception) {
             Log.e("TimerService", "Erreur lors du démarrage de l'enregistrement: ${e.message}")
             isRecording = false
@@ -215,7 +334,15 @@ class TimerService : Service() {
                 currentAudioFile?.let { file ->
                     if (file.exists() && file.length() > 0) {
                         audioFileQueue.add(file)
-                        Log.d("TimerService", "Fichier audio ajouté à la queue: ${file.name}")
+                        Log.d("TimerService", "Fichier audio ajouté à la queue: ${file.name} (${audioFileQueue.size} en attente)")
+
+                        // Tenter d'envoyer immédiatement si connexion disponible
+                        if (isNetworkAvailable()) {
+                            sendQueuedAudioFiles()
+                        }
+                        else{
+                            Log.d("TimerService", "Pas de connexion - données en queue (Audio: ${audioFileQueue.size})")
+                        }
                     } else {
                         Log.w("TimerService", "Fichier audio vide ou inexistant")
                     }
@@ -235,34 +362,6 @@ class TimerService : Service() {
         startAudioRecording()
     }
 
-
-    private fun sendQueuedAudioFiles() {
-        if (audioFileQueue.isNotEmpty()) {
-            val api = api_service(this)
-            val filesToSend = ArrayList(audioFileQueue)
-
-            // Envoyer chaque fichier
-            filesToSend.forEach { file ->
-                api.sendAudioFile(
-                    context = this,
-                    audioFile = file
-                ) { success ->
-                    if (success) {
-                        Log.d("TimerService", "Fichier audio envoyé avec succès: ${file.name}")
-                        // Supprimer le fichier de la queue et du système
-                        audioFileQueue.remove(file)
-                        if (file.exists()) {
-                            file.delete()
-                        }
-                    } else {
-                        Log.e("TimerService", "Erreur lors de l'envoi du fichier audio: ${file.name}")
-                        // Le fichier reste dans la queue pour un nouvel essai
-                    }
-                }
-            }
-        }
-    }
-
     private fun hasAudioPermission(): Boolean {
         return ActivityCompat.checkSelfPermission(
             this,
@@ -280,18 +379,18 @@ class TimerService : Service() {
         fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
             if (location != null) {
                 Log.d("TimerService", "Localisation → lat: ${location.latitude}, lng: ${location.longitude}")
-                // Tu peux sauvegarder ou envoyer la position ici
-                var api = api_service(this)
-                api.sendLocation(
-                    context = this,
+
+                // Ajouter à la queue au lieu d'envoyer directement
+                val locationData = LocationData(
                     latitude = location.latitude.toString(),
                     longitude = location.longitude.toString()
-                ) { success ->
-                    if (success) {
-                        Log.d("TimerService", "Localisation envoyée avec succès")
-                    } else {
-                        Log.e("TimerService", "Erreur lors de l'envoi de la localisation")
-                    }
+                )
+                locationQueue.add(locationData)
+                Log.d("TimerService", "Dernière localisation ajoutée à la queue")
+
+                // Tenter d'envoyer immédiatement si connexion disponible
+                if (isNetworkAvailable()) {
+                    sendQueuedLocations()
                 }
             } else {
                 Log.d("TimerService", "Localisation non disponible")
@@ -311,7 +410,7 @@ class TimerService : Service() {
 
         return NotificationCompat.Builder(this, channelId)
             .setContentTitle("SafeRider en cours")
-            .setContentText("Minuteur en cours d’exécution…")
+            .setContentText("Minuteur en cours d'exécution…")
             .setSmallIcon(R.drawable.main_icon_dark)
             .build()
     }
@@ -330,8 +429,9 @@ class TimerService : Service() {
         // Arrêter l'enregistrement en cours
         stopAudioRecording()
 
-        // Envoyer les fichiers restants
+        // Tenter d'envoyer les queues restantes (même sans connexion pour le log)
         sendQueuedAudioFiles()
+        sendQueuedLocations()
 
         clearTimerState()
         stopSelf()
@@ -339,12 +439,23 @@ class TimerService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
-        // S'assurer que l'enregistrement est arrêté
+
+        // Désinscrire le receiver
+        try {
+            unregisterReceiver(networkReceiver)
+        } catch (e: IllegalArgumentException) {
+            Log.w("TimerService", "Receiver déjà désinscrit")
+        }
+
+        // S'assurer que l'enregistrement est arrêté et que les données sont envoyées
         if (isRecording) {
             stopCountdown()
             stopLocationUpdates()
-
         }
+
+        // Dernier envoi des données restantes
+        sendQueuedLocations()
+        sendQueuedAudioFiles()
     }
 
     override fun onBind(intent: Intent?): IBinder? = null
