@@ -350,30 +350,12 @@ fun SafeRiderMap(
 }
 
 private fun buildMapBoxUrl(coordinates: List<Pair<Double, Double>>): String {
-    val accessToken = "pk.eyJ1Ijoib2tpbm84MTMiLCJhIjoiY21mdzllZzFoMDZ1ZDJqczhzd3VmdTRydyJ9.o_QveVDPs7jn-hgN6mZngg"
-    // Utilise | pour séparer les coordonnées dans le path
-    val pathCoords = coordinates.joinToString("|") { "${it.second},${it.first}" }
-    val startMarker = "pin-s+4CAF50(${coordinates.first().second},${coordinates.first().first})"
-    val endMarker = "pin-s-f+F44336(${coordinates.last().second},${coordinates.last().first})"
-    val overlays = "path-5+3388ff-0.8($pathCoords),$startMarker,$endMarker"
-    // Calcul du bounding box
-    var minLat = coordinates.minOf { it.first }
-    var maxLat = coordinates.maxOf { it.first }
-    var minLng = coordinates.minOf { it.second }
-    var maxLng = coordinates.maxOf { it.second }
-    // Si tous les points sont identiques → ajoute une marge artificielle
-    if (minLat == maxLat) {
-        minLat -= 0.001
-        maxLat += 0.001
-    }
-    if (minLng == maxLng) {
-        minLng -= 0.001
-        maxLng += 0.001
-    }
-    val bbox = "[$minLng,$minLat,$maxLng,$maxLat]"
-    return "https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/" +
-            "$overlays/$bbox/600x400@2x?" +
-            "access_token=$accessToken"
+    val accessToken = "AIzaSyBZWWgX4v2Yl0i7G96tLfygcH-qMLevBIs"
+    // Construction du path : longitude,latitude séparés par |
+    val pathCoords = coordinates.joinToString("|") { "${it.first},${it.second}" }
+    val urltest= "https://maps.googleapis.com/maps/api/staticmap?size=600x400&path=color:0x0000ff|weight:5|$pathCoords&key=$accessToken\n"
+
+    return urltest
 }
 
 
