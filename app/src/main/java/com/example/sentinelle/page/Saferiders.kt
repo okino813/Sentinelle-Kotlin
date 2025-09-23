@@ -1,6 +1,8 @@
 package com.example.sentinelle.page
 
+import android.graphics.BitmapFactory
 import android.util.Log
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -16,9 +18,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Slider
@@ -35,10 +41,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.media3.common.MediaItem
@@ -61,15 +71,11 @@ import com.example.sentinelle.api.Saferider.Companion.getDate
 import com.example.sentinelle.api.Saferider.Companion.getHourMinute
 import com.example.sentinelle.api.SaferiderItemWrapper
 import com.example.sentinelle.api.api_service
-import com.google.android.gms.maps.model.CameraPosition
-import com.google.android.gms.maps.model.LatLng
-import com.google.maps.android.compose.GoogleMap
-import com.google.maps.android.compose.Marker
-import com.google.maps.android.compose.MarkerState
-import com.google.maps.android.compose.Polyline
-import com.google.maps.android.compose.rememberCameraPositionState
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.net.URL
 
 @Composable
 fun AppNavigation(
@@ -170,45 +176,216 @@ fun SaferidersScreen(
 }
 
 @Composable
-fun SafeRiderMap(coordinates: List<Pair<Double, Double>>) {
-    // Convertir la liste en LatLng
-    val path = coordinates.map { LatLng(it.first, it.second) }
-
-    // Centrer la caméra sur le premier point
-    val cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.fromLatLngZoom(
-            path.firstOrNull() ?: LatLng(0.0, 0.0),
-            15f // Zoom
-        )
+fun SafeRiderMap(
+    coordinates: List<Pair<Double, Double>>,
+    colors: List<Color>,
+    modifier: Modifier = Modifier
+) {
+    LaunchedEffect(coordinates) {
+        Log.d("SafeRiderMap", "Nombre de coordonnées: ${coordinates.size}")
     }
 
-    GoogleMap(
-        modifier = Modifier.fillMaxWidth()
-            .height(300.dp)
-//            .clip(RoundedCornerShape(12.dp))
-        ,
-        cameraPositionState = cameraPositionState
-    ) {
-        // Tracé de la route
-        if (path.isNotEmpty()) {
-            Polyline(points = path)
+    if (coordinates.isEmpty()) {
+        Box(
+            modifier = modifier
+                .fillMaxWidth()
+                .height(300.dp)
+                .background(Color.Gray.copy(alpha = 0.3f))
+                .padding(16.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                "Aucune coordonnée disponible",
+                color = Color.White,
+                fontSize = 16.sp
+            )
         }
+        return
+    }
 
-        // Marqueurs (début & fin)
-        path.firstOrNull()?.let {
-            Marker(
-                state = MarkerState(position = it),
-                title = "Départ"
-            )
+    var mapImage by remember { mutableStateOf<ImageBitmap?>(null) }
+    var isLoading by remember { mutableStateOf(true) }
+    var errorMessage by remember { mutableStateOf<String?>(null) }
+
+    // Créer l'URL de l'API
+    val mapUrl = remember(coordinates) {
+        buildMapBoxUrl(coordinates)
+    }
+
+    Log.d("SafeRiderMap", "URL de la carte: $mapUrl")
+
+    // Charger l'image de la carte
+    LaunchedEffect(mapUrl) {
+        withContext(Dispatchers.IO) {
+            try {
+                Log.d("SafeRiderMap", "Chargement de: $mapUrl")
+
+                val url = URL(mapUrl)
+                val connection = url.openConnection().apply {
+                    setRequestProperty("User-Agent", "SafeRider-App")
+                    connectTimeout = 10000
+                    readTimeout = 10000
+                }
+
+                val inputStream = connection.getInputStream()
+                val bitmap = BitmapFactory.decodeStream(inputStream)
+                inputStream.close()
+
+                if (bitmap != null) {
+                    mapImage = bitmap.asImageBitmap()
+                    isLoading = false
+                    errorMessage = null
+                    Log.d("SafeRiderMap", "Carte chargée avec succès")
+                } else {
+                    errorMessage = "Impossible de décoder l'image"
+                    isLoading = false
+                }
+            } catch (e: Exception) {
+                Log.e("SafeRiderMap", "Erreur: ${e.message}")
+                errorMessage = "Erreur réseau: ${e.message?.take(50) ?: "Inconnue"}"
+                isLoading = false
+            }
         }
-        path.lastOrNull()?.let {
-            Marker(
-                state = MarkerState(position = it),
-                title = "Arrivée"
-            )
+    }
+
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(300.dp)
+            .background(Color.Black.copy(alpha = 0.1f))
+    ) {
+        when {
+            isLoading -> {
+                // Indicateur de chargement
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        CircularProgressIndicator(
+                            color = colors[1],
+                            strokeWidth = 3.dp,
+                            modifier = Modifier.size(32.dp)
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            "Génération de la carte...",
+                            color = Color.White,
+                            fontSize = 12.sp
+                        )
+                    }
+                }
+            }
+
+            errorMessage != null -> {
+                // Message d'erreur avec retry
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Icon(
+                            painterResource(id = android.R.drawable.stat_notify_error),
+                            contentDescription = "Erreur",
+                            tint = colors[4],
+                            modifier = Modifier.size(32.dp)
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            errorMessage!!,
+                            color = Color.White,
+                            fontSize = 11.sp,
+                            textAlign = TextAlign.Center
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            "Appuyez pour réessayer",
+                            color = colors[3],
+                            fontSize = 10.sp,
+                            modifier = Modifier.clickable {
+                                isLoading = true
+                                errorMessage = null
+                            }
+                        )
+                    }
+                }
+            }
+
+            mapImage != null -> {
+                // Afficher la carte
+                Box(modifier = Modifier.fillMaxSize()) {
+                    Image(
+                        bitmap = mapImage!!,
+                        contentDescription = "Carte du trajet",
+                        modifier = Modifier.fillMaxSize(),
+                        contentScale = ContentScale.Crop
+                    )
+
+                    // Overlay avec info
+                    Box(
+                        modifier = Modifier
+                            .align(Alignment.BottomEnd)
+                            .padding(8.dp)
+                            .background(
+                                Color.Black.copy(alpha = 0.8f),
+                                RoundedCornerShape(4.dp)
+                            )
+                            .padding(horizontal = 8.dp, vertical = 4.dp)
+                    ) {
+                        Text(
+                            "${coordinates.size} points GPS",
+                            color = Color.White,
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Medium
+                        )
+                    }
+                }
+            }
         }
     }
 }
+
+// Fonction pour construire l'URL MapBox
+private fun buildMapBoxUrl(coordinates: List<Pair<Double, Double>>): String {
+    val accessToken = "pk.eyJ1Ijoib2tpbm84MTMiLCJhIjoiY21mdzllZzFoMDZ1ZDJqczhzd3VmdTRydyJ9.o_QveVDPs7jn-hgN6mZngg"
+
+    val pathCoords = coordinates.joinToString(",") { "${it.second},${it.first}" }
+
+    val startMarker = "pin-s+4CAF50(${coordinates.first().second},${coordinates.first().first})"
+    val endMarker = "pin-s-f+F44336(${coordinates.last().second},${coordinates.last().first})"
+    val overlays = "path-5+3388ff-0.8($pathCoords),$startMarker,$endMarker"
+
+    // Calcul du bounding box
+    var minLat = coordinates.minOf { it.first }
+    var maxLat = coordinates.maxOf { it.first }
+    var minLng = coordinates.minOf { it.second }
+    var maxLng = coordinates.maxOf { it.second }
+
+    // Si tous les points sont identiques → ajoute une marge artificielle
+    if (minLat == maxLat) {
+        minLat -= 0.001
+        maxLat += 0.001
+    }
+    if (minLng == maxLng) {
+        minLng -= 0.001
+        maxLng += 0.001
+    }
+
+    val bbox = "[$minLng,$minLat,$maxLng,$maxLat]"
+
+    return "https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/" +
+            "$overlays/$bbox/600x400@2x?" +
+            "access_token=$accessToken"
+}
+
+
+
+
+
 
 @Composable
 fun SaferiderDetailScreen(id: Int?, colors: List<Color>) {
@@ -216,6 +393,7 @@ fun SaferiderDetailScreen(id: Int?, colors: List<Color>) {
     var audioList by remember { mutableStateOf<List<AudioRecord>>(emptyList()) }
     var saferider by remember { mutableStateOf<Saferider?>(null) }
     var coords by remember { mutableStateOf<List<Pair<Double, Double>>>(emptyList()) }
+    val scrollState = rememberScrollState()
 
     val api = api_service(context)
     LaunchedEffect(id) {
@@ -264,9 +442,10 @@ fun SaferiderDetailScreen(id: Int?, colors: List<Color>) {
 
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(top = 50.dp, start = 16.dp, end = 16.dp)
+            .fillMaxWidth()
+            .padding(top = 20.dp, start = 16.dp,bottom = 120.dp, end = 16.dp)
             .background(colors[0])
+            .verticalScroll(scrollState)
     ) {
         Text(
             "Trajet Protégé",
@@ -398,9 +577,17 @@ fun SaferiderDetailScreen(id: Int?, colors: List<Color>) {
                 }
             }
         }
+        Spacer(Modifier.height(16.dp))
 
-        LazyColumn {
-            items(audioList, key = { it.id }) { audio ->
+
+        SafeRiderMap(
+            coordinates = coords,
+            colors = colors,
+        )
+
+
+        Column {
+            audioList.forEach { audio ->
                 ExoPlayerAudioPlayer(audio = audio, colors = colors)
             }
         }
@@ -500,7 +687,7 @@ fun ExoPlayerAudioPlayer(audio: AudioRecord, colors: List<Color>) {
                                 // Préparer le media item avec headers
                                 coroutineScope.launch {
                                     try {
-                                    val token = ApiHelper.getToken()
+                                        val token = ApiHelper.getToken()
                                         val url = "${AppValues.base_url}/api/listen/${audio.path}"
 
                                         Log.d("ExoPlayer", "URL: $url")

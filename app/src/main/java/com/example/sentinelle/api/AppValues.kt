@@ -14,8 +14,8 @@ import java.util.Date
 import java.util.Locale
 
 object AppValues {
-// const val base_url = "http://192.168.1.102:8000"
-const val base_url = "http://10.0.2.2:8000"
+ const val base_url = "http://192.168.1.102:8000"
+//const val base_url = "http://10.0.2.2:8000"
 
  val Montserrat = FontFamily(
   Font(R.font.montserrat_bold_italic, FontWeight.Bold, FontStyle.Italic),
