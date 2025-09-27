@@ -181,12 +181,14 @@ class api_service(val context: Context) {
         context: Context,
         latitude: String,
         longitude: String,
+        timestamp: String,
         callback: (Boolean) -> Unit
     ) {
 
         val json = JSONObject().apply {
             put("latitude", latitude)
             put("longitude", longitude)
+            put("timestamp", timestamp)
         }
 
         ApiHelper.apiPost(

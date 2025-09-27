@@ -147,14 +147,6 @@ fun HomeScreen(
         } else {
             textBtnStartStop = "Départ"
             // Arrêter le minuteur
-            val intent = Intent(context, TimerService::class.java).apply {
-                action = "STOP_TIMER"
-            }
-
-            context.startService(intent)
-            isTimerRunning = false
-
-            Log.d("TimerService", "Timer stopped, reset values")
 
             api.stopTimer(context) { success, error ->
                 if (success) {
@@ -162,6 +154,15 @@ fun HomeScreen(
                     heures.value = 0
                     minutes.value = 0
                     secondes.value = 0
+
+                    val intent = Intent(context, TimerService::class.java).apply {
+                        action = "STOP_TIMER"
+                    }
+
+                    context.startService(intent)
+                    isTimerRunning = false
+
+                    Log.d("TimerService", "Timer stopped, reset values")
 
                 } else {
                     errorMessage = error ?: "Erreur inconnue"

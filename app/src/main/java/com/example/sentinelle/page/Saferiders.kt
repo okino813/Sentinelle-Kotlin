@@ -19,7 +19,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
@@ -324,25 +323,6 @@ fun SafeRiderMap(
                         modifier = Modifier.fillMaxSize(),
                         contentScale = ContentScale.Crop
                     )
-
-                    // Overlay avec info
-                    Box(
-                        modifier = Modifier
-                            .align(Alignment.BottomEnd)
-                            .padding(8.dp)
-                            .background(
-                                Color.Black.copy(alpha = 0.8f),
-                                RoundedCornerShape(4.dp)
-                            )
-                            .padding(horizontal = 8.dp, vertical = 4.dp)
-                    ) {
-                        Text(
-                            "${coordinates.size} points GPS",
-                            color = Color.White,
-                            fontSize = 11.sp,
-                            fontWeight = FontWeight.Medium
-                        )
-                    }
                 }
             }
         }
@@ -357,11 +337,6 @@ private fun buildMapBoxUrl(coordinates: List<Pair<Double, Double>>): String {
 
     return urltest
 }
-
-
-
-
-
 
 @Composable
 fun SaferiderDetailScreen(id: Int?, colors: List<Color>) {
@@ -419,7 +394,7 @@ fun SaferiderDetailScreen(id: Int?, colors: List<Color>) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 20.dp, start = 16.dp,bottom = 120.dp, end = 16.dp)
+            .padding(top = 30.dp, start = 16.dp,bottom = 120.dp, end = 16.dp)
             .background(colors[0])
             .verticalScroll(scrollState)
     ) {
