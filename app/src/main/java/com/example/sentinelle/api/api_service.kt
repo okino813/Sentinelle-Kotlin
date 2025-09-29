@@ -1,12 +1,19 @@
 package com.example.sentinelle.api
 
 import android.content.Context
+import android.os.Build
+import android.os.Environment
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.toMutableStateList
 import com.example.sentinelle.ApiHelper
 import org.json.JSONObject
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import java.util.TimeZone
 
 class api_service(val context: Context) {
 
@@ -261,6 +268,97 @@ class api_service(val context: Context) {
         })
 
     }
+
+    @RequiresApi(Build.VERSION_CODES.Q)
+    fun DownloadSaferider(context: Context, saferider: List<Saferider>, coords: List<Triple<Double, Double, Double>>, audios : List<AudioRecord>): Boolean {
+        Log.d("DownloadSaferider", "Téléchargement du trajet ${coords}")
+
+        // Créez le contenu du fichier GPX
+        val gpxContent = generateGpx(saferider, coords)
+
+        Log.d("GPX", gpxContent)
+
+        // On crée le dossier du saferider
+        // On vérifie si le dossier racine "Saferiders" existe, sinon on le crée
+
+
+        // On crée le dossier spécifique au saferider
+        var trajetName = "${Saferider.getDate(saferider[0].start_date)}-${Saferider.getDate(saferider[0].start_date)}"
+        // En cas de doublon on ajoute (bis) à la fin
+        val currentDateTime: Date = Date()
+        val currentTimestamp: Long = currentDateTime.time
+        // Dossier par défaut
+        var saferiderDir = File(
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS),
+            "Sentinelle/$trajetName"
+        )
+
+// Si le dossier existe déjà, on ajoute le suffixe (bis<timestamp>)
+        if (saferiderDir.exists()) {
+            trajetName += "(bis${currentTimestamp})"
+            saferiderDir = File(
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS),
+                "Sentinelle/${trajetName}"
+            )
+        }
+
+        // On crée le dossier final
+        if (!saferiderDir.exists()) {
+            saferiderDir.mkdirs()
+        }
+
+        // On récupère les fichier audio depuis l'api
+        for(audio in audios) {
+            // On split le path pour récupérer le nom du fichier
+            var name = audio.path.split("/").last()
+            Log.d("DownloadSaferider", "Téléchargement de l'audio ${name}")
+
+            ApiHelper.downloadFileToDocuments(context, trajetName = trajetName, url = "${AppValues.base_url}/api/listen/${audio.path}", fileName = name, onSuccess = { uri ->
+                Log.d("DownloadSaferider", "Fichier audio téléchargé avec succès : $uri")
+            }, onError = {
+                Log.e("DownloadSaferider", "Erreur lors du téléchargement du fichier audio")
+            })
+        }
+
+        // On crée le fichier GPX dans le dossier
+        val gpxFile = File(saferiderDir, "saferider_$trajetName.gpx")
+        gpxFile.writeText(gpxContent)
+
+        return true
+
+    }
+
+    fun formatTimestampToIso(timestamp: Long): String {
+        val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.FRENCH)
+        sdf.timeZone = TimeZone.getTimeZone("UTC")
+        return sdf.format(Date(timestamp* 1000)) // ton timestamp est en secondes
+    }
+
+    fun generateGpx(saferider: List<Saferider>, locations: List<Triple<Double, Double, Double>>): String {
+        val sb = StringBuilder()
+
+        var dateJ = Saferider.getDate(saferider[0].start_date)
+
+        sb.append("""<?xml version="1.0" encoding="UTF-8"?>""").append("\n")
+        sb.append("""<gpx version="1.1" creator="MyApp" xmlns="http://www.topografix.com/GPX/1/1">""").append("\n")
+        sb.append("  <trk>\n")
+        sb.append("    <name>Saferider du $dateJ</name>\n")
+        sb.append("    <trkseg>\n")
+
+        for (loc in locations) {
+            Log.d("GPX", "Location: lat=${loc.first}, lon=${loc.second}, time=${loc.third.toLong()}")
+            val isoTime = formatTimestampToIso(loc.third.toLong())
+            sb.append("""      <trkpt lat="${loc.first}" lon="${loc.second}">""").append("\n")
+            sb.append("        <time>$isoTime</time>\n")
+            sb.append("      </trkpt>\n")
+        }
+
+        sb.append("    </trkseg>\n")
+        sb.append("  </trk>\n")
+        sb.append("</gpx>\n")
+        return sb.toString()
+    }
+
 
     fun logout(
         context: Context,

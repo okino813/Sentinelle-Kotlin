@@ -1,7 +1,9 @@
 package com.example.sentinelle.page
 
 import android.graphics.BitmapFactory
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -65,6 +67,7 @@ import com.example.sentinelle.ApiHelper
 import com.example.sentinelle.R
 import com.example.sentinelle.api.AppValues
 import com.example.sentinelle.api.AudioRecord
+import com.example.sentinelle.api.PopupAlert
 import com.example.sentinelle.api.Saferider
 import com.example.sentinelle.api.Saferider.Companion.getDate
 import com.example.sentinelle.api.Saferider.Companion.getHourMinute
@@ -76,6 +79,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.net.URL
 
+@RequiresApi(Build.VERSION_CODES.Q)
 @Composable
 fun AppNavigation(
     colors: List<Color>,
@@ -338,13 +342,19 @@ private fun buildMapBoxUrl(coordinates: List<Pair<Double, Double>>): String {
     return urltest
 }
 
+@RequiresApi(Build.VERSION_CODES.Q)
 @Composable
 fun SaferiderDetailScreen(id: Int?, colors: List<Color>) {
     val context = LocalContext.current
     var audioList by remember { mutableStateOf<List<AudioRecord>>(emptyList()) }
     var saferider by remember { mutableStateOf<Saferider?>(null) }
     var coords by remember { mutableStateOf<List<Pair<Double, Double>>>(emptyList()) }
+    var coordsComplete by remember { mutableStateOf<List<Triple<Double, Double, Double>>>(emptyList()) }
     val scrollState = rememberScrollState()
+
+    var showDialog by remember { mutableStateOf(false) }
+    var isSuccess by remember { mutableStateOf<Boolean>(false) }
+    var messageDialogue by remember { mutableStateOf("") }
 
     val api = api_service(context)
     LaunchedEffect(id) {
@@ -384,6 +394,16 @@ fun SaferiderDetailScreen(id: Int?, colors: List<Color>) {
                             add(Pair(item.getString("latitude").toDouble(), item.getString("longitude").toDouble()))
                         }
                     }
+
+                    coordsComplete = buildList {
+                        val coordArray = dataObject.getJSONArray("coordinates")
+                        for (i in 0 until coordArray.length()) {
+                            val item = coordArray.getJSONObject(i)
+                            add(Triple(item.getString("latitude").toDouble(), item.getString("longitude").toDouble(), item.getString("date").toDouble()))
+                        }
+                    }
+
+
                 }
             }
         } catch (e: Exception) {
@@ -512,7 +532,17 @@ fun SaferiderDetailScreen(id: Int?, colors: List<Color>) {
                         modifier = Modifier
                             .size(30.dp)
                             .clickable {
-                                Log.d("IconClick", "Icône downloads !")
+                                var succes = api.DownloadSaferider(context, listOf(s), coordsComplete, audioList)
+                                if(succes){
+                                    isSuccess = true
+                                    showDialog = true
+                                    messageDialogue = "Saferider téléchargé dans vos documents !"
+                                }
+                                else{
+                                    isSuccess = false
+                                    showDialog = true
+                                    messageDialogue = "Erreur lors du téléchargement"
+                                }
                             }
                     )
                     Icon(
@@ -540,6 +570,12 @@ fun SaferiderDetailScreen(id: Int?, colors: List<Color>) {
         Column {
             audioList.forEach { audio ->
                 ExoPlayerAudioPlayer(audio = audio, colors = colors)
+            }
+        }
+
+        if (showDialog) {
+            PopupAlert(messageDialogue,colors = colors, isSuccess = isSuccess) {
+                showDialog = false
             }
         }
     }
@@ -706,3 +742,5 @@ fun ExoPlayerAudioPlayer(audio: AudioRecord, colors: List<Color>) {
         }
     }
 }
+
+

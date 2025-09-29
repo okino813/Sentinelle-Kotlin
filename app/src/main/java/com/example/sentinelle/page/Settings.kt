@@ -285,11 +285,8 @@ fun SettingsScreenStateless(
         Spacer(Modifier.height(16.dp))
 
         Input("Prénom", value = firstname, colors = colors, onValueChange = onFirstnameChange, false, firstnameError)
-        Spacer(modifier = Modifier.height(8.dp))
         Input("Nom", value = lastname, colors = colors, onValueChange = onLastnameChange, false, lastnameError)
-        Spacer(modifier = Modifier.height(8.dp))
         Input("Numéro de téléphone", value = phone, colors = colors, onValueChange =  onPhoneChange, false, phoneError)
-        Spacer(modifier = Modifier.height(8.dp))
 
         Bouton("Enregistrer", colors = colors, OnClick = {
             valideInfoPerso()
@@ -308,11 +305,8 @@ fun SettingsScreenStateless(
         Spacer(Modifier.height(16.dp))
 
         Input("Mot de passe actuel", value = password, colors = colors, onValueChange = onPasswordChange, true, passwordError)
-        Spacer(modifier = Modifier.height(8.dp))
         Input("Nouveau mot de passe", value = NewPassword, colors = colors, onValueChange = onNewPasswordChange, true, NewPasswordError)
-        Spacer(modifier = Modifier.height(8.dp))
         Input("Confirmation du mot de passe", value = ConfirmNewPassword, colors = colors, onValueChange = onNewConfirmPassword, true, ConfirmNewPasswordError)
-        Spacer(modifier = Modifier.height(8.dp))
 
         Bouton("Enregistrer", colors = colors, OnClick = {
             validePassword()

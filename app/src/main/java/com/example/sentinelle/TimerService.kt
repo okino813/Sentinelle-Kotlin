@@ -29,7 +29,7 @@ import java.io.File
 data class LocationData(
     val latitude: String,
     val longitude: String,
-    val timestamp: Long = System.currentTimeMillis()
+    val timestamp: Long = System.currentTimeMillis() / 1000
 )
 
 class TimerService : Service() {
@@ -87,7 +87,7 @@ class TimerService : Service() {
                     val locationData = LocationData(
                         latitude = location.latitude.toString(),
                         longitude = location.longitude.toString(),
-                        timestamp = System.currentTimeMillis()
+                        timestamp = System.currentTimeMillis() / 1000
                     )
                     locationQueue.add(locationData)
                     Log.d("TimerService", "Coordonnées ajoutées à la queue (${locationQueue.size} en attente)")
@@ -491,6 +491,8 @@ class TimerService : Service() {
 
         clearTimerState()
         stopSelf()
+        val api = api_service(this)
+        api.getInfo(this) // Mettre à jour les infos après l'arrêt
     }
 
     override fun onDestroy() {

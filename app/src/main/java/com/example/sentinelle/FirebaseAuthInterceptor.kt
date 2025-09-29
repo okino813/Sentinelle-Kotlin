@@ -1,6 +1,10 @@
 package com.example.sentinelle
 
+import android.content.ContentValues
 import android.content.Context
+import android.net.Uri
+import android.os.Environment
+import android.provider.MediaStore
 import android.util.Log
 import com.example.sentinelle.api.AppValues
 import com.google.android.gms.tasks.OnCompleteListener
@@ -164,6 +168,61 @@ object ApiHelper {
             }
         })
     }
+
+    fun downloadFileToDocuments(
+        context: Context,
+        url: String,
+        trajetName: String,
+        fileName: String,
+        onSuccess: (Uri) -> Unit,
+        onError: () -> Unit
+    ) {
+        val request = Request.Builder()
+            .url(url)
+            .get()
+            .build()
+
+        buildClient().newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                onError()
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                if (!response.isSuccessful || response.body == null) {
+                    onError()
+                    return
+                }
+
+                try {
+                    val resolver = context.contentResolver
+                    val contentValues = ContentValues().apply {
+                        put(MediaStore.MediaColumns.DISPLAY_NAME, fileName)
+                        put(MediaStore.MediaColumns.MIME_TYPE, "audio/mp4")
+                        put(
+                            MediaStore.MediaColumns.RELATIVE_PATH,
+                            "${Environment.DIRECTORY_DOCUMENTS}/Sentinelle/$trajetName/"
+                        )
+                    }
+
+                    val uri = resolver.insert(MediaStore.Files.getContentUri("external"), contentValues)
+                    if (uri == null) {
+                        onError()
+                        return
+                    }
+
+                    resolver.openOutputStream(uri).use { outStream ->
+                        response.body!!.byteStream().copyTo(outStream!!)
+                    }
+
+                    onSuccess(uri)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    onError()
+                }
+            }
+        })
+    }
+
 
     fun apiPostFile(
         context: Context,
