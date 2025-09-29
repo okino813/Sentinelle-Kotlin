@@ -125,16 +125,16 @@ fun InputTextArea(
         textStyle = TextStyle(fontSize = 16.sp, color = colors[0]),
         shape = RoundedCornerShape(16.dp),
         colors = OutlinedTextFieldDefaults.colors(
-                focusedTextColor = colors[0],
-                unfocusedTextColor = colors[0],
-                focusedContainerColor = containerColor,
-                unfocusedContainerColor = containerColor,
-                disabledContainerColor = containerColor,
-                errorContainerColor = colors[1],
-                cursorColor = colors[0],
-                focusedBorderColor = colors[4],
-                unfocusedBorderColor = colors[1],
-            ),
+            focusedTextColor = colors[0],
+            unfocusedTextColor = colors[0],
+            focusedContainerColor = containerColor,
+            unfocusedContainerColor = containerColor,
+            disabledContainerColor = containerColor,
+            errorContainerColor = colors[1],
+            cursorColor = colors[0],
+            focusedBorderColor = colors[4],
+            unfocusedBorderColor = colors[1],
+        ),
         maxLines = maxLines,
         minLines = 7,
     )
@@ -171,16 +171,16 @@ fun Input(
         textStyle = TextStyle(fontSize = 16.sp, color = colors[0]),
         shape = RoundedCornerShape(50.dp),
         colors = OutlinedTextFieldDefaults.colors(
-                focusedTextColor = colors[0],
-                unfocusedTextColor = colors[0],
-                focusedContainerColor = containerColor,
-                unfocusedContainerColor = containerColor,
-                disabledContainerColor = containerColor,
-                errorContainerColor = colors[1],
-                cursorColor = colors[0],
-                focusedBorderColor = colors[0],
-                unfocusedBorderColor = colors[0],
-            ),
+            focusedTextColor = colors[0],
+            unfocusedTextColor = colors[0],
+            focusedContainerColor = containerColor,
+            unfocusedContainerColor = containerColor,
+            disabledContainerColor = containerColor,
+            errorContainerColor = colors[1],
+            cursorColor = colors[0],
+            focusedBorderColor = colors[0],
+            unfocusedBorderColor = colors[0],
+        ),
         visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None,
     )
     if (errorMessage != null) {
@@ -206,7 +206,7 @@ fun Bouton(text: String,colors: List<Color>, modifier: Modifier = Modifier, OnCl
         ),
         shape = RoundedCornerShape(8.dp),
 
-    ) {
+        ) {
         Text(
             text,
             fontFamily = Montserrat,
@@ -295,73 +295,73 @@ fun CustomNumberPicker(
 {
     AndroidView(
         modifier = Modifier.wrapContentSize().clipToBounds(),
-            factory = { context ->
-                val view = LayoutInflater.from(context).inflate(
-                    R.layout.number_picker, null
-                )
+        factory = { context ->
+            val view = LayoutInflater.from(context).inflate(
+                R.layout.number_picker, null
+            )
 
-                val numberPicker = view.findViewById<NumberPicker>(R.id.numberPicker)
+            val numberPicker = view.findViewById<NumberPicker>(R.id.numberPicker)
 
-                try {
-                    val count = numberPicker.childCount
-                    for (i in 0 until count) {
-                        val child = numberPicker.getChildAt(i)
-                        if (child is EditText) {
-                            child.setTextColor(colors[1].toArgb())
+            try {
+                val count = numberPicker.childCount
+                for (i in 0 until count) {
+                    val child = numberPicker.getChildAt(i)
+                    if (child is EditText) {
+                        child.setTextColor(colors[1].toArgb())
 //                            child.textSize = 20f // Facultatif : taille
-                        }
                     }
+                }
 
-                    // Change aussi les lignes du NumberPicker (les dividers)
-                    val fields = NumberPicker::class.java.declaredFields
-                    for (field in fields) {
-                        if (field.name == "mSelectionDivider") {
-                            field.isAccessible = true
-                            field.set(numberPicker, ColorDrawable(colors[1].toArgb()))
-                            break
-                        }
+                // Change aussi les lignes du NumberPicker (les dividers)
+                val fields = NumberPicker::class.java.declaredFields
+                for (field in fields) {
+                    if (field.name == "mSelectionDivider") {
+                        field.isAccessible = true
+                        field.set(numberPicker, ColorDrawable(colors[1].toArgb()))
+                        break
                     }
-                    numberPicker.invalidate()
-
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                    Log.e("CustomNumberPicker", "Erreur lors de la personnalisation du NumberPicker", e)
                 }
+                numberPicker.invalidate()
 
-                try {
-                    val selectorWheelPaintField = NumberPicker::class.java.getField("mSelectorWheelPaint")
-                    selectorWheelPaintField.isAccessible = true
-                    val paint = selectorWheelPaintField.get(numberPicker) as Paint
-                    paint.color = colors[1] // ou une autre couleur
-                    numberPicker.invalidate()
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-                numberPicker.layoutParams = LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    150.dpToPx(context)
-                )
-
-                numberPicker.minValue = list.first()
-                numberPicker.maxValue = list.last()
-                numberPicker.value = selectedValue.value
-
-                numberPicker.textSize = 100f
-
-                numberPicker.setOnValueChangedListener { numberPicker, old, new ->
-                    onValueChange(numberPicker.value)
-                }
-
-                numberPicker.dividerPadding = 16
-
-                numberPicker
-            },
-
-            update = { view ->
-                view.minValue = list.first()
-                view.maxValue = list.last()
-                view.value = selectedValue.value
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Log.e("CustomNumberPicker", "Erreur lors de la personnalisation du NumberPicker", e)
             }
+
+            try {
+                val selectorWheelPaintField = NumberPicker::class.java.getField("mSelectorWheelPaint")
+                selectorWheelPaintField.isAccessible = true
+                val paint = selectorWheelPaintField.get(numberPicker) as Paint
+                paint.color = colors[1] // ou une autre couleur
+                numberPicker.invalidate()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+            numberPicker.layoutParams = LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                150.dpToPx(context)
+            )
+
+            numberPicker.minValue = list.first()
+            numberPicker.maxValue = list.last()
+            numberPicker.value = selectedValue.value
+
+            numberPicker.textSize = 100f
+
+            numberPicker.setOnValueChangedListener { numberPicker, old, new ->
+                onValueChange(numberPicker.value)
+            }
+
+            numberPicker.dividerPadding = 16
+
+            numberPicker
+        },
+
+        update = { view ->
+            view.minValue = list.first()
+            view.maxValue = list.last()
+            view.value = selectedValue.value
+        }
 
     )
 
@@ -438,6 +438,92 @@ fun PopupAlert(
 }
 
 @Composable
+fun PopupAlertRequest(
+    message: String,
+    isSuccess: Boolean,
+    colors: List<Color>,
+    onDismiss: () -> Unit,
+    onAccept: () -> Unit,
+) {
+
+    Dialog(onDismissRequest = onDismiss) {
+        var color = Color.Transparent
+        if(isSuccess)
+        {
+            color = colors[1]
+        }
+        else{
+            color = colors[5]
+        }
+        Box(
+            modifier = Modifier
+                .padding(16.dp)
+                .background(
+                    color = colors[0],
+                    shape = RoundedCornerShape(12.dp)
+                )
+                .border(
+                    width = 2.dp,
+                    color = color,
+                    shape = RoundedCornerShape(12.dp)
+                )
+                .padding(16.dp)
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Spacer(modifier = Modifier.height(10.dp))
+
+                Text(
+                    text = "Attention !",
+                    color = colors[1],
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.Bold,
+                    fontStyle = FontStyle.Italic,
+                    fontFamily = Montserrat,
+                )
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                Text(
+                    text = message,
+                    color = Color.White,
+                    fontSize = 16.sp,
+                    textAlign = TextAlign.Center,
+                )
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+
+
+                Row(
+                    horizontalArrangement = Arrangement.SpaceEvenly,
+                    modifier = Modifier.fillMaxWidth()
+                )
+                {
+                    Button(
+                        onClick = onAccept,
+                        colors = ButtonDefaults.buttonColors(containerColor = colors[1], contentColor = colors[0]),
+                    ) {
+                        Text("Valider")
+                    }
+
+                    Button(
+                        onClick = onDismiss,
+                        colors = ButtonDefaults.buttonColors(containerColor = colors[5], colors[0]),
+                    ) {
+                        Text("Refuser")
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@Composable
 fun ContactItem(
     contact: Contact,
     colors: List<Color>,
@@ -477,13 +563,11 @@ fun SaferiderItem(
 ) {
     Row(
         modifier = Modifier
-//            .fillMaxWidth()
             .clickable {
-                // 👉 Ici tu rediriges vers ton écran de détail
                 onClick(saferider.id)
             }
             .padding(vertical = 8.dp)
-            ,
+        ,
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
 
@@ -502,13 +586,6 @@ fun SaferiderItem(
                 Icon(Icons.Default.Delete, contentDescription = "Supprimer", tint = colors[5])
             }
         }
-
-
-
-//        Checkbox(
-//            checked = contact.selected,
-//            onCheckedChange = onSelect
-//        )
     }
 }
 
@@ -523,7 +600,7 @@ fun SaferiderItemWrapper(
         saferider = saferider,
         colors = colors,
         onDelete = onDelete,
-        onClick = onClick
+        onClick = onClick,
     )
 }
 

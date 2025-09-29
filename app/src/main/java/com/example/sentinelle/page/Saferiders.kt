@@ -1,7 +1,10 @@
 package com.example.sentinelle.page
 
+import android.content.Context
 import android.graphics.BitmapFactory
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
@@ -68,6 +71,7 @@ import com.example.sentinelle.R
 import com.example.sentinelle.api.AppValues
 import com.example.sentinelle.api.AudioRecord
 import com.example.sentinelle.api.PopupAlert
+import com.example.sentinelle.api.PopupAlertRequest
 import com.example.sentinelle.api.Saferider
 import com.example.sentinelle.api.Saferider.Companion.getDate
 import com.example.sentinelle.api.Saferider.Companion.getHourMinute
@@ -83,7 +87,8 @@ import java.net.URL
 @Composable
 fun AppNavigation(
     colors: List<Color>,
-    saferiders: List<Saferider>
+    saferiders: List<Saferider>,
+    OnRefresh: () -> Unit = {},
 ) {
     val navController = rememberNavController()
     Surface(
@@ -103,6 +108,10 @@ fun AppNavigation(
                         navController.navigate("detail/$id")
                     },
                     modifier = Modifier,
+                    onRefresh = {
+                        OnRefresh()
+                    }
+
                 )
             }
 
@@ -111,7 +120,11 @@ fun AppNavigation(
                 arguments = listOf(navArgument("id") { type = NavType.IntType })
             ) { backStackEntry ->
                 val saferiderId = backStackEntry.arguments?.getInt("id")
-                SaferiderDetailScreen(saferiderId, colors = colors)
+
+                SaferiderDetailScreen(saferiderId, colors = colors, onRefresh = {
+                    OnRefresh()
+                    navController.popBackStack()
+                })
             }
         }
     }
@@ -123,7 +136,21 @@ fun SaferidersScreen(
     modifier: Modifier,
     saferiders: List<Saferider>,
     onNavigateToDetail: (Int) -> Unit,
+    onRefresh: () -> Unit
 ) {
+    var showDialog by remember { mutableStateOf(false) }
+    var showDialogRequest by remember { mutableStateOf(false) }
+    var isSuccessRequest by remember { mutableStateOf<Boolean>(false) }
+    var isSuccess by remember { mutableStateOf<Boolean>(false) }
+    var messageDialogueRequest by remember { mutableStateOf("") }
+    var messageDialogue by remember { mutableStateOf("") }
+
+    var onAccept by remember { mutableStateOf<() -> Unit>({}) }
+    var onDismiss by remember { mutableStateOf<() -> Unit>({}) }
+
+    val context = LocalContext.current
+    var api = api_service(context)
+
     Box(
         modifier = Modifier
             .background(colors[0])
@@ -152,6 +179,7 @@ fun SaferidersScreen(
                 modifier = Modifier.align(Alignment.Start)
             )
 
+
             Box(modifier = Modifier.fillMaxSize()) {
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),
@@ -166,7 +194,48 @@ fun SaferidersScreen(
                         SaferiderItemWrapper(
                             saferider = saferider,
                             colors = colors,
-                            onDelete = {},
+                            onDelete = {
+                                showDialogRequest = true
+                                messageDialogueRequest = "Voulez-vous vraiment supprimer ce Saferider ?"
+                                onAccept = {
+                                    // On test si le minuteur n'ai pas en cours
+                                    val prefs = context.getSharedPreferences("sentinelle_prefs", Context.MODE_PRIVATE)
+                                    val isRunning = prefs.getBoolean("is_timer_running", false)
+                                    if(isRunning){
+                                        messageDialogue = "Impossible de supprimer un Saferider pendant un trajet protégé"
+                                        isSuccess = false
+                                        showDialog = true
+                                        showDialogRequest = false
+                                    }
+                                    else{
+
+
+                                        api.DeleteSaferider(context, saferider.id) { success ->
+                                            if (success) {
+
+                                                messageDialogue = "Le Saferider a été supprimé"
+                                                isSuccess = true
+                                                showDialog = true
+                                                showDialogRequest = false
+                                                Handler(Looper.getMainLooper()).postDelayed({
+                                                    showDialog = false
+                                                    onRefresh() // Cela va recharger AppValues.saferiders
+                                                }, 1500)
+                                            } else {
+                                                messageDialogue = "Erreur lors de la suppression"
+                                                isSuccess = false
+                                                showDialog = true
+                                                showDialogRequest = false
+
+                                            }
+                                        }
+                                    }
+                                }
+
+                                onDismiss = {
+                                    showDialogRequest = false
+                                }
+                            },
                             onClick = { id ->
                                 onNavigateToDetail(id)
                             }
@@ -175,6 +244,17 @@ fun SaferidersScreen(
                 }
             }
         }
+    }
+
+    if (showDialog) {
+        PopupAlert(messageDialogue,colors = colors, isSuccess = isSuccess) {
+            showDialog = false
+        }
+    }
+
+
+    if(showDialogRequest){
+        PopupAlertRequest(message = messageDialogueRequest,colors = colors, isSuccess = isSuccessRequest, onAccept = onAccept, onDismiss = onDismiss)
     }
 }
 
@@ -344,7 +424,7 @@ private fun buildMapBoxUrl(coordinates: List<Pair<Double, Double>>): String {
 
 @RequiresApi(Build.VERSION_CODES.Q)
 @Composable
-fun SaferiderDetailScreen(id: Int?, colors: List<Color>) {
+fun SaferiderDetailScreen(id: Int?, colors: List<Color>, onRefresh: () -> Unit = {}) {
     val context = LocalContext.current
     var audioList by remember { mutableStateOf<List<AudioRecord>>(emptyList()) }
     var saferider by remember { mutableStateOf<Saferider?>(null) }
@@ -353,8 +433,14 @@ fun SaferiderDetailScreen(id: Int?, colors: List<Color>) {
     val scrollState = rememberScrollState()
 
     var showDialog by remember { mutableStateOf(false) }
+    var showDialogRequest by remember { mutableStateOf(false) }
+    var isSuccessRequest by remember { mutableStateOf<Boolean>(false) }
     var isSuccess by remember { mutableStateOf<Boolean>(false) }
+    var messageDialogueRequest by remember { mutableStateOf("") }
     var messageDialogue by remember { mutableStateOf("") }
+
+    var onAccept by remember { mutableStateOf<() -> Unit>({}) }
+    var onDismiss by remember { mutableStateOf<() -> Unit>({}) }
 
     val api = api_service(context)
     LaunchedEffect(id) {
@@ -414,7 +500,7 @@ fun SaferiderDetailScreen(id: Int?, colors: List<Color>) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 30.dp, start = 16.dp,bottom = 120.dp, end = 16.dp)
+            .padding(top = 40.dp, start = 16.dp,bottom = 120.dp, end = 16.dp)
             .background(colors[0])
             .verticalScroll(scrollState)
     ) {
@@ -553,6 +639,45 @@ fun SaferiderDetailScreen(id: Int?, colors: List<Color>) {
                             .size(30.dp)
                             .clickable {
                                 Log.d("IconClick", "Icône supprimé !")
+                                // Demander la confirmation avant de supprimer
+                                showDialogRequest = true
+                                messageDialogueRequest = "Voulez-vous vraiment supprimer ce Saferider ?"
+                                onAccept = {
+                                    val prefs = context.getSharedPreferences("sentinelle_prefs", Context.MODE_PRIVATE)
+                                    val isRunning = prefs.getBoolean("is_timer_running", false)
+                                    if(isRunning){
+                                        messageDialogue = "Impossible de supprimer un Saferider pendant un trajet protégé"
+                                        isSuccess = false
+                                        showDialog = true
+                                        showDialogRequest = false
+                                    }
+                                    else {
+                                        api.DeleteSaferider(context, s.id) { success ->
+                                            if (success) {
+
+                                                messageDialogue = "Le Saferider a été supprimé"
+                                                isSuccess = true
+                                                showDialog = true
+                                                showDialogRequest = false
+                                                Handler(Looper.getMainLooper()).postDelayed({
+                                                    showDialog = false
+                                                    onRefresh() // Cela va recharger AppValues.saferiders
+                                                }, 1500)
+                                            } else {
+                                                messageDialogue = "Erreur lors de la suppression"
+                                                isSuccess = false
+                                                showDialog = true
+                                                showDialogRequest = false
+
+                                            }
+                                        }
+                                    }
+                                }
+
+                                onDismiss = {
+                                    showDialogRequest = false
+                                }
+
                             }
                     )
                 }
@@ -577,6 +702,11 @@ fun SaferiderDetailScreen(id: Int?, colors: List<Color>) {
             PopupAlert(messageDialogue,colors = colors, isSuccess = isSuccess) {
                 showDialog = false
             }
+        }
+
+
+        if(showDialogRequest){
+            PopupAlertRequest(message = messageDialogueRequest,colors = colors, isSuccess = isSuccessRequest, onAccept = onAccept, onDismiss = onDismiss)
         }
     }
 }
@@ -742,5 +872,3 @@ fun ExoPlayerAudioPlayer(audio: AudioRecord, colors: List<Color>) {
         }
     }
 }
-
-

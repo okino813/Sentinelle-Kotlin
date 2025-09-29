@@ -359,6 +359,27 @@ class api_service(val context: Context) {
         return sb.toString()
     }
 
+    fun DeleteSaferider(context: Context, id_saferider: Int, callback: (Boolean) -> Unit) {
+        val json = JSONObject().apply {
+            put("id_saferider", id_saferider)
+        }
+
+        ApiHelper.apiPost(context, "deletesaferider", json, { jsonObj ->
+
+            Log.d("DeleteSaferider", "Suppression du saferider $id_saferider : ${jsonObj}")
+            removeSaferiderById(AppValues.saferiders, id_saferider)
+            callback(jsonObj.optBoolean("success", false))
+
+        }, {
+            callback(false)
+        })
+
+    }
+
+    fun removeSaferiderById(list: MutableList<Saferider>, id: Int) {
+        list.removeAll { it.id == id }
+    }
+
 
     fun logout(
         context: Context,
