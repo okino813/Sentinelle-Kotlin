@@ -136,11 +136,13 @@ class api_service(val context: Context) {
         hour: Int,
         minute: Int,
         seconde: Int,
+        isAlert: Boolean,
         callback: (Boolean, String?) -> Unit
     ) {
         val totalSecond = hour * 60 * 60 + minute * 60 + seconde
         val json = JSONObject().apply {
             put("total_second", totalSecond)
+            put("isAlert", isAlert)
         }
 
         ApiHelper.apiPost(

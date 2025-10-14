@@ -1,7 +1,7 @@
 package com.example.sentinelle.page
 
+import android.app.NotificationManager
 import android.content.Context
-import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.os.Build
 import android.util.Log
@@ -40,7 +40,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
+import com.example.sentinelle.R
 import com.example.sentinelle.TimerService
 import com.example.sentinelle.api.AppValues
 import com.example.sentinelle.api.BoutonStartStop
@@ -71,13 +73,9 @@ fun HomeScreen(
     var isSuccess by remember { mutableStateOf(false) }
 
     var isTimerRunning by remember { mutableStateOf(false) }
+    var isAlertRunning by remember { mutableStateOf(false) }
     var textBtnStartStop by remember { mutableStateOf("Démarer") }
-
-
-    val prefs = context.getSharedPreferences("sentinelle_prefs", MODE_PRIVATE)
-    val isRunning = prefs.getBoolean("is_timer_running", false)
-
-
+    var textBtnAlertStartStop by remember { mutableStateOf("ALERTER") }
 
     val permissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestMultiplePermissions()
@@ -117,6 +115,23 @@ fun HomeScreen(
         }
     }
 
+    LaunchedEffect(Unit) {
+        val prefs = context.getSharedPreferences("sentinelle_prefs", Context.MODE_PRIVATE)
+        var isAlertRunning = prefs.getBoolean("is_alert_running", false)
+
+        if (isAlertRunning) {
+            textBtnAlertStartStop = "Stop"
+            val endTimestamp = prefs.getLong("end_timestamp", 0L)
+            val remainingMillis = endTimestamp - System.currentTimeMillis()
+            if (remainingMillis > 0) {
+                isAlertRunning = true
+            } else {
+                prefs.edit().putBoolean("is_alert_running", false).remove("end_timestamp").apply()
+                isAlertRunning = false
+            }
+        }
+    }
+
 
 
     fun startTimer(context : Context){
@@ -128,6 +143,7 @@ fun HomeScreen(
                 heures.value,
                 minutes.value,
                 secondes.value,
+                isAlert = false
             ) { success, error ->
                 if (success) {
                     Log.d("TESTCheck", "Timer started")
@@ -171,7 +187,7 @@ fun HomeScreen(
                 }
             }
         }
-        }
+    }
 
     if (showErrorDialog) {
         PopupAlert(errorMessage, colors = colors, isSuccess = isSuccess) {
@@ -180,7 +196,97 @@ fun HomeScreen(
     }
 
     fun SendAlertManual(){
-        // On lance l'alerte
+        if(isTimerRunning){
+            textBtnStartStop = "Départ"
+            // Arrêter le minuteur
+
+            api.stopTimer(context) { success, error ->
+                if (success) {
+                    // Remise à zéro des valeurs du minuteur
+                    heures.value = 0
+                    minutes.value = 0
+                    secondes.value = 0
+
+                    val intent = Intent(context, TimerService::class.java).apply {
+                        action = "STOP_TIMER"
+                    }
+
+                    context.startService(intent)
+                    isTimerRunning = false
+
+                    Log.d("TimerService", "Timer stopped, reset values")
+
+                } else {
+                    errorMessage = error ?: "Erreur inconnue"
+                    isSuccess = false
+                    showErrorDialog = true
+                }
+            }
+
+        }
+        if (!isAlertRunning) {
+            // Vérification de lancement via API
+            textBtnAlertStartStop ="Stop"
+            api.startTimer(
+                context,
+                heures.value,
+                minutes.value,
+                secondes.value,
+                true,
+            ) { success, error ->
+                if (success) {
+                    Log.d("TESTCheck", "Timer started")
+                    val intent = Intent(context, TimerService::class.java).apply {
+                        action = "RESUME_TIMER"
+                        putExtra("totalSeconds", 172800)
+                    }
+                    ContextCompat.startForegroundService(context, intent)
+
+
+                    // On envoi une notification pour dire que le minuteur a été atteins
+                    val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                    val notification = NotificationCompat.Builder(context, "saferider_timer")
+                        .setContentTitle("Alerte SafeRider")
+                        .setContentText("L'alert manuel à été déclanché ! Vos proches ont été prévenus.")
+                        .setSmallIcon(R.drawable.main_icon_dark)
+                        .setAutoCancel(true)
+                        .build()
+
+                    notificationManager.notify(2, notification)
+                    isAlertRunning = true
+                } else {
+                    errorMessage = error ?: "Erreur inconnue"
+                    isSuccess = false
+                    showErrorDialog = true
+                }
+            }
+        } else {
+            textBtnAlertStartStop = "ALERTER"
+            // Arrêter le minuteur
+
+            api.stopTimer(context) { success, error ->
+                if (success) {
+                    // Remise à zéro des valeurs du minuteur
+                    heures.value = 0
+                    minutes.value = 0
+                    secondes.value = 0
+
+                    val intent = Intent(context, TimerService::class.java).apply {
+                        action = "STOP_TIMER"
+                    }
+
+                    context.startService(intent)
+                    isAlertRunning = false
+
+                    Log.d("TimerService", "Timer stopped, reset values")
+
+                } else {
+                    errorMessage = error ?: "Erreur inconnue"
+                    isSuccess = false
+                    showErrorDialog = true
+                }
+            }
+        }
     }
 
     HomeScreenStateless(
@@ -192,6 +298,7 @@ fun HomeScreen(
         minutesValues = minutesValues,
         secondes = secondes,
         textBtnStartStop = textBtnStartStop,
+        textBtnAlertStartStop = textBtnAlertStartStop,
         clickLaunchTimer = {startTimer(context)},
         sendAlertManual = { SendAlertManual() }
 
@@ -217,11 +324,12 @@ fun HomeScreenStateless(
     minutes: MutableState<Int>,
     secondes: MutableState<Int>,
     textBtnStartStop: String,
+    textBtnAlertStartStop: String,
     clickLaunchTimer: () -> Unit,
     sendAlertManual: () -> Unit
 
 
-    ) {
+) {
     Box(
         modifier = Modifier
             .background(colors[0])
@@ -319,7 +427,7 @@ fun HomeScreenStateless(
                     containerColor = colors[5] // ou une autre couleur
                 )
             ) {
-                Text("ALERTER", fontSize = 16.sp, color = Color.White, fontWeight = FontWeight.Bold)
+                Text(textBtnAlertStartStop, fontSize = 16.sp, color = Color.White, fontWeight = FontWeight.Bold)
 
             }
 
@@ -341,10 +449,10 @@ fun HomeScreenStateless(
                 fontSize = 12.sp,
                 textAlign = TextAlign.Center,
             )
-            }
         }
-
     }
+
+}
 
 
 

@@ -46,8 +46,6 @@ class TimerService : Service() {
 
     // Queue pour les coordonnées GPS
     private val locationQueue = ArrayList<LocationData>()
-
-    private val sentAudioFiles = HashSet<String>()
     private var isSendingLocations = false
     private val sentLocations = HashSet<String>()
 
