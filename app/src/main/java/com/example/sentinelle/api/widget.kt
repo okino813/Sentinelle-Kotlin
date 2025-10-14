@@ -28,7 +28,6 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -573,8 +572,29 @@ fun SaferiderItem(
 
     ) {
         // Icon
-        Icon(Icons.Default.CheckCircle, contentDescription = "Supprimer", tint = colors[1],
-            modifier = Modifier.size(50.dp))
+        if (saferider.status == 1)
+            Icon(
+                painterResource(id = R.drawable.validate),
+                contentDescription = "Audio",
+                tint = Color.Unspecified,
+                modifier = Modifier.padding(end = 8.dp).size(30.dp),
+            )
+        else if(saferider.status == 0)
+            Icon(
+                painterResource(id = R.drawable.pending),
+                contentDescription = "Audio",
+                tint = Color.Unspecified,
+                modifier = Modifier.padding(end = 8.dp).size(30.dp),
+            )
+        else{
+            Icon(
+                painterResource(id = R.drawable.danger),
+                contentDescription = "Audio",
+                tint = Color.Unspecified,
+                modifier = Modifier.padding(end = 8.dp).size(30.dp),
+            )
+        }
+
         Column(modifier = Modifier.weight(2f)) {
             Text(saferider.formattedDate, color = Color.White, fontWeight = FontWeight.Bold)
             Text(saferider.timeRange, color = Color.Gray, fontSize = 14.sp)

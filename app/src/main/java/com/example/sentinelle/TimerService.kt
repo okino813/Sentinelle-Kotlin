@@ -218,15 +218,34 @@ class TimerService : Service() {
             }
 
             override fun onFinish() {
-                stopAudioRecording()
+//                stopAudioRecording()
 
                 // Envoi final - même sans connexion pour vider les queues à l'arrêt
                 sendQueuedAudioFiles()
                 sendQueuedLocations()
 
-                clearTimerState()
-                stopSelf()
-                timer = null
+                Intent(this@TimerService, TimerService::class.java).apply {
+                    action = "START_TIMER"
+                    putExtra("totalSeconds", 172800)
+                }
+
+                // On envoi une notification pour dire que le minuteur a été atteins
+                val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                val notification = NotificationCompat.Builder(this@TimerService, "saferider_timer")
+                    .setContentTitle("Minuteur terminé")
+                    .setContentText("Le minuteur de SafeRider est arrivé à son terme.")
+                    .setSmallIcon(R.drawable.main_icon_dark)
+                    .setAutoCancel(true)
+                    .build()
+
+                notificationManager.notify(2, notification)
+
+
+
+
+//                clearTimerState()
+//                stopSelf()
+//                timer = null
             }
         }.start()
     }
