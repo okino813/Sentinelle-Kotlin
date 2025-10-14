@@ -17,6 +17,8 @@ object AppValues {
  const val base_url = "http://192.168.1.201:8000"
 //const val base_url = "http://10.0.2.2:8000"
 
+ var finished = mutableStateOf(false)
+
  val Montserrat = FontFamily(
   Font(R.font.montserrat_bold_italic, FontWeight.Bold, FontStyle.Italic),
   Font(R.font.montserrat_semi_bold, FontWeight.SemiBold, FontStyle.Normal),

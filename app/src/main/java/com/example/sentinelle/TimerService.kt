@@ -19,6 +19,7 @@ import android.os.IBinder
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
 import com.example.sentinelle.api.AppValues
 import com.example.sentinelle.api.api_service
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -160,12 +161,79 @@ class TimerService : Service() {
                 startForeground(1, buildNotification()) // ✅ Foreground
                 startCountdown(totalSeconds)
             }
+            "RESUME_TIMER" -> {
+                val totalSeconds = intent.getIntExtra("totalSeconds", 0)
+                startForeground(1, buildNotification()) // ✅ Foreground
+                startCountup(totalSeconds)
+            }
             "STOP_TIMER" -> {
                 stopCountdown()
                 stopLocationUpdates()
             }
         }
         return START_STICKY
+    }
+
+    private fun startCountup(totalSeconds: Int) {
+        val endTimestamp = System.currentTimeMillis() + totalSeconds * 1000L
+        getSharedPreferences("sentinelle_prefs", MODE_PRIVATE).edit()
+            .putBoolean("is_timer_running", true)
+            .putLong("end_timestamp", endTimestamp)
+            .apply()
+
+        var secondsElapsed = 0
+
+        // Démarrer l'enregistrement audio
+        startAudioRecording()
+
+        timer = object : CountDownTimer(totalSeconds * 1000L, 1_000L) {
+            override fun onTick(millisLeft: Long) {
+                secondsElapsed++
+
+                // Action chaque seconde
+                var heurePasser = secondsElapsed / 3600
+                var minutePasser = (secondsElapsed % 3600) / 60
+                var secondePasser = (secondsElapsed % 60)
+
+                AppValues.hour.value = heurePasser.toInt()
+                AppValues.minute.value = minutePasser.toInt()
+                AppValues.seconde.value = secondePasser.toInt()
+
+                Log.d("TimerService", "Heure: $heurePasser, Minute: $minutePasser, Seconde: $secondePasser")
+
+                if(secondsElapsed % 10 == 0) {
+                    // Action toutes les 10 secondes
+                    Log.d("TimerService", "Action toutes les 10 secondes")
+                    startLocationUpdates()
+                }
+
+                if(secondsElapsed % 300 == 0) {
+                    // Action toutes les 5 minutes
+                    handleAudioRecording()
+
+                    // Tenter d'envoyer les queues si connexion disponible
+                    if (isNetworkAvailable()) {
+                        sendQueuedAudioFiles()
+                        sendQueuedLocations()
+                    } else {
+                        Log.d("TimerService", "Pas de connexion - données en queue (Audio: ${audioFileQueue.size}, GPS: ${locationQueue.size})")
+                    }
+
+                    Log.d("TimerService", "Action toutes les 5 minutes")
+                }
+            }
+
+            override fun onFinish() {
+                stopAudioRecording()
+                // Envoi final - même sans connexion potur vider les queues à l'arrêt
+                sendQueuedAudioFiles()
+                sendQueuedLocations()
+
+                clearTimerState()
+                stopSelf()
+                timer = null
+            }
+        }.start()
     }
 
     private fun startCountdown(totalSeconds: Int) {
@@ -218,16 +286,16 @@ class TimerService : Service() {
             }
 
             override fun onFinish() {
-//                stopAudioRecording()
-
-                // Envoi final - même sans connexion pour vider les queues à l'arrêt
+                stopAudioRecording()
+                // Envoi final - même sans connexion potur vider les queues à l'arrêt
                 sendQueuedAudioFiles()
                 sendQueuedLocations()
 
-                Intent(this@TimerService, TimerService::class.java).apply {
-                    action = "START_TIMER"
+                val intent = Intent(this@TimerService, TimerService::class.java).apply {
+                    action = "RESUME_TIMER"
                     putExtra("totalSeconds", 172800)
                 }
+                ContextCompat.startForegroundService(this@TimerService, intent)
 
                 // On envoi une notification pour dire que le minuteur a été atteins
                 val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
