@@ -106,4 +106,6 @@ dependencies {
     // La carte
     implementation("com.google.maps.android:maps-compose:4.3.3")
     implementation("com.google.android.gms:play-services-maps:18.2.0")
+
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.1.0")
 }

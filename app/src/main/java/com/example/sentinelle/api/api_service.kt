@@ -369,7 +369,7 @@ class api_service(val context: Context) {
         ApiHelper.apiPost(context, "deletesaferider", json, { jsonObj ->
 
             Log.d("DeleteSaferider", "Suppression du saferider $id_saferider : ${jsonObj}")
-            removeSaferiderById(AppValues.saferiders, id_saferider)
+//            removeSaferiderById(AppValues.saferiders, id_saferider)
             callback(jsonObj.optBoolean("success", false))
 
         }, {

@@ -138,6 +138,13 @@ fun SaferidersScreen(
     onNavigateToDetail: (Int) -> Unit,
     onRefresh: () -> Unit
 ) {
+
+    var localSaferiders by remember { mutableStateOf(saferiders) }
+
+    LaunchedEffect(saferiders) {
+        localSaferiders = saferiders
+    }
+
     var showDialog by remember { mutableStateOf(false) }
     var showDialogRequest by remember { mutableStateOf(false) }
     var isSuccessRequest by remember { mutableStateOf<Boolean>(false) }
@@ -188,7 +195,7 @@ fun SaferidersScreen(
                     userScrollEnabled = true
                 ) {
                     items(
-                        saferiders,
+                        localSaferiders,
                         key = { saferider -> saferider.id }
                     ) { saferider ->
                         SaferiderItemWrapper(
@@ -212,6 +219,9 @@ fun SaferidersScreen(
 
                                         api.DeleteSaferider(context, saferider.id) { success ->
                                             if (success) {
+                                                AppValues.saferiders.remove(saferider)
+                                                localSaferiders = localSaferiders.filter { it.id != saferider.id }
+                                                api.getInfo(context)
 
                                                 messageDialogue = "Le Saferider a été supprimé"
                                                 isSuccess = true
@@ -219,7 +229,6 @@ fun SaferidersScreen(
                                                 showDialogRequest = false
                                                 Handler(Looper.getMainLooper()).postDelayed({
                                                     showDialog = false
-                                                    onRefresh() // Cela va recharger AppValues.saferiders
                                                 }, 1500)
                                             } else {
                                                 messageDialogue = "Erreur lors de la suppression"
@@ -229,6 +238,8 @@ fun SaferidersScreen(
 
                                             }
                                         }
+
+
                                     }
                                 }
 
@@ -314,22 +325,27 @@ fun SafeRiderMap(
                 val bitmap = BitmapFactory.decodeStream(inputStream)
                 inputStream.close()
 
-                if (bitmap != null) {
-                    mapImage = bitmap.asImageBitmap()
-                    isLoading = false
-                    errorMessage = null
-                    Log.d("SafeRiderMap", "Carte chargée avec succès")
-                } else {
-                    errorMessage = "Impossible de décoder l'image"
-                    isLoading = false
+                withContext(Dispatchers.Main) {
+                    if (bitmap != null) {
+                        mapImage = bitmap.asImageBitmap()
+                        isLoading = false
+                        errorMessage = null
+                        Log.d("SafeRiderMap", "Carte chargée avec succès")
+                    } else {
+                        errorMessage = "Impossible de décoder l'image"
+                        isLoading = false
+                    }
                 }
             } catch (e: Exception) {
                 Log.e("SafeRiderMap", "Erreur: ${e.message}")
-                errorMessage = "Erreur réseau: ${e.message?.take(50) ?: "Inconnue"}"
-                isLoading = false
+                withContext(Dispatchers.Main) {
+                    errorMessage = "Erreur réseau: ${e.message?.take(50) ?: "Inconnue"}"
+                    isLoading = false
+                }
             }
         }
     }
+
 
     Box(
         modifier = modifier
@@ -605,6 +621,9 @@ fun SaferiderDetailScreen(id: Int?, colors: List<Color>, onRefresh: () -> Unit =
                         )
                     }
                 }
+
+
+
 
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End),
