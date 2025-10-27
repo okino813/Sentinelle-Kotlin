@@ -271,6 +271,34 @@ class api_service(val context: Context) {
 
     }
 
+    fun RemoveTagFromSaferider(context : Context, id_saferider: Int, tag: Int, callback: (Boolean) -> Unit) {
+        val json = JSONObject().apply {
+            put("id_saferider", id_saferider)
+            put("id_tag", tag)
+        }
+
+        ApiHelper.apiPost(context, "removetagfromsaferider", json, { jsonObj ->
+            callback(jsonObj.optBoolean("status", false))
+        }, {
+            callback(false)
+        })
+
+    }
+
+    fun AddTagToSaferider(context : Context, id_saferider: Int, tag: Int, callback: (Boolean) -> Unit) {
+        val json = JSONObject().apply {
+            put("id_saferider", id_saferider)
+            put("id_tag", tag)
+        }
+
+        ApiHelper.apiPost(context, "addtagfromsaferider", json, { jsonObj ->
+            callback(jsonObj.optBoolean("status", false))
+        }, {
+            callback(false)
+        })
+
+    }
+
     @RequiresApi(Build.VERSION_CODES.Q)
     fun DownloadSaferider(context: Context, saferider: List<Saferider>, coords: List<Triple<Double, Double, Double>>, audios : List<AudioRecord>): Boolean {
         Log.d("DownloadSaferider", "Téléchargement du trajet ${coords}")

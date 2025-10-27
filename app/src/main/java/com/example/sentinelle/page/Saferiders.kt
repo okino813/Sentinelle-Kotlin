@@ -22,6 +22,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -448,6 +449,9 @@ fun SaferiderDetailScreen(id: Int?, colors: List<Color>, onRefresh: () -> Unit =
     var coordsComplete by remember { mutableStateOf<List<Triple<Double, Double, Double>>>(emptyList()) }
     val scrollState = rememberScrollState()
 
+    var all_tags by remember {mutableStateOf<List<Triple<Int, String, String>>>(emptyList())}
+    var saferider_tags by remember {mutableStateOf<List<Triple<Int, String, String>>>(emptyList())}
+
     var showDialog by remember { mutableStateOf(false) }
     var showDialogRequest by remember { mutableStateOf(false) }
     var isSuccessRequest by remember { mutableStateOf<Boolean>(false) }
@@ -465,6 +469,22 @@ fun SaferiderDetailScreen(id: Int?, colors: List<Color>, onRefresh: () -> Unit =
                 api.GetSafeRiderDetail(context, id) { jsonObject ->
                     val list = mutableListOf<AudioRecord>()
                     val dataObject = jsonObject.getJSONObject("data")
+
+                    all_tags = buildList {
+                        val TagsArray = dataObject.getJSONArray("all_tag")
+                        for (i in 0 until TagsArray.length()) {
+                            val item = TagsArray.getJSONObject(i)
+                            add(Triple(item.getInt("id"), item.getString("name"), item.getString("hexa")))
+                        }
+                    }
+
+                    saferider_tags = buildList {
+                        val TagsArray = dataObject.getJSONArray("saferider_tags")
+                        for (i in 0 until TagsArray.length()) {
+                            val item = TagsArray.getJSONObject(i)
+                            add(Triple(item.getInt("id"), item.getString("name"), item.getString("hexa")))
+                        }
+                    }
 
                     val audioArray = dataObject.getJSONArray("audio_records")
                     Log.d("SaferiderDetail", "Détails du Saferider: $jsonObject")
@@ -709,6 +729,57 @@ fun SaferiderDetailScreen(id: Int?, colors: List<Color>, onRefresh: () -> Unit =
             coordinates = coords,
             colors = colors,
         )
+
+        LazyRow(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            items(all_tags) { tag ->
+                var isSelected by remember(saferider_tags) {
+                    mutableStateOf(saferider_tags.any { it.first == tag.first })
+                }
+                Box(
+                    modifier = Modifier
+                        .background(
+                            // Utilisation de la couleur hexa
+                            if (isSelected) Color(tag.third.toLong(16)).copy(alpha = 0.8f)
+                            else Color.Gray.copy(alpha = 0.3f)
+                        )
+                        .padding(horizontal = 12.dp, vertical = 6.dp)
+                        .clickable(
+                            enabled = true,
+                            onClick = {
+                                if (isSelected) {
+                                    // Supprimer le tag
+                                    api.RemoveTagFromSaferider(context, id!!, tag.first) { success ->
+                                        if (success) {
+                                            saferider_tags = saferider_tags.filter { it.first != tag.first }
+                                        }
+                                    }
+                                    isSelected = false
+                                } else {
+                                    // Ajouter le tag
+                                    api.AddTagToSaferider(context, id!!, tag.first) { success ->
+                                        if (success) {
+                                            saferider_tags = saferider_tags + tag
+                                        }
+                                    }
+                                    isSelected = true
+                                }
+                            }
+                        )
+                ) {
+                    Text(
+                        text = tag.second,
+                        color = Color.White,
+                        fontStyle = FontStyle.Normal,
+                        fontSize = 16.sp
+                    )
+                }
+            }
+        }
 
 
         Column {

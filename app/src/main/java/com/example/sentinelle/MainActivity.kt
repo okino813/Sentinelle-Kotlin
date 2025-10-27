@@ -7,6 +7,8 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -75,7 +77,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-
 
 class MainActivity : ComponentActivity() {
 
@@ -149,6 +150,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContentView(R.layout.activity_main)
+
+        if (!isNetworkAvailable()) {
+            showNoInternetDialog()
+            return // Arrête l'exécution du reste de onCreate
+        }
+
         auth = Firebase.auth
 
         // Configurer Google Sign-In
@@ -218,6 +225,33 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+    private fun isNetworkAvailable(): Boolean {
+        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val network = connectivityManager.activeNetwork ?: return false
+            val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
+            capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+        } else {
+            @Suppress("DEPRECATION")
+            val networkInfo = connectivityManager.activeNetworkInfo
+            @Suppress("DEPRECATION")
+            networkInfo?.isConnected == true
+        }
+    }
+
+    private fun showNoInternetDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("Pas de connexion Internet")
+            .setMessage("Sentinelle nécessite une connexion Internet pour fonctionner.\n\nVeuillez activer votre connexion et redémarrer l'application.")
+            .setPositiveButton("Fermer") { _, _ ->
+                finish() // Ferme l'application
+            }
+            .setCancelable(false) // Empêche de fermer le dialogue en appuyant ailleurs
+            .show()
+    }
+
 
     private fun printFirebaseToken() {
         val user = FirebaseAuth.getInstance().currentUser
