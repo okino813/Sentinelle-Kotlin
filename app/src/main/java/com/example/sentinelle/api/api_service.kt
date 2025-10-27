@@ -32,6 +32,14 @@ class api_service(val context: Context) {
             val saferidersJsonArray = jsonObject.getJSONArray("saferiders")
             val saferidersList = mutableStateListOf<Saferider>()
 
+            val colorsJsonArray = jsonObject.getJSONArray("all_color")
+            val colorsList = mutableStateListOf<Colors>()
+
+            val tagsJsonArray = jsonObject.getJSONArray("all_tags")
+            val tagsList = mutableStateListOf<Tag>()
+
+            Log.d("APIRESULTAT", "Récupération des infos : $jsonObject")
+
             for (i in 0 until contactsJsonArray.length()) {
                 val contactJson = contactsJsonArray.getJSONObject(i)
                 val contact = Contact(
@@ -57,9 +65,31 @@ class api_service(val context: Context) {
                 saferidersList.add(saferider)
             }
 
+            for (i in 0 until colorsJsonArray.length()) {
+                val colorJson = colorsJsonArray.getJSONObject(i)
+                val color = Colors(
+                    id = colorJson.getInt("id"),
+                    name = colorJson.getString("name"),
+                    hexa = colorJson.getString("hexa")
+                )
+                colorsList.add(color)
+            }
+
+            for (i in 0 until tagsJsonArray.length()) {
+                val tagJson = tagsJsonArray.getJSONObject(i)
+                val tag = Tag(
+                    id = tagJson.getInt("id"),
+                    name = tagJson.getString("name"),
+                    hexa = tagJson.getString("hexa")
+                )
+                tagsList.add(tag)
+            }
+
 
             AppValues.contacts = contactsList.toMutableStateList()
             AppValues.saferiders = saferidersList.toMutableStateList()
+            AppValues.tags = tagsList.toMutableStateList()
+            AppValues.colorsTag = colorsList.toMutableStateList()
 
         }, {
             Log.e("APIRESULTAT", "Erreur lors de la récupération des infos")
@@ -130,6 +160,33 @@ class api_service(val context: Context) {
             callback(false)
         })
     }
+
+    fun AddTag(context: Context,name: String, color: Int, callback: (Boolean, Int) -> Unit) {
+        val json = JSONObject().apply {
+            put("name", name)
+            put("id_color", color)
+        }
+
+        ApiHelper.apiPost(context, "createtag", json, { jsonObj ->
+            Log.d("AddTag", "Ajout du tag : ${jsonObj}")
+            callback(jsonObj.optBoolean("status", false), jsonObj.optString("id_tag").toInt())
+        }, {
+            callback(false, 0)
+        })
+    }
+
+    fun deleteTag(context: Context,id: Int, callback: (Boolean) -> Unit) {
+        val json = JSONObject().apply {
+            put("id_tag", id)
+        }
+
+        ApiHelper.apiPost(context, "deletetag", json, { jsonObj ->
+            callback(jsonObj.optBoolean("status", false))
+        }, {
+            callback(false)
+        })
+    }
+
 
     fun startTimer(
         context: Context,

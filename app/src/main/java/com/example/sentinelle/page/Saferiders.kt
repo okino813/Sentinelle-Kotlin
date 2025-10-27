@@ -13,6 +13,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -22,8 +24,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -112,7 +114,6 @@ fun AppNavigation(
                     onRefresh = {
                         OnRefresh()
                     }
-
                 )
             }
 
@@ -439,10 +440,12 @@ private fun buildMapBoxUrl(coordinates: List<Pair<Double, Double>>): String {
     return urltest
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @RequiresApi(Build.VERSION_CODES.Q)
 @Composable
 fun SaferiderDetailScreen(id: Int?, colors: List<Color>, onRefresh: () -> Unit = {}) {
     val context = LocalContext.current
+    val listState = rememberLazyListState()
     var audioList by remember { mutableStateOf<List<AudioRecord>>(emptyList()) }
     var saferider by remember { mutableStateOf<Saferider?>(null) }
     var coords by remember { mutableStateOf<List<Pair<Double, Double>>>(emptyList()) }
@@ -539,6 +542,7 @@ fun SaferiderDetailScreen(id: Int?, colors: List<Color>, onRefresh: () -> Unit =
             .padding(top = 40.dp, start = 16.dp,bottom = 120.dp, end = 16.dp)
             .background(colors[0])
             .verticalScroll(scrollState)
+//            .simpleVerticalScrollbar(listState)
     ) {
         Text(
             "Trajet Protégé",
@@ -730,13 +734,15 @@ fun SaferiderDetailScreen(id: Int?, colors: List<Color>, onRefresh: () -> Unit =
             colors = colors,
         )
 
-        LazyRow(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        Spacer(Modifier.height(16.dp))
+
+
+        FlowRow(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            items(all_tags) { tag ->
+            all_tags.forEach { tag ->
                 var isSelected by remember(saferider_tags) {
                     mutableStateOf(saferider_tags.any { it.first == tag.first })
                 }

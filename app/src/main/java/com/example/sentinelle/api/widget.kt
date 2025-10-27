@@ -11,6 +11,8 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.NumberPicker
 import androidx.annotation.RequiresApi
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -26,9 +28,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
@@ -39,6 +47,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -49,9 +58,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.toArgb
@@ -63,6 +75,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
@@ -191,6 +204,195 @@ fun Input(
         )
     }
 }
+
+@Composable
+fun InputColorPicker(
+    label: String,
+    value: String,
+    colors: List<Color>,
+    onValueChange: (String) -> Unit,
+    isPassword: Boolean = false,
+    errorMessage: String? = null,
+    isColorPicker: Boolean = false, // ✅ Activer le sélecteur de couleur
+    selectedColor: Color? = null, // ✅ Couleur actuellement sélectionnée
+    onColorSelected: ((Colors) -> Unit)? = null // ✅ Callback
+) {
+    var showColorDialog by remember { mutableStateOf(false) }
+    val containerColor = colors[1]
+
+    Column {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            TextField(
+                modifier = Modifier.weight(1f),
+                value = value,
+                onValueChange = {
+                    onValueChange(it)
+                },
+                placeholder = { Text(label, color = colors[0]) },
+                isError = false,
+                singleLine = false,
+                textStyle = TextStyle(fontSize = 16.sp, color = colors[0]),
+                shape = RoundedCornerShape(40.dp),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedTextColor = colors[0],
+                    unfocusedTextColor = colors[0],
+                    focusedContainerColor = containerColor,
+                    unfocusedContainerColor = containerColor,
+                    disabledContainerColor = containerColor,
+                    errorContainerColor = colors[1],
+                    cursorColor = colors[0],
+                    focusedBorderColor = colors[0],
+                    unfocusedBorderColor = colors[0],
+                ),
+                visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None,
+            )
+
+            // ✅ Bouton pour ouvrir le dialogue de couleurs
+            if (isColorPicker) {
+                Box(
+                    modifier = Modifier
+                        .size(56.dp)
+                        .clip(CircleShape)
+                        .background(selectedColor ?: Color.Gray)
+                        .border(2.dp, colors[0], CircleShape)
+                        .clickable {
+                            showColorDialog = true
+                        },
+                    contentAlignment = Alignment.Center
+                ) {
+                    if (selectedColor == null) {
+                        Icon(
+                            painter = painterResource(id = android.R.drawable.ic_menu_edit),
+                            contentDescription = "Choisir une couleur",
+                            tint = Color.White,
+                            modifier = Modifier.size(24.dp)
+                        )
+                    }
+                }
+            }
+        }
+
+        if (errorMessage != null) {
+            Text(
+                text = errorMessage,
+                color = colors[5],
+                style = MaterialTheme.typography.labelSmall,
+                modifier = Modifier.padding(start = 16.dp, top = 4.dp)
+            )
+        }
+    }
+
+    // ✅ Dialogue de sélection de couleur
+    if (showColorDialog) {
+        AlertDialog(
+            onDismissRequest = { showColorDialog = false },
+            title = {
+                Text(
+                    "Choisir une couleur",
+                    fontFamily = Montserrat,
+                    fontWeight = FontWeight.Bold,
+                    color = colors[0]
+                )
+            },
+            text = {
+                LazyVerticalGrid(
+                    columns = GridCells.Fixed(4),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    modifier = Modifier.padding(8.dp)
+                ) {
+                    items(AppValues.colorsTag) { color ->
+                        Log.d("ColorPicker", "Available color: ${color.hexa}")
+                        val isSelected = selectedColor?.toArgb() == Color(color.hexa.toLong(16)).toArgb()
+
+                        Box(
+                            modifier = Modifier
+                                .size(50.dp)
+                                .clip(CircleShape)
+                                .background(Color(android.graphics.Color.parseColor("#${color.hexa}")))
+                                .border(
+                                    width = if (isSelected) 4.dp else 0.dp,
+                                    color = colors[0],
+                                    shape = CircleShape
+                                )
+                                .clickable {
+                                    onColorSelected?.invoke(color)
+                                    showColorDialog = false
+                                },
+                            contentAlignment = Alignment.Center
+                        ) {
+                            if (isSelected) {
+                                Icon(
+                                    painter = painterResource(id = android.R.drawable.checkbox_on_background),
+                                    contentDescription = "Sélectionné",
+                                    tint = if (Color(color.hexa.toLong(16)).toArgb() > 0.5f) Color.Black else Color.White,
+                                    modifier = Modifier.size(32.dp)
+                                )
+                            }
+                        }
+                    }
+                }
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = { showColorDialog = false }
+                ) {
+                    Text(
+                        "Fermer",
+                        color = colors[0],
+                        fontFamily = Montserrat,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                }
+            },
+            containerColor = colors[1],
+            shape = RoundedCornerShape(16.dp)
+        )
+    }
+}
+
+
+@Composable
+fun Modifier.simpleVerticalScrollbar(
+    state: LazyListState,
+    width: Dp = 6.dp
+): Modifier {
+    val targetAlpha = if (state.isScrollInProgress) 1f else 0f
+    val duration = if (state.isScrollInProgress) 150 else 500
+
+    val alpha by animateFloatAsState(
+        targetValue = targetAlpha,
+        animationSpec = tween(durationMillis = duration),
+        label = "scrollbarAlpha"
+    )
+
+    return this.then(
+        Modifier.drawWithContent {
+            drawContent()
+
+            val firstVisibleIndex = state.layoutInfo.visibleItemsInfo.firstOrNull()?.index
+            val needDrawScrollbar = state.isScrollInProgress || alpha > 0f
+
+            if (needDrawScrollbar && firstVisibleIndex != null && state.layoutInfo.totalItemsCount > 0) {
+                val elementHeight = size.height / state.layoutInfo.totalItemsCount
+                val scrollbarOffsetY = firstVisibleIndex * elementHeight
+                val scrollbarHeight = state.layoutInfo.visibleItemsInfo.size * elementHeight
+
+                drawRect(
+                    color = Color.White.copy(alpha = 0.6f), // couleur du scroll
+                    topLeft = Offset(size.width - width.toPx(), scrollbarOffsetY),
+                    size = Size(width.toPx(), scrollbarHeight),
+                    alpha = alpha
+                )
+            }
+        }
+    )
+}
+
 
 @Composable
 fun Bouton(text: String,colors: List<Color>, modifier: Modifier = Modifier, OnClick: () -> Unit){
@@ -548,6 +750,47 @@ fun ContactItem(
         Checkbox(
             checked = contact.selected,
             onCheckedChange = onSelect
+        )
+    }
+}
+
+@Composable
+fun TagItem(
+    tag: Tag,
+    colors: List<Color>,
+    onDelete: () -> Unit
+) {
+    val tag_color = Color(android.graphics.Color.parseColor("#${tag.hexa}"))
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        TagLabel(tag = tag)
+
+        IconButton(onClick = onDelete) {
+            Icon(Icons.Default.Delete, contentDescription = "Supprimer", tint = colors[5])
+        }
+    }
+}
+
+@Composable
+fun TagLabel(
+    tag: Tag
+) {
+    val tag_color = Color(android.graphics.Color.parseColor("#${tag.hexa}"))
+    Box(
+        modifier = Modifier
+            .background(tag_color)
+            .padding(horizontal = 12.dp, vertical = 6.dp)
+    ) {
+        Text(
+            text = tag.name,
+            color = Color.White,
+            fontStyle = FontStyle.Normal,
+            fontSize = 16.sp
         )
     }
 }

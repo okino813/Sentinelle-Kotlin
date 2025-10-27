@@ -334,7 +334,7 @@ fun SettingsScreenStateless(
 
         ) {
             Text(
-                "Mode contraster",
+                "Mode contrasté",
                 color = colors[0],
                 modifier = Modifier.weight(1f).padding(start = 16.dp, top = 4.dp),
             )

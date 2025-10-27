@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.ThumbUp
@@ -49,10 +50,14 @@ import com.example.sentinelle.api.Bouton
 import com.example.sentinelle.api.Contact
 import com.example.sentinelle.api.ContactItem
 import com.example.sentinelle.api.Input
+import com.example.sentinelle.api.InputColorPicker
 import com.example.sentinelle.api.InputTextArea
 import com.example.sentinelle.api.PopupAlert
+import com.example.sentinelle.api.Tag
+import com.example.sentinelle.api.TagItem
 import com.example.sentinelle.api.UpdateStatusBarColor
 import com.example.sentinelle.api.api_service
+import com.example.sentinelle.api.simpleVerticalScrollbar
 
 
 /**
@@ -185,9 +190,48 @@ fun MessageScreenStateless(
 
             Bouton("Enregistrer",modifier = Modifier.align(Alignment.CenterHorizontally), colors = colors,
                 OnClick = {
-                validationMessage()
-            })
+                    validationMessage()
+                })
         }
+    }
+}
+class TagViewModel : ViewModel() {
+
+    // State observable par Compose
+    var tags by mutableStateOf<List<Tag>>(emptyList())
+
+
+    init {
+        // Initialisation depuis AppValues si tu utilises un stockage global
+        // Adapte le mapping selon la structure réelle des objets dans AppValues.contacts
+        try {
+            tags = AppValues.tags.map { c ->
+                Tag(
+                    id = c.id,
+                    name = c.name,
+                    hexa = c.hexa
+                )
+            }
+        } catch (e: Exception) {
+            // fallback si AppValues n'existe pas ou format différent
+            tags = emptyList()
+        }
+    }
+
+    // Ajoute (immutably)
+    fun addTag(tag: Tag) {
+        tags = tags + tag
+    }
+
+    // Supprime (immutably)
+    fun deleteTag(tagId: Int) {
+        tags = tags.filterNot { it.id == tagId }
+    }
+
+
+    // Remettre une liste complète (utile si tu veux re-sync depuis le serveur)
+    fun updateTags(newList: List<Tag>) {
+        tags = newList
     }
 }
 
@@ -507,12 +551,257 @@ fun ContactScreenStateless(
 
 
 @Composable
-fun PlaylistScreen(modifier: Modifier = Modifier) {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
+fun TagsScreen(
+    modifier: Modifier = Modifier,
+    colors: List<Color>,
+    viewModel: TagViewModel = viewModel()
+) {
+    val context = LocalContext.current
+    val api = api_service(context) // ton service réseau
+    val tags = viewModel.tags // lecture directe du state (recomposition automatique)
+
+    Log.d("TagsScreen", "Current tags: $tags")
+
+    var showDialog by remember { mutableStateOf(false) }
+    var isSuccess by remember { mutableStateOf(false) }
+    var messageDialogue by remember { mutableStateOf("") }
+
+    var name by remember { mutableStateOf("") }
+    var color by remember { mutableStateOf("") }
+    var color_hexa by remember { mutableStateOf("") }
+    var nameError by remember { mutableStateOf<String?>(null) }
+    var colorError by remember { mutableStateOf<String?>(null) }
+
+    // --- Fonctions locales utilisant le ViewModel (optimistic UI) ---
+
+
+    // Suppression : on supprime localement, tente la suppression réseau, et ré-ajoute en cas d'échec
+    fun onDeleteTag(tag: Tag) {
+        val previous = tags // snapshot
+        viewModel.deleteTag(tag.id)
+
+//        CACA
+        api.deleteTag(context, tag.id) { success ->
+            if (!success) {
+                Log.d("ContactScreen", "Failed to delete ${tag.id}, restoring local state")
+                // restore previous list
+                viewModel.updateTags(previous)
+                isSuccess = false
+                messageDialogue = "Suppression impossible (réseau)"
+                showDialog = true
+            } else {
+                // sync AppValues if needed
+                try {
+                    AppValues.tags.removeAll { it.id == tag.id }
+                } catch (_: Exception) {}
+            }
+        }
+    }
+
+    // Ajout d'un contact (on attend la réponse de l'API pour récupérer l'ID réel)
+    fun onAddTag() {
+        nameError = null
+        colorError = null
+        var valide = true
+
+        if (name.isBlank()) {
+            nameError = "Le nom doit être renseigné"
+            valide = false
+        }
+
+
+        //  On test si l'id est compris dans la liste des couleurs disponibles
+        val colorId = color.toIntOrNull()
+        val availableColorIds = AppValues.colorsTag.map { it.id }
+        if (colorId == null || colorId !in availableColorIds) {
+            colorError = "Veuillez sélectionner une couleur valide"
+            valide = false
+        }
+
+        if (!valide) return
+
+        api.AddTag(context, name, color.toInt()) { success, id_tag ->
+            if (success && id_tag != null) {
+                val newTag = Tag(
+                    id = id_tag,
+                    name = name,
+                    hexa = color_hexa
+                )
+                // mettre à jour ViewModel (source de vérité)
+                viewModel.addTag(newTag)
+
+                // sync AppValues si tu en as besoin
+                try {
+                    AppValues.tags.add(
+                        Tag(
+                            id = id_tag,
+                            name = name,
+                            hexa = color_hexa
+                        )
+                    )
+                } catch (_: Exception) { }
+
+                // feedback UI
+                name = ""
+                color = ""
+                isSuccess = true
+                messageDialogue = "Tag ajouté !"
+                showDialog = true
+            } else {
+                isSuccess = false
+                messageDialogue = "Erreur lors de création du Tag"
+                showDialog = true
+            }
+        }
+    }
+
+    // --- Affichage ---
+    TagsScreenStateless(
+        colors = colors,
+        modifier = modifier,
+        color = color,
+        colorError = colorError,
+        name = name,
+        nameError = nameError,
+        onNameChange = { name = it },
+        onColorChange = { color = it },
+        onColorHexaChange = { color_hexa = it },
+        valideNewTag = { onAddTag() },
+        tags = tags,
+        onDeleteTag = { onDeleteTag(it) }
+    )
+
+    if (showDialog) {
+        PopupAlert(messageDialogue, colors = colors, isSuccess = isSuccess) {
+            showDialog = false
+        }
+    }
+}
+
+
+
+@Composable
+fun TagsScreenStateless(
+    colors: List<Color>,
+    modifier: Modifier = Modifier,
+    color: String,
+    colorError: String?,
+    name: String,
+    nameError: String?,
+    onNameChange : (String) -> Unit,
+    onColorChange : (String) -> Unit,
+    onColorHexaChange : (String) -> Unit,
+    valideNewTag: () -> Unit,
+    tags: List<Tag>,
+    onDeleteTag: (Tag) -> Unit
+) {
+    UpdateStatusBarColor(colors[0], LocalContext.current)
+
+    val listState = rememberLazyListState()
+
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .background(colors[0])
+            .padding(top = 16.dp, start = 16.dp, end = 16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Text("Playlist Screen")
+        // --- Formulaire ---
+        Text(
+            "Ajouter un tag",
+            color = colors[3],
+            fontWeight = FontWeight.Bold,
+            fontSize = 20.sp,
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(Modifier.height(16.dp))
+
+        Text(
+            "Ajouter votre tag ci-dessous.",
+            color = Color.White,
+            fontSize = 16.sp,
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(Modifier.height(16.dp))
+
+        var selectedColor by remember { mutableStateOf<Color?>(null) }
+        var selectedColorHexa by remember { mutableStateOf<String?>(null) }
+        var selectedColorId by remember { mutableStateOf<Int?>(null) }
+        var tagName by remember { mutableStateOf("") }
+
+        InputColorPicker(
+            label = "Nom du tag",
+            value = tagName,
+            colors = colors,
+            onValueChange = { tagName = it },
+            isColorPicker = true,
+            selectedColor = selectedColor,
+            onColorSelected = { color ->
+                selectedColor = Color(android.graphics.Color.parseColor("#${color.hexa}"))
+                selectedColorHexa = color.hexa
+                selectedColorId = color.id
+            }
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Box(
+            modifier = Modifier.fillMaxWidth(),
+            contentAlignment = Alignment.Center
+        ) {
+            Bouton("Enregistrer", colors = colors, OnClick = {
+//               Transmet l'id de la couleur choisi
+                Log.d("TagsScreenStateless", "Selected color ID: $selectedColorId, Tag Name: $tagName")
+                onColorChange(selectedColorId.toString())
+                onColorHexaChange(selectedColorHexa.toString())
+                onNameChange(tagName)
+                valideNewTag(
+
+                )
+            })
+        }
+
+        Spacer(Modifier.height(16.dp))
+
+        Text(
+            "Mes Tags",
+            color = colors[3],
+            fontWeight = FontWeight.Bold,
+            fontSize = 20.sp,
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(Modifier.height(8.dp))
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+        ) {
+            LazyColumn(
+                state = listState,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .simpleVerticalScrollbar(listState) // 👈 ici la magie
+            ) {
+                items(tags, key = { it.id }) { tag ->
+                    TagItem(
+                        tag = tag,
+                        colors = colors,
+                        onDelete = { onDeleteTag(tag) }
+                    )
+                }
+            }
+        }
+
+        Text(
+            text = "Faites défiler pour voir plus ↓",
+            fontSize = 15.sp,
+            color = Color.White,
+            modifier = Modifier.padding(8.dp)
+        )
     }
 }
 
@@ -524,7 +813,7 @@ enum class Destination(
 ) {
     MESSAGE("message", "Message", Icons.Default.ThumbUp, "Message"),
     CONTACT("contact", "Contact", Icons.Default.ThumbUp, "Contact"),
-    PLAYLISTS("playlist", "Playlist", Icons.Default.Home, "Playlist")
+    TAGS("tags", "Tags", Icons.Default.Home, "Tags")
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -598,7 +887,9 @@ fun AppNavHost(
                     Destination.CONTACT -> ContactScreen(
                         colors = colors
                     )
-                    Destination.PLAYLISTS -> PlaylistScreen()
+                    Destination.TAGS -> TagsScreen(
+                        colors = colors
+                    )
                 }
             }
         }

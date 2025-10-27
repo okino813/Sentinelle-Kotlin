@@ -14,8 +14,8 @@ import java.util.Date
 import java.util.Locale
 
 object AppValues {
-// const val base_url = "http://192.168.1.200:8000"
-const val base_url = "http://10.0.2.2:8000"
+ const val base_url = "http://192.168.1.204:8000"
+//const val base_url = "http://10.0.2.2:8000"
 
  var finished = mutableStateOf(false)
 
@@ -60,7 +60,9 @@ val contrastColors = listOf(
  var email: String? = ""
  var message: String? = ""
  var contacts = mutableStateListOf<Contact>()
+ var tags = mutableStateListOf<Tag>()
  var saferiders = mutableStateListOf<Saferider>()
+ var colorsTag = mutableStateListOf<Colors>()
 
 }
 
@@ -70,6 +72,21 @@ data class Contact(
  val name: String,
  val phone: String,
  var selected: Boolean
+)
+
+@Immutable
+data class Tag(
+ val id: Int,
+ val name: String,
+ val hexa: String,
+)
+
+
+@Immutable
+data class Colors(
+ val id: Int,
+ val name: String,
+ val hexa: String,
 )
 
 @Immutable
