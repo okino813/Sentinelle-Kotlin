@@ -42,6 +42,7 @@ import com.example.sentinelle.api.AppValues
 import com.example.sentinelle.api.Bouton
 import com.example.sentinelle.api.Input
 import com.example.sentinelle.api.PopupAlert
+import com.example.sentinelle.api.PopupAlertRequest
 import com.example.sentinelle.api.RedBouton
 import com.example.sentinelle.api.UpdateStatusBarColor
 import com.example.sentinelle.api.api_service
@@ -199,6 +200,53 @@ fun SettingsScreen(
         )
     }
 
+    fun delete_all_saferider(){
+        api.DeleteAllSaferider(context = context,{
+            success ->
+            if (success) {
+                Log.d("Delete", "Tous les saferiders ont été supprimés avec succès")
+                api.getInfo(context = context)
+
+            } else {
+                Log.d("Delete", "Erreur lors de la suppression des saferiders")
+            }
+        })
+    }
+
+    fun delete_account(){
+        api.DeleteAccount(context = context,{
+                success ->
+            if (success) {
+                Log.d("Delete", "Le comptes a été ont été supprimés avec succès")
+                api.logout(
+                    context = context,
+                    onLogoutSuccess = {
+                        sharedPreferences.edit().putBoolean("is_authentificated", false).commit()
+                        sharedPreferences.edit().putBoolean("isContraster", false).commit()
+                        isLoggedIn.value = false
+
+                        // Redémarre l'application
+                        val activity = context as? Activity
+                        val intent =
+                            context.packageManager.getLaunchIntentForPackage(context.packageName)
+                        intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                        context.startActivity(intent)
+                        activity?.finish()
+                        Runtime.getRuntime().exit(0)
+                    },
+                    onLogoutFailure = { error ->
+                        Handler(Looper.getMainLooper()).post {
+                            Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                )
+
+            } else {
+                Log.d("Delete", "Erreur lors de la suppression des saferiders")
+            }
+        })
+    }
+
     SettingsScreenStateless(
         modifier = modifier,
         colors = colors,
@@ -224,7 +272,9 @@ fun SettingsScreen(
         onChangeColor = onChangeColor,
         valideInfoPerso = { changeInfoPerso() },
         validePassword = { changePassword() },
-        logout = { logout() }
+        logout = { logout() },
+        delete_all_saferider = { delete_all_saferider() },
+        delete_account = { delete_account() }
     )
 
 
@@ -263,7 +313,12 @@ fun SettingsScreenStateless(
     valideInfoPerso: () -> Unit,
     validePassword: () -> Unit,
     logout: () -> Unit,
+    delete_all_saferider: () -> Unit,
+    delete_account: () -> Unit
 ){
+
+    var showDialogDeleteAllSaferiders by remember { mutableStateOf(false) }
+    var showDialogDeleteAccount by remember { mutableStateOf(false) }
 
     Column(
         modifier = modifier
@@ -383,7 +438,7 @@ fun SettingsScreenStateless(
             )
 
             RedBouton("Supprimer", colors = colors, OnClick = {
-                print("test")
+                showDialogDeleteAllSaferiders = true
             })
         }
 
@@ -402,7 +457,8 @@ fun SettingsScreenStateless(
             )
 
             RedBouton("Supprimer", colors = colors, OnClick = {
-                print("test")
+                // On fais une popup de confirmation
+                showDialogDeleteAccount = true
             })
 
         }
@@ -426,5 +482,36 @@ fun SettingsScreenStateless(
             })
 
         }
+    }
+
+    if(showDialogDeleteAccount)
+    {
+        PopupAlertRequest(
+            message = "Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.",
+            colors = colors,
+            isSuccess = true,
+            onDismiss = {
+                showDialogDeleteAccount = false
+            },
+            onAccept = {
+                showDialogDeleteAccount = false
+                delete_account()
+            }
+        )
+    }
+
+    if(showDialogDeleteAllSaferiders){
+        PopupAlertRequest(
+            message = "Êtes-vous sûr de vouloir supprimer tous vos saferiders ? Cette action est irréversible.",
+            colors = colors,
+            isSuccess = true,
+            onDismiss = {
+                showDialogDeleteAllSaferiders = false
+            },
+            onAccept = {
+                showDialogDeleteAllSaferiders = false
+                delete_all_saferider()
+            }
+        )
     }
 }
