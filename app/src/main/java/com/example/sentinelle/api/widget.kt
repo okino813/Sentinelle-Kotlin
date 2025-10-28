@@ -295,7 +295,7 @@ fun InputColorPicker(
                     "Choisir une couleur",
                     fontFamily = Montserrat,
                     fontWeight = FontWeight.Bold,
-                    color = colors[0]
+                    color = colors[3]
                 )
             },
             text = {
@@ -343,13 +343,13 @@ fun InputColorPicker(
                 ) {
                     Text(
                         "Fermer",
-                        color = colors[0],
+                        color = colors[1],
                         fontFamily = Montserrat,
                         fontWeight = FontWeight.SemiBold
                     )
                 }
             },
-            containerColor = colors[1],
+            containerColor = colors[0],
             shape = RoundedCornerShape(16.dp)
         )
     }
@@ -820,7 +820,7 @@ fun SaferiderItem(
                 painterResource(id = R.drawable.validate),
                 contentDescription = "Audio",
                 tint = Color.Unspecified,
-                modifier = Modifier.padding(end = 8.dp).size(30.dp),
+                modifier = Modifier.padding(end = 7.dp).size(35.dp),
             )
         else if(saferider.status == 0)
             Icon(
