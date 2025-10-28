@@ -796,12 +796,12 @@ fun TagsScreenStateless(
             }
         }
 
-        Text(
-            text = "Faites défiler pour voir plus ↓",
-            fontSize = 15.sp,
-            color = Color.White,
-            modifier = Modifier.padding(8.dp)
-        )
+//        Text(
+//            text = "Faites défiler pour voir plus ↓",
+//            fontSize = 15.sp,
+//            color = Color.White,
+//            modifier = Modifier.padding(8.dp)
+//        )
     }
 }
 

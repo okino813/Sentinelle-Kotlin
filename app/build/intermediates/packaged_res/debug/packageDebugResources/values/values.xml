@@ -39,6 +39,8 @@
     <style name="Base.Theme.Sentinelle" parent="Theme.Material3.DayNight.NoActionBar">
         
         
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
     <style name="NumberPickerStyle">
         <item name="android:background">#00000000</item> 
@@ -50,4 +52,17 @@
         <item name="android:textStyle">bold</item> 
     </style>
     <style name="Theme.Sentinelle" parent="Base.Theme.Sentinelle"/>
+    <style name="Theme.Sentinelle.Splash" parent="Theme.SplashScreen">
+        
+        <item name="windowSplashScreenBackground">@color/dark_blue</item>
+
+        
+        <item name="windowSplashScreenAnimatedIcon">@drawable/logo_splash</item>
+
+        
+        <item name="windowSplashScreenIconBackgroundColor">@color/dark_blue</item>
+
+        
+        <item name="postSplashScreenTheme">@style/Theme.Sentinelle</item>
+    </style>
 </resources>

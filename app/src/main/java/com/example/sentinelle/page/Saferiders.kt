@@ -539,9 +539,10 @@ fun SaferiderDetailScreen(id: Int?, colors: List<Color>, onRefresh: () -> Unit =
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 40.dp, start = 16.dp,bottom = 120.dp, end = 16.dp)
+            .padding(top = 50.dp, start = 16.dp,bottom = 120.dp, end = 16.dp)
             .background(colors[0])
             .verticalScroll(scrollState)
+
 //            .simpleVerticalScrollbar(listState)
     ) {
         Text(
@@ -874,7 +875,7 @@ fun ExoPlayerAudioPlayer(audio: AudioRecord, colors: List<Color>) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 8.dp, top = 50.dp, end = 8.dp)
+            .padding(start = 8.dp, top = 20.dp, end = 8.dp)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically

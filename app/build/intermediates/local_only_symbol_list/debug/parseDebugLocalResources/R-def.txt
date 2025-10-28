@@ -27,6 +27,7 @@ drawable logo_carte_tuto2
 drawable logo_minuteur
 drawable logo_proche_tuto_4
 drawable logo_record_tuto3
+drawable logo_splash
 drawable main_dark_logo
 drawable main_icon_dark
 drawable map
@@ -93,6 +94,7 @@ string web_client_id
 style Base.Theme.Sentinelle
 style NumberPickerStyle
 style Theme.Sentinelle
+style Theme.Sentinelle.Splash
 xml backup_rules
 xml data_extraction_rules
 xml network_security_config

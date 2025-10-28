@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.sentinelle.app-mergeDebugResources-77:/values-iw/values-iw.xml",
+            "outputFile": "com.example.sentinelle.app-mergeDebugResources-78:/values-iw/values-iw.xml",
             "map": [
                 {
                     "source": "/home/axel/.gradle/caches/8.11.1/transforms/e739a3ec76e6674d5d5a54962b7347fa/transformed/foundation-release/res/values-iw/values-iw.xml",

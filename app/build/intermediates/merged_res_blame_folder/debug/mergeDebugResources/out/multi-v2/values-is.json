@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.sentinelle.app-mergeDebugResources-77:/values-is/values-is.xml",
+            "outputFile": "com.example.sentinelle.app-mergeDebugResources-78:/values-is/values-is.xml",
             "map": [
                 {
                     "source": "/home/axel/.gradle/caches/8.11.1/transforms/9cce1695e4e76da4071e3a3d2e40e628/transformed/media3-ui-1.1.1/res/values-is/values-is.xml",

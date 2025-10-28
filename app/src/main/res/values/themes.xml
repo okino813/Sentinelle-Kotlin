@@ -3,7 +3,24 @@
     <style name="Base.Theme.Sentinelle" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
+
+    <style name="Theme.Sentinelle.Splash" parent="Theme.SplashScreen">
+        <!-- Couleur de fond de ta splashscreen -->
+        <item name="windowSplashScreenBackground">@color/dark_blue</item>
+
+        <!-- Ton logo -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/logo_splash</item>
+
+        <!-- Facultatif : icône en rond -->
+        <item name="windowSplashScreenIconBackgroundColor">@color/dark_blue</item>
+
+        <!-- Thème qui sera appliqué ensuite -->
+        <item name="postSplashScreenTheme">@style/Theme.Sentinelle</item>
+    </style>
+
 
     <style name="Theme.Sentinelle" parent="Base.Theme.Sentinelle" />
 </resources>

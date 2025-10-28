@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:2:1-70:12
-INJECTED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:2:1-70:12
-INJECTED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:2:1-70:12
-INJECTED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:2:1-70:12
+ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:2:1-72:12
+INJECTED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:2:1-72:12
+INJECTED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:2:1-72:12
+INJECTED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:2:1-72:12
 MERGED from [com.google.maps.android:maps-compose:4.3.3] /home/axel/.gradle/caches/8.11.1/transforms/ab4e4cd712be9cbe29567dbd6c2b20ca/transformed/maps-compose-4.3.3/AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.maps.android:maps-ktx:5.0.0] /home/axel/.gradle/caches/8.11.1/transforms/89964a1f0a84a39d8cbdc93d6caf4932/transformed/maps-ktx-5.0.0/AndroidManifest.xml:18:1-23:12
 MERGED from [androidx.databinding:viewbinding:8.10.1] /home/axel/.gradle/caches/8.11.1/transforms/f2f4dfdad209df41d75a2bfed2c7307c/transformed/viewbinding-8.10.1/AndroidManifest.xml:2:1-7:12
@@ -102,6 +102,7 @@ MERGED from [androidx.graphics:graphics-path:1.0.1] /home/axel/.gradle/caches/8.
 MERGED from [androidx.core:core:1.15.0] /home/axel/.gradle/caches/8.11.1/transforms/d444f0522389efd7f206a7d03e48c8ce/transformed/core-1.15.0/AndroidManifest.xml:17:1-30:12
 MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /home/axel/.gradle/caches/8.11.1/transforms/2b96f1af5655545d5d01afa7235f6dbb/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:17:1-23:12
 MERGED from [androidx.core:core-ktx:1.15.0] /home/axel/.gradle/caches/8.11.1/transforms/9865e3d0817a4c4aa14b8569b934747c/transformed/core-ktx-1.15.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.core:core-splashscreen:1.0.0] /home/axel/.gradle/caches/8.11.1/transforms/55db2c4b2308679507cd00aa89ab81e4/transformed/core-splashscreen-1.0.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/axel/.gradle/caches/8.11.1/transforms/17353301bfef02f4aa82246a555331f1/transformed/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.cardview:cardview:1.0.0] /home/axel/.gradle/caches/8.11.1/transforms/766a713a91f1e7a453cc2e6b0ae4c51b/transformed/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /home/axel/.gradle/caches/8.11.1/transforms/47313d5547ae7224eb8a5952a6e29e1a/transformed/profileinstaller-1.4.0/AndroidManifest.xml:17:1-55:12
@@ -202,8 +203,8 @@ ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/a
 	android:name
 		ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:23:22-85
 application
-ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:26:5-68:19
-INJECTED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:26:5-68:19
+ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:26:5-70:19
+INJECTED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:26:5-70:19
 MERGED from [com.google.android.material:material:1.12.0] /home/axel/.gradle/caches/8.11.1/transforms/35d5b624636b9d77bbfe6345c5ca5c3a/transformed/material-1.12.0/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.12.0] /home/axel/.gradle/caches/8.11.1/transforms/35d5b624636b9d77bbfe6345c5ca5c3a/transformed/material-1.12.0/AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.2.0] /home/axel/.gradle/caches/8.11.1/transforms/3e2b636f21be9b062450a5f4fb5a1bb2/transformed/constraintlayout-2.2.0/AndroidManifest.xml:7:5-20
@@ -279,43 +280,45 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/axel/
 	android:usesCleartextTraffic
 		ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:36:9-44
 meta-data#com.google.android.geo.API_KEY
-ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:39:9-41:44
+ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:40:9-42:44
 	android:value
-		ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:41:13-41
+		ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:42:13-41
 	android:name
-		ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:40:13-58
+		ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:41:13-58
 activity#com.example.sentinelle.MainActivity
-ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:47:9-57:20
+ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:48:9-59:20
 	android:screenOrientation
-		ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:50:13-49
+		ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:51:13-49
 	android:exported
-		ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:49:13-36
+		ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:50:13-36
+	android:theme
+		ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:52:13-59
 	android:name
-		ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:48:13-41
+		ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:49:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:51:13-55:29
+ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:53:13-57:29
 action#android.intent.action.MAIN
-ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:52:17-69
+ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:54:17-69
 	android:name
-		ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:52:25-66
+		ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:54:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:54:17-77
+ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:56:17-77
 	android:name
-		ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:54:27-74
+		ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:56:27-74
 service#com.example.sentinelle.TimerService
-ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:59:9-62:40
+ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:61:9-64:40
 	android:exported
-		ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:62:13-37
+		ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:64:13-37
 	android:foregroundServiceType
-		ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:61:13-87
+		ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:63:13-87
 	android:name
-		ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:60:13-41
+		ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:62:13-41
 meta-data#preloaded_fonts
-ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:64:9-66:57
+ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:66:9-68:57
 	android:resource
-		ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:66:13-54
+		ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:68:13-54
 	android:name
-		ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:65:13-43
+		ADDED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml:67:13-43
 uses-sdk
 INJECTED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/axel/Documents/Projet/Sentinelle/app/kotlin/Sentinelle-Kotlin/app/src/main/AndroidManifest.xml
@@ -516,6 +519,8 @@ MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /home/axel/.
 MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /home/axel/.gradle/caches/8.11.1/transforms/2b96f1af5655545d5d01afa7235f6dbb/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
 MERGED from [androidx.core:core-ktx:1.15.0] /home/axel/.gradle/caches/8.11.1/transforms/9865e3d0817a4c4aa14b8569b934747c/transformed/core-ktx-1.15.0/AndroidManifest.xml:5:5-44
 MERGED from [androidx.core:core-ktx:1.15.0] /home/axel/.gradle/caches/8.11.1/transforms/9865e3d0817a4c4aa14b8569b934747c/transformed/core-ktx-1.15.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-splashscreen:1.0.0] /home/axel/.gradle/caches/8.11.1/transforms/55db2c4b2308679507cd00aa89ab81e4/transformed/core-splashscreen-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core-splashscreen:1.0.0] /home/axel/.gradle/caches/8.11.1/transforms/55db2c4b2308679507cd00aa89ab81e4/transformed/core-splashscreen-1.0.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/axel/.gradle/caches/8.11.1/transforms/17353301bfef02f4aa82246a555331f1/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/axel/.gradle/caches/8.11.1/transforms/17353301bfef02f4aa82246a555331f1/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.cardview:cardview:1.0.0] /home/axel/.gradle/caches/8.11.1/transforms/766a713a91f1e7a453cc2e6b0ae4c51b/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
