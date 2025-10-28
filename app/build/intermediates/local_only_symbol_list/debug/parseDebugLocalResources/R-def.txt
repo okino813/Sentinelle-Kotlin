@@ -18,11 +18,11 @@ drawable fleche_tuto3
 drawable fleche_tuto4
 drawable fleche_tuto_1
 drawable frame
+drawable google_logo
 drawable home
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable ic_more
-drawable image
 drawable logo_carte_tuto2
 drawable logo_minuteur
 drawable logo_proche_tuto_4

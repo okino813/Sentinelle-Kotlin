@@ -88,6 +88,10 @@
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-82:/drawable/pending.xml"
     },
     {
+        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-80:/drawable_google_logo.png.flat",
+        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-82:/drawable/google_logo.png"
+    },
+    {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-80:/mipmap-xxhdpi_ic_launcher.webp.flat",
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-82:/mipmap-xxhdpi/ic_launcher.webp"
     },
@@ -204,10 +208,6 @@
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-82:/mipmap-hdpi/icon_app_dark.png"
     },
     {
-        "merged": "com.example.sentinelle.app-debug-80:/drawable_logo_splash.png.flat",
-        "source": "com.example.sentinelle.app-main-82:/drawable/logo_splash.png"
-    },
-    {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-80:/font_montserrat_extra_light.ttf.flat",
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-82:/font/montserrat_extra_light.ttf"
     },
@@ -266,6 +266,14 @@
     {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-80:/drawable_home.xml.flat",
         "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-82:/drawable/home.xml"
+    },
+    {
+        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-80:/drawable_google_logo_carre.png.flat",
+        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-82:/drawable/google_logo_carre.png"
+    },
+    {
+        "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-80:/drawable_logo_splash.png.flat",
+        "source": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-main-82:/drawable/logo_splash.png"
     },
     {
         "merged": "/home/axel/.gradle/daemon/8.11.1/com.example.sentinelle.app-debug-80:/mipmap-xxhdpi_ic_launcher_round.webp.flat",

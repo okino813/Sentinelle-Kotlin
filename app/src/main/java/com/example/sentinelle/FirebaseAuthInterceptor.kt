@@ -37,39 +37,45 @@ class FirebaseAuthInterceptor : Interceptor {
         val originalRequest = chain.request()
         val user = FirebaseAuth.getInstance().currentUser
 
-        if (user == null) {
-            // Pas connecté
-            throw Exception("Utilisateur non connecté")
+        return if (user != null) {
+            try {
+                // Obtenir un token valide
+                val tokenTask = user.getIdToken(true)
+                val tokenResult = Tasks.await(tokenTask)
+                val token = tokenResult.token ?: throw Exception("Token Firebase invalide")
+
+                // Ajouter le token à la requête
+                var requestWithToken = originalRequest.newBuilder()
+                    .addHeader("Authorization", "Bearer $token")
+                    .build()
+
+                var response = chain.proceed(requestWithToken)
+
+                // Rafraîchir le token si besoin
+                if (response.code == 401) {
+                    response.close()
+                    val refreshedToken = Tasks.await(user.getIdToken(true)).token
+                        ?: throw Exception("Impossible de rafraîchir le token Firebase")
+
+                    requestWithToken = originalRequest.newBuilder()
+                        .header("Authorization", "Bearer $refreshedToken")
+                        .build()
+
+                    response = chain.proceed(requestWithToken)
+                }
+
+                response
+            } catch (e: Exception) {
+                Log.e("FirebaseAuthInterceptor", "Erreur token Firebase: ${e.message}")
+                // On continue sans token si erreur
+                chain.proceed(originalRequest)
+            }
+        } else {
+            // Aucun utilisateur connecté → on continue sans token
+            Log.d("FirebaseAuthInterceptor", "Aucun utilisateur connecté, on continue sans token")
+            chain.proceed(originalRequest)
+            // Il faut changer le sharedpreference et redémarrer l'activité de connexion
         }
-
-        // Obtenir un token valide
-        val tokenTask = user.getIdToken(false)
-        val tokenResult = Tasks.await(tokenTask)
-        val token = tokenResult.token ?: throw Exception("Token Firebase invalide")
-
-        // Ajouter le token à la requête
-        val requestWithToken = originalRequest.newBuilder()
-            .addHeader("Authorization", "Bearer $token")
-            .build()
-
-        val response = chain.proceed(requestWithToken)
-
-        // Si le token a expiré, on tente de le rafraîchir et rejouer la requête
-        if (response.code == 401) {
-            response.close()
-
-            // Force le rafraîchissement du token
-            val refreshedToken = Tasks.await(user.getIdToken(true)).token
-                ?: throw Exception("Impossible de rafraîchir le token Firebase")
-
-            val retriedRequest = originalRequest.newBuilder()
-                .header("Authorization", "Bearer $refreshedToken")
-                .build()
-
-            return chain.proceed(retriedRequest)
-        }
-
-        return response
     }
 
     public fun printFirebaseToken() {

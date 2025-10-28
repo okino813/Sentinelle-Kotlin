@@ -3299,6 +3299,7 @@ drawable fleche_tuto3
 drawable fleche_tuto4
 drawable fleche_tuto_1
 drawable frame
+drawable google_logo
 drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
 drawable home
@@ -3324,7 +3325,6 @@ drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
 drawable ic_search_black_24
 drawable icon_background
-drawable image
 drawable indeterminate_static
 drawable logo_carte_tuto2
 drawable logo_minuteur

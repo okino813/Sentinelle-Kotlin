@@ -474,6 +474,7 @@ fun Logo(){
         Image(
             painter = painterResource(R.drawable.main_icon_dark),
             contentDescription = "Logo Sentinelle",
+            modifier = Modifier.size(180.dp)
         )
     }
 

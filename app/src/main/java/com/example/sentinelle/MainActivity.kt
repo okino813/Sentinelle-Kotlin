@@ -94,7 +94,8 @@ class MainActivity : AppCompatActivity() {
     private val REQUIRED_PERMISSIONS = arrayOf(
         Manifest.permission.RECORD_AUDIO,
         Manifest.permission.ACCESS_FINE_LOCATION,
-        Manifest.permission.ACCESS_COARSE_LOCATION
+        Manifest.permission.ACCESS_COARSE_LOCATION,
+        Manifest.permission.POST_NOTIFICATIONS
     )
 
     private var googleSignInCallback: ((Boolean) -> Unit)? = null
@@ -173,8 +174,60 @@ class MainActivity : AppCompatActivity() {
         isLoggedIn.value = sharedPreferences.getBoolean("is_authentificated", false)
         isContrast.value = sharedPreferences.getBoolean("isContraster", false)
 
+        checkTokenValidity()
+
         context = this
 
+        // Demande les permissions dès le lancement
+        checkAndRequestPermissions()
+    }
+    @RequiresApi(Build.VERSION_CODES.Q)
+    private fun checkTokenValidity() {
+        val user = auth.currentUser
+
+        if (user == null) {
+            // Pas d'utilisateur → pas connecté
+            Log.d("AUTH_CHECK", "Aucun utilisateur Firebase")
+            isLoggedIn.value = false
+            sharedPreferences.edit().putBoolean("is_authentificated", false).apply()
+            setupUI()
+            return
+        }
+
+        // ✅ Vérifier si le token est valide
+        user.getIdToken(true) // true = force le refresh du token
+            .addOnSuccessListener { result ->
+                if (result.token != null) {
+                    // Token valide → utilisateur vraiment connecté
+                    Log.d("AUTH_CHECK", "Token Firebase valide")
+                    isLoggedIn.value = true
+                    sharedPreferences.edit().putBoolean("is_authentificated", true).apply()
+                    setupUI()
+                } else {
+                    // Pas de token → déconnecter
+                    Log.w("AUTH_CHECK", "Token Firebase null")
+                    forceSignOut()
+                }
+            }
+            .addOnFailureListener { exception ->
+                // Erreur lors de la récupération du token → déconnecter
+                Log.e("AUTH_CHECK", "Erreur token Firebase: ${exception.message}")
+                forceSignOut()
+            }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.Q)
+    private fun forceSignOut() {
+        Log.d("AUTH_CHECK", "Déconnexion forcée : token invalide ou expiré")
+        auth.signOut()
+        googleSignInClient.signOut()
+        isLoggedIn.value = false
+        sharedPreferences.edit().putBoolean("is_authentificated", false).apply()
+        setupUI()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.Q)
+    private fun setupUI() {
         // Demande les permissions dès le lancement
         checkAndRequestPermissions()
 
@@ -192,7 +245,6 @@ class MainActivity : AppCompatActivity() {
                         )
                     }
                     printFirebaseToken()
-
                 }
             } else {
                 var appState by remember { mutableStateOf<AppState>(AppState.Tutorial) }
@@ -212,10 +264,8 @@ class MainActivity : AppCompatActivity() {
                             isLoggedIn.value = true
                             sharedPreferences.edit().putBoolean("is_authentificated", true).apply()
                             appState = AppState.Main
-                            // ✅ DEMANDER LES PERMISSIONS APRÈS LA CONNEXION
                             checkAndRequestPermissions()
                         })
-
 
                     is AppState.Main ->
                         BottomMenu(
@@ -228,6 +278,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
 
     private fun isNetworkAvailable(): Boolean {
         val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -344,6 +395,7 @@ class MainActivity : AppCompatActivity() {
             .setMessage("Sentinelle a besoin de ces permissions pour assurer votre sécurité :\n\n" +
                     "• 📍 Localisation : pour suivre votre parcours\n" +
                     "• 🎤 Microphone : pour enregistrer l'environnement sonore\n\n" +
+                    "• 🔔 Notifications : pour vous alerter en cas d'urgence\n\n" +
                     "Ces données restent privées et ne sont utilisées qu'en cas d'urgence.")
             .setPositiveButton("Réessayer") { _, _ ->
                 checkAndRequestPermissions()
@@ -741,7 +793,15 @@ fun ContentScreen(modifier: Modifier, selectedIndex : Int,
             sharedPreferences = sharedPreferences,
             isLoggedIn = isLoggedIn,
             isContrast = isContrast,
-            onChangeColor = onChangeColor
+            onChangeColor = onChangeColor,
+            googleSignInClient = GoogleSignIn.getClient(
+                context,
+                GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestIdToken(context.getString(R.string.web_client_id))
+                    .requestEmail()
+                    .build()
+
+        )
         )
     }
 }

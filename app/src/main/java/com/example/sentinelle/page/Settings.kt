@@ -46,6 +46,7 @@ import com.example.sentinelle.api.PopupAlertRequest
 import com.example.sentinelle.api.RedBouton
 import com.example.sentinelle.api.UpdateStatusBarColor
 import com.example.sentinelle.api.api_service
+import com.google.firebase.auth.FirebaseAuth
 
 
 @Composable
@@ -56,7 +57,8 @@ fun SettingsScreen(
     sharedPreferences: SharedPreferences,
     isLoggedIn: MutableState<Boolean>,
     isContrast: MutableState<Boolean>,
-    onChangeColor: (Int) -> Unit
+    onChangeColor: (Int) -> Unit,
+    googleSignInClient: com.google.android.gms.auth.api.signin.GoogleSignInClient
 
 ) {
     var firstname by remember { mutableStateOf(AppValues.firstname.toString()) }
@@ -179,6 +181,13 @@ fun SettingsScreen(
         api.logout(
             context = context,
             onLogoutSuccess = {
+
+                var auth = FirebaseAuth.getInstance()
+
+                auth.signOut()
+                googleSignInClient.signOut()
+
+
                 sharedPreferences.edit().putBoolean("is_authentificated", false).commit()
                 sharedPreferences.edit().putBoolean("isContraster", false).commit()
                 isLoggedIn.value = false
@@ -190,7 +199,6 @@ fun SettingsScreen(
                 intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
                 context.startActivity(intent)
                 activity?.finish()
-                Runtime.getRuntime().exit(0)
             },
             onLogoutFailure = { error ->
                 Handler(Looper.getMainLooper()).post {
@@ -221,9 +229,12 @@ fun SettingsScreen(
                 api.logout(
                     context = context,
                     onLogoutSuccess = {
+                        googleSignInClient.signOut()
                         sharedPreferences.edit().putBoolean("is_authentificated", false).commit()
                         sharedPreferences.edit().putBoolean("isContraster", false).commit()
                         isLoggedIn.value = false
+                        FirebaseAuth.getInstance().signOut()
+
 
                         // Redémarre l'application
                         val activity = context as? Activity
