@@ -210,7 +210,7 @@ fun SettingsScreen(
 
     fun delete_all_saferider(){
         api.DeleteAllSaferider(context = context,{
-            success ->
+                success ->
             if (success) {
                 Log.d("Delete", "Tous les saferiders ont été supprimés avec succès")
                 api.getInfo(context = context)
@@ -361,22 +361,37 @@ fun SettingsScreenStateless(
 
         Spacer(Modifier.height(16.dp))
 
-        Text(
-            "Sécurité",
-            color = colors[3],
-            fontWeight = FontWeight.Bold,
-            fontSize = 20.sp,
-            modifier = Modifier.align(Alignment.Start)
-        )
-        Spacer(Modifier.height(16.dp))
+        // On vérifie si il s'est connecter avec google ou pas
+        val user = FirebaseAuth.getInstance().currentUser
 
-        Input("Mot de passe actuel", value = password, colors = colors, onValueChange = onPasswordChange, true, passwordError)
-        Input("Nouveau mot de passe", value = NewPassword, colors = colors, onValueChange = onNewPasswordChange, true, NewPasswordError)
-        Input("Confirmation du mot de passe", value = ConfirmNewPassword, colors = colors, onValueChange = onNewConfirmPassword, true, ConfirmNewPasswordError)
+        if (user != null) {
+            val providers = user.providerData.map { it.providerId }
+            if (providers.contains("google.com")) {
+                // L'utilisateur s'est connecté avec Google
+                Log.d("AUTHFireBASE", "Connected with Google")
+            } else {
+                // L'utilisateur ne s'est pas connecté avec Google
+                Log.d("AUTHFireBASE", "Not connected with Google")
 
-        Bouton("Enregistrer", colors = colors, OnClick = {
-            validePassword()
-        })
+                Text(
+                    "Sécurité",
+                    color = colors[3],
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    modifier = Modifier.align(Alignment.Start)
+                )
+                Spacer(Modifier.height(16.dp))
+
+                Input("Mot de passe actuel", value = password, colors = colors, onValueChange = onPasswordChange, true, passwordError)
+                Input("Nouveau mot de passe", value = NewPassword, colors = colors, onValueChange = onNewPasswordChange, true, NewPasswordError)
+                Input("Confirmation du mot de passe", value = ConfirmNewPassword, colors = colors, onValueChange = onNewConfirmPassword, true, ConfirmNewPasswordError)
+
+                Bouton("Enregistrer", colors = colors, OnClick = {
+                    validePassword()
+                })
+            }
+        }
+
 
 
         Spacer(Modifier.height(16.dp))
