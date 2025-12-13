@@ -257,6 +257,7 @@ object ApiHelper {
 
             override fun onResponse(call: Call, response: Response) {
                 val bodys = response.body?.string()
+                Log.d("API_POST_FILE", "Response body: $bodys")
                 if (response.isSuccessful && bodys != null) {
                     try {
                         onSuccess(JSONObject(bodys))

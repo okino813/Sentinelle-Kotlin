@@ -75,11 +75,8 @@ layout number_picker
 menu bottom_nav_menu
 menu list_pop_up_menu
 mipmap ic_launcher
+mipmap ic_launcher_foreground
 mipmap ic_launcher_round
-mipmap icon_app
-mipmap icon_app_dark
-mipmap icon_dark_test
-mipmap icon_main_app_dark
 string app_name
 string default_web_client_id
 string gcm_defaultSenderId

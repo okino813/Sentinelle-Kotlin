@@ -4269,11 +4269,8 @@ layout support_simple_spinner_dropdown_item
 menu bottom_nav_menu
 menu list_pop_up_menu
 mipmap ic_launcher
+mipmap ic_launcher_foreground
 mipmap ic_launcher_round
-mipmap icon_app
-mipmap icon_app_dark
-mipmap icon_dark_test
-mipmap icon_main_app_dark
 plurals exo_controls_fastforward_by_amount_description
 plurals exo_controls_rewind_by_amount_description
 plurals mtrl_badge_content_description

@@ -392,7 +392,7 @@ class TimerService : Service() {
         // DÉBOUNCE : éviter les envois trop rapprochés (moins de 3 secondes)
         val currentTime = System.currentTimeMillis()
         if (currentTime - lastAudioSendTime < 3000) {
-            Log.d("TimerService", "Envoi trop rapproché ignoré (débounce)")
+            Log.d("SendAudio", "Envoi trop rapproché ignoré (débounce)")
             return
         }
         lastAudioSendTime = currentTime
@@ -403,14 +403,14 @@ class TimerService : Service() {
         }
 
         if (filesToSend.isEmpty()) {
-            Log.d("TimerService", "Tous les fichiers sont déjà en cours d'envoi")
+            Log.d("SendAudio", "Tous les fichiers sont déjà en cours d'envoi")
             return
         }
 
-        Log.d("TimerService", "=== DÉBUT ENVOI AUDIO ===")
-        Log.d("TimerService", "Fichiers à envoyer: ${filesToSend.size}")
+        Log.d("SendAudio", "=== DÉBUT ENVOI AUDIO ===")
+        Log.d("SendAudio", "Fichiers à envoyer: ${filesToSend.size}")
         filesToSend.forEach { file ->
-            Log.d("TimerService", "- ${file.name} (${file.length()} bytes)")
+            Log.d("SendAudio", "- ${file.name} (${file.length()} bytes)")
         }
 
         isSendingAudio = true
@@ -421,7 +421,7 @@ class TimerService : Service() {
             // Marquer ce fichier comme en cours d'envoi
             audioFilesBeingSent.add(file.absolutePath)
 
-            Log.d("TimerService", "Envoi du fichier: ${file.name}")
+            Log.d("SendAudio", "Envoi du fichier: ${file.name}")
 
             api.sendAudioFile(
                 context = this,
@@ -429,10 +429,10 @@ class TimerService : Service() {
             ) { success ->
                 pendingUploads--
 
-                Log.d("TimerService", "Callback reçu pour ${file.name} - Success: $success, Restant: $pendingUploads")
+                Log.d("SendAudio", "Callback reçu pour ${file.name} - Success: $success, Restant: $pendingUploads")
 
                 if (success) {
-                    Log.d("TimerService", "✅ Fichier audio envoyé avec succès: ${file.name}")
+                    Log.d("SendAudio", "✅ Fichier audio envoyé avec succès: ${file.name}")
                     // Supprimer le fichier de TOUTES les listes
                     audioFileQueue.remove(file)
                     audioFilesBeingSent.remove(file.absolutePath)
@@ -440,13 +440,13 @@ class TimerService : Service() {
                     // Supprimer le fichier du système
                     try {
                         if (file.exists() && file.delete()) {
-                            Log.d("TimerService", "Fichier supprimé du système: ${file.name}")
+                            Log.d("SendAudio", "Fichier supprimé du système: ${file.name}")
                         }
                     } catch (e: Exception) {
-                        Log.e("TimerService", "Erreur suppression fichier: ${e.message}")
+                        Log.e("SendAudio", "Erreur suppression fichier: ${e.message}")
                     }
                 } else {
-                    Log.e("TimerService", "❌ Erreur lors de l'envoi du fichier audio: ${file.name}")
+                    Log.e("SendAudio", "❌ Erreur lors de l'envoi du fichier audio: ${file.name}")
                     // Retirer seulement de la liste des fichiers en cours d'envoi pour permettre un nouvel essai
                     audioFilesBeingSent.remove(file.absolutePath)
                 }
@@ -454,8 +454,8 @@ class TimerService : Service() {
                 // Réinitialiser le flag quand tous les envois sont terminés
                 if (pendingUploads == 0) {
                     isSendingAudio = false
-                    Log.d("TimerService", "=== FIN ENVOI AUDIO === (isSendingAudio = false)")
-                    Log.d("TimerService", "Queue finale: ${audioFileQueue.size} fichiers")
+                    Log.d("SendAudio", "=== FIN ENVOI AUDIO === (isSendingAudio = false)")
+                    Log.d("SendAudio", "Queue finale: ${audioFileQueue.size} fichiers")
                 }
             }
         }
