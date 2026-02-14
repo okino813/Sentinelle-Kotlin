@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.sentinelle.app-mergeDebugResources-78:/values-fr/values-fr.xml",
+            "outputFile": "com.okino813.sentinelle.app-mergeDebugResources-78:/values-fr/values-fr.xml",
             "map": [
                 {
                     "source": "/home/axel/.gradle/caches/8.11.1/transforms/aa69082ee5c70524ce57c5bf5f792c59/transformed/media3-exoplayer-1.1.1/res/values-fr/values-fr.xml",

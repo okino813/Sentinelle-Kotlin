@@ -7,15 +7,15 @@ plugins {
 }
 
 android {
-    namespace = "com.example.sentinelle"
+    namespace = "com.okino813.sentinelle"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.sentinelle"
+        applicationId = rootProject.extra["defaultApplicationId"] as String
         minSdk = 24
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        targetSdk = 35
+        versionCode = 2
+        versionName = "1.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

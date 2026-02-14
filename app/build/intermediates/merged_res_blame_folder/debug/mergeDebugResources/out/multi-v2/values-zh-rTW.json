@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.sentinelle.app-mergeDebugResources-78:/values-zh-rTW/values-zh-rTW.xml",
+            "outputFile": "com.okino813.sentinelle.app-mergeDebugResources-78:/values-zh-rTW/values-zh-rTW.xml",
             "map": [
                 {
                     "source": "/home/axel/.gradle/caches/8.11.1/transforms/35d5b624636b9d77bbfe6345c5ca5c3a/transformed/material-1.12.0/res/values-zh-rTW/values-zh-rTW.xml",
