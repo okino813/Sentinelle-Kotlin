@@ -2,18 +2,20 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
+    id("com.google.gms.google-services")
+
 }
 
 android {
-    namespace = "com.example.sentinelle"
+    namespace = "com.okino813.sentinelle"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.sentinelle"
+        applicationId = rootProject.extra["defaultApplicationId"] as String
         minSdk = 24
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        targetSdk = 35
+        versionCode = 3
+        versionName = "1.0.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -58,7 +60,7 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.9.1") // Ajoute OkHttp ici
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
     implementation(libs.play.services.location)
-    implementation(libs.play.services.maps) // Ajoute logging-interceptor (facultatif)
+    implementation(libs.play.services.maps)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -88,4 +90,24 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.7.7")
 
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.30.1")
+
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.0")
+
+    // Firebase Auth
+    implementation("com.google.firebase:firebase-auth-ktx:22.3.0")
+    // Google Sign-In
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
+
+    implementation("androidx.media3:media3-exoplayer:1.1.1")
+    implementation("androidx.media3:media3-ui:1.1.1")
+    implementation("androidx.media3:media3-common:1.1.1")
+
+
+    // La carte
+    implementation("com.google.maps.android:maps-compose:4.3.3")
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
+
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.1.0")
+
+    implementation("androidx.core:core-splashscreen:1.0.0")
 }
