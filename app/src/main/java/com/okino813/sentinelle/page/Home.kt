@@ -137,7 +137,7 @@ fun HomeScreen(
     fun startTimer(context : Context){
         if (!isTimerRunning) {
             // Vérification de lancement via API
-            textBtnStartStop ="Stop"
+            //textBtnStartStop ="Stop"
             api.startTimer(
                 context,
                 heures.value,
@@ -146,6 +146,7 @@ fun HomeScreen(
                 isAlert = false
             ) { success, error ->
                 if (success) {
+                    textBtnStartStop ="Stop"
                     Log.d("TESTCheck", "Timer started")
                     val totalseconds = heures.value * 3600 + minutes.value * 60 + secondes.value
                     val intent = Intent(context, TimerService::class.java).apply {
@@ -161,11 +162,12 @@ fun HomeScreen(
                 }
             }
         } else {
-            textBtnStartStop = "Départ"
             // Arrêter le minuteur
 
             api.stopTimer(context) { success, error ->
                 if (success) {
+                    textBtnStartStop = "Départ"
+
                     // Remise à zéro des valeurs du minuteur
                     heures.value = 0
                     minutes.value = 0
@@ -197,11 +199,12 @@ fun HomeScreen(
 
     fun SendAlertManual(){
         if(isTimerRunning){
-            textBtnStartStop = "Départ"
             // Arrêter le minuteur
 
             api.stopTimer(context) { success, error ->
                 if (success) {
+                    textBtnStartStop = "Départ"
+
                     // Remise à zéro des valeurs du minuteur
                     heures.value = 0
                     minutes.value = 0
@@ -226,7 +229,6 @@ fun HomeScreen(
         }
         if (!isAlertRunning) {
             // Vérification de lancement via API
-            textBtnAlertStartStop ="Stop"
             api.startTimer(
                 context,
                 heures.value,
@@ -235,6 +237,8 @@ fun HomeScreen(
                 true,
             ) { success, error ->
                 if (success) {
+                    textBtnAlertStartStop ="Stop"
+
                     Log.d("TESTCheck", "Timer started")
                     val intent = Intent(context, TimerService::class.java).apply {
                         action = "RESUME_TIMER"

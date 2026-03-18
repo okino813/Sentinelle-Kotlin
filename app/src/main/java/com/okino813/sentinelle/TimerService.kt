@@ -82,7 +82,7 @@ class TimerService : Service() {
                 for (location in result.locations) {
                     Log.d("TimerService", "Localisation → lat: ${location.latitude}, lng: ${location.longitude}")
 
-                    // Ajouter à la queue au lieu d'envoyer directement
+                    // Ajouter à la queue
                     val locationData = LocationData(
                         latitude = location.latitude.toString(),
                         longitude = location.longitude.toString(),
@@ -156,12 +156,12 @@ class TimerService : Service() {
         when (intent?.action) {
             "START_TIMER" -> {
                 val totalSeconds = intent.getIntExtra("totalSeconds", 0)
-                startForeground(1, buildNotification()) // ✅ Foreground
+                startForeground(1, buildNotification())
                 startCountdown(totalSeconds)
             }
             "RESUME_TIMER" -> {
                 val totalSeconds = intent.getIntExtra("totalSeconds", 0)
-                startForeground(1, buildNotification()) // ✅ Foreground
+                startForeground(1, buildNotification())
                 startCountup(totalSeconds)
             }
             "STOP_TIMER" -> {
@@ -278,8 +278,6 @@ class TimerService : Service() {
                     } else {
                         Log.d("TimerService", "Pas de connexion - données en queue (Audio: ${audioFileQueue.size}, GPS: ${locationQueue.size})")
                     }
-
-                    Log.d("TimerService", "Action toutes les 5 minutes")
                 }
             }
 

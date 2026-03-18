@@ -179,7 +179,7 @@ fun Input(
         },
         placeholder = { Text(label, color = colors[0]) },
         isError = false,
-        singleLine = false,
+        singleLine = true,
         textStyle = TextStyle(fontSize = 16.sp, color = colors[0]),
         shape = RoundedCornerShape(50.dp),
         colors = OutlinedTextFieldDefaults.colors(

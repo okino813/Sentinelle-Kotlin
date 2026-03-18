@@ -826,41 +826,47 @@ fun NavigationTabExample(
     val startDestination = Destination.MESSAGE
     var selectedDestination by rememberSaveable { mutableIntStateOf(startDestination.ordinal) }
 
-    Scaffold(
-        modifier = modifier,
-        containerColor = colors[0],
-        topBar = {
-            PrimaryTabRow(
-                selectedTabIndex = selectedDestination,
-                containerColor = colors[0],
-                contentColor = colors[3],
-            ) {
-                Destination.entries.forEachIndexed { index, destination ->
-                    Tab(
-                        selected = selectedDestination == index,
-                        onClick = {
-                            navController.navigate(route = destination.route)
-                            selectedDestination = index
-                        },
-                        text = {
-                            Text(
-                                text = destination.label,
-                                maxLines = 2,
-                                overflow = TextOverflow.Ellipsis
-                            )
-                        }
-                    )
+
+    Box(
+        modifier = Modifier
+            .background(colors[0])
+    ) {
+        Scaffold(
+            modifier = modifier,
+            containerColor = colors[0],
+            topBar = {
+                PrimaryTabRow(
+                    selectedTabIndex = selectedDestination,
+                    containerColor = colors[0],
+                    contentColor = colors[3],
+                ) {
+                    Destination.entries.forEachIndexed { index, destination ->
+                        Tab(
+                            selected = selectedDestination == index,
+                            onClick = {
+                                navController.navigate(route = destination.route)
+                                selectedDestination = index
+                            },
+                            text = {
+                                Text(
+                                    text = destination.label,
+                                    maxLines = 2,
+                                    overflow = TextOverflow.Ellipsis
+                                )
+                            }
+                        )
+                    }
                 }
             }
+        ) { contentPadding ->
+            // Passer le contentPadding au NavHost
+            AppNavHost(
+                colors,
+                navController = navController,
+                startDestination = startDestination,
+                contentPadding = contentPadding
+            )
         }
-    ) { contentPadding ->
-        // Passer le contentPadding au NavHost
-        AppNavHost(
-            colors,
-            navController = navController,
-            startDestination = startDestination,
-            contentPadding = contentPadding
-        )
     }
 }
 

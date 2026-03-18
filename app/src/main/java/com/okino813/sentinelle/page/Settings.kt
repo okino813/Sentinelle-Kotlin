@@ -10,6 +10,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -330,214 +331,260 @@ fun SettingsScreenStateless(
 
     var showDialogDeleteAllSaferiders by remember { mutableStateOf(false) }
     var showDialogDeleteAccount by remember { mutableStateOf(false) }
-
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
+    Box(
+        modifier = Modifier
             .background(colors[0])
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        UpdateStatusBarColor(colors[0], LocalContext.current)
-        Text(
-            "Mon compte",
-            color = colors[3],
-            fontWeight = FontWeight.Bold,
-            fontSize = 20.sp,
-            modifier = Modifier.align(Alignment.Start)
-        )
 
-        Spacer(Modifier.height(16.dp))
+        Column(
+            modifier = modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .background(colors[0])
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            UpdateStatusBarColor(colors[0], LocalContext.current)
+            Text(
+                "Mon compte",
+                color = colors[3],
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
+                modifier = Modifier.align(Alignment.Start)
+            )
 
-        Input("Prénom", value = firstname, colors = colors, onValueChange = onFirstnameChange, false, firstnameError)
-        Input("Nom", value = lastname, colors = colors, onValueChange = onLastnameChange, false, lastnameError)
-        Input("Numéro de téléphone", value = phone, colors = colors, onValueChange =  onPhoneChange, false, phoneError)
+            Spacer(Modifier.height(16.dp))
 
-        Bouton("Enregistrer", colors = colors, OnClick = {
-            valideInfoPerso()
-        })
+            Input(
+                "Prénom",
+                value = firstname,
+                colors = colors,
+                onValueChange = onFirstnameChange,
+                false,
+                firstnameError
+            )
+            Input(
+                "Nom",
+                value = lastname,
+                colors = colors,
+                onValueChange = onLastnameChange,
+                false,
+                lastnameError
+            )
+            Input(
+                "Numéro de téléphone",
+                value = phone,
+                colors = colors,
+                onValueChange = onPhoneChange,
+                false,
+                phoneError
+            )
+
+            Bouton("Enregistrer", colors = colors, OnClick = {
+                valideInfoPerso()
+            })
 
 
-        Spacer(Modifier.height(16.dp))
+            Spacer(Modifier.height(16.dp))
 
-        // On vérifie si il s'est connecter avec google ou pas
-        val user = FirebaseAuth.getInstance().currentUser
+            // On vérifie si il s'est connecter avec google ou pas
+            val user = FirebaseAuth.getInstance().currentUser
 
-        if (user != null) {
-            val providers = user.providerData.map { it.providerId }
-            if (providers.contains("google.com")) {
-                // L'utilisateur s'est connecté avec Google
-                Log.d("AUTHFireBASE", "Connected with Google")
-            } else {
-                // L'utilisateur ne s'est pas connecté avec Google
-                Log.d("AUTHFireBASE", "Not connected with Google")
+            if (user != null) {
+                val providers = user.providerData.map { it.providerId }
+                if (providers.contains("google.com")) {
+                    // L'utilisateur s'est connecté avec Google
+                    Log.d("AUTHFireBASE", "Connected with Google")
+                } else {
+                    // L'utilisateur ne s'est pas connecté avec Google
+                    Log.d("AUTHFireBASE", "Not connected with Google")
+
+                    Text(
+                        "Sécurité",
+                        color = colors[3],
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 20.sp,
+                        modifier = Modifier.align(Alignment.Start)
+                    )
+                    Spacer(Modifier.height(16.dp))
+
+                    Input(
+                        "Mot de passe actuel",
+                        value = password,
+                        colors = colors,
+                        onValueChange = onPasswordChange,
+                        true,
+                        passwordError
+                    )
+                    Input(
+                        "Nouveau mot de passe",
+                        value = NewPassword,
+                        colors = colors,
+                        onValueChange = onNewPasswordChange,
+                        true,
+                        NewPasswordError
+                    )
+                    Input(
+                        "Confirmation du mot de passe",
+                        value = ConfirmNewPassword,
+                        colors = colors,
+                        onValueChange = onNewConfirmPassword,
+                        true,
+                        ConfirmNewPasswordError
+                    )
+
+                    Bouton("Enregistrer", colors = colors, OnClick = {
+                        validePassword()
+                    })
+                }
+            }
+
+
+
+            Spacer(Modifier.height(16.dp))
+
+            Text(
+                "Accessibilité",
+                color = colors[3],
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
+                modifier = Modifier.align(Alignment.Start)
+            )
+
+            Spacer(Modifier.height(16.dp))
+
+            Row(
+                modifier = Modifier
+                    .clip(RoundedCornerShape(50.dp))
+                    .background(colors[1]),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = androidx.compose.foundation.layout.Arrangement.SpaceBetween
+
+            ) {
+                Text(
+                    "Mode contrasté",
+                    color = colors[0],
+                    modifier = Modifier.weight(1f).padding(start = 16.dp, top = 4.dp),
+                )
+                Switch(
+                    checked = isContrast.value,
+                    onCheckedChange = { checked ->
+                        isContrast.value = checked
+                        onChangeColor(0)
+                    },
+
+                    modifier = Modifier.padding(end = 8.dp),
+
+                    colors = SwitchDefaults.colors(
+                        checkedThumbColor = colors[4],
+                        uncheckedThumbColor = colors[4],
+                        checkedTrackColor = colors[0],
+                        uncheckedTrackColor = colors[0],
+                    )
+                )
+            }
+
+            Spacer(Modifier.height(20.dp))
+
+            Text(
+                "Autres paramêtre",
+                color = colors[3],
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
+                modifier = Modifier.align(Alignment.Start)
+            )
+
+            Spacer(Modifier.height(16.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
 
                 Text(
-                    "Sécurité",
-                    color = colors[3],
+                    "Supprimé tout mes trajets",
+                    color = colors[5],
                     fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp,
-                    modifier = Modifier.align(Alignment.Start)
+                    fontSize = 16.sp,
+                    textAlign = TextAlign.Center,
                 )
-                Spacer(Modifier.height(16.dp))
 
-                Input("Mot de passe actuel", value = password, colors = colors, onValueChange = onPasswordChange, true, passwordError)
-                Input("Nouveau mot de passe", value = NewPassword, colors = colors, onValueChange = onNewPasswordChange, true, NewPasswordError)
-                Input("Confirmation du mot de passe", value = ConfirmNewPassword, colors = colors, onValueChange = onNewConfirmPassword, true, ConfirmNewPasswordError)
-
-                Bouton("Enregistrer", colors = colors, OnClick = {
-                    validePassword()
+                RedBouton("Supprimer", colors = colors, OnClick = {
+                    showDialogDeleteAllSaferiders = true
                 })
             }
-        }
 
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
 
-
-        Spacer(Modifier.height(16.dp))
-
-        Text(
-            "Accessibilité",
-            color = colors[3],
-            fontWeight = FontWeight.Bold,
-            fontSize = 20.sp,
-            modifier = Modifier.align(Alignment.Start)
-        )
-
-        Spacer(Modifier.height(16.dp))
-
-        Row(
-            modifier = Modifier
-                .clip(RoundedCornerShape(50.dp))
-                .background(colors[1]),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = androidx.compose.foundation.layout.Arrangement.SpaceBetween
-
-        ) {
-            Text(
-                "Mode contrasté",
-                color = colors[0],
-                modifier = Modifier.weight(1f).padding(start = 16.dp, top = 4.dp),
-            )
-            Switch(
-                checked = isContrast.value,
-                onCheckedChange = { checked ->
-                    isContrast.value = checked
-                    onChangeColor(0)
-                },
-
-                modifier = Modifier.padding(end = 8.dp),
-
-                colors = SwitchDefaults.colors(
-                    checkedThumbColor = colors[4],
-                    uncheckedThumbColor = colors[4],
-                    checkedTrackColor = colors[0],
-                    uncheckedTrackColor = colors[0],
+                Text(
+                    "Supprimer mon compte",
+                    color = colors[5],
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp,
+                    textAlign = TextAlign.Center,
                 )
-            )
-        }
 
-        Spacer(Modifier.height(20.dp))
+                RedBouton("Supprimer", colors = colors, OnClick = {
+                    // On fais une popup de confirmation
+                    showDialogDeleteAccount = true
+                })
 
-        Text(
-            "Autres paramêtre",
-            color = colors[3],
-            fontWeight = FontWeight.Bold,
-            fontSize = 20.sp,
-            modifier = Modifier.align(Alignment.Start)
-        )
-
-        Spacer(Modifier.height(16.dp))
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-
-            Text(
-                "Supprimé tout mes trajets",
-                color = colors[5],
-                fontWeight = FontWeight.Bold,
-                fontSize = 16.sp,
-                textAlign = TextAlign.Center,
-            )
-
-            RedBouton("Supprimer", colors = colors, OnClick = {
-                showDialogDeleteAllSaferiders = true
-            })
-        }
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-
-            Text(
-                "Supprimer mon compte",
-                color = colors[5],
-                fontWeight = FontWeight.Bold,
-                fontSize = 16.sp,
-                textAlign = TextAlign.Center,
-            )
-
-            RedBouton("Supprimer", colors = colors, OnClick = {
-                // On fais une popup de confirmation
-                showDialogDeleteAccount = true
-            })
-
-        }
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-
-            Text(
-                "Se Déconnecter ?",
-                color = colors[5],
-                fontWeight = FontWeight.Bold,
-                fontSize = 16.sp,
-                textAlign = TextAlign.Center,
-            )
-
-            RedBouton("Déconexion", colors = colors, OnClick = {
-                logout()
-            })
-
-        }
-    }
-
-    if(showDialogDeleteAccount)
-    {
-        PopupAlertRequest(
-            message = "Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.",
-            colors = colors,
-            isSuccess = true,
-            onDismiss = {
-                showDialogDeleteAccount = false
-            },
-            onAccept = {
-                showDialogDeleteAccount = false
-                delete_account()
             }
-        )
-    }
 
-    if(showDialogDeleteAllSaferiders){
-        PopupAlertRequest(
-            message = "Êtes-vous sûr de vouloir supprimer tous vos saferiders ? Cette action est irréversible.",
-            colors = colors,
-            isSuccess = true,
-            onDismiss = {
-                showDialogDeleteAllSaferiders = false
-            },
-            onAccept = {
-                showDialogDeleteAllSaferiders = false
-                delete_all_saferider()
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+
+                Text(
+                    "Se Déconnecter ?",
+                    color = colors[5],
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp,
+                    textAlign = TextAlign.Center,
+                )
+
+                RedBouton("Déconexion", colors = colors, OnClick = {
+                    logout()
+                })
+
             }
-        )
+        }
+
+        if (showDialogDeleteAccount) {
+            PopupAlertRequest(
+                message = "Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.",
+                colors = colors,
+                isSuccess = true,
+                onDismiss = {
+                    showDialogDeleteAccount = false
+                },
+                onAccept = {
+                    showDialogDeleteAccount = false
+                    delete_account()
+                }
+            )
+        }
+
+        if (showDialogDeleteAllSaferiders) {
+            PopupAlertRequest(
+                message = "Êtes-vous sûr de vouloir supprimer tous vos saferiders ? Cette action est irréversible.",
+                colors = colors,
+                isSuccess = true,
+                onDismiss = {
+                    showDialogDeleteAllSaferiders = false
+                },
+                onAccept = {
+                    showDialogDeleteAllSaferiders = false
+                    delete_all_saferider()
+                }
+            )
+        }
     }
 }

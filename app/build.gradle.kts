@@ -3,12 +3,20 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
     id("com.google.gms.google-services")
-
 }
 
 android {
     namespace = "com.okino813.sentinelle"
     compileSdk = 35
+
+    testOptions {
+        unitTests {
+            all {
+                // Mock automatique de toutes les classes Android
+            }
+            isReturnDefaultValues = true  // ← Ajoute cette ligne
+        }
+    }
 
     defaultConfig {
         applicationId = rootProject.extra["defaultApplicationId"] as String
@@ -110,4 +118,9 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout-compose:1.1.0")
 
     implementation("androidx.core:core-splashscreen:1.0.0")
+
+    testImplementation("io.mockk:mockk:1.13.10")
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    testImplementation("org.json:json:20231013")
 }
