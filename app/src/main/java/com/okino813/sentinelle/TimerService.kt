@@ -183,6 +183,7 @@ class TimerService : Service() {
 
         // Démarrer l'enregistrement audio
         startAudioRecording()
+        startLocationUpdates()
 
         timer = object : CountDownTimer(totalSeconds * 1000L, 1_000L) {
             override fun onTick(millisLeft: Long) {
@@ -199,11 +200,11 @@ class TimerService : Service() {
 
                 Log.d("TimerService", "Heure: $heurePasser, Minute: $minutePasser, Seconde: $secondePasser")
 
-                if(secondsElapsed % 10 == 0) {
-                    // Action toutes les 10 secondes
-                    Log.d("TimerService", "Action toutes les 10 secondes")
-                    startLocationUpdates()
-                }
+//                if(secondsElapsed % 10 == 0) {
+//                    // Action toutes les 10 secondes
+//                    Log.d("TimerService", "Action toutes les 10 secondes")
+//                    startLocationUpdates()
+//                }
 
                 if(secondsElapsed % 300 == 0) {
                     // Action toutes les 5 minutes
@@ -245,6 +246,7 @@ class TimerService : Service() {
 
         // Démarrer l'enregistrement audio
         startAudioRecording()
+        startLocationUpdates()
 
         timer = object : CountDownTimer(totalSeconds * 1000L, 1_000L) {
             override fun onTick(millisUntilFinished: Long) {
@@ -261,11 +263,11 @@ class TimerService : Service() {
 
                 Log.d("TimerService", "Heure: $heureRestant, Minute: $minuteRestant, Seconde: $secondeRestant")
 
-                if(secondsElapsed % 10 == 0) {
-                    // Action toutes les 10 secondes
-                    Log.d("TimerService", "Action toutes les 10 secondes")
-                    startLocationUpdates()
-                }
+//                if(secondsElapsed % 10 == 0) {
+//                    // Action toutes les 10 secondes
+//                    Log.d("TimerService", "Action toutes les 10 secondes")
+//                    startLocationUpdates()
+//                }
 
                 if(secondsElapsed % 300 == 0) {
                     // Action toutes les 5 minutes
@@ -315,34 +317,34 @@ class TimerService : Service() {
     }
 
     private fun sendQueuedLocations() {
-        if (locationQueue.isEmpty() || isSendingLocations) {
-            return
-        }
-
-        if (!isNetworkAvailable()) {
-            Log.d("TimerService", "Pas de connexion réseau - ${locationQueue.size} coordonnées en attente")
-            return
-        }
+        if (locationQueue.isEmpty() || isSendingLocations) return
+        if (!isNetworkAvailable()) return
 
         isSendingLocations = true
-        val api = api_service(this)
 
-        // Créer un identifiant unique pour chaque location
-        val locationsToSend = locationQueue.filter { locationData ->
-            val locationId = "${locationData.latitude}_${locationData.longitude}_${locationData.timestamp}"
-            !sentLocations.contains(locationId)
-        }
+        // Trier par timestamp avant envoi
+        val locationsToSend = locationQueue
+            .filter { locationData ->
+                val id = "${locationData.latitude}_${locationData.longitude}_${locationData.timestamp}"
+                !sentLocations.contains(id)
+            }
+            .sortedBy { it.timestamp } // ← tri chronologique
 
         if (locationsToSend.isEmpty()) {
             isSendingLocations = false
             return
         }
 
-        Log.d("TimerService", "Envoi de ${locationsToSend.size} coordonnées en queue")
+        val api = api_service(this)
 
-        var pendingUploads = locationsToSend.size
+        // Envoi séquentiel récursif
+        fun sendNext(index: Int) {
+            if (index >= locationsToSend.size) {
+                isSendingLocations = false
+                return
+            }
 
-        locationsToSend.forEach { locationData ->
+            val locationData = locationsToSend[index]
             val locationId = "${locationData.latitude}_${locationData.longitude}_${locationData.timestamp}"
             sentLocations.add(locationId)
 
@@ -352,21 +354,16 @@ class TimerService : Service() {
                 longitude = locationData.longitude,
                 timestamp = locationData.timestamp.toString()
             ) { success ->
-                pendingUploads--
-
                 if (success) {
-                    Log.d("TimerService", "Coordonnées envoyées avec succès: lat=${locationData.latitude}, lng=${locationData.longitude}")
                     locationQueue.remove(locationData)
                 } else {
-                    Log.e("TimerService", "Erreur lors de l'envoi des coordonnées: lat=${locationData.latitude}, lng=${locationData.longitude}")
                     sentLocations.remove(locationId)
                 }
-
-                if (pendingUploads == 0) {
-                    isSendingLocations = false
-                }
+                sendNext(index + 1) // ← envoie le suivant seulement après le callback
             }
         }
+
+        sendNext(0)
     }
 
     private fun sendQueuedAudioFiles() {
@@ -394,7 +391,6 @@ class TimerService : Service() {
             return
         }
         lastAudioSendTime = currentTime
-
         // Filtrer les fichiers qui ne sont pas déjà en cours d'envoi
         val filesToSend = audioFileQueue.filter { file ->
             !audioFilesBeingSent.contains(file.absolutePath)

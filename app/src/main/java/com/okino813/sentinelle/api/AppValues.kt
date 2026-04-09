@@ -83,7 +83,6 @@ data class Tag(
  val hexa: String,
 )
 
-
 @Immutable
 data class Colors(
  val id: Int,

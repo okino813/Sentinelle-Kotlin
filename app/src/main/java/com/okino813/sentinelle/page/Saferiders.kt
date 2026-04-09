@@ -6,6 +6,7 @@ import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -22,6 +23,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -47,6 +49,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
@@ -85,7 +89,13 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.net.URL
-
+import android.graphics.Color as AndroidColor
+import androidx.compose.ui.viewinterop.AndroidView
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory
+import org.osmdroid.util.GeoPoint
+import org.osmdroid.views.MapView
+import org.osmdroid.views.overlay.Marker
+import org.osmdroid.views.overlay.Polyline
 @RequiresApi(Build.VERSION_CODES.Q)
 @Composable
 fun AppNavigation(
@@ -277,157 +287,84 @@ fun SafeRiderMap(
     colors: List<Color>,
     modifier: Modifier = Modifier
 ) {
-    LaunchedEffect(coordinates) {
-        Log.d("SafeRiderMap", "Nombre de coordonnées: ${coordinates.size}")
-    }
-
     if (coordinates.isEmpty()) {
         Box(
             modifier = modifier
                 .fillMaxWidth()
-                .height(300.dp)
-                .background(Color.Gray.copy(alpha = 0.3f))
-                .padding(16.dp),
+                .requiredHeight(300.dp)
+                .background(Color.Gray.copy(alpha = 0.3f)),
             contentAlignment = Alignment.Center
         ) {
-            Text(
-                "Aucune coordonnée disponible",
-                color = Color.White,
-                fontSize = 16.sp
-            )
+            Text("Aucune coordonnée disponible", color = Color.White)
         }
         return
     }
 
-    var mapImage by remember { mutableStateOf<ImageBitmap?>(null) }
-    var isLoading by remember { mutableStateOf(true) }
-    var errorMessage by remember { mutableStateOf<String?>(null) }
-
-    // Créer l'URL de l'API
-    val mapUrl = remember(coordinates) {
-        buildMapBoxUrl(coordinates)
-    }
-
-    Log.d("SafeRiderMap", "URL de la carte: $mapUrl")
-
-    // Charger l'image de la carte
-    LaunchedEffect(mapUrl) {
-        withContext(Dispatchers.IO) {
-            try {
-                Log.d("SafeRiderMap", "Chargement de: $mapUrl")
-
-                val url = URL(mapUrl)
-                val connection = url.openConnection().apply {
-                    setRequestProperty("User-Agent", "SafeRider-App")
-                    connectTimeout = 10000
-                    readTimeout = 10000
-                }
-
-                val inputStream = connection.getInputStream()
-                val bitmap = BitmapFactory.decodeStream(inputStream)
-                inputStream.close()
-
-                withContext(Dispatchers.Main) {
-                    if (bitmap != null) {
-                        mapImage = bitmap.asImageBitmap()
-                        isLoading = false
-                        errorMessage = null
-                        Log.d("SafeRiderMap", "Carte chargée avec succès")
-                    } else {
-                        errorMessage = "Impossible de décoder l'image"
-                        isLoading = false
-                    }
-                }
-            } catch (e: Exception) {
-                Log.e("SafeRiderMap", "Erreur: ${e.message}")
-                withContext(Dispatchers.Main) {
-                    errorMessage = "Erreur réseau: ${e.message?.take(50) ?: "Inconnue"}"
-                    isLoading = false
-                }
-            }
-        }
-    }
-
-
+    val context = LocalContext.current
     Box(
-        modifier = modifier
+        modifier = Modifier
             .fillMaxWidth()
             .height(300.dp)
-            .background(Color.Black.copy(alpha = 0.1f))
+            .padding(vertical = 16.dp)
+            .clip(RoundedCornerShape(12.dp))  // coupe tout ce qui dépasse
     ) {
-        when {
-            isLoading -> {
-                // Indicateur de chargement
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        CircularProgressIndicator(
-                            color = colors[1],
-                            strokeWidth = 3.dp,
-                            modifier = Modifier.size(32.dp)
-                        )
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Text(
-                            "Génération de la carte...",
-                            color = Color.White,
-                            fontSize = 12.sp
-                        )
-                    }
-                }
-            }
+        AndroidView(
+            modifier = modifier
+                .fillMaxWidth()
+                .requiredHeight(300.dp)
+                .padding(16.dp),
+            factory = {
+                MapView(context).apply {
+                    // Config OSMDroid
+                    org.osmdroid.config.Configuration.getInstance()
+                        .load(context, context.getSharedPreferences("osmdroid", 0))
+                    org.osmdroid.config.Configuration.getInstance().userAgentValue =
+                        context.packageName
 
-            errorMessage != null -> {
-                // Message d'erreur avec retry
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Icon(
-                            painterResource(id = android.R.drawable.stat_notify_error),
-                            contentDescription = "Erreur",
-                            tint = colors[4],
-                            modifier = Modifier.size(32.dp)
-                        )
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Text(
-                            errorMessage!!,
-                            color = Color.White,
-                            fontSize = 11.sp,
-                            textAlign = TextAlign.Center
-                        )
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Text(
-                            "Appuyez pour réessayer",
-                            color = colors[3],
-                            fontSize = 10.sp,
-                            modifier = Modifier.clickable {
-                                isLoading = true
-                                errorMessage = null
-                            }
-                        )
-                    }
-                }
-            }
-
-            mapImage != null -> {
-                // Afficher la carte
-                Box(modifier = Modifier.fillMaxSize()) {
-                    Image(
-                        bitmap = mapImage!!,
-                        contentDescription = "Carte du trajet",
-                        modifier = Modifier.fillMaxSize(),
-                        contentScale = ContentScale.Crop
+                    setTileSource(TileSourceFactory.MAPNIK)
+                    setMultiTouchControls(true)
+                    isHorizontalMapRepetitionEnabled = false
+                    isVerticalMapRepetitionEnabled = false
+                    // Empêche la carte de redimensionner son View
+                    layoutParams = ViewGroup.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT  // taille fixe, pas WRAP_CONTENT
                     )
+
+                    // Centrer sur le premier point
+                    val startPoint = GeoPoint(
+                        coordinates.first().first,
+                        coordinates.first().second
+                    )
+                    controller.setZoom(15.0)
+                    controller.setCenter(startPoint)
+
+                    // Tracer la polyline
+                    val polyline = Polyline().apply {
+                        setPoints(coordinates.map { GeoPoint(it.first, it.second) })
+                        outlinePaint.color = android.graphics.Color.BLUE
+                        outlinePaint.strokeWidth = 8f
+                    }
+                    overlays.add(polyline)
+
+                    // Marqueur de départ
+                    val startMarker = Marker(this).apply {
+                        position = GeoPoint(coordinates.first().first, coordinates.first().second)
+                        setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+                        title = "Départ"
+                    }
+                    overlays.add(startMarker)
+
+                    // Marqueur d'arrivée
+                    val endMarker = Marker(this).apply {
+                        position = GeoPoint(coordinates.last().first, coordinates.last().second)
+                        setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+                        title = "Arrivée"
+                    }
+                    overlays.add(endMarker)
                 }
             }
-        }
+        )
     }
 }
 
